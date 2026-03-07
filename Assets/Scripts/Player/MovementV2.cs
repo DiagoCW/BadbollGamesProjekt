@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MovementV1 : MonoBehaviour
+public class MovementV2 : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float jumpForce = 5f;
@@ -39,6 +39,10 @@ public class MovementV1 : MonoBehaviour
             grounded = true;
             yVelocity = 0f;
 
+            // Snap back to ground level
+            Vector3 pos = transform.position;
+            pos.y = 1f;
+            transform.position = pos;
         }
         else
         {

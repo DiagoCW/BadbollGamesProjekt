@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 3075644731513971568}
   - component: {fileID: 3447374915580824248}
   - component: {fileID: 6858544786508406803}
-  - component: {fileID: 6303266220109416682}
+  - component: {fileID: 6448183477708532702}
+  - component: {fileID: 3116936360427248809}
   m_Layer: 0
   m_Name: PlayerCapsule
   m_TagString: Untagged
@@ -88,7 +89,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &6303266220109416682
+--- !u!114 &6448183477708532702
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -102,6 +103,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   jumpForce: 5
+--- !u!114 &3116936360427248809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007656224211979727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8162ad63872670e4e91a21f87e2cb251, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activateKey: 118
+  highlightableTag: Highlightable
+  highlightDuration: 5
+  cooldownDuration: 25
+  maxDistance: 50
 --- !u!1 &1486696140885246979
 GameObject:
   m_ObjectHideFlags: 0
@@ -265,7 +283,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9165604929533768895}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Player+Vision
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
