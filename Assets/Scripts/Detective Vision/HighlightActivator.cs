@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class HighlightActivator : MonoBehaviour
 {
     [SerializeField] private KeyCode activateKey = KeyCode.V;
-    [SerializeField] private string highlightableTag = "Highlightable";
+    [SerializeField] private string Clue = "Clue";
     [SerializeField] public float highlightDuration = 5f;
     [SerializeField] public float cooldownDuration = 25f;
     [SerializeField] private float maxDistance = 50f;
@@ -38,7 +38,7 @@ public class HighlightActivator : MonoBehaviour
     {
         ClearCurrentHighlights();
 
-        GameObject[] candidates = GameObject.FindGameObjectsWithTag(highlightableTag);
+        GameObject[] candidates = GameObject.FindGameObjectsWithTag("Clue");
         if (candidates == null || candidates.Length == 0) return;
 
         Plane[] frustumPlanes = GeometryUtility.CalculateFrustumPlanes(Camera.main);
