@@ -7,7 +7,7 @@ public class OutlineHighlighter : MonoBehaviour
 {
     [SerializeField] private Color outlineColor = Color.yellow;
     [SerializeField] private float outlineWidth = 0.03f;
-    [SerializeField] private ClueType clueType = ClueType.Regular;
+    //[SerializeField] private ClueType clueType = ClueType.Regular;
     public enum ClueType { Regular, Important, Critical, Hidden }
 
     private GameObject outlineObject;

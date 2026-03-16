@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class HighlightActivator : MonoBehaviour
 {
     [SerializeField] private KeyCode activateKey = KeyCode.V;
-    [SerializeField] private string Clue = "Clue";
+    //[SerializeField] private string Clue = "Clue";
     [SerializeField] public float highlightDuration = 5f;
     [SerializeField] public float cooldownDuration = 25f;
     [SerializeField] private float maxDistance = 50f;
@@ -43,7 +43,7 @@ public class HighlightActivator : MonoBehaviour
 
         Plane[] frustumPlanes = GeometryUtility.CalculateFrustumPlanes(Camera.main);
 
-        foreach (GameObject go in candidates) // Only consider objects with a Renderer and that are within the camera's view 
+        foreach (GameObject go in candidates)  
         {
             Renderer rend = go.GetComponent<Renderer>();
             if (rend == null) continue;
@@ -61,7 +61,7 @@ public class HighlightActivator : MonoBehaviour
             }
         }
 
-        if (currentHighlighters.Count > 0) // Only start cooldown if we actually highlighted something
+        if (currentHighlighters.Count > 0) 
         {
             CooldownEndTime = Time.time + cooldownDuration;
             HighlightEndTime = Time.time + highlightDuration;
@@ -69,7 +69,7 @@ public class HighlightActivator : MonoBehaviour
         }
     }
 
-    private void ClearCurrentHighlights() // Un-highlight all currently highlighted objects and reset state
+    private void ClearCurrentHighlights() 
     {
         foreach (var h in currentHighlighters)
         {
