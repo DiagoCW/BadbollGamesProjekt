@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5555878345202978079}
   m_Layer: 0
   m_Name: Washing_machine_01
-  m_TagString: Highlightable
+  m_TagString: Clue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

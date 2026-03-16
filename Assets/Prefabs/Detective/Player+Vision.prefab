@@ -116,7 +116,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activateKey: 118
-  highlightableTag: Highlightable
   highlightDuration: 5
   cooldownDuration: 25
   maxDistance: 50
@@ -133,6 +132,7 @@ GameObject:
   - component: {fileID: 3885143727888912458}
   - component: {fileID: 7491950335094877585}
   - component: {fileID: 6761767985168752216}
+  - component: {fileID: 6513791438161616657}
   m_Layer: 0
   m_Name: MainCamera
   m_TagString: MainCamera
@@ -273,6 +273,26 @@ MonoBehaviour:
   mouseSensitivity: 600
   minPitch: -80
   maxPitch: 80
+--- !u!114 &6513791438161616657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1486696140885246979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2dc339bc61148441959dddbdce9dec7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activator: {fileID: 0}
+  volume: {fileID: 0}
+  visionSaturation: -65
+  visionVignetteIntensity: 0.4
+  lerpSpeed: 8
+  boostBloomDuringHighlight: 1
+  activeBloomIntensity: 3.5
+  normalBloomIntensity: 1
 --- !u!1 &8207979048077512018
 GameObject:
   m_ObjectHideFlags: 0
