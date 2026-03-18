@@ -4,6 +4,7 @@ using System.Collections;
 
 public class DialogueScript : MonoBehaviour
 {
+    public TextMeshProUGUI[] choiceTexts;
     public TextMeshProUGUI textComponent;
 
     private DialogueData dialogueData;
@@ -33,19 +34,71 @@ public class DialogueScript : MonoBehaviour
                 NextLine();
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1)) Choose(0);
+        if (Input.GetKeyDown(KeyCode.Alpha2)) Choose(1);
+        if (Input.GetKeyDown(KeyCode.Alpha3)) Choose(2);
+        if (Input.GetKeyDown(KeyCode.Alpha4)) Choose(3);
+    }
+
+    void ShowChoices()
+    {
+        if (dialogueData.choices == null || dialogueData.choices.Length == 0)
+        {
+            EndDialogue();
+            return;
+        }
+
+        for (int i = 0; i < choiceTexts.Length; i++)
+        {
+            if (i < dialogueData.choices.Length)
+            {
+                choiceTexts[i].text = (i + 1) + ". " + dialogueData.choices[i].choiceText;
+                choiceTexts[i].gameObject.SetActive(true);
+            }
+            else
+            {
+                choiceTexts[i].gameObject.SetActive(false);
+            }
+        }
+    }
+
+    void Choose(int choiceIndex)
+    {
+        if (isTyping) return;
+
+        if (dialogueData.choices == null) return;
+        if (choiceIndex >= dialogueData.choices.Length) return;
+
+        DialogueData next = dialogueData.choices[choiceIndex].nextDialogue;
+
+        if (next != null)
+        {
+            StartDialogue(next);
+        }
+        else
+        {
+            EndDialogue();
+        }
     }
 
     public void StartDialogue(DialogueData newDialogue)
     {
-        if (newDialogue == null || newDialogue.lines == null || newDialogue.lines.Length == 0)
-        {
-            Debug.LogWarning("Dialogue data is empty!");
-            return;
-        }
+        //if (newDialogue == null || newDialogue.lines == null || newDialogue.lines.Length == 0)
+        //{
+        //    Debug.LogWarning("Dialogue data is empty!");
+        //    return;
+        //}
 
         dialogueData = newDialogue;
         index = 0;
         textComponent.text = "";
+
+        foreach (var choice in choiceTexts)
+        {
+            choice.gameObject.SetActive(false);
+        }
+
         gameObject.SetActive(true);
         StartCoroutine(TypeLine());
     }
@@ -73,7 +126,7 @@ public class DialogueScript : MonoBehaviour
         }
         else
         {
-            EndDialogue();
+            ShowChoices();
         }
     }
 

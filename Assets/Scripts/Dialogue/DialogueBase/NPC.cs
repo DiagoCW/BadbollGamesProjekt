@@ -22,7 +22,7 @@ public class NPC : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = true;
-            Debug.Log("Player entered NPC range");
+            // Debug.Log("Player entered NPC range");
         }
     }
 
@@ -31,7 +31,7 @@ public class NPC : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = false;
-            Debug.Log("Player left NPC range");
+            // Debug.Log("Player left NPC range");
         }
     }
 }
