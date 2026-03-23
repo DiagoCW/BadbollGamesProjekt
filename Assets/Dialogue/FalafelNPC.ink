@@ -23,7 +23,11 @@ I could kill for less than that, actually. There's this guy that would always as
 Erm, that's awkward... #speaker: Player
 Anyway, did you know the victim then? The one who was found by the dumpster?
 Of course, he was my most frequent customer! Half the town knows the guy. You should be glad that you didn't, though. #speaker: Boss Man
-Meaning what, exactly? #speaker: Player
+    * [Listen to his story]
+        Meaning what, exactly? #speaker: Player
+        -> BackStory
+    * [I don't have time for this...]
+        -> IntroContinued
 -> BackStory
 === BackStory ===
 Around 3 years ago, a man I’ve never seen before came up to my stand and ordered the least sold item on my menu. I was ecstatic, for it was the crown jewel of all rolls, yet no one would ever order it. #speaker: Boss Man
