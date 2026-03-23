@@ -17,7 +17,7 @@ public class HighlightActivator : MonoBehaviour
 
     void Update()
     {
-        // for Safety make sure to clear highlights if duration expires, even if player doesn't press the key again
+
         if (IsHighlighting && Time.time >= HighlightEndTime)
         {
             ClearCurrentHighlights();
