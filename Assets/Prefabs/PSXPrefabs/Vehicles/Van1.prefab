@@ -875,6 +875,7 @@ GameObject:
   - component: {fileID: 9075146838454648632}
   - component: {fileID: 7015564980270259351}
   - component: {fileID: 397937208617230015}
+  - component: {fileID: 6119607936788849498}
   m_Layer: 0
   m_Name: Van1
   m_TagString: Untagged
@@ -892,7 +893,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
   m_LocalPosition: {x: 37.062145, y: -1.3247876, z: 41.04849}
-  m_LocalScale: {x: 100, y: 100, z: 100}
+  m_LocalScale: {x: 55.5, y: 53, z: 49}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6915349662043964166}
@@ -963,6 +964,24 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &6119607936788849498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6454716151764394233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9df078d8cbb6f514ba37baeba82b3249, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  driveSpeed: 10
+  detectionDistance: 5
+  playerLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  endPoint: {fileID: 0}
 --- !u!1 &6910826319036080633
 GameObject:
   m_ObjectHideFlags: 0

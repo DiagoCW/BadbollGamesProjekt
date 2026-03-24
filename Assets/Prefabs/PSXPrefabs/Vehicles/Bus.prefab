@@ -726,6 +726,7 @@ GameObject:
   - component: {fileID: 13009771400342051}
   - component: {fileID: 257748478227704900}
   - component: {fileID: 7437046489296281751}
+  - component: {fileID: 269831794208041395}
   m_Layer: 0
   m_Name: Bus
   m_TagString: Untagged
@@ -743,7 +744,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.49778068, y: -0.50220954, z: -0.50220954, w: 0.49778056}
   m_LocalPosition: {x: -11.14, y: 1.53, z: -67.87}
-  m_LocalScale: {x: 100, y: 100, z: 100}
+  m_LocalScale: {x: 87.5, y: 96, z: 99}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8741248456996435470}
@@ -814,6 +815,24 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &269831794208041395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7580428441856239280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9df078d8cbb6f514ba37baeba82b3249, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  driveSpeed: 10
+  detectionDistance: 7
+  frontBumperOffset: 2.5
+  obstacleLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &8340602885829360688
 GameObject:
   m_ObjectHideFlags: 0
