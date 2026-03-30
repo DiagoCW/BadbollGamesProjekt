@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class CooldownUIVisualTest : MonoBehaviour
+public class CooldownUIVisualIAVersion : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private HighlightActivatorIAVersion activator;
