@@ -11,6 +11,10 @@ public class TrafficSpawner : MonoBehaviour
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private Transform endPoint;
 
+    [Header("Spawn Safety Checks")]
+    [SerializeField] private float spawnCheckRadius = 5f; // Radius to check for existing vehicles
+    [SerializeField] private LayerMask vehicleLayerMask; // Layer mask for vehicles
+
     private void Start()
     {
         StartCoroutine(SpawnTrafficRoutine());
@@ -29,7 +33,10 @@ public class TrafficSpawner : MonoBehaviour
     {
         if (vehiclePrefabs.Length == 0 || spawnPoint == null || endPoint == null)
             return;
-        
+
+        if (Physics.CheckSphere(spawnPoint.position, spawnCheckRadius, vehicleLayerMask))
+            return;
+
         int randomIndex = Random.Range(0, vehiclePrefabs.Length);
         GameObject selectedPrefab = vehiclePrefabs[randomIndex];
 
