@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44eb7fc60ea1c3248bd36111df5792f7, type: 3}
   m_Name: TestClue
   m_EditorClassIdentifier: 
-  prefab: {fileID: 1524992426138371207, guid: b1eb78a27f668ba42b37a37a9a12bc1a, type: 3}
+  prefab: {fileID: 8912453792745851185, guid: 4e0aad9de28699f498988fa462d01d9b, type: 3}
   description: This is a test clue
