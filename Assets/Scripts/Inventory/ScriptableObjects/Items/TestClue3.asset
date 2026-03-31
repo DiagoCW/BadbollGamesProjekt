@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a7923ccd3bc7ef49ac7a97e7d55d993, type: 3}
-  m_Name: PlayerClues
+  m_Script: {fileID: 11500000, guid: 44eb7fc60ea1c3248bd36111df5792f7, type: 3}
+  m_Name: TestClue3
   m_EditorClassIdentifier: 
-  Container:
-  - item: {fileID: 11400000, guid: 432480add68ca3d439358dd567ea7cf6, type: 2}
-  - item: {fileID: 11400000, guid: 2e1e118a6414222499bd3a1ebc5a5c31, type: 2}
+  prefab: {fileID: 8912453792745851185, guid: 4e0aad9de28699f498988fa462d01d9b, type: 3}
+  description: This is the 3rd test clue
