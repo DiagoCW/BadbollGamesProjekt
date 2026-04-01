@@ -4,7 +4,10 @@ using UnityEngine.UI;
 public class DraggableClue : MonoBehaviour
 {
     [SerializeField] private float grabProximityPx = 60f;
-    [SerializeField] private float snapDistance = 80f;
+    [SerializeField] private float snapDistance = 100f;
+
+    [Header("Correct Position")]
+    [SerializeField] public int correctSlotID = 1;
 
     private RectTransform rectTransform;
     private Canvas canvas;
@@ -37,8 +40,8 @@ public class DraggableClue : MonoBehaviour
 
         if (!canvas || !canvasRectTransform)
         {
-            Debug.LogError($"Missing Canvas setup on {gameObject.name}");
             enabled = false;
+            return;
         }
 
         rectTransform.pivot = new Vector2(0.5f, 0.5f);
@@ -59,22 +62,22 @@ public class DraggableClue : MonoBehaviour
         Vector2 screenCenter = new Vector2(screenCenter3D.x, screenCenter3D.y);
         float dist = Vector2.Distance(mouse, screenCenter);
 
-        if (dist < 100f)
-        {
-            Debug.Log($"[PROX] {name} | Dist: {dist:F1}px");
-        }
-
         if (Input.GetMouseButtonDown(0) && !isDragging)
         {
             if (dist <= grabProximityPx)
             {
                 isDragging = true;
-                Debug.Log($"[GRAB] {name} | Dist: {dist:F1}px");
+
+                Slot currentSlot = GetComponentInParent<Slot>();
+                if (currentSlot != null)
+                {
+                    currentSlot.Vacate();
+                }
 
                 if (image != null)
                 {
                     image.color = new Color(1f, 0.9f, 0.6f);
-                    transform.localScale = originalScale * 1.1f;
+                    transform.localScale = originalScale * 1.08f;
                 }
             }
         }
@@ -96,7 +99,6 @@ public class DraggableClue : MonoBehaviour
             else
             {
                 isDragging = false;
-                Debug.Log($"[RELEASE] {name}");
 
                 if (image != null)
                 {
@@ -107,16 +109,14 @@ public class DraggableClue : MonoBehaviour
                 Slot nearest = FindNearestSlot();
                 if (nearest != null && !nearest.IsOccupied())
                 {
-                    Vector3 worldPos = rectTransform.position;
                     transform.SetParent(nearest.transform);
-                    rectTransform.position = worldPos;  // Keep world pos after reparent
+                    rectTransform.anchoredPosition = Vector2.zero;
                     nearest.Occupy(this);
                 }
                 else
                 {
-                    Vector3 worldPos = rectTransform.position;
                     transform.SetParent(originalParent);
-                    rectTransform.position = worldPos;
+                    rectTransform.anchoredPosition = startPosition;
                 }
             }
         }

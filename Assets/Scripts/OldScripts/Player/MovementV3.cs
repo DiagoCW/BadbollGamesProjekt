@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class MovementV3 : MonoBehaviour
 {
@@ -9,24 +9,23 @@ public class MovementV3 : MonoBehaviour
     [SerializeField] private float deceleration = 18f;
 
     [Header("Mouse Look")]
+    [SerializeField] private Camera playerCamera;           
     [SerializeField] private float mouseSensitivity = 2f;
-    [SerializeField] private float verticalLookRange = 80f; // max up/down angle
+    [SerializeField] private float verticalLookRange = 80f;
 
     [Header("Jump & Gravity")]
     [SerializeField] private float jumpHeight = 1.5f;
     [SerializeField] private float gravity = -30f;
 
     [Header("Ground Check")]
-    [SerializeField] private Transform groundCheck;         // child object at feet
+    [SerializeField] private Transform groundCheck;
     [SerializeField] private float groundDistance = 0.4f;
     [SerializeField] private LayerMask groundMask;
 
     private CharacterController controller;
-    private Vector3 velocity;           // vertical velocity (jump + gravity)
-    private Vector3 horizontalVelocity; // smoothed horizontal movement
+    private Vector3 velocity;
+    private Vector3 horizontalVelocity;
     private bool isGrounded;
-
-    // Mouse look
     private float xRotation = 0f;
 
     private void Awake()
@@ -39,13 +38,23 @@ public class MovementV3 : MonoBehaviour
             return;
         }
 
-        // Auto-create ground check if missing
+        // Auto-create ground check
         if (groundCheck == null)
         {
             GameObject go = new GameObject("GroundCheck");
             go.transform.SetParent(transform);
             go.transform.localPosition = new Vector3(0, 0.1f, 0);
             groundCheck = go.transform;
+        }
+
+        // Auto-find camera if not assigned
+        if (playerCamera == null)
+        {
+            playerCamera = GetComponentInChildren<Camera>();
+            if (playerCamera == null)
+            {
+                Debug.LogWarning("No Camera found as child of player. Please assign it in Inspector.", this);
+            }
         }
     }
 
@@ -57,15 +66,18 @@ public class MovementV3 : MonoBehaviour
 
     private void Update()
     {
-        // Skip all input if script is disabled (important for corkboard view)
         if (!enabled) return;
 
         HandleGroundCheck();
         HandleMovement();
         HandleJump();
-        HandleMouseLook();
 
-        // Apply movement
+        // Only run mouse look if we have a valid camera
+        if (playerCamera != null)
+        {
+            HandleMouseLook();
+        }
+
         controller.Move(horizontalVelocity * Time.deltaTime + velocity * Time.deltaTime);
     }
 
@@ -75,26 +87,22 @@ public class MovementV3 : MonoBehaviour
 
         if (isGrounded && velocity.y < 0)
         {
-            velocity.y = -2f; // small downward force to keep grounded
+            velocity.y = -2f;
         }
     }
 
     private void HandleMovement()
     {
-        // Input
         float x = Input.GetAxisRaw("Horizontal");
         float z = Input.GetAxisRaw("Vertical");
 
         Vector3 inputDir = transform.right * x + transform.forward * z;
         inputDir = Vector3.ClampMagnitude(inputDir, 1f);
 
-        // sprint with Shift
         float currentMaxSpeed = Input.GetKey(KeyCode.LeftShift) ? sprintSpeed : walkSpeed;
 
-        // Target horizontal velocity
         Vector3 targetVelocity = inputDir * currentMaxSpeed;
 
-        // Smooth towards target
         float accel = (targetVelocity.magnitude > 0.01f) ? acceleration : deceleration;
         horizontalVelocity = Vector3.MoveTowards(horizontalVelocity, targetVelocity, accel * Time.deltaTime);
     }
@@ -103,25 +111,23 @@ public class MovementV3 : MonoBehaviour
     {
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
-            // Better jump height calculation
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
 
-        // Apply gravity
         velocity.y += gravity * Time.deltaTime;
     }
 
     private void HandleMouseLook()
     {
+        if (playerCamera == null) return;   // Safety check
+
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
 
-        // Vertical rotation
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -verticalLookRange, verticalLookRange);
 
-        // Apply rotations
-        Camera.main.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+        playerCamera.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         transform.Rotate(Vector3.up * mouseX);
     }
 

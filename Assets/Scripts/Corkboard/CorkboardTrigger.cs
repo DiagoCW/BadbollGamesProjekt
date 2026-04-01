@@ -3,15 +3,15 @@
 public class CorkboardTrigger : MonoBehaviour
 {
     [Header("Cameras")]
-    [SerializeField] private GameObject playerCameraGO;         // Drag the MainCamera GameObject
-    [SerializeField] private GameObject corkboardCameraGO;      // Drag the Corkboard Camera GameObject
+    [SerializeField] private GameObject playerCameraGO;
+    [SerializeField] private GameObject corkboardCameraGO;
 
     [Header("Trigger Settings")]
     [SerializeField] private string playerTag = "Player";
     [SerializeField] private KeyCode exitKey = KeyCode.Escape;
 
     [Header("Cursor Behaviour")]
-    [SerializeField] private bool useConfinedCursor = true;     
+    [SerializeField] private bool useConfinedCursor = true;
 
     [Header("Optional Behaviour")]
     [SerializeField] private MonoBehaviour[] scriptsToDisableWhileViewing;
@@ -23,10 +23,7 @@ public class CorkboardTrigger : MonoBehaviour
         if (playerCameraGO == null) Debug.LogError("PlayerCameraGO not assigned!", this);
         if (corkboardCameraGO == null) Debug.LogError("CorkboardCameraGO not assigned!", this);
 
-        // Force correct starting state
         SetViewToPlayer();
-
-        // Ensure cursor starts locked for normal gameplay
         LockCursor(true);
     }
 
@@ -34,7 +31,6 @@ public class CorkboardTrigger : MonoBehaviour
     {
         if (other.CompareTag(playerTag) && !isViewingCorkboard)
         {
-            Debug.Log($"Player ({other.gameObject.name}) ENTERED trigger → switch to corkboard");
             SwitchToCorkboard(true);
         }
     }
@@ -43,7 +39,6 @@ public class CorkboardTrigger : MonoBehaviour
     {
         if (other.CompareTag(playerTag) && isViewingCorkboard)
         {
-            Debug.Log($"Player ({other.gameObject.name}) EXITED trigger → back to player");
             SwitchToCorkboard(false);
         }
     }
@@ -52,7 +47,6 @@ public class CorkboardTrigger : MonoBehaviour
     {
         if (isViewingCorkboard && Input.GetKeyDown(exitKey))
         {
-            Debug.Log("Escape pressed → force exit corkboard view");
             SwitchToCorkboard(false);
         }
     }
@@ -67,35 +61,18 @@ public class CorkboardTrigger : MonoBehaviour
         {
             playerCameraGO.SetActive(false);
             corkboardCameraGO.SetActive(true);
-
-            // Force depth priority
-            var cbCam = corkboardCameraGO.GetComponent<Camera>();
-            if (cbCam != null) cbCam.depth = 10f;
-
-            // Unlock cursor so player can interact with UI (drag clues, click buttons)
             LockCursor(false);
-
-            Debug.Log("Switched TO corkboard view → cursor UNLOCKED for UI interaction");
         }
         else
         {
             corkboardCameraGO.SetActive(false);
             playerCameraGO.SetActive(true);
-
-            var playerCam = playerCameraGO.GetComponent<Camera>();
-            if (playerCam != null) playerCam.depth = -1f;
-
-            // Re-lock cursor for normal movement
             LockCursor(true);
-
-            Debug.Log("Switched BACK to player view → cursor RE-LOCKED");
         }
 
-        // Disable script while active
         foreach (var script in scriptsToDisableWhileViewing)
         {
-            if (script != null)
-                script.enabled = !toCorkboard;
+            if (script != null) script.enabled = !toCorkboard;
         }
     }
 

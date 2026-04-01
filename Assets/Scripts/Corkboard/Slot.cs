@@ -1,10 +1,12 @@
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
 public class Slot : MonoBehaviour
 {
+    [Header("Correct Position")]
+    [SerializeField] public int slotID = 1;
+
     private RectTransform rectTransform;
-    private DraggableClue currentClue;   // null if empty
+    private DraggableClue currentClue;
 
     private void Awake()
     {
@@ -23,11 +25,7 @@ public class Slot : MonoBehaviour
         currentClue = null;
     }
 
-    public Vector2 GetSnapPosition()
-    {
-        return rectTransform.anchoredPosition;   // Center of slot
-    }
+    public Vector2 GetSnapPosition() => rectTransform.anchoredPosition;
 
     public RectTransform GetRect() => rectTransform;
-
 }
