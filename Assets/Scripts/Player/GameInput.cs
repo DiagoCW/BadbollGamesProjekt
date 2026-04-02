@@ -6,6 +6,7 @@ public class GameInput : MonoBehaviour
 {
     public event EventHandler OnJumpAction;
     public event EventHandler OnHighlightAction;
+    public event EventHandler OnInventoryAction;
 
     private InputSystem_Actions inputActions;
 
@@ -17,6 +18,7 @@ public class GameInput : MonoBehaviour
         // subscribe to input events
         inputActions.Player.Jump.performed += Jump_performed;
         inputActions.Player.Highlight.performed += Highlight_performed;
+        inputActions.Player.Inventory.performed += Inventory_performed;
     }
 
     private void OnDestroy()
@@ -24,6 +26,7 @@ public class GameInput : MonoBehaviour
         // unsubscribe from input events to prevent memory leaks
         inputActions.Player.Jump.performed -= Jump_performed;
         inputActions.Player.Highlight.performed -= Highlight_performed;
+        inputActions.Player.Inventory.performed -= Inventory_performed;
         inputActions.Dispose();
     }
 
@@ -45,5 +48,10 @@ public class GameInput : MonoBehaviour
     public Vector2 GetLookVector() 
     {
         return inputActions.Player.Look.ReadValue<Vector2>();
+    }
+
+    public void Inventory_performed(InputAction.CallbackContext obj) 
+    {
+        OnInventoryAction?.Invoke(this, EventArgs.Empty);
     }
 }
