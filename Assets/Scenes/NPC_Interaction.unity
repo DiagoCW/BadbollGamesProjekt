@@ -5900,6 +5900,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e83abb364c6ad7c419abd01de82f93ee, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1630563436}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e83abb364c6ad7c419abd01de82f93ee, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1630563438}
   m_SourcePrefab: {fileID: 100100000, guid: e83abb364c6ad7c419abd01de82f93ee, type: 3}
 --- !u!4 &1630563434 stripped
 Transform:
@@ -5945,7 +5948,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 265d8379ea94a64448cf58fb52633ac6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inkJson: {fileID: 0}
+  inkJson: {fileID: 4900000, guid: 840704c269d7c284cac229b3000baa43, type: 3}
+--- !u!136 &1630563438
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1630563435}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 5
+  m_Direction: 1
+  m_Center: {x: 0, y: 2, z: 0}
 --- !u!43 &1663235898
 Mesh:
   m_ObjectHideFlags: 0
