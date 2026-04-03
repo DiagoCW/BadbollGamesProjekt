@@ -1,4 +1,5 @@
 INCLUDE globals.ink
+/* 
 VAR foundWallet = false
 {talkedToBossMan: -> FindWallet | -> Inspect }
 
@@ -20,4 +21,7 @@ Wait... There's something buried beneath the trash. #speaker: Player
 This is the part of the game where I find an incriminating piece of evidence and promptly go back to a suspect to confront them, even though there is nothing here yet to suggest that they would have something to do with this.
 ~ visitedCrimeScene = true
 ~ foundWallet = true
--> END
+-> END 
+*/
+
+~ visitedCrimeScene = true

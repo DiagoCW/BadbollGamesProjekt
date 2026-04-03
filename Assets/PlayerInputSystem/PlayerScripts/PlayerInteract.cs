@@ -6,6 +6,7 @@ public interface IInteractable
 {
     void Interact();
 }
+
 public class PlayerInteract : MonoBehaviour
 {
     [SerializeField] Camera playerCamera;
@@ -15,6 +16,7 @@ public class PlayerInteract : MonoBehaviour
     {
         playerCamera = Camera.main;
     }
+
     public void OnInteract(InputValue value)
     {
         if (NewDialogueManager.Instance.dialogueIsPlaying) return;
@@ -35,6 +37,7 @@ public class PlayerInteract : MonoBehaviour
             IInteractable interactable = hitInfo.collider.GetComponent<IInteractable>();
             // Calling interact method of the interactable
             interactable?.Interact();
+            
         }
     }
 }

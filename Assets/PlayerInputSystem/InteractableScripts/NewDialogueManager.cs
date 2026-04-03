@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using UnityEngine.EventSystems;
 using System.Collections;
 using UnityEngine.SearchService;
+using System;
 public class NewDialogueManager : MonoBehaviour
 {
 
@@ -21,20 +22,33 @@ public class NewDialogueManager : MonoBehaviour
     [SerializeField] GameObject[] choices;
     TextMeshProUGUI[] choicesText;
 
-    [SerializeField] float typingSpeed = 0.02f;
+    [Header("Speaker Panels")]
+    [SerializeField] GameObject npcPanel;
+    [SerializeField] GameObject playerPanel;
+    [SerializeField] TextMeshProUGUI npcText;
+    [SerializeField] TextMeshProUGUI playerText;
 
-    Story currentStory;
+    [Header("NPC Animation Controller")]
+    [SerializeField] RuntimeAnimatorController npcAnimController;
+    [SerializeField] Animator npcAnimator;
+    
 
-    Coroutine displayLineCoroutine;
+    [SerializeField] float typingSpeed = 0.03f;
+
+    public Story currentStory { get; private set; } // dialogens textfil 
     public bool dialogueIsPlaying { get; private set; }
     bool isTyping;
 
-    DialogueVariables dialogueVariables;
-    public static NewDialogueManager Instance { get; private set; }
+    private Coroutine displayLineCoroutine;
+
+    public DialogueVariables dialogueVariables { get; private set; }
+    public static NewDialogueManager Instance { get; set; }
 
     const string SPEAKER_TAG = "speaker";
     const string PORTRAIT_TAG = "portrait";
     const string LAYOUT_TAG = "layout";
+    const string ANIM_TAG = "anim";
+    string currentValue = string.Empty;
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -45,6 +59,8 @@ public class NewDialogueManager : MonoBehaviour
         else Instance = this;
 
         dialogueVariables = new(loadGlobalsJSON);
+
+        
     }
 
 
@@ -63,12 +79,13 @@ public class NewDialogueManager : MonoBehaviour
 
     private void Update()
     {
-        if (!dialogueIsPlaying ||
-            currentStory.currentChoices.Count > 0) return;
+        if (!dialogueIsPlaying /*||
+            currentStory.currentChoices.Count > 0*/) return;
 
-        //if (!dialogueIsPlaying) return;
+        if (Input.GetKeyDown(KeyCode.Escape))
+            ExitDialogue();
 
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && currentStory.currentChoices.Count == 0)
         {
             if (!isTyping)
             {
@@ -86,31 +103,39 @@ public class NewDialogueManager : MonoBehaviour
         }
     }
 
+
     IEnumerator TypeText(string line)
     {
-        dialogueText.text = string.Empty;
-        isTyping = true;
-        HideChoices();
-        foreach (char letter in line.ToCharArray())
+        
+        if (currentStory.currentChoices.Count > 0)
         {
-            dialogueText.text += letter;
-            yield return new WaitForSeconds(typingSpeed);
+            //isTyping = false;
+            dialogueText.text = string.Empty;
+            DisplayChoices();
+            //yield return new WaitForSeconds(0.01f);
         }
-        isTyping = false;
-        DisplayChoices();
+        else
+        {
+            dialogueText.text = string.Empty;
+            isTyping = true;
+            HideChoices();
+            foreach (char letter in line.ToCharArray())
+            {
+                dialogueText.text += letter;
+                yield return new WaitForSeconds(typingSpeed);
+            }
+            isTyping = false;
+        }
+        
+        
     }
 
     public void EnterDialogue(TextAsset inkJson)
     {
-        GameObject.FindWithTag("Player").GetComponent<PlayerInput>().enabled = false;
+        //GameObject.FindWithTag("Player").GetComponent<PlayerInput>().enabled = false;
+        PlayerController.Instance.enabled = false;
         currentStory = new(inkJson.text);
         dialogueVariables.StartListening(currentStory);
-
-        currentStory.BindExternalFunction("setAnimation", (string anim) =>
-        {
-            Debug.Log(anim);
-        });
-
 
         dialogueIsPlaying = true;
         dialoguePanel.SetActive(true);
@@ -121,9 +146,11 @@ public class NewDialogueManager : MonoBehaviour
     private void ExitDialogue()
     {
         dialogueVariables.StopListening(currentStory);
-        currentStory.UnbindExternalFunction("setAnimation");
+        //currentStory.UnbindExternalFunction("setAnimation");
 
-        GameObject.FindWithTag("Player").GetComponent<PlayerInput>().enabled = true;
+        //GameObject.FindWithTag("Player").GetComponent<PlayerInput>().enabled = true;
+        //GameObject.FindWithTag("Player").GetComponent<GameInput>().enabled = true;
+        PlayerController.Instance.enabled = true;
         dialogueIsPlaying = false;
         dialoguePanel.SetActive(false);
         dialogueText.text = string.Empty;
@@ -140,6 +167,7 @@ public class NewDialogueManager : MonoBehaviour
             displayLineCoroutine = StartCoroutine(TypeText(currentStory.Continue()));
             HandleTags(currentStory.currentTags);
         }
+        
         else
         {
             ExitDialogue();
@@ -158,11 +186,26 @@ public class NewDialogueManager : MonoBehaviour
             }
             string tagKey = splitTag[0].Trim();
             string tagValue = splitTag[1].Trim();
+            
+
             switch (tagKey)
             {
                 case SPEAKER_TAG:
                     // Hantera talare, t.ex. ändra namn eller färg på texten
                     Debug.Log($"Speaker: {tagValue}");
+                    if (tagValue.Equals("Player"))
+                    {
+                        playerText.text = tagValue;
+                        npcPanel.SetActive(false);
+                        playerPanel.SetActive(true);
+                    }
+                        
+                    else
+                    {
+                        npcText.text = tagValue;
+                        npcPanel.SetActive(true);
+                        playerPanel.SetActive(false);
+                    }
                     displayNameText.text = tagValue;
                     break;
                 case PORTRAIT_TAG:
@@ -172,6 +215,30 @@ public class NewDialogueManager : MonoBehaviour
                 case LAYOUT_TAG:
                     // Hantera layout, t.ex. ändra position eller stil på dialogrutan
                     Debug.Log($"Layout: {tagValue}");
+                    break;
+                case ANIM_TAG:
+                    Debug.Log($"Animation: {tagValue}, currentTag: {currentValue}");
+
+                    //DialogueTrigger.npcAnimator.SetTrigger(tagValue);
+                    npcAnimator.SetTrigger(tagValue);
+
+                    if (!currentValue.Equals(tagValue))
+                    {
+                        //DialogueTrigger.npcAnimator.ResetTrigger(currentValue);
+                        npcAnimator.ResetTrigger(currentValue);
+                        currentValue = tagValue;
+                        //continue;
+                    }
+
+                    
+                    
+                    //string currentValue = tagValue;
+                    
+
+                    //if (npcAnimator.GetBool(tagValue))
+                    //    npcAnimator.SetBool(tagValue, false);
+                    //else npcAnimator.SetBool(tagValue, true);
+
                     break;
                 default:
                     Debug.LogWarning($"Unknown tag key: {tagKey}");
@@ -226,6 +293,12 @@ public class NewDialogueManager : MonoBehaviour
     public void MakeChoice(int choiceIndex)
     {
         currentStory.ChooseChoiceIndex(choiceIndex);
-        ContinueStory();
+        StartCoroutine(ChoiceDelay());
+        //ContinueStory();
+    }
+
+    private IEnumerator ChoiceDelay()
+    {
+        yield return new WaitForSeconds(5f);
     }
 }

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Highlightable
   - Clue
+  - NPC
   layers:
   - Default
   - TransparentFX
