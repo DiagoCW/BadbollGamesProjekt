@@ -29,8 +29,8 @@ public class NewDialogueManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI playerText;
 
     [Header("NPC Animation Controller")]
-    [SerializeField] RuntimeAnimatorController npcAnimController;
-    [SerializeField] Animator npcAnimator;
+    //[SerializeField] RuntimeAnimatorController npcAnimController;
+    /*[SerializeField]*/ Animator npcAnimator;
     
 
     [SerializeField] float typingSpeed = 0.03f;
@@ -48,7 +48,7 @@ public class NewDialogueManager : MonoBehaviour
     const string PORTRAIT_TAG = "portrait";
     const string LAYOUT_TAG = "layout";
     const string ANIM_TAG = "anim";
-    string currentValue = string.Empty;
+    string currentValue = "Idle";
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -130,10 +130,12 @@ public class NewDialogueManager : MonoBehaviour
         
     }
 
-    public void EnterDialogue(TextAsset inkJson)
+    public void EnterDialogue(TextAsset inkJson, GameObject npc)
     {
         //GameObject.FindWithTag("Player").GetComponent<PlayerInput>().enabled = false;
+        
         PlayerController.Instance.enabled = false;
+        npcAnimator = npc.GetComponent<Animator>();
         currentStory = new(inkJson.text);
         dialogueVariables.StartListening(currentStory);
 
@@ -146,8 +148,6 @@ public class NewDialogueManager : MonoBehaviour
     private void ExitDialogue()
     {
         dialogueVariables.StopListening(currentStory);
-        //currentStory.UnbindExternalFunction("setAnimation");
-
         //GameObject.FindWithTag("Player").GetComponent<PlayerInput>().enabled = true;
         //GameObject.FindWithTag("Player").GetComponent<GameInput>().enabled = true;
         PlayerController.Instance.enabled = true;
@@ -222,13 +222,15 @@ public class NewDialogueManager : MonoBehaviour
                     //DialogueTrigger.npcAnimator.SetTrigger(tagValue);
                     npcAnimator.SetTrigger(tagValue);
 
-                    if (!currentValue.Equals(tagValue))
-                    {
-                        //DialogueTrigger.npcAnimator.ResetTrigger(currentValue);
-                        npcAnimator.ResetTrigger(currentValue);
-                        currentValue = tagValue;
-                        //continue;
-                    }
+                    //if (!currentValue.Equals(tagValue))
+                    //{
+                    //    //DialogueTrigger.npcAnimator.ResetTrigger(currentValue);
+                    //    npcAnimator.ResetTrigger(currentValue);
+                    //    currentValue = tagValue;
+                    //    //continue;
+                    //}
+
+                    
 
                     
                     

@@ -11,7 +11,7 @@ public class DialogueTrigger : MonoBehaviour, IInteractable
     [Header("Transform NPC & Player")]
     Transform npcDir;
     Transform player;
-    public static Animator npcAnimator { get; set; }
+    //public static Animator npcAnimator { get; set; }
     //Transform defaultPos;
     
     // Ink JSON fil som håller dialogen som objektet ska visa vid interaktion
@@ -22,12 +22,14 @@ public class DialogueTrigger : MonoBehaviour, IInteractable
     {
         npcDir = this.transform;
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        //NewDialogueManager.Instance.currentStory.variablesState["foundSnusdosa"] = true;
+        
     }
 
     public void Interact()
     {
         Debug.Log(inkJson.text);
-        NewDialogueManager.Instance.EnterDialogue(inkJson);
+        NewDialogueManager.Instance.EnterDialogue(inkJson, this.gameObject);
         //FacePlayer();
     }
 
@@ -46,6 +48,5 @@ public class DialogueTrigger : MonoBehaviour, IInteractable
     {
         Vector3 rotation = new Vector3(player.position.x, transform.position.y, player.position.z);
         transform.LookAt(rotation);
-       
     }
 }
