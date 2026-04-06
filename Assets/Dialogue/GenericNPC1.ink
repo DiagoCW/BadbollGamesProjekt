@@ -4,11 +4,11 @@ VAR seenDialogue = false
 Have you seen anything unusual lately? # speaker: Player
 Can’t say that I have, but I’ll keep my eyes peeled… Just in case. # speaker: Some Guy
 Thanks, but it’s Time. # speaker: Player
-What? # speaker: Some Guy
+What? # speaker: Some Guy # anim: Yelling
 Justin Time. # speaker: Player
 -> Finish
 
 === Finish ===
 ~seenDialogue = true 
-... Yeah, as I said, I’ll let you know. # speaker: Some guy
+... Yeah, as I said, I’ll let you know. # speaker: Some guy # anim: Shake
 ->END
