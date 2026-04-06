@@ -7,6 +7,7 @@ using UnityEngine.EventSystems;
 using System.Collections;
 using UnityEngine.SearchService;
 using System;
+//using Ink.Parsed;
 public class NewDialogueManager : MonoBehaviour
 {
 
@@ -59,8 +60,6 @@ public class NewDialogueManager : MonoBehaviour
         else Instance = this;
 
         dialogueVariables = new(loadGlobalsJSON);
-
-        
     }
 
 
@@ -75,6 +74,16 @@ public class NewDialogueManager : MonoBehaviour
         {
             choicesText[i] = choices[i].GetComponentInChildren<TextMeshProUGUI>();
         }
+    }
+
+    public Ink.Runtime.Object GetVariableState(string variableName)
+    {
+        Ink.Runtime.Object value = null;
+        dialogueVariables.variables.TryGetValue(variableName, out value);
+        if (value == null)
+            Debug.LogWarning($"Variable {variableName} not found in DialogueVariables.");
+        return value;
+        
     }
 
     private void Update()
@@ -130,12 +139,12 @@ public class NewDialogueManager : MonoBehaviour
         
     }
 
-    public void EnterDialogue(TextAsset inkJson, GameObject npc)
+    public void EnterDialogue(TextAsset inkJson, Animator npc)
     {
         //GameObject.FindWithTag("Player").GetComponent<PlayerInput>().enabled = false;
         
         PlayerController.Instance.enabled = false;
-        npcAnimator = npc.GetComponent<Animator>();
+        npcAnimator = npc;
         currentStory = new(inkJson.text);
         dialogueVariables.StartListening(currentStory);
 

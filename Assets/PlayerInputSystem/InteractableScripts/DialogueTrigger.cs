@@ -3,20 +3,21 @@ using Ink.Runtime;
 using Ink.Parsed;
 
 /// <summary>
-/// Detta script läggs till på alla komponenter som ska kunna trigga igång dialog,
-/// gäller både NPCs och andra objekt som spelaren kan interagera med.
+/// Detta script läggs till på alla NPCs som spelaren ska kunna interagera med och starta dialog.
+/// Den innehåller en JSON-fil med dess Inkdialog som skickas till DialogueManager.
+/// 
 /// </summary>
 public class DialogueTrigger : MonoBehaviour, IInteractable
 {
     [Header("Transform NPC & Player")]
     Transform npcDir;
     Transform player;
-    //public static Animator npcAnimator { get; set; }
-    //Transform defaultPos;
     
     // Ink JSON fil som håller dialogen som objektet ska visa vid interaktion
     [Header("Ink JSON")]
     [SerializeField] TextAsset inkJson;
+
+    Animator npcAnimator;
     
     void Awake()
     {
@@ -24,13 +25,13 @@ public class DialogueTrigger : MonoBehaviour, IInteractable
         player = GameObject.FindGameObjectWithTag("Player").transform;
         //NewDialogueManager.Instance.currentStory.variablesState["foundSnusdosa"] = true;
         
+        npcAnimator = GetComponentInChildren<Animator>();
     }
 
     public void Interact()
     {
-        Debug.Log(inkJson.text);
-        NewDialogueManager.Instance.EnterDialogue(inkJson, this.gameObject);
-        //FacePlayer();
+        //Debug.Log(inkJson.text);
+        NewDialogueManager.Instance.EnterDialogue(inkJson, npcAnimator);
     }
 
     void Update()
@@ -41,7 +42,6 @@ public class DialogueTrigger : MonoBehaviour, IInteractable
             Vector3.Distance(npcDir.position, player.position) < 5)
                 FacePlayer();
         }
-
     }
 
     public void FacePlayer()
