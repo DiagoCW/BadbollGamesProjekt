@@ -3,12 +3,12 @@ INCLUDE globals.ink
 {talkedToBossMan: -> Inspect | -> InspectAgain }
 
 === Inspect ===
-{visitedCrimeScene: -> InspectAgain | -> FindRoll }
+{foundSnusdosa: -> InspectAgain | -> FindSnusdosa }
 === InspectAgain ===
 Good ol trash... # speaker: Player
 -> END
 
-=== FindRoll === 
+=== FindSnusdosa === 
 This roll... it's still fresh. # speaker: Player
-~ visitedCrimeScene = true
+~ foundSnusdosa = true
 -> END

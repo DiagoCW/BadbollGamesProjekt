@@ -42,6 +42,10 @@ public class DialogueVariables
         foreach (KeyValuePair<string, Ink.Runtime.Object> variable in variables)
         {
             story.variablesState.SetGlobal(variable.Key, variable.Value);
+            
         }
+
     }
+
+    
 }
