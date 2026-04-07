@@ -324,7 +324,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slotID: 2
-  showDebug: 1
 --- !u!114 &91769608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2364,7 +2363,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slotID: 4
-  showDebug: 1
 --- !u!114 &1120321817
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3176,18 +3174,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1360106377}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1360106378
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3456,7 +3442,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slotID: 3
-  showDebug: 1
 --- !u!114 &1680756728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3546,7 +3531,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slotID: 1
-  showDebug: 1
 --- !u!114 &1686588536
 MonoBehaviour:
   m_ObjectHideFlags: 0
