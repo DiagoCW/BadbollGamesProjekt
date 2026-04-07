@@ -6,37 +6,28 @@ using System.IO;
 using UnityEditor;
 
 [CreateAssetMenu(fileName = "New Inventory", menuName = "Inventory System/Inventory")]
-public class InventoryObject : ScriptableObject, ISerializationCallbackReceiver
+public class InventoryObject : ScriptableObject
 {
     public string savePath;
-    private ItemDatabaseObject database;
-    public List<InventorySlot> Container = new List<InventorySlot>(); 
+    public ItemDatabaseObject database;
+    public Inventory Container;
 
-    private void OnEnable()
+    public void AddItem(Item _item/*, int _amount*/)
     {
-#if UNITY_EDITOR
-        database = (ItemDatabaseObject)AssetDatabase.LoadAssetAtPath("Assets/Scripts/Inventory/ScriptableObjects/Items/Resources/Database.asset", typeof(ItemDatabaseObject));
-#else
-        database = Resources.Load<ItemDatabaseObject>("Database");
-
-#endif
-    }
-
-    public void AddItem(ItemObject _item/*, int _amount*/)
-    {
-        for (int i = 0; i < Container.Count; i++)
+        for (int i = 0; i < Container.Items.Count; i++)
         {
-            if (Container[i].item == _item)
+            if (Container.Items[i].item == _item)
             {
                 //-Excluded-
-                //Container[i].AddAmount(-amount);
+                //Container.Items[i].AddAmount(-amount);
                 //-Excluded-
                 return;
             }
         }
-        Container.Add(new InventorySlot(database.GetId[_item], _item/*, _amount*/));
+        Container.Items.Add(new InventorySlot(_item.Id, _item/*, _amount*/));
     }
 
+    [ContextMenu("Save")]
     public void Save()
     {
         string saveData = JsonUtility.ToJson(this, true);
@@ -46,6 +37,7 @@ public class InventoryObject : ScriptableObject, ISerializationCallbackReceiver
         file.Close();
     }
 
+    [ContextMenu("Load")]
     public void Load()
     {
         if (File.Exists(string.Concat(Application.persistentDataPath, savePath)))
@@ -57,41 +49,40 @@ public class InventoryObject : ScriptableObject, ISerializationCallbackReceiver
         }
     }
 
-    public void OnAfterDeserialize()
+    [ContextMenu("Clear")]
+    public void Clear()
     {
-        for (int i = 0; i < Container.Count; i++)
-        {
-            Container[i].item = database.GetItem[Container[i].ID];
-        }
+        Container = new Inventory();
     }
+}
 
-    public void OnBeforeSerialize()
+[System.Serializable]
+public class Inventory
+{
+    public List<InventorySlot> Items = new List<InventorySlot>();
+}
+
+[System.Serializable]
+public class InventorySlot
+{
+    public int ID;
+    public Item item;
+    //-Excluded-
+    //public int amount;
+    //-Excluded-
+    public InventorySlot(int _id, Item _item/*, int _amount*/)
     {
-
-    }
-
-    [System.Serializable]
-    public class InventorySlot
-    {
-        public int ID;
-        public ItemObject item;
+        ID = _id;
+        item = _item;
         //-Excluded-
-        //public int amount;
+        //amount = _amount;
         //-Excluded-
-        public InventorySlot(int _id, ItemObject _item/*, int _amount*/)
-        {
-            ID = _id;
-            item = _item;
-            //-Excluded-
-            //amount = _amount;
-            //-Excluded-
-        }
-
-        public void AddAmount(int value)
-        {
-            //-Excluded-
-            //amount += value;
-            //-Excluded-
-        }
     }
+
+    //public void AddAmount(int value)
+    //{
+    //    //-Excluded-
+    //    //amount += value;
+    //    //-Excluded-
+    //}
 }
