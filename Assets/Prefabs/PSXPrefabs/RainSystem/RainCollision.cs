@@ -20,6 +20,7 @@ public class RainCollision : MonoBehaviour
     {
         int numberofDrops = ps.GetCollisionEvents(other, rainCollision);
 
+
         //Looping through each Raindrop hit
         for (int i = 0; i < numberofDrops; i++)
         {
@@ -29,6 +30,8 @@ public class RainCollision : MonoBehaviour
             //exact point where the raindrop hit
             Vector3 hitPos = rainCollision[i].intersection;
             Vector3 hitNormal = rainCollision[i].normal;
+
+          
 
             //spawn splash - Quaternion = Rotates splash 
             GameObject splash = Instantiate(SplashSystem, hitPos, Quaternion.LookRotation(hitNormal));
