@@ -9,10 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5344c14e9be04d84cb6b04a48b7e2011, type: 3}
-  m_Name: Option1
+  m_Script: {fileID: 11500000, guid: ce35d50bed45aec4ca76927dcd2e78cd, type: 3}
+  m_Name: DatabaseTest
   m_EditorClassIdentifier: 
-  lines:
-  - You are a very smart fella
-  textSpeed: 0.02
-  choices: []
+  items:
+  - {fileID: 11400000, guid: 293d2e1c924464d4aa7e4df191afffca, type: 2}

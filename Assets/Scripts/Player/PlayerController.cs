@@ -9,6 +9,9 @@ public class PlayerController : MonoBehaviour
     [Header("References")]
     [SerializeField] private GameInput gameInput;
 
+    [Header("UI References")]
+    [SerializeField] private GameObject inventoryCanvas;
+
     [Header("Movement Settings")]
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float jumpHeight = 1.5f;
@@ -18,6 +21,9 @@ public class PlayerController : MonoBehaviour
     private Vector3 verticalVelocity;
     private float gravity = -9.81f;
     private bool isGrounded;
+    
+    public bool IsInventoryOpen { get; private set; } = false;
+    public bool IsInDialogue { get; set; } = false;
 
     private void Awake()
     {
@@ -34,19 +40,67 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         gameInput.OnJumpAction += GameInput_OnJumpAction;
+        gameInput.OnInventoryAction += GameInput_OnInventoryAction;
+
+        if (inventoryCanvas != null)
+        {
+            inventoryCanvas.SetActive(false);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (gameInput != null)
+        {
+            gameInput.OnJumpAction -= GameInput_OnJumpAction;
+            gameInput.OnInventoryAction -= GameInput_OnInventoryAction;
+        }
     }
 
     private void GameInput_OnJumpAction(object sender, EventArgs e)
     {
-        if (isGrounded)
+        if (isGrounded && !IsInventoryOpen && !IsInDialogue)
         {
             verticalVelocity.y = Mathf.Sqrt(jumpHeight * -2f * (gravity * gravityMultiplier));
         }
     }
 
+    private void GameInput_OnInventoryAction(object sender, EventArgs e)
+    {
+        if (IsInDialogue) 
+        {
+            return;
+        }
+
+        ToggleInventory();
+    }
+
+    private void ToggleInventory() 
+    {
+        IsInventoryOpen = !IsInventoryOpen;
+
+        if (inventoryCanvas != null)
+        {
+            inventoryCanvas.SetActive(IsInventoryOpen);
+        }
+
+        if (IsInventoryOpen)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        else 
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+    }
+
     private void Update()
     {
-        HandleMovement();
+        
+            HandleMovement();
+        
     }
 
     private void HandleMovement() 
@@ -57,7 +111,11 @@ public class PlayerController : MonoBehaviour
             verticalVelocity.y = -2f; // small negative value to keep the player grounded
         }
 
-        Vector2 inputVector = gameInput.GetMovementVectorNormalized();
+        Vector2 inputVector = Vector2.zero;
+        if (!IsInventoryOpen && !IsInDialogue) 
+        {
+            inputVector = gameInput.GetMovementVectorNormalized();
+        }
 
         // Move relative to the player's orientation
         Vector3 moveDir = transform.right * inputVector.x + transform.forward * inputVector.y;
