@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46db39dea7ad8e84bab99ebae6da6802, type: 3}
   m_Name: Clue1
   m_EditorClassIdentifier: 
-  prefab: {fileID: 5271284333641439176, guid: cb4c0a44b44417c429d06d2788e78d65, type: 3}
+  Id: 1
+  uiDisplay: {fileID: 21300000, guid: 5893fc1488267e94ea85121a346590e3, type: 3}
   description: 
