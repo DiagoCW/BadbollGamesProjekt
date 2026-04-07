@@ -96,7 +96,7 @@ public class OutlineHighlighter : MonoBehaviour
         {
             CreateOutline();
             outlineObject.SetActive(true);
-
+            
             if (duration > 0f)
             {
                 CancelInvoke(nameof(TurnOff));
@@ -114,5 +114,6 @@ public class OutlineHighlighter : MonoBehaviour
         if (outlineObject != null)
             outlineObject.SetActive(false);
         isHighlighted = false;
+        gameObject.tag = null;
     }
 }
