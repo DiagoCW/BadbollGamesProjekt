@@ -143,7 +143,8 @@ public class NewDialogueManager : MonoBehaviour
     {
         //GameObject.FindWithTag("Player").GetComponent<PlayerInput>().enabled = false;
         
-        PlayerController.Instance.enabled = false;
+        //PlayerController.Instance.enabled = false;
+        //PlayerController.Instance.IsInDialogue = true;
         npcAnimator = npc;
         currentStory = new(inkJson.text);
         dialogueVariables.StartListening(currentStory);
@@ -159,7 +160,8 @@ public class NewDialogueManager : MonoBehaviour
         dialogueVariables.StopListening(currentStory);
         //GameObject.FindWithTag("Player").GetComponent<PlayerInput>().enabled = true;
         //GameObject.FindWithTag("Player").GetComponent<GameInput>().enabled = true;
-        PlayerController.Instance.enabled = true;
+        //PlayerController.Instance.enabled = true;
+        //PlayerController.Instance.IsInDialogue = false;
         dialogueIsPlaying = false;
         dialoguePanel.SetActive(false);
         dialogueText.text = string.Empty;
