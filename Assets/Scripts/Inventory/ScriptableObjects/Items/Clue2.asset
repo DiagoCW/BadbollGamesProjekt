@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44eb7fc60ea1c3248bd36111df5792f7, type: 3}
-  m_Name: TestClue2
+  m_Script: {fileID: 11500000, guid: 46db39dea7ad8e84bab99ebae6da6802, type: 3}
+  m_Name: Clue2
   m_EditorClassIdentifier: 
-  prefab: {fileID: 8912453792745851185, guid: 4e0aad9de28699f498988fa462d01d9b, type: 3}
-  description: This is the second test clue
+  prefab: {fileID: 6720301604675972158, guid: 65f00ac60575ece459d2cb878a5a610c, type: 3}
+  description: 

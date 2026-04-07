@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ClueItem : MonoBehaviour
+public class Item : MonoBehaviour
 {
     public ItemObject item;
 }
