@@ -30,7 +30,7 @@ public class DialogueTrigger : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        //Debug.Log(inkJson.text);
+        //gameObject.tag = "Untagged";
         NewDialogueManager.Instance.EnterDialogue(inkJson, npcAnimator);
     }
 
