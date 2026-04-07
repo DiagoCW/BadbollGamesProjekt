@@ -14,7 +14,7 @@ public class TriggerTutorial : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (NewDialogueManager.Instance == null)
+        if (NewDialogueManager.Instance.dialogueIsPlaying)
             return;
         dVisionTutorial = (Ink.Runtime.BoolValue)
         NewDialogueManager.Instance.GetVariableState("dvisionTutorialTrigger");
