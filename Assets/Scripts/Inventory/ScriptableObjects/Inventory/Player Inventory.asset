@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1a7923ccd3bc7ef49ac7a97e7d55d993, type: 3}
-  m_Name: PlayerClues
+  m_Name: Player Inventory
   m_EditorClassIdentifier: 
-  Container:
-  - item: {fileID: 11400000, guid: 432480add68ca3d439358dd567ea7cf6, type: 2}
-  - item: {fileID: 11400000, guid: 2e1e118a6414222499bd3a1ebc5a5c31, type: 2}
+  savePath: /SavePathInventoryTest
+  database: {fileID: 11400000, guid: 65c1ec72b1754a84b83107db8121c438, type: 2}
+  Container: []
