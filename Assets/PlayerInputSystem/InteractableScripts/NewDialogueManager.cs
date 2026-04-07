@@ -14,7 +14,7 @@ public class NewDialogueManager : MonoBehaviour
     [Header("Dialogue UI")]
     [SerializeField] GameObject dialoguePanel;
     [SerializeField] TextMeshProUGUI dialogueText;
-    [SerializeField] TextMeshProUGUI displayNameText;
+    //[SerializeField] TextMeshProUGUI displayNameText;
 
     [Header("Load Globals JSON")]
     [SerializeField] TextAsset loadGlobalsJSON;
@@ -215,7 +215,7 @@ public class NewDialogueManager : MonoBehaviour
                         npcPanel.SetActive(true);
                         playerPanel.SetActive(false);
                     }
-                    displayNameText.text = tagValue;
+                    //displayNameText.text = tagValue;
                     break;
                 case PORTRAIT_TAG:
                     // Hantera porträtt, t.ex. visa en bild av talaren
