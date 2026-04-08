@@ -1,36 +1,47 @@
 using UnityEngine;
 
+/// <summary>
+/// Används för att sätta igång triggers baserade på ändrade variabler i GlobalsMain.Ink;
+/// t.ex startas en trigger när dVisionTutorialTrigger sätts 
+/// </summary>
 public class TriggerTutorial : MonoBehaviour
 {
-    bool dVisionTutorial = false;
-    //bool tutorialComplete = false;
     [SerializeField] TextAsset inkJson;
+    [SerializeField] string Inkvariable = string.Empty;
+    object trigger = false;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        //Debug.Log("Trigger: " + Inkvariable + " " + "value: " + trigger);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        if (NewDialogueManager.Instance.dialogueIsPlaying)
-            return;
-        dVisionTutorial = 
-            NewDialogueManager.Instance.dialogueVariables.variables.TryGetValue("dvisionTutorialTrigger", out Ink.Runtime.Object value);
-        //dVisionTutorial = (Ink.Runtime.BoolValue)
+
+        //trigger = (Ink.Runtime.BoolValue)
         //NewDialogueManager.Instance.GetVariableState("dvisionTutorialTrigger");
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Player") && dVisionTutorial 
+        if (NewDialogueManager.Instance.dialogueIsPlaying)
+            return;
+        trigger =
+            NewDialogueManager.Instance.dialogueVariables.variables.TryGetValue(Inkvariable, out Ink.Runtime.Object value);
+
+        if (other.CompareTag("Player") && (bool)trigger 
             && !NewDialogueManager.Instance.dialogueIsPlaying)
         {
             NewDialogueManager.Instance.EnterDialogue(inkJson, null);
-            Debug.Log("Triggered D-Vision Tutorial");
+            Debug.Log($"Trigger {Inkvariable} activated");
         }
-        if (dVisionTutorial)
+        
+        if ((bool)trigger)
+        {
+            Debug.Log($"Destroying trigger " + Inkvariable);
             Destroy(gameObject);
+        }
+            
     }
 }
