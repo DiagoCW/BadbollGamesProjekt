@@ -1,6 +1,11 @@
 using UnityEngine;
 using System;
 
+public interface IInteractable
+{
+    void Interact();
+}
+
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
@@ -16,6 +21,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float jumpHeight = 1.5f;
     [SerializeField] private float gravityMultiplier = 2f;
+
+    [Header("Interaction Settings")]
+    [SerializeField] private Camera playerCamera;
+    [SerializeField] private float interactRange = 2f;
 
     private CharacterController controller;
     private Vector3 verticalVelocity;
@@ -46,12 +55,18 @@ public class PlayerController : MonoBehaviour
         Instance = this;
 
         controller = GetComponent<CharacterController>();
+
+        if (playerCamera == null)
+        {
+            playerCamera = Camera.main;
+        }
     }
 
     private void Start()
     {
         gameInput.OnJumpAction += GameInput_OnJumpAction;
         gameInput.OnInventoryAction += GameInput_OnInventoryAction;
+        gameInput.OnInteractAction += GameInput_OnInteractAction;
 
         if (inventoryCanvas != null)
         {
@@ -65,6 +80,7 @@ public class PlayerController : MonoBehaviour
         {
             gameInput.OnJumpAction -= GameInput_OnJumpAction;
             gameInput.OnInventoryAction -= GameInput_OnInventoryAction;
+            gameInput.OnInteractAction -= GameInput_OnInteractAction;
         }
     }
 
@@ -84,6 +100,37 @@ public class PlayerController : MonoBehaviour
         }
 
         ToggleInventory();
+    }
+
+    private void GameInput_OnInteractAction(object sender, EventArgs e)
+    {
+        if (IsInventoryOpen || IsDialoguePlaying) 
+        {
+            return;
+        }
+
+        if (playerCamera == null) 
+        {
+            Debug.LogError("PlayerController: No camera assigned for interaction raycasting.");
+            return;
+        }
+
+        Ray ray = new Ray
+        {
+            origin = playerCamera.transform.position,
+            direction = playerCamera.transform.forward
+        };
+
+        // If you want to see the ray when you press interact button you can uncomment this line of code.
+        //Debug.DrawRay(ray.origin, ray.direction * interactRange, Color.red, 2f);
+
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, interactRange)) 
+        {
+            IInteractable interactable = hitInfo.collider.GetComponent<IInteractable>();
+
+            interactable?.Interact();
+        }
+
     }
 
     private void ToggleInventory() 
@@ -109,9 +156,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        
             HandleMovement();
-        
     }
 
     private void HandleMovement() 
