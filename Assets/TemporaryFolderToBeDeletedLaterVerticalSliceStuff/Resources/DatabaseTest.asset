@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46db39dea7ad8e84bab99ebae6da6802, type: 3}
-  m_Name: Clue3
+  m_Script: {fileID: 11500000, guid: ce35d50bed45aec4ca76927dcd2e78cd, type: 3}
+  m_Name: DatabaseTest
   m_EditorClassIdentifier: 
-  Id: 3
-  uiDisplay: {fileID: 21300000, guid: 16146b0198877a5479607bd1486a2d4a, type: 3}
-  description: 
+  items:
+  - {fileID: 11400000, guid: 293d2e1c924464d4aa7e4df191afffca, type: 2}

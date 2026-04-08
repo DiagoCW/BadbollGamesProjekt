@@ -3,7 +3,7 @@ using UnityEngine;
 public class TriggerTutorial : MonoBehaviour
 {
     bool dVisionTutorial = false;
-    bool tutorialComplete = false;
+    //bool tutorialComplete = false;
     [SerializeField] TextAsset inkJson;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -16,8 +16,10 @@ public class TriggerTutorial : MonoBehaviour
     {
         if (NewDialogueManager.Instance.dialogueIsPlaying)
             return;
-        dVisionTutorial = (Ink.Runtime.BoolValue)
-        NewDialogueManager.Instance.GetVariableState("dvisionTutorialTrigger");
+        dVisionTutorial = 
+            NewDialogueManager.Instance.dialogueVariables.variables.TryGetValue("dvisionTutorialTrigger", out Ink.Runtime.Object value);
+        //dVisionTutorial = (Ink.Runtime.BoolValue)
+        //NewDialogueManager.Instance.GetVariableState("dvisionTutorialTrigger");
     }
 
     private void OnTriggerStay(Collider other)
@@ -27,9 +29,8 @@ public class TriggerTutorial : MonoBehaviour
         {
             NewDialogueManager.Instance.EnterDialogue(inkJson, null);
             Debug.Log("Triggered D-Vision Tutorial");
-            tutorialComplete = true;
         }
-        if (tutorialComplete)
+        if (dVisionTutorial)
             Destroy(gameObject);
     }
 }

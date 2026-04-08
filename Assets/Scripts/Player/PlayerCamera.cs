@@ -21,6 +21,11 @@ public class PlayerCamera : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (PlayerController.Instance != null && PlayerController.Instance.IsInventoryOpen)
+        {
+            return;
+        }
+
         HandleCameraLook();
     }
 
