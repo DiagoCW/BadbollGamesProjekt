@@ -16,21 +16,18 @@ public class DraggableClue : MonoBehaviour
     private Color originalColor;
     private Vector3 originalScale;
 
-    private Vector2 startPosition;
     private Transform originalParent;
+    private Vector2 dragOffset;
 
     private bool isDragging = false;
+    private static bool isAnythingBeingDragged = false; 
 
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
         image = GetComponent<Image>();
-
         canvas = GetComponentInParent<Canvas>();
         canvasRectTransform = canvas?.GetComponent<RectTransform>();
-
-        originalParent = transform.parent;
-        startPosition = rectTransform.anchoredPosition;
 
         if (image != null)
         {
@@ -41,10 +38,12 @@ public class DraggableClue : MonoBehaviour
         if (!canvas || !canvasRectTransform)
         {
             enabled = false;
-            return;
         }
+    }
 
-        rectTransform.pivot = new Vector2(0.5f, 0.5f);
+    private void Start()
+    {
+        originalParent = transform.parent;
     }
 
     private void Update()
@@ -62,17 +61,25 @@ public class DraggableClue : MonoBehaviour
         Vector2 screenCenter = new Vector2(screenCenter3D.x, screenCenter3D.y);
         float dist = Vector2.Distance(mouse, screenCenter);
 
-        if (Input.GetMouseButtonDown(0) && !isDragging)
+        if (Input.GetMouseButtonDown(0) && !isDragging && !isAnythingBeingDragged)
         {
             if (dist <= grabProximityPx)
             {
                 isDragging = true;
+                isAnythingBeingDragged = true; // Lock other clues from being grabbed
 
                 Slot currentSlot = GetComponentInParent<Slot>();
                 if (currentSlot != null)
                 {
                     currentSlot.Vacate();
                 }
+
+                transform.SetParent(canvas.transform);
+                transform.SetAsLastSibling(); 
+
+               
+                RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRectTransform, mouse, activeCam, out Vector2 localMousePos);
+                dragOffset = rectTransform.anchoredPosition - localMousePos;
 
                 if (image != null)
                 {
@@ -86,19 +93,17 @@ public class DraggableClue : MonoBehaviour
         {
             if (Input.GetMouseButton(0))
             {
-                Vector2 localPos;
-                if (RectTransformUtility.ScreenPointToLocalPointInRectangle(
-                    canvasRectTransform,
-                    mouse,
-                    activeCam,
-                    out localPos))
+                if (RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRectTransform, mouse, activeCam, out Vector2 localPos))
                 {
-                    rectTransform.anchoredPosition = localPos;
+                    // Apply the offset so it drags smoothly
+                    rectTransform.anchoredPosition = localPos + dragOffset;
                 }
             }
             else
             {
+               
                 isDragging = false;
+                isAnythingBeingDragged = false;
 
                 if (image != null)
                 {
@@ -110,13 +115,18 @@ public class DraggableClue : MonoBehaviour
                 if (nearest != null && !nearest.IsOccupied())
                 {
                     transform.SetParent(nearest.transform);
+
+                    rectTransform.anchorMin = new Vector2(0.5f, 0.5f);
+                    rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
+                    rectTransform.pivot = new Vector2(0.5f, 0.5f);
+
                     rectTransform.anchoredPosition = Vector2.zero;
+
                     nearest.Occupy(this);
                 }
                 else
                 {
                     transform.SetParent(originalParent);
-                    rectTransform.anchoredPosition = startPosition;
                 }
             }
         }
@@ -130,7 +140,7 @@ public class DraggableClue : MonoBehaviour
 
         foreach (Slot s in slots)
         {
-            float dist = Vector2.Distance(rectTransform.anchoredPosition, s.GetRect().anchoredPosition);
+            float dist = Vector2.Distance(rectTransform.position, s.GetRect().position);
             if (dist < minDist)
             {
                 minDist = dist;

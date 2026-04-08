@@ -2,6 +2,9 @@
 
 public class CorkboardTrigger : MonoBehaviour
 {
+    [Header("Spawner")]
+    [SerializeField] private CorkboardSpawner spawner;
+
     [Header("Cameras")]
     [SerializeField] private GameObject playerCameraGO;
     [SerializeField] private GameObject corkboardCameraGO;
@@ -62,6 +65,8 @@ public class CorkboardTrigger : MonoBehaviour
             playerCameraGO.SetActive(false);
             corkboardCameraGO.SetActive(true);
             LockCursor(false);
+
+            if (spawner != null) spawner.SpawnCollectedClues();
         }
         else
         {
