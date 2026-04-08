@@ -315,7 +315,7 @@ public class NewDialogueManager : MonoBehaviour
     {
         currentStory.ChooseChoiceIndex(choiceIndex);
         StartCoroutine(ChoiceDelay());
-        //ContinueStory();
+        ContinueStory();
     }
 
     private IEnumerator ChoiceDelay()
