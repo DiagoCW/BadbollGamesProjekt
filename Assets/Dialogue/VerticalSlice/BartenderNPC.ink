@@ -4,3 +4,4 @@ INCLUDE globalsmain.ink
 Give me a drink, bartender...
 
 Jag har inget särskilt att säga men kom tillbaka senare :) #speaker: Bartender #anim: Talking
+~ seenBreath = true

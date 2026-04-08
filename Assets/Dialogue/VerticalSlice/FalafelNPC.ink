@@ -1,7 +1,10 @@
 INCLUDE globalsmain.ink
+temp startInvestigation = false
+
 # speaker: Boss Man 
 { dvisionTutorialTrigger: -> IsCulpritFound | -> Intro }
 === Intro ===
+{ startInvestigation: -> EndGame | -> Idle }
 You got here just in time... Jag har århundratets brott för dig att lösa. # anim: Talking
 <PLAYERCHOICE> 
     * [Vad har hänt?]
@@ -24,10 +27,11 @@ Så, sätt igång med undersökningen! # anim: Shake
         Det är du som är detektiven, jag är bara killen som riskerar näringsverksamhetsförbud. Du borde ha ett sorts sjätte sinne för den här typen av saker. 
     *[Alright...]
 - ~ dvisionTutorialTrigger = true
+~ startInvestigation = true
 <> -> END
 
 === IsCulpritFound ===
-{ foundCulprit: -> EndGame | -> Idle }
+{ startInvestigation: -> EndGame | -> Idle }
 
 === Idle ===
 Vad står du och pillar i naveln för? Hitta boven!
