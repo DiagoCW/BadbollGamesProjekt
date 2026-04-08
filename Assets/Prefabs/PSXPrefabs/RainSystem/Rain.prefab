@@ -224,7 +224,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.065553546, g: 0.15282153, b: 0.3509434, a: 0.5882353}
+      maxColor: {r: 0.5411765, g: 0.57254905, b: 0.64705884, a: 0.5882353}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -4809,7 +4809,7 @@ ParticleSystemRenderer:
   m_MaxParticleSize: 0.5
   m_CameraVelocityScale: 0
   m_VelocityScale: 0
-  m_LengthScale: 2
+  m_LengthScale: 1.5
   m_SortingFudge: 0
   m_NormalDirection: 1
   m_ShadowBias: 0
@@ -4846,4 +4846,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c93dadf37ed7134fac870d88483654e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SplashSystem: {fileID: 4167807349997829424, guid: 773555a14e36aeb459f162d5e21f6ba4, type: 3}
+  splashes: []

@@ -4,10 +4,13 @@ using System.Collections;
 
 public class RainCollision : MonoBehaviour
 {
-    public GameObject SplashSystem;
+    //New Splashsystem is in scene to prevent too many clones
+    public ParticleSystem[] splashes;
+    private int currentSplash = 0;
+
     private ParticleSystem ps;
     private List<ParticleCollisionEvent> rainCollision;
-
+    
 
     void Start()
     {
@@ -24,20 +27,19 @@ public class RainCollision : MonoBehaviour
         //Looping through each Raindrop hit
         for (int i = 0; i < numberofDrops; i++)
         {
-            //Save for later - if it lags make it randomly
-            //if (Random.value > 0.3f) continue;
-
             //exact point where the raindrop hit
             Vector3 hitPos = rainCollision[i].intersection;
             Vector3 hitNormal = rainCollision[i].normal;
 
-          
+            //Reuse splashes instead of creating new ones - prevent clones
+            ParticleSystem splash = splashes[currentSplash];
 
-            //spawn splash - Quaternion = Rotates splash 
-            GameObject splash = Instantiate(SplashSystem, hitPos, Quaternion.LookRotation(hitNormal));
+            //Move splash to where the raindrops hit
+            splash.transform.position = hitPos;
+            splash.transform.rotation = Quaternion.LookRotation(hitNormal);
+            splash.Play();
 
-            //Delete raindrop
-            Destroy(splash, 2f);
+            currentSplash = (currentSplash + 1) % splashes.Length;
         }
     }
 }
