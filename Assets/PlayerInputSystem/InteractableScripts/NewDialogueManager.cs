@@ -29,11 +29,10 @@ public class NewDialogueManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI npcText;
     [SerializeField] TextMeshProUGUI playerText;
 
-    [Header("NPC Animation Controller")]
-    //[SerializeField] RuntimeAnimatorController npcAnimController;
-    /*[SerializeField]*/ Animator npcAnimator;
     [Header("External Function References")]
-    [SerializeField] TestAIScript aiScript;
+    [SerializeField] TestAIScript aiAgent;
+
+    Animator npcAnimator;
     
 
     [SerializeField] float typingSpeed = 0.03f;
@@ -152,7 +151,8 @@ public class NewDialogueManager : MonoBehaviour
         npcAnimator = npc;
         currentStory = new(inkJson.text);
         dialogueVariables.StartListening(currentStory);
-        functions.Bind(currentStory, aiScript);
+        functions.Bind(currentStory, aiAgent);
+
         dialogueIsPlaying = true;
         dialoguePanel.SetActive(true);
 
@@ -161,12 +161,12 @@ public class NewDialogueManager : MonoBehaviour
 
     private void ExitDialogue()
     {
-        functions.Unbind(currentStory);
         dialogueVariables.StopListening(currentStory);
         //GameObject.FindWithTag("Player").GetComponent<PlayerInput>().enabled = true;
         //GameObject.FindWithTag("Player").GetComponent<GameInput>().enabled = true;
         //PlayerController.Instance.enabled = true;
         //PlayerController.Instance.IsInDialogue = false;
+        functions.Unbind(currentStory);
         dialogueIsPlaying = false;
         dialoguePanel.SetActive(false);
         dialogueText.text = string.Empty;
@@ -315,7 +315,7 @@ public class NewDialogueManager : MonoBehaviour
     {
         currentStory.ChooseChoiceIndex(choiceIndex);
         StartCoroutine(ChoiceDelay());
-        ContinueStory();
+        //ContinueStory();
     }
 
     private IEnumerator ChoiceDelay()
