@@ -38,7 +38,7 @@ public class DialogueTrigger : MonoBehaviour, IInteractable
     {
         if (gameObject.CompareTag("NPC"))
         {
-            if (NewDialogueManager.Instance.dialogueIsPlaying ||
+            if (/*NewDialogueManager.Instance.dialogueIsPlaying ||*/
             Vector3.Distance(npcDir.position, player.position) < 5)
                 FacePlayer();
         }
