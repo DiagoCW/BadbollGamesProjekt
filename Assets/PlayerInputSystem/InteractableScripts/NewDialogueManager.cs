@@ -29,9 +29,10 @@ public class NewDialogueManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI npcText;
     [SerializeField] TextMeshProUGUI playerText;
 
-    [Header("NPC Animation Controller")]
-    //[SerializeField] RuntimeAnimatorController npcAnimController;
-    /*[SerializeField]*/ Animator npcAnimator;
+    [Header("External Function References")]
+    [SerializeField] TestAIScript aiAgent;
+
+    Animator npcAnimator;
     
 
     [SerializeField] float typingSpeed = 0.03f;
@@ -43,6 +44,7 @@ public class NewDialogueManager : MonoBehaviour
     private Coroutine displayLineCoroutine;
 
     public DialogueVariables dialogueVariables { get; private set; }
+    public InkExternalFunctions functions { get; private set; }
     public static NewDialogueManager Instance { get; set; }
 
     const string SPEAKER_TAG = "speaker";
@@ -60,6 +62,7 @@ public class NewDialogueManager : MonoBehaviour
         else Instance = this;
 
         dialogueVariables = new(loadGlobalsJSON);
+        functions = new();
     }
 
 
@@ -148,6 +151,7 @@ public class NewDialogueManager : MonoBehaviour
         npcAnimator = npc;
         currentStory = new(inkJson.text);
         dialogueVariables.StartListening(currentStory);
+        functions.Bind(currentStory, aiAgent);
 
         dialogueIsPlaying = true;
         dialoguePanel.SetActive(true);
@@ -162,6 +166,7 @@ public class NewDialogueManager : MonoBehaviour
         //GameObject.FindWithTag("Player").GetComponent<GameInput>().enabled = true;
         //PlayerController.Instance.enabled = true;
         //PlayerController.Instance.IsInDialogue = false;
+        functions.Unbind(currentStory);
         dialogueIsPlaying = false;
         dialoguePanel.SetActive(false);
         dialogueText.text = string.Empty;
