@@ -49,7 +49,7 @@ public class NewDialogueManager : MonoBehaviour
     const string PORTRAIT_TAG = "portrait";
     const string LAYOUT_TAG = "layout";
     const string ANIM_TAG = "anim";
-    string currentValue;
+    string currentValue = "Idle";
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -80,8 +80,8 @@ public class NewDialogueManager : MonoBehaviour
     {
         Ink.Runtime.Object value = null;
         dialogueVariables.variables.TryGetValue(variableName, out value);
-        if (value == null)
-            Debug.LogWarning($"Variable {variableName} not found in DialogueVariables.");
+        //if (value == null)
+        //    Debug.LogWarning($"Variable {variableName} not found in DialogueVariables.");
         return value;
         
     }
@@ -228,8 +228,9 @@ public class NewDialogueManager : MonoBehaviour
                     Debug.Log($"Layout: {tagValue}");
                     break;
                 case ANIM_TAG:
-                    currentValue = npcAnimator.CompareTag("NPC") ? "Idle" : "isSitting";
-                    npcAnimator.SetBool(currentValue, true);
+                    if (npcAnimator == null) return;
+                    //currentValue = npcAnimator.CompareTag("NPC") ? "Idle" : "isSitting";
+                    //npcAnimator.SetBool(currentValue, true);
                     Debug.Log($"Animation: {tagValue}, currentTag: {currentValue}");
 
                     //DialogueTrigger.npcAnimator.SetTrigger(tagValue);
