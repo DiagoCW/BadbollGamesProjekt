@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce35d50bed45aec4ca76927dcd2e78cd, type: 3}
-  m_Name: DatabaseTest
+  m_Script: {fileID: 11500000, guid: 46db39dea7ad8e84bab99ebae6da6802, type: 3}
+  m_Name: GarlicBreathClue
   m_EditorClassIdentifier: 
-  items:
-  - {fileID: 11400000, guid: 293d2e1c924464d4aa7e4df191afffca, type: 2}
+  Id: 1
+  uiDisplay: {fileID: -785194391, guid: b261526cbe38cda48b2c7a6cfdbf0ea5, type: 3}
+  description: 

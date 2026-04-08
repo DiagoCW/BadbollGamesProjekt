@@ -114,6 +114,6 @@ public class OutlineHighlighter : MonoBehaviour
         if (outlineObject != null)
             outlineObject.SetActive(false);
         isHighlighted = false;
-        gameObject.tag = null;
+       // gameObject.tag = null;
     }
 }

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9be040aba8a346c45a27da0586120dc4
+guid: 8fda39d87e5a2ab4fa6fe4072dba6bfe
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,14 +97,14 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: kebabCluePicture_0
+      name: receipt_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 330
-        height: 182
-      alignment: 9
+        width: 600
+        height: 1310
+      alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
@@ -112,8 +112,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 504f64a52e2c6cb4381cb751e8608a37
-      internalID: -1374013574
+      spriteID: b52c6e1e00023cc4b9586552e9e527f3
+      internalID: -1811802506
       vertices: []
       indices: 
       edges: []
@@ -122,7 +122,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: e5f9065af804db9488bbd5d47d149102
+    spriteID: 6b82ae0972266c54c8b3addabbc21049
     internalID: 0
     vertices: []
     indices: 
@@ -132,7 +132,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      kebabCluePicture_0: -1374013574
+      receipt_0: -1811802506
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
