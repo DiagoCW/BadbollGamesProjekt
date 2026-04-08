@@ -17,6 +17,8 @@ public class DialogueTrigger : MonoBehaviour, IInteractable
     [Header("Ink JSON")]
     [SerializeField] TextAsset inkJson;
 
+    /*[SerializeField]*/ HighlightActivatorIAVersion highlighter;
+
     Animator npcAnimator;
     
     void Awake()
@@ -24,13 +26,13 @@ public class DialogueTrigger : MonoBehaviour, IInteractable
         npcDir = this.transform;
         player = GameObject.FindGameObjectWithTag("Player").transform;
         //NewDialogueManager.Instance.currentStory.variablesState["foundSnusdosa"] = true;
-        
+        highlighter = GameObject.FindGameObjectWithTag("Player").GetComponent<HighlightActivatorIAVersion>();
         npcAnimator = GetComponentInChildren<Animator>();
     }
 
     public void Interact()
     {
-        //gameObject.tag = "Untagged";
+        if (highlighter.IsHighlighting) return;
         NewDialogueManager.Instance.EnterDialogue(inkJson, npcAnimator);
     }
 
