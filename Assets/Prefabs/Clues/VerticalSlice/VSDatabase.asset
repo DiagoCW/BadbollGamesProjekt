@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 330796fff04be574a9568759fe6e63cc, type: 3}
-  m_Name: ClueKebab
+  m_Script: {fileID: 11500000, guid: ce35d50bed45aec4ca76927dcd2e78cd, type: 3}
+  m_Name: VSDatabase
   m_EditorClassIdentifier: 
-  prefab: {fileID: 472239490547768019, guid: 0a16e42979b25d247ab7569fea33f24f, type: 3}
-  description: 
+  items:
+  - {fileID: 11400000, guid: 4b09e41668915b149a8cde603f770edc, type: 2}
+  - {fileID: 11400000, guid: a64dc46ed900449439d5da6a38151c2a, type: 2}
