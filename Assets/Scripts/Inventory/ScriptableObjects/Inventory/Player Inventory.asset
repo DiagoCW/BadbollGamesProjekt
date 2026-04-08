@@ -15,8 +15,4 @@ MonoBehaviour:
   savePath: /SavePathInventoryTest
   database: {fileID: 11400000, guid: 65c1ec72b1754a84b83107db8121c438, type: 2}
   Container:
-    Items:
-    - ID: 0
-      item:
-        Name: 
-        Id: 0
+    Items: []
