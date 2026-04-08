@@ -14,9 +14,9 @@ public class InventoryObject : ScriptableObject
 
     public void AddItem(Item _item/*, int _amount*/)
     {
-        for (int i = 0; i < Container.Items.Count; i++)
+        for (int i = 0; i < Container.Items.Length; i++)
         {
-            if (Container.Items[i].item == _item)
+            if (Container.Items[i].ID == _item.Id)
             {
                 //-Excluded-
                 //Container.Items[i].AddAmount(-amount);
@@ -24,7 +24,20 @@ public class InventoryObject : ScriptableObject
                 return;
             }
         }
-        Container.Items.Add(new InventorySlot(_item.Id, _item/*, _amount*/));
+        SetEmptySlot(_item);
+    }
+    public InventorySlot SetEmptySlot(Item _item)
+    {
+        for (int i = 0; i < Container.Items.Length; i++)
+        {
+            if(Container.Items[i].ID == -1)
+            {
+                Container.Items[i].UpdateSlot(_item.Id, _item);
+                return Container.Items[i];
+            }
+        }
+        // set up funktionality for when inventory is full
+        return null;
     }
 
     [ContextMenu("Save")]
@@ -59,17 +72,23 @@ public class InventoryObject : ScriptableObject
 [System.Serializable]
 public class Inventory
 {
-    public List<InventorySlot> Items = new List<InventorySlot>();
+    //public List<InventorySlot> Items = new List<InventorySlot>();
+    public InventorySlot[] Items = new InventorySlot[12];
 }
 
 [System.Serializable]
 public class InventorySlot
 {
-    public int ID;
+    public int ID = -1;
     public Item item;
     //-Excluded-
     //public int amount;
     //-Excluded-
+    public InventorySlot()
+    {
+        ID = -1;
+        item = null;
+    }
     public InventorySlot(int _id, Item _item/*, int _amount*/)
     {
         ID = _id;
@@ -77,6 +96,12 @@ public class InventorySlot
         //-Excluded-
         //amount = _amount;
         //-Excluded-
+    }
+
+    public void UpdateSlot(int _id, Item _item)
+    {
+        ID = _id;
+        item = _item;
     }
 
     //public void AddAmount(int value)

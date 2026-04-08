@@ -1553,6 +1553,10 @@ PrefabInstance:
       propertyPath: gameInput
       value: 
       objectReference: {fileID: 639640594}
+    - target: {fileID: 1010552263841033069, guid: 0993b5793f98947409e773b6431cd003, type: 3}
+      propertyPath: inventoryCanvas
+      value: 
+      objectReference: {fileID: 1345136154}
     - target: {fileID: 2425299257626633436, guid: 0993b5793f98947409e773b6431cd003, type: 3}
       propertyPath: gameInput
       value: 
