@@ -32,7 +32,7 @@ public class DialogueTrigger : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        if (highlighter.IsHighlighting) return;
+        //if (highlighter.IsHighlighting) return;
         NewDialogueManager.Instance.EnterDialogue(inkJson, npcAnimator);
     }
 

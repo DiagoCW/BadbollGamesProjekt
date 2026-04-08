@@ -124,11 +124,41 @@ public class PlayerController : MonoBehaviour
         // If you want to see the ray when you press interact button you can uncomment this line of code.
         //Debug.DrawRay(ray.origin, ray.direction * interactRange, Color.red, 2f);
 
-        if (Physics.Raycast(ray, out RaycastHit hitInfo, interactRange)) 
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, interactRange))
         {
-            IInteractable interactable = hitInfo.collider.GetComponent<IInteractable>();
+            IInteractable[] interactables = hitInfo.collider.GetComponents<IInteractable>();
 
-            interactable?.Interact();
+            if (interactables.Length == 0) return;
+
+            // Check if highlight mode is active
+            HighlightActivatorIAVersion highlighter = GameObject
+                .FindGameObjectWithTag("Player")
+                .GetComponent<HighlightActivatorIAVersion>();
+
+            if (highlighter != null && highlighter.IsHighlighting)
+            {
+                // Find and call InteractableNPC specifically
+                foreach (IInteractable interactable in interactables)
+                {
+                    if (interactable is InteractableNPC)
+                    {
+                        interactable.Interact();
+                        return;
+                    }
+                }
+            }
+            else
+            {
+                // Find and call DialogueTrigger specifically
+                foreach (IInteractable interactable in interactables)
+                {
+                    if (interactable is DialogueTrigger)
+                    {
+                        interactable.Interact();
+                        return;
+                    }
+                }
+            }
         }
 
     }
