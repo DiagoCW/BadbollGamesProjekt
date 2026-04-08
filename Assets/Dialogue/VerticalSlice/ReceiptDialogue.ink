@@ -1,2 +1,2 @@
 INCLUDE globalsmain.ink
-~ startInvestigation = true
+~ foundReceipt = true

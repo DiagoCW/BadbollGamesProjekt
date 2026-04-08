@@ -32,6 +32,8 @@ public class NewDialogueManager : MonoBehaviour
     [Header("NPC Animation Controller")]
     //[SerializeField] RuntimeAnimatorController npcAnimController;
     /*[SerializeField]*/ Animator npcAnimator;
+    [Header("External Function References")]
+    [SerializeField] TestAIScript aiScript;
     
 
     [SerializeField] float typingSpeed = 0.03f;
@@ -43,6 +45,7 @@ public class NewDialogueManager : MonoBehaviour
     private Coroutine displayLineCoroutine;
 
     public DialogueVariables dialogueVariables { get; private set; }
+    public InkExternalFunctions functions { get; private set; }
     public static NewDialogueManager Instance { get; set; }
 
     const string SPEAKER_TAG = "speaker";
@@ -60,6 +63,7 @@ public class NewDialogueManager : MonoBehaviour
         else Instance = this;
 
         dialogueVariables = new(loadGlobalsJSON);
+        functions = new();
     }
 
 
@@ -148,7 +152,7 @@ public class NewDialogueManager : MonoBehaviour
         npcAnimator = npc;
         currentStory = new(inkJson.text);
         dialogueVariables.StartListening(currentStory);
-
+        functions.Bind(currentStory, aiScript);
         dialogueIsPlaying = true;
         dialoguePanel.SetActive(true);
 
@@ -157,6 +161,7 @@ public class NewDialogueManager : MonoBehaviour
 
     private void ExitDialogue()
     {
+        functions.Unbind(currentStory);
         dialogueVariables.StopListening(currentStory);
         //GameObject.FindWithTag("Player").GetComponent<PlayerInput>().enabled = true;
         //GameObject.FindWithTag("Player").GetComponent<GameInput>().enabled = true;
@@ -310,7 +315,7 @@ public class NewDialogueManager : MonoBehaviour
     {
         currentStory.ChooseChoiceIndex(choiceIndex);
         StartCoroutine(ChoiceDelay());
-        //ContinueStory();
+        ContinueStory();
     }
 
     private IEnumerator ChoiceDelay()
