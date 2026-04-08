@@ -24,6 +24,17 @@ public class PlayerController : MonoBehaviour
     
     public bool IsInventoryOpen { get; private set; } = false;
     
+    private bool IsDialoguePlaying 
+    {
+        get 
+        {
+            if (NewDialogueManager.Instance != null)
+            {
+                return NewDialogueManager.Instance.dialogueIsPlaying;
+            }
+            return false;
+        }
+    }
 
     private void Awake()
     {
@@ -59,7 +70,7 @@ public class PlayerController : MonoBehaviour
 
     private void GameInput_OnJumpAction(object sender, EventArgs e)
     {
-        if (isGrounded && !IsInventoryOpen && !NewDialogueManager.Instance.dialogueIsPlaying)
+        if (isGrounded && !IsInventoryOpen && !IsDialoguePlaying)
         {
             verticalVelocity.y = Mathf.Sqrt(jumpHeight * -2f * (gravity * gravityMultiplier));
         }
@@ -67,7 +78,7 @@ public class PlayerController : MonoBehaviour
 
     private void GameInput_OnInventoryAction(object sender, EventArgs e)
     {
-        if (NewDialogueManager.Instance.dialogueIsPlaying) 
+        if (IsDialoguePlaying) 
         {
             return;
         }
@@ -112,7 +123,7 @@ public class PlayerController : MonoBehaviour
         }
 
         Vector2 inputVector = Vector2.zero;
-        if (!IsInventoryOpen && !NewDialogueManager.Instance.dialogueIsPlaying) 
+        if (!IsInventoryOpen && !IsDialoguePlaying) 
         {
             inputVector = gameInput.GetMovementVectorNormalized();
         }
