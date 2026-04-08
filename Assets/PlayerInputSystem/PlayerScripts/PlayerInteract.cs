@@ -2,10 +2,10 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 // Interface for all objects the player can interact with
-public interface IInteractable
-{
-    void Interact();
-}
+//public interface IInteractable
+//{
+//    void Interact();
+//}
 
 public class PlayerInteract : MonoBehaviour
 {
