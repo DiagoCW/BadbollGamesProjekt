@@ -3,13 +3,17 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class CorkboardManager : MonoBehaviour
 {
+    public static event System.Action OnCorkboardCompleted;
+    
     [Header("UI References")]
+    private bool isPuzzleSolved = false;
     [SerializeField] private Button finishButton;
     [SerializeField] private GameObject resultCanvas;
     [SerializeField] private TextMeshProUGUI resultText;
-
+    
     [Header("End Scene Camera")]
     [SerializeField] private Camera endSceneCamera;
 
@@ -33,9 +37,26 @@ public class CorkboardManager : MonoBehaviour
 
     private void Update()
     {
-        if (AllSlotsFilled() && finishButton != null && !finishButton.gameObject.activeSelf)
+        if (isPuzzleSolved) return;
+
+        if (AllSlotsFilled())
         {
-            finishButton.gameObject.SetActive(true);
+            int correctCount = 0;
+            for (int i = 0; i < slots.Length; i++)
+            {
+                DraggableClue clue = slots[i].GetComponentInChildren<DraggableClue>();
+                if (clue != null && clue.correctSlotID == slots[i].slotID)
+                    correctCount++;
+            }
+
+            if (correctCount == slots.Length)
+            {
+                isPuzzleSolved = true;
+
+                if (finishButton != null) finishButton.gameObject.SetActive(false);
+
+                CalculateAndShowResult();
+            }
         }
     }
 
@@ -67,6 +88,12 @@ public class CorkboardManager : MonoBehaviour
         }
 
         bool won = correctCount == slots.Length;
+
+        if (won)
+        {
+            Debug.Log("Puzzle Solved! Event triggered");
+            OnCorkboardCompleted?.Invoke();
+        }
 
         if (corkboardTrigger != null)
             corkboardTrigger.ForceExit();
