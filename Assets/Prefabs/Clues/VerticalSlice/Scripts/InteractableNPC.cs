@@ -45,7 +45,9 @@ public class InteractableNPC : MonoBehaviour, IInteractable
             // Add the item to the inventory
             playerInventory.AddItem(new Item(garlicBreathClue));
 
+            gameObject.tag = "Untagged";
             hasDiscoveredBreath = true;
+
         }
 
     }

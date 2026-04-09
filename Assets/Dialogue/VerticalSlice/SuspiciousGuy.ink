@@ -4,7 +4,7 @@ EXTERNAL runAway()
 -> Intro
 === Intro ===
 How can I help? # speaker: Some guy
-<PLAYERCHOICE>
+<PLAYERCHOICE> #speaker: Player
 {foundReceipt:
     * [I need to ask you a few questions...]
         -> GainEntry
@@ -13,11 +13,11 @@ How can I help? # speaker: Some guy
         -> IntroContinued
 }
 = IntroContinued
-hehehehehehehehe
+hehehehehehehehe #speaker: Some guy
 -> DONE
 
 === GainEntry ===
-- What? Why?
+- What? Why? #speaker: Some guy
 ~ runAway()
 You'll never catch me fucker!!! # anim: Running
 ->END

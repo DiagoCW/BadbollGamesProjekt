@@ -10,7 +10,7 @@ using System;
 //using Ink.Parsed;
 public class NewDialogueManager : MonoBehaviour
 {
-
+    // Alla komponenter för dialogpanelen
     [Header("Dialogue UI")]
     [SerializeField] GameObject dialoguePanel;
     [SerializeField] TextMeshProUGUI dialogueText;
@@ -29,24 +29,26 @@ public class NewDialogueManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI npcText;
     [SerializeField] TextMeshProUGUI playerText;
 
+    // Behövs för att binda en extern funktion inuti Ink, kan lämnas som den är nu men kan behövas ändras i framtiden
     [Header("External Function References")]
     [SerializeField] TestAIScript aiAgent;
 
-    Animator npcAnimator;
+    Animator npcAnimator; // referens till animatorn för en npc. Parsar tags inuti Ink-filer som sätter animationtriggers
     
 
     [SerializeField] float typingSpeed = 0.03f;
 
-    public Story currentStory { get; private set; } // dialogens textfil 
-    public bool dialogueIsPlaying { get; private set; }
+    public Story currentStory { get; private set; } // Den dialog som spelas för tillfället: Nästan allting utgår från denna  
+    public bool dialogueIsPlaying { get; private set; } // Referens som andra klasser kan hämta för att kontrollera att en dialog är aktiv eller inte 
     bool isTyping;
 
     private Coroutine displayLineCoroutine;
 
-    public DialogueVariables dialogueVariables { get; private set; }
-    public InkExternalFunctions functions { get; private set; }
-    public static NewDialogueManager Instance { get; set; }
+    public DialogueVariables dialogueVariables { get; private set; } // Lagrar alla globala variabler som finns delade mellan olika Ink-filer 
+    public InkExternalFunctions functions { get; private set; } // Denna kallas för att binda / unbinda externa funktioner inuti en Ink-fil 
+    public static NewDialogueManager Instance { get; private set; } // Instans för att hämta relevanta metoder och properties från andra klasser 
 
+    // Tags som sätts inuti Ink-filen och parsas för att ändra bl.a speaker-panel, animationer, eller porträtt för t.ex npc, spelare, items, osv 
     const string SPEAKER_TAG = "speaker";
     const string PORTRAIT_TAG = "portrait";
     const string LAYOUT_TAG = "layout";
