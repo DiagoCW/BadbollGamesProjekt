@@ -15341,6 +15341,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 413189686}
     m_Modifications:
+    - target: {fileID: 4916576401457564166, guid: 9149d763d14439540a411f38f2a324e8, type: 3}
+      propertyPath: inkJson
+      value: 
+      objectReference: {fileID: 4900000, guid: 5bbc4a28a6229cc40932e5ee5c585d58, type: 3}
     - target: {fileID: 8854984999481115647, guid: 9149d763d14439540a411f38f2a324e8, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -16547,6 +16551,10 @@ PrefabInstance:
     - target: {fileID: 2140469213848675157, guid: 25eb0d6ef292f144e83696736f0b6ea3, type: 3}
       propertyPath: m_Name
       value: Washing_machine_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 2140469213848675157, guid: 25eb0d6ef292f144e83696736f0b6ea3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8862426498472022100, guid: 25eb0d6ef292f144e83696736f0b6ea3, type: 3}
       propertyPath: m_LocalPosition.x
