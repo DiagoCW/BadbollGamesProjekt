@@ -20253,6 +20253,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInventory: {fileID: 11400000, guid: ee950d6b3fe5a384c8b4e11c821cd03e, type: 2}
   garlicBreathClue: {fileID: 11400000, guid: a64dc46ed900449439d5da6a38151c2a, type: 2}
+  inkJson: {fileID: 0}
 --- !u!4 &1978916708 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4463668083527960573, guid: abc5127d393733b48860c64c40a47656, type: 3}
@@ -21182,6 +21183,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1439410306526553957, guid: 5cefdb61d378ea84a91a8d09fd3d728b, type: 3}
+      propertyPath: correctOrder.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5113590964553072803, guid: 5cefdb61d378ea84a91a8d09fd3d728b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 29.595516
