@@ -211,6 +211,7 @@ public class NewDialogueManager : MonoBehaviour
                 case SPEAKER_TAG:
                     // Hantera talare, t.ex. ändra namn eller färg på texten
                     Debug.Log($"Speaker: {tagValue}");
+                    if (tagValue.Equals(null)) tagValue = "Test";
                     if (tagValue.Equals("Player"))
                     {
                         playerText.text = tagValue;
