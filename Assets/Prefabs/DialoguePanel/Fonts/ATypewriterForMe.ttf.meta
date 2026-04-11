@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e8b7653f9a512f34681b248e5bf2dc84
+guid: 231d4ba88e529cd4b93c22a7b65f15b6
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - DaisyWheel
+  - ATypewriterForMe
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

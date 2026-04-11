@@ -27,16 +27,16 @@ Så, sätt igång med undersökningen! # anim: Shake
     * [Jag hittade det här i soptunnan.] -> ContinueInvestigation
   - else:
     *[How?] -> Introcont
-    *[Alright...] -> FinishIntro
+    *[Alright...]<>-> FinishIntro
 }
 
 = Introcont
 #speaker: Boss Man
 Det är du som är detektiven, jag är bara killen som riskerar näringsverksamhetsförbud. Du borde ha ett sorts sjätte sinne för den här typen av saker. 
--> FinishIntro
+<>-> FinishIntro
 
 = FinishIntro
-~dvisionTutorialTrigger = true
+~ dvisionTutorialTrigger = true
 ~ startInvestigation = true
 ->END
 
