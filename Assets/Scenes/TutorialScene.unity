@@ -13933,16 +13933,20 @@ PrefabInstance:
       value: 123.16
       objectReference: {fileID: 0}
     - target: {fileID: 3886142877784862579, guid: 8595716bf07c42340bbb8dd76589fdc5, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.a
+      value: 0.5176471
+      objectReference: {fileID: 0}
+    - target: {fileID: 3886142877784862579, guid: 8595716bf07c42340bbb8dd76589fdc5, type: 3}
       propertyPath: InitialModule.startColor.maxColor.b
-      value: 0.08679241
+      value: 0.14716971
       objectReference: {fileID: 0}
     - target: {fileID: 3886142877784862579, guid: 8595716bf07c42340bbb8dd76589fdc5, type: 3}
       propertyPath: InitialModule.startColor.maxColor.g
-      value: 0.08679241
+      value: 0.14716971
       objectReference: {fileID: 0}
     - target: {fileID: 3886142877784862579, guid: 8595716bf07c42340bbb8dd76589fdc5, type: 3}
       propertyPath: InitialModule.startColor.maxColor.r
-      value: 0.08679241
+      value: 0.14716971
       objectReference: {fileID: 0}
     - target: {fileID: 6055701875776704771, guid: 8595716bf07c42340bbb8dd76589fdc5, type: 3}
       propertyPath: m_LocalScale.x
