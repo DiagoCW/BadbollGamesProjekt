@@ -4,7 +4,6 @@ EXTERNAL runAway()
 -> Intro
 === Intro ===
 How can I help? # speaker: Some guy
-<PLAYERCHOICE> #speaker: Player
 {foundReceipt:
     * [I need to ask you a few questions...]
         -> GainEntry

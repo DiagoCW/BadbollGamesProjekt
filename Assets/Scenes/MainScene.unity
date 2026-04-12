@@ -15773,6 +15773,7 @@ MonoBehaviour:
   dialogueText: {fileID: 1222944802}
   dialogueCheck: {fileID: 1524672869}
   itemPortrait: {fileID: 311183211}
+  itemDatabase: {fileID: 11400000, guid: ebf6e610692fd9a41b8525a59d798fac, type: 2}
   loadGlobalsJSON: {fileID: 4900000, guid: 5427038970ba5294b890ea2cf2966b5d, type: 3}
   choicesContainer: {fileID: 2126608902}
   choices:
@@ -20781,7 +20782,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2525857091356472075, guid: b39871bbd2ef23449948787e6100ab8f, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 350
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 2525857091356472075, guid: b39871bbd2ef23449948787e6100ab8f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -20817,7 +20818,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2525857091356472075, guid: b39871bbd2ef23449948787e6100ab8f, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -306
+      value: -350
       objectReference: {fileID: 0}
     - target: {fileID: 2525857091356472075, guid: b39871bbd2ef23449948787e6100ab8f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -20834,6 +20835,10 @@ PrefabInstance:
     - target: {fileID: 4419099711230757392, guid: b39871bbd2ef23449948787e6100ab8f, type: 3}
       propertyPath: m_Interactable
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4419099711230757392, guid: b39871bbd2ef23449948787e6100ab8f, type: 3}
+      propertyPath: m_Colors.m_FadeDuration
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4419099711230757392, guid: b39871bbd2ef23449948787e6100ab8f, type: 3}
       propertyPath: m_Colors.m_NormalColor.a
@@ -20884,6 +20889,10 @@ PrefabInstance:
       value: MakeChoice
       objectReference: {fileID: 0}
     - target: {fileID: 4462075187113767400, guid: b39871bbd2ef23449948787e6100ab8f, type: 3}
+      propertyPath: m_Colors.m_FadeDuration
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4462075187113767400, guid: b39871bbd2ef23449948787e6100ab8f, type: 3}
       propertyPath: m_Colors.m_HighlightedColor.a
       value: 1
       objectReference: {fileID: 0}
@@ -20907,6 +20916,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: MakeChoice
       objectReference: {fileID: 0}
+    - target: {fileID: 5023102098298619527, guid: b39871bbd2ef23449948787e6100ab8f, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 350
+      objectReference: {fileID: 0}
+    - target: {fileID: 5549145524307725075, guid: b39871bbd2ef23449948787e6100ab8f, type: 3}
+      propertyPath: m_text
+      value: Other
+      objectReference: {fileID: 0}
     - target: {fileID: 5759430956366391054, guid: b39871bbd2ef23449948787e6100ab8f, type: 3}
       propertyPath: m_Color.a
       value: 1
@@ -20927,8 +20944,24 @@ PrefabInstance:
       propertyPath: m_FillCenter
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6662975674740284012, guid: b39871bbd2ef23449948787e6100ab8f, type: 3}
+      propertyPath: m_text
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809798330775579447, guid: b39871bbd2ef23449948787e6100ab8f, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 7809798330775579447, guid: b39871bbd2ef23449948787e6100ab8f, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 700
+      objectReference: {fileID: 0}
     - target: {fileID: 8665619915586118681, guid: b39871bbd2ef23449948787e6100ab8f, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8892141286183974776, guid: b39871bbd2ef23449948787e6100ab8f, type: 3}
+      propertyPath: m_Colors.m_FadeDuration
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8892141286183974776, guid: b39871bbd2ef23449948787e6100ab8f, type: 3}
@@ -38497,7 +38530,7 @@ PrefabInstance:
       objectReference: {fileID: 859044569}
     - target: {fileID: 1010552263841033069, guid: 0993b5793f98947409e773b6431cd003, type: 3}
       propertyPath: interactRange
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1010552263841033069, guid: 0993b5793f98947409e773b6431cd003, type: 3}
       propertyPath: inventoryCanvas
@@ -38507,6 +38540,10 @@ PrefabInstance:
       propertyPath: gameInput
       value: 
       objectReference: {fileID: 410230760}
+    - target: {fileID: 2425299257626633436, guid: 0993b5793f98947409e773b6431cd003, type: 3}
+      propertyPath: maxDistance
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 4699622709227887763, guid: 0993b5793f98947409e773b6431cd003, type: 3}
       propertyPath: m_Name
       value: Player
