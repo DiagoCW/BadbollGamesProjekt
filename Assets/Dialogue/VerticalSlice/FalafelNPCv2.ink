@@ -5,7 +5,6 @@ INCLUDE globalsmain.ink
 === Intro ===
 #speaker: Boss Man
 You got here just in time... Jag har århundratets brott för dig att lösa. # anim: Talking
-<PLAYERCHOICE> # speaker: Player
     * [Vad har hänt?]
     * [*Skippa denna skit, gå på sak!]
         -> StartInvestigation
@@ -13,7 +12,6 @@ You got here just in time... Jag har århundratets brott för dig att lösa. # a
 - When I got my skattedeklaration last week, I was looking at a juicy 50.000kr back in skatteåterbäring. #speaker: Boss Man
 Till mina stora överraskning så kom Ekobrottsmyndigheten till mitt stånd häromdagen och anklagade mig för att ha fejkat inkomster.
 När vi gick igenom mina inkomster insåg jag snabbt att det verkar finnas en kund som inte betalat för sin mat, vilket innebär att jag har förlorat pengar på dem!
-<PLAYERCHOICE> #speaker: Player
     * That makes no sense.[] I can see why they would investigate if your income was larger than your estimated sales, but if you're operating at a loss there's no crime being committed. # speaker: Player
             Tror du att de bryr sig? Jag har blivit rånad oavsett! # speaker: Boss Man # anim: Yelling
     * [Go on...]
@@ -22,7 +20,6 @@ När vi gick igenom mina inkomster insåg jag snabbt att det verkar finnas en ku
 === StartInvestigation ===
 #speaker: Boss Man
 Så, sätt igång med undersökningen! # anim: Shake
-<PLAYERCHOICE> #speaker: Player
 {foundReceipt:
     * [Jag hittade det här i soptunnan.] -> ContinueInvestigation
   - else:

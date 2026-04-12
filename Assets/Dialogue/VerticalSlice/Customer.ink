@@ -22,10 +22,10 @@ Ok du fångade mig bra jobbat!!!! #anim: ThumbsUp
 { foundCulprit: -> Confront2 | -> Intro }
 === Intro === 
 Hej hej hej hej hej!!!!! # speaker: Customer
-<PLAYERCHOICE> #speaker: Player
     {seenBreath and foundReceipt} * [Angående din andedräkt...] -> Confront2
     * [Hur är läget?]
-        E du min mamma ->END
+        E du min mamma #speaker: Customer
+        ->END
     * [Jag måste gå nu.]<>->END
     } 
 === Confront2 ===

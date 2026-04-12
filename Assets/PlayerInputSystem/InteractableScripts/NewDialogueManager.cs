@@ -19,6 +19,7 @@ public class NewDialogueManager : MonoBehaviour
     [SerializeField] UnityEngine.UI.Image dialogueCheck;
     [SerializeField] UnityEngine.UI.Image itemPortrait;
     //[SerializeField] TextMeshProUGUI displayNameText;
+    [SerializeField] ItemDatabaseObject itemDatabase;
 
     [Header("Load Globals JSON")]
     [SerializeField] TextAsset loadGlobalsJSON;
@@ -101,8 +102,8 @@ public class NewDialogueManager : MonoBehaviour
 
     private void Update()
     {
-        if (!dialogueIsPlaying ||
-            currentStory.currentChoices.Count > 0) return;
+        if (!dialogueIsPlaying /*||
+            currentStory.currentChoices.Count > 0*/ || choicesContainer.activeSelf) return;
 
         if (Input.GetKeyDown(KeyCode.Escape))
             ExitDialogue();
@@ -123,6 +124,9 @@ public class NewDialogueManager : MonoBehaviour
                 }
                 dialogueText.text = currentStory.currentText;
                 isTyping = false;
+                dialogueCheck.enabled = true;
+                if (currentStory.currentChoices.Count > 0)
+                    DisplayChoices();
             }
         }
     }
@@ -151,41 +155,67 @@ public class NewDialogueManager : MonoBehaviour
     }
 
 
+    //IEnumerator TypeText(string line)
+    //{
+    //    HideChoices();
+    //    // Denna gör att nuvarande val dyker upp så fort dialogen är klar; Enda nackdelen är att det inte går att
+    //    // autocompletea dialogen. Försök fixa det
+    //    if (currentStory.currentChoices.Count > 0)
+    //    {
+    //        yield return new WaitForSeconds(1f);
+    //        //isTyping = false;
+    //        //dialogueText.text = string.Empty;
+    //        DisplayChoices();
+    //        //yield return new WaitForSeconds(0.01f);
+    //    }
+    //    //else
+    //    {
+    //        dialogueText.text = string.Empty;
+    //        isTyping = true;
+    //        foreach (char letter in line.ToCharArray())
+    //        {
+    //            dialogueText.text += letter;
+    //            yield return new WaitForSeconds(typingSpeed);
+    //        }
+    //        isTyping = false;
+
+    //        // Om man istället har den här så måste man klicka en extra gång för att få upp valen.
+    //        // Inte lika snyggt men fungerar att autocompleta dialogen när det finns val.
+    //        //if (currentStory.currentChoices.Count > 0)
+    //        //{
+    //        //    yield return new WaitForSeconds(0.1f);
+    //        //    DisplayChoices();
+    //        //}
+    //    }
+    //}
+
     IEnumerator TypeText(string line)
     {
         HideChoices();
+        dialogueText.text = string.Empty;
+        isTyping = true;
+        dialogueCheck.enabled = false;
+
+        foreach (char letter in line.ToCharArray())
+        {
+            dialogueText.text += letter;
+            yield return new WaitForSeconds(typingSpeed);
+        }
+
+        isTyping = false;
+        dialogueCheck.enabled = true;
         if (currentStory.currentChoices.Count > 0)
         {
-            //isTyping = false;
-            //dialogueText.text = string.Empty;
+            yield return new WaitForSeconds(0.1f);
             DisplayChoices();
-            //yield return new WaitForSeconds(0.01f);
         }
-        else
-        {
-            dialogueText.text = string.Empty;
-            isTyping = true;
-            foreach (char letter in line.ToCharArray())
-            {
-                dialogueText.text += letter;
-                yield return new WaitForSeconds(typingSpeed);
-            }
-            isTyping = false;
-            if (currentStory.currentChoices.Count > 0)
-            {
-                DisplayChoices();
-            }
-        }
-        
-
     }
+
+
 
     public void EnterDialogue(TextAsset inkJson, Animator npc)
     {
-        //GameObject.FindWithTag("Player").GetComponent<PlayerInput>().enabled = false;
-        
         //PlayerController.Instance.enabled = false;
-        //PlayerController.Instance.IsInDialogue = true;
         npcAnimator = npc;
         currentStory = new(inkJson.text);
         dialogueVariables.StartListening(currentStory);
@@ -193,6 +223,7 @@ public class NewDialogueManager : MonoBehaviour
 
         dialogueIsPlaying = true;
         dialoguePanel.SetActive(true);
+        itemPortrait.gameObject.SetActive(false);
         inputCooldownUntil = Time.time + INPUT_COOLDOWN;
         ContinueStory();
     }
@@ -201,33 +232,13 @@ public class NewDialogueManager : MonoBehaviour
     {
 
         dialogueVariables.StopListening(currentStory);
-        //GameObject.FindWithTag("Player").GetComponent<PlayerInput>().enabled = true;
-        //GameObject.FindWithTag("Player").GetComponent<GameInput>().enabled = true;
         //PlayerController.Instance.enabled = true;
-        //PlayerController.Instance.IsInDialogue = false;
         functions.Unbind(currentStory);
         dialogueIsPlaying = false;
         dialoguePanel.SetActive(false);
         dialogueText.text = string.Empty;
+        itemPortrait.gameObject.SetActive(false);
     }
-
-    //void ContinueStory()
-    //{
-    //    if (currentStory.canContinue)
-    //    {
-    //        if (displayLineCoroutine != null)
-    //        {
-    //            StopCoroutine(displayLineCoroutine);
-    //        }
-    //        displayLineCoroutine = StartCoroutine(TypeText(currentStory.Continue()));
-    //        HandleTags(currentStory.currentTags);
-    //    }
-        
-    //    else
-    //    {
-    //        ExitDialogue();
-    //    }
-    //}
 
     void ContinueStory()
     {
@@ -299,6 +310,29 @@ public class NewDialogueManager : MonoBehaviour
                 case PORTRAIT_TAG:
                     // Hantera porträtt, t.ex. visa en bild av talaren
                     Debug.Log($"Portrait: {tagValue}");
+                    //itemPortrait.enabled = true;
+                    //itemPortrait.sprite = Resources.Load<Sprite>(tagValue);
+                    //itemPortrait.sprite = ScriptableObject.FindFirstObjectByType<ItemDatabaseObject>()
+                    //foreach (var clue in ScriptableObject.FindFirstObjectByType<ItemDatabaseObject>().items)
+                    //{
+                    //    if (clue.Id.Equals(Convert.ToInt32(tagValue)))
+                    //    {
+                    //        itemPortrait.sprite = clue.uiDisplay;
+                    //        break;
+                    //    }
+                    //}
+
+                    if (int.TryParse(tagValue, out int itemId) && itemDatabase.GetItem.TryGetValue(itemId, out ItemObject item))
+                    {
+                        itemPortrait.sprite = item.uiDisplay;
+                        itemPortrait.gameObject.SetActive(true);
+                    }
+                    else
+                    {
+                        Debug.LogWarning($"Portrait tag value '{tagValue}' not found in item database.");
+                        itemPortrait.gameObject.SetActive(false);
+                    }
+
                     break;
                 case LAYOUT_TAG:
                     // Hantera layout, t.ex. ändra position eller stil på dialogrutan
@@ -306,32 +340,9 @@ public class NewDialogueManager : MonoBehaviour
                     break;
                 case ANIM_TAG:
                     if (npcAnimator == null) return;
-                    //currentValue = npcAnimator.CompareTag("NPC") ? "Idle" : "isSitting";
-                    //npcAnimator.SetBool(currentValue, true);
                     Debug.Log($"Animation: {tagValue}, currentTag: {currentValue}");
 
-                    //DialogueTrigger.npcAnimator.SetTrigger(tagValue);
                     npcAnimator.SetTrigger(tagValue);
-
-                    //if (!currentValue.Equals(tagValue))
-                    //{
-                    //    //DialogueTrigger.npcAnimator.ResetTrigger(currentValue);
-                    //    npcAnimator.ResetTrigger(currentValue);
-                    //    currentValue = tagValue;
-                    //    //continue;
-                    //}
-
-                    
-
-                    
-                    
-                    //string currentValue = tagValue;
-                    
-
-                    //if (npcAnimator.GetBool(tagValue))
-                    //    npcAnimator.SetBool(tagValue, false);
-                    //else npcAnimator.SetBool(tagValue, true);
-
                     break;
                 default:
                     Debug.LogWarning($"Unknown tag key: {tagKey}");
@@ -395,9 +406,5 @@ public class NewDialogueManager : MonoBehaviour
         ContinueStory();
         
     }
-
-    private IEnumerator ChoiceDelay()
-    {
-        yield return new WaitForEndOfFrame();
-    }
+    
 }
