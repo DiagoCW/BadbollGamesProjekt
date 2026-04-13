@@ -100,6 +100,54 @@ public class NewDialogueManager : MonoBehaviour
         
     }
 
+    private void OnEnable()
+    {
+        CorkboardManager.OnCorkboardCompleted += OnCorkboardCompletedHandler;
+    }
+
+    private void OnDisable()
+    {
+        CorkboardManager.OnCorkboardCompleted -= OnCorkboardCompletedHandler;
+    }
+
+    private void OnCorkboardCompletedHandler()
+    {
+        Debug.Log("OnCorkboardCompletedHandler triggered");
+        // Try to get the current value from the cached globals
+        Ink.Runtime.Object value = GetVariableState("foundCulprit");
+
+        bool currentBool = false;
+        bool toggleResult = true; // default to true if variable missing or not bool
+
+        if (value == null)
+        {
+            Debug.LogWarning("Variable 'foundCulprit' not found in DialogueVariables. Creating it and setting to true.");
+            toggleResult = true;
+        }
+        else if (value is Ink.Runtime.BoolValue boolVal)
+        {
+            currentBool = boolVal.value;
+            toggleResult = !currentBool;
+        }
+        else
+        {
+            Debug.LogWarning($"Variable 'foundCulprit' exists but is not a bool (type: {value.GetType()}). Overwriting with true.");
+            toggleResult = true;
+        }
+
+        // Update the cached globals dictionary so future stories get the change
+        dialogueVariables?.variables?.Remove("foundCulprit");
+        dialogueVariables?.variables?.Add("foundCulprit", new Ink.Runtime.BoolValue(toggleResult));
+
+        // Also update the currently playing story so the change takes effect immediately
+        if (currentStory != null)
+        {
+            currentStory.variablesState.SetGlobal("foundCulprit", new Ink.Runtime.BoolValue(toggleResult));
+        }
+
+        Debug.Log($"Set 'foundCulprit' = {toggleResult}");
+    }
+
     private void Update()
     {
         if (!dialogueIsPlaying /*||
