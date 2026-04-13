@@ -21,6 +21,12 @@ public class TestAIScript : MonoBehaviour
         //}
     }
 
+    void Update()
+    {
+        if (Vector3.Distance(agent.transform.position, targetDestination.position) < 1)
+            Destroy(gameObject);
+    }
+
     public void StartPath()
     {
         if (targetDestination != null)

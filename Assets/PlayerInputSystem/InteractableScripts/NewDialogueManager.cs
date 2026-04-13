@@ -88,6 +88,7 @@ public class NewDialogueManager : MonoBehaviour
         {
             choicesText[i] = choices[i].GetComponentInChildren<TextMeshProUGUI>();
         }
+        Debug.Log("DialogueManager active");
     }
 
     public Ink.Runtime.Object GetVariableState(string variableName)

@@ -1,5 +1,4 @@
 INCLUDE globalsmain.ink
-
 { startInvestigation: -> Receipt | -> Intro }
 
 === Intro ===
@@ -63,5 +62,9 @@ Eller kvinnan!!! #anim: Yelling
 -> END
 
 === FinishInvestigation ===
-hihi du klara det :) tack<3 #anim: Talking
+Så, det var han hela tiden... #anim: Talking #speaker: Boss Man
+Tack för att du löste fallet åt mig!
+Ekobrottsmyndigheten har dock valt att fälla mig, så jag ska sitta i fängelse i 1 år med 3 års näringsverksamhetsförbud. 
+Spelet kommer nu att förstöras!
+~ completedGame = true
 ->END
