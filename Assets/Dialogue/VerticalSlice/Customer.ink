@@ -19,17 +19,20 @@ Ok du fångade mig bra jobbat!!!! #anim: ThumbsUp
 -> END
 */
 
-{ foundCulprit: -> Confront2 | -> Intro }
+// { foundCulprit: -> Confront2 | -> Intro }
+-> Intro
+
+=== Confront ===
+#speaker: Customer
+Hahahahahaha!!!!!!! #anim: ThumbsUp
+-> END
+
 === Intro === 
 Hej hej hej hej hej!!!!! # speaker: Customer
-    {seenBreath and foundReceipt} * [Angående din andedräkt...] -> Confront2
+    * {seenBreath} [Angående din andedräkt...] -> Confront
     * [Hur är läget?]
         E du min mamma #speaker: Customer
         ->END
-    * [Jag måste gå nu.]<>->END
+    * [Jag måste gå nu.]->END
     } 
-=== Confront2 ===
-#speaker: Customer
-Ok du fångade mig bra jobbat!!!! #anim: ThumbsUp
-~ foundCulprit = true
--> END
+    

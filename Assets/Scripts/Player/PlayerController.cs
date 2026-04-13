@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using TMPro;
 
 public interface IInteractable
 {
@@ -24,7 +25,9 @@ public class PlayerController : MonoBehaviour
 
     [Header("Interaction Settings")]
     [SerializeField] private Camera playerCamera;
-    [SerializeField] private float interactRange = 2f;
+    [SerializeField] float interactRange = 2f;
+    [Header("Interaction UI")]
+    [SerializeField] private TextMeshProUGUI interactPromptText;
 
     private CharacterController controller;
     private Vector3 verticalVelocity;
@@ -44,6 +47,8 @@ public class PlayerController : MonoBehaviour
             return false;
         }
     }
+
+    public float InteractRange() => interactRange;
 
     private void Awake()
     {
@@ -71,6 +76,11 @@ public class PlayerController : MonoBehaviour
         if (inventoryCanvas != null)
         {
             inventoryCanvas.SetActive(false);
+        }
+
+        if (interactPromptText != null)
+        {
+            interactPromptText.gameObject.SetActive(false);
         }
     }
 
@@ -127,14 +137,13 @@ public class PlayerController : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hitInfo, interactRange))
         {
             IInteractable[] interactables = hitInfo.collider.GetComponents<IInteractable>();
-
+            
             if (interactables.Length == 0) return;
 
-            // Check if highlight mode is active
-            HighlightActivatorIAVersion highlighter = GameObject
-                .FindGameObjectWithTag("Player")
-                .GetComponent<HighlightActivatorIAVersion>();
-
+        // Check if highlight mode is active
+        HighlightActivatorIAVersion highlighter = GameObject
+            .FindGameObjectWithTag("Player")
+            .GetComponent<HighlightActivatorIAVersion>();
             if (highlighter != null && highlighter.IsHighlighting)
             {
                 // Find and call InteractableNPC specifically
@@ -186,7 +195,41 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+            HandleInteractionPrompt();
             HandleMovement();
+    }
+
+    private void HandleInteractionPrompt()
+    {
+        if (interactPromptText == null || playerCamera == null)
+            return;
+
+        // Hide prompt if inventory open or dialogue playing
+        if (IsInventoryOpen || IsDialoguePlaying)
+        {
+            if (interactPromptText.gameObject.activeSelf)
+                interactPromptText.gameObject.SetActive(false);
+            return;
+        }
+
+        Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, interactRange))
+        {
+            // Check if the hit object (or its parents) implement IInteractable
+            var interactable = hitInfo.collider.GetComponentInParent<MonoBehaviour>() as IInteractable;
+            if (interactable != null)
+            {
+                // Use the root gameobject name as the display name
+                string displayName = hitInfo.collider.GetComponentInParent<Transform>().gameObject.name;
+                interactPromptText.text = $"Press E to talk to {displayName}";
+                if (!interactPromptText.gameObject.activeSelf)
+                    interactPromptText.gameObject.SetActive(true);
+                return;
+            }
+        }
+
+        if (interactPromptText.gameObject.activeSelf)
+            interactPromptText.gameObject.SetActive(false);
     }
 
     private void HandleMovement() 

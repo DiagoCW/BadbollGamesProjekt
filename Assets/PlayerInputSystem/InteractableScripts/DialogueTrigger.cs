@@ -1,6 +1,7 @@
 using UnityEngine;
 using Ink.Runtime;
 using Ink.Parsed;
+using Unity.VisualScripting;
 
 /// <summary>
 /// Detta script läggs till på alla NPCs som spelaren ska kunna interagera med och starta dialog.
@@ -16,7 +17,8 @@ public class DialogueTrigger : MonoBehaviour, IInteractable
     // Ink JSON fil som håller dialogen som objektet ska visa vid interaktion
     [Header("Ink JSON")]
     [SerializeField] TextAsset inkJson;
-
+    //[SerializeField] public string npcName;
+    
     /*[SerializeField]*/ HighlightActivatorIAVersion highlighter;
 
     Animator npcAnimator;
@@ -41,7 +43,7 @@ public class DialogueTrigger : MonoBehaviour, IInteractable
         if (gameObject.CompareTag("NPC"))
         {
             if (/*NewDialogueManager.Instance.dialogueIsPlaying ||*/
-            Vector3.Distance(npcDir.position, player.position) < 5)
+            Vector3.Distance(npcDir.position, player.position) <= PlayerController.Instance.InteractRange() + 0.5f)
                 FacePlayer();
         }
     }

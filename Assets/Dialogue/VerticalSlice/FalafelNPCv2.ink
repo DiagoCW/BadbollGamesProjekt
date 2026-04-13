@@ -19,6 +19,7 @@ När vi gick igenom mina inkomster insåg jag snabbt att det verkar finnas en ku
 
 === StartInvestigation ===
 #speaker: Boss Man
+/*
 Så, sätt igång med undersökningen! # anim: Shake
 {foundReceipt:
     * [Jag hittade det här i soptunnan.] -> ContinueInvestigation
@@ -26,6 +27,11 @@ Så, sätt igång med undersökningen! # anim: Shake
     *[How?] -> Introcont
     *[Alright...]<>-> FinishIntro
 }
+*/
+Så, sätt igång med undersökningen! # anim: Shake
+    * { foundReceipt } [Jag hittade det här i soptunnan.] -> ContinueInvestigation
+    *[How?] -> Introcont
+    *[Alright...]<>-> FinishIntro
 
 = Introcont
 #speaker: Boss Man

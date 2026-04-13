@@ -93,6 +93,7 @@ public class CorkboardManager : MonoBehaviour
         {
             Debug.Log("Puzzle Solved! Event triggered");
             OnCorkboardCompleted?.Invoke();
+            
         }
 
         if (corkboardTrigger != null)

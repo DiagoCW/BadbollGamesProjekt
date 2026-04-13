@@ -44,8 +44,6 @@ public class DialogueVariables
             story.variablesState.SetGlobal(variable.Key, variable.Value);
             
         }
-
     }
-
     
 }
