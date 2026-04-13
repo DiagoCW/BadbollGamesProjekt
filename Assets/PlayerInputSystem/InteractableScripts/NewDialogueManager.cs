@@ -7,6 +7,8 @@ using UnityEngine.EventSystems;
 using System.Collections;
 using UnityEngine.SearchService;
 using System;
+using UnityEngine.UIElements;
+using UnityEngine.UI;
 //using Ink.Parsed;
 public class NewDialogueManager : MonoBehaviour
 {
@@ -14,12 +16,16 @@ public class NewDialogueManager : MonoBehaviour
     [Header("Dialogue UI")]
     [SerializeField] GameObject dialoguePanel;
     [SerializeField] TextMeshProUGUI dialogueText;
+    [SerializeField] UnityEngine.UI.Image dialogueCheck;
+    [SerializeField] UnityEngine.UI.Image itemPortrait;
     //[SerializeField] TextMeshProUGUI displayNameText;
+    [SerializeField] ItemDatabaseObject itemDatabase;
 
     [Header("Load Globals JSON")]
     [SerializeField] TextAsset loadGlobalsJSON;
 
     [Header("Choices UI")]
+    [SerializeField] GameObject choicesContainer;
     [SerializeField] GameObject[] choices;
     TextMeshProUGUI[] choicesText;
 
@@ -37,6 +43,9 @@ public class NewDialogueManager : MonoBehaviour
     
 
     [SerializeField] float typingSpeed = 0.03f;
+    // Add with other private fields
+    private float inputCooldownUntil;
+    private const float INPUT_COOLDOWN = 0.1f;
 
     public Story currentStory { get; private set; } // Den dialog som spelas för tillfället: Nästan allting utgår från denna  
     public bool dialogueIsPlaying { get; private set; } // Referens som andra klasser kan hämta för att kontrollera att en dialog är aktiv eller inte 
@@ -94,10 +103,38 @@ public class NewDialogueManager : MonoBehaviour
     private void Update()
     {
         if (!dialogueIsPlaying /*||
-            currentStory.currentChoices.Count > 0*/) return;
+            currentStory.currentChoices.Count > 0*/ || choicesContainer.activeSelf) return;
 
         if (Input.GetKeyDown(KeyCode.Escape))
             ExitDialogue();
+
+        //StartCoroutine(CanContinue());
+
+        if (Input.GetKeyDown(KeyCode.E) && Time.time >= inputCooldownUntil)
+        {
+            if (!isTyping)
+            {
+                ContinueStory();
+            }
+            else
+            {
+                if (displayLineCoroutine != null)
+                {
+                    StopCoroutine(displayLineCoroutine);
+                }
+                dialogueText.text = currentStory.currentText;
+                isTyping = false;
+                dialogueCheck.enabled = true;
+                if (currentStory.currentChoices.Count > 0)
+                    DisplayChoices();
+            }
+        }
+    }
+
+    IEnumerator CanContinue()
+    {
+        yield return new WaitUntil(() => currentStory.canContinue || currentStory.currentChoices.Count > 0 || 
+        !currentStory.canContinue);
 
         if (Input.GetKeyDown(KeyCode.E) && currentStory.currentChoices.Count == 0)
         {
@@ -118,38 +155,67 @@ public class NewDialogueManager : MonoBehaviour
     }
 
 
+    //IEnumerator TypeText(string line)
+    //{
+    //    HideChoices();
+    //    // Denna gör att nuvarande val dyker upp så fort dialogen är klar; Enda nackdelen är att det inte går att
+    //    // autocompletea dialogen. Försök fixa det
+    //    if (currentStory.currentChoices.Count > 0)
+    //    {
+    //        yield return new WaitForSeconds(1f);
+    //        //isTyping = false;
+    //        //dialogueText.text = string.Empty;
+    //        DisplayChoices();
+    //        //yield return new WaitForSeconds(0.01f);
+    //    }
+    //    //else
+    //    {
+    //        dialogueText.text = string.Empty;
+    //        isTyping = true;
+    //        foreach (char letter in line.ToCharArray())
+    //        {
+    //            dialogueText.text += letter;
+    //            yield return new WaitForSeconds(typingSpeed);
+    //        }
+    //        isTyping = false;
+
+    //        // Om man istället har den här så måste man klicka en extra gång för att få upp valen.
+    //        // Inte lika snyggt men fungerar att autocompleta dialogen när det finns val.
+    //        //if (currentStory.currentChoices.Count > 0)
+    //        //{
+    //        //    yield return new WaitForSeconds(0.1f);
+    //        //    DisplayChoices();
+    //        //}
+    //    }
+    //}
+
     IEnumerator TypeText(string line)
     {
-        
+        HideChoices();
+        dialogueText.text = string.Empty;
+        isTyping = true;
+        dialogueCheck.enabled = false;
+
+        foreach (char letter in line.ToCharArray())
+        {
+            dialogueText.text += letter;
+            yield return new WaitForSeconds(typingSpeed);
+        }
+
+        isTyping = false;
+        dialogueCheck.enabled = true;
         if (currentStory.currentChoices.Count > 0)
         {
-            //isTyping = false;
-            dialogueText.text = string.Empty;
+            yield return new WaitForSeconds(0.1f);
             DisplayChoices();
-            //yield return new WaitForSeconds(0.01f);
         }
-        else
-        {
-            dialogueText.text = string.Empty;
-            isTyping = true;
-            HideChoices();
-            foreach (char letter in line.ToCharArray())
-            {
-                dialogueText.text += letter;
-                yield return new WaitForSeconds(typingSpeed);
-            }
-            isTyping = false;
-        }
-        
-        
     }
+
+
 
     public void EnterDialogue(TextAsset inkJson, Animator npc)
     {
-        //GameObject.FindWithTag("Player").GetComponent<PlayerInput>().enabled = false;
-        
         //PlayerController.Instance.enabled = false;
-        //PlayerController.Instance.IsInDialogue = true;
         npcAnimator = npc;
         currentStory = new(inkJson.text);
         dialogueVariables.StartListening(currentStory);
@@ -157,37 +223,51 @@ public class NewDialogueManager : MonoBehaviour
 
         dialogueIsPlaying = true;
         dialoguePanel.SetActive(true);
-
+        itemPortrait.gameObject.SetActive(false);
+        inputCooldownUntil = Time.time + INPUT_COOLDOWN;
         ContinueStory();
     }
 
     private void ExitDialogue()
     {
+
         dialogueVariables.StopListening(currentStory);
-        //GameObject.FindWithTag("Player").GetComponent<PlayerInput>().enabled = true;
-        //GameObject.FindWithTag("Player").GetComponent<GameInput>().enabled = true;
         //PlayerController.Instance.enabled = true;
-        //PlayerController.Instance.IsInDialogue = false;
         functions.Unbind(currentStory);
         dialogueIsPlaying = false;
         dialoguePanel.SetActive(false);
         dialogueText.text = string.Empty;
+        itemPortrait.gameObject.SetActive(false);
     }
 
     void ContinueStory()
     {
+        Debug.Log($"ContinueStory called. canContinue: {currentStory.canContinue}, " +
+                  $"choices: {currentStory.currentChoices.Count}");
+
         if (currentStory.canContinue)
         {
             if (displayLineCoroutine != null)
-            {
                 StopCoroutine(displayLineCoroutine);
+
+            string line = currentStory.Continue();
+            Debug.Log($"Continued. Line: '{line}', canContinue after: {currentStory.canContinue}, " +
+                      $"choices after: {currentStory.currentChoices.Count}");
+
+            if (string.IsNullOrWhiteSpace(line) && !currentStory.canContinue
+                && currentStory.currentChoices.Count == 0)
+            {
+                Debug.Log("Empty line with nothing left — exiting.");
+                ExitDialogue();
+                return;
             }
-            displayLineCoroutine = StartCoroutine(TypeText(currentStory.Continue()));
+
+            displayLineCoroutine = StartCoroutine(TypeText(line));
             HandleTags(currentStory.currentTags);
         }
-        
-        else
+        else if (currentStory.currentChoices.Count == 0)
         {
+            Debug.Log("Nothing left — exiting.");
             ExitDialogue();
         }
     }
@@ -230,6 +310,29 @@ public class NewDialogueManager : MonoBehaviour
                 case PORTRAIT_TAG:
                     // Hantera porträtt, t.ex. visa en bild av talaren
                     Debug.Log($"Portrait: {tagValue}");
+                    //itemPortrait.enabled = true;
+                    //itemPortrait.sprite = Resources.Load<Sprite>(tagValue);
+                    //itemPortrait.sprite = ScriptableObject.FindFirstObjectByType<ItemDatabaseObject>()
+                    //foreach (var clue in ScriptableObject.FindFirstObjectByType<ItemDatabaseObject>().items)
+                    //{
+                    //    if (clue.Id.Equals(Convert.ToInt32(tagValue)))
+                    //    {
+                    //        itemPortrait.sprite = clue.uiDisplay;
+                    //        break;
+                    //    }
+                    //}
+
+                    if (int.TryParse(tagValue, out int itemId) && itemDatabase.GetItem.TryGetValue(itemId, out ItemObject item))
+                    {
+                        itemPortrait.sprite = item.uiDisplay;
+                        itemPortrait.gameObject.SetActive(true);
+                    }
+                    else
+                    {
+                        Debug.LogWarning($"Portrait tag value '{tagValue}' not found in item database.");
+                        itemPortrait.gameObject.SetActive(false);
+                    }
+
                     break;
                 case LAYOUT_TAG:
                     // Hantera layout, t.ex. ändra position eller stil på dialogrutan
@@ -237,32 +340,9 @@ public class NewDialogueManager : MonoBehaviour
                     break;
                 case ANIM_TAG:
                     if (npcAnimator == null) return;
-                    //currentValue = npcAnimator.CompareTag("NPC") ? "Idle" : "isSitting";
-                    //npcAnimator.SetBool(currentValue, true);
                     Debug.Log($"Animation: {tagValue}, currentTag: {currentValue}");
 
-                    //DialogueTrigger.npcAnimator.SetTrigger(tagValue);
                     npcAnimator.SetTrigger(tagValue);
-
-                    //if (!currentValue.Equals(tagValue))
-                    //{
-                    //    //DialogueTrigger.npcAnimator.ResetTrigger(currentValue);
-                    //    npcAnimator.ResetTrigger(currentValue);
-                    //    currentValue = tagValue;
-                    //    //continue;
-                    //}
-
-                    
-
-                    
-                    
-                    //string currentValue = tagValue;
-                    
-
-                    //if (npcAnimator.GetBool(tagValue))
-                    //    npcAnimator.SetBool(tagValue, false);
-                    //else npcAnimator.SetBool(tagValue, true);
-
                     break;
                 default:
                     Debug.LogWarning($"Unknown tag key: {tagKey}");
@@ -273,6 +353,7 @@ public class NewDialogueManager : MonoBehaviour
 
     void HideChoices()
     {
+        choicesContainer.SetActive(false);
         foreach (GameObject choice in choices)
             choice.SetActive(false);
     }
@@ -292,10 +373,13 @@ public class NewDialogueManager : MonoBehaviour
         //if (currentChoices.Count > 0)
         //    dialogueText.text = string.Empty;
 
+        choicesContainer.SetActive(currentChoices.Count > 0);
+
         for (int i = 0; i < choices.Length; i++)
         {
             if (i < currentChoices.Count)
             {
+                
                 choices[i].SetActive(true);
                 choicesText[i].text = currentChoices[i].text;
             }
@@ -305,6 +389,7 @@ public class NewDialogueManager : MonoBehaviour
             }
         }
         StartCoroutine(SelectFirstChoice());
+        
     }
 
     private IEnumerator SelectFirstChoice()
@@ -317,12 +402,9 @@ public class NewDialogueManager : MonoBehaviour
     public void MakeChoice(int choiceIndex)
     {
         currentStory.ChooseChoiceIndex(choiceIndex);
-        StartCoroutine(ChoiceDelay());
+        inputCooldownUntil = Time.time + INPUT_COOLDOWN;
         ContinueStory();
+        
     }
-
-    private IEnumerator ChoiceDelay()
-    {
-        yield return new WaitForSeconds(5f);
-    }
+    
 }
