@@ -4,9 +4,9 @@ using UnityEngine;
 /// Används för att sätta igång triggers baserade på ändrade variabler i GlobalsMain.Ink;
 /// t.ex startas en trigger när dVisionTutorialTrigger sätts 
 /// </summary>
-public class TriggerTutorial : MonoBehaviour
+public class EndGameTrigger : MonoBehaviour
 {
-    [SerializeField] TextAsset inkJson, inkJsonTest;
+    //[SerializeField] TextAsset inkJson, inkJsonTest;
     [SerializeField] string Inkvariable;
     object trigger = false;
     public static int counter = 0;
@@ -15,12 +15,8 @@ public class TriggerTutorial : MonoBehaviour
     {
         //Debug.Log("Trigger: " + Inkvariable + " " + "value: " + trigger);
         //NewDialogueManager.Instance.EnterDialogue(inkJsonTest, null);
-        if (counter == 0)
-        {
-            NewDialogueManager.Instance.EnterDialogue(inkJsonTest, null);
-            counter++;
-        }
         
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -44,18 +40,17 @@ public class TriggerTutorial : MonoBehaviour
         //trigger = (Ink.Runtime.BoolValue)
         //NewDialogueManager.Instance.GetVariableState(Inkvariable);
 
-        if (other.CompareTag("Player") && (bool)trigger 
-            && !NewDialogueManager.Instance.dialogueIsPlaying)
+        if (other.CompareTag("Player") && (bool)trigger)
         {
-            NewDialogueManager.Instance.EnterDialogue(inkJson, null);
-            Debug.Log($"Trigger {Inkvariable} activated");
+            //Debug.Log($"Destroying trigger " + Inkvariable);
+            //Destroy(gameObject);
+            Application.Quit();
+
+            Debug.Log("Om du ser detta så fungerar inte triggern för att stänga spelet ):");
         }
+
         
-        if ((bool)trigger)
-        {
-            Debug.Log($"Destroying trigger " + Inkvariable);
-            Destroy(gameObject);
-        }
-            
+
     }
 }
+
