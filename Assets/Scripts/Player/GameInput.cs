@@ -8,6 +8,7 @@ public class GameInput : MonoBehaviour
     public event EventHandler OnHighlightAction;
     public event EventHandler OnInventoryAction;
     public event EventHandler OnInteractAction;
+    public event EventHandler OnExitAction;
 
     private InputSystem_Actions inputActions;
 
@@ -21,6 +22,7 @@ public class GameInput : MonoBehaviour
         inputActions.Player.Highlight.performed += Highlight_performed;
         inputActions.Player.Inventory.performed += Inventory_performed;
         inputActions.Player.Interact.performed += Interact_performed;
+        inputActions.Player.Exit.performed += Exit_performed;
     }
 
     private void OnDestroy()
@@ -30,6 +32,7 @@ public class GameInput : MonoBehaviour
         inputActions.Player.Highlight.performed -= Highlight_performed;
         inputActions.Player.Inventory.performed -= Inventory_performed;
         inputActions.Player.Interact.performed -= Interact_performed;
+        inputActions.Player.Exit.performed -= Exit_performed;
         inputActions.Dispose();
     }
 
@@ -61,5 +64,10 @@ public class GameInput : MonoBehaviour
     public void Interact_performed(InputAction.CallbackContext obj) 
     {
         OnInteractAction?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void Exit_performed(InputAction.CallbackContext obj) 
+    {
+        OnExitAction?.Invoke(this, EventArgs.Empty);
     }
 }

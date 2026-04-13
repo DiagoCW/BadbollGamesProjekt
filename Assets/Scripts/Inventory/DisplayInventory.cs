@@ -114,12 +114,32 @@ public class DisplayInventory : MonoBehaviour
         }
         else
         {
-            // "Maybe we should add this in some other fashion, if you drag an item off the panel it's removed."
-            //inventory.RemoveItem(itemsDisplayed[obj].item);
+            // NEW DEBUG LOGGING: Let's see exactly what the mouse is hitting!
+            PointerEventData eventData = new PointerEventData(EventSystem.current);
+            eventData.position = Input.mousePosition;
+            List<RaycastResult> results = new List<RaycastResult>();
+            EventSystem.current.RaycastAll(eventData, results);
+
+            Debug.Log($"Dropped item. Mouse hit {results.Count} UI objects.");
+            foreach (var res in results)
+            {
+                Debug.Log($"Hit Object: {res.gameObject.name} | Tag: {res.gameObject.tag}");
+            }
+
+            if (IsPointerOverClueboard())
+            {
+                int itemToDropID = itemsDisplayed[obj].ID;
+
+                CorkboardSpawnerV2 spawner = FindFirstObjectByType<CorkboardSpawnerV2>();
+                if (spawner != null)
+                {
+                    spawner.SpawnSingleClue(itemToDropID);
+                    itemsDisplayed[obj].UpdateSlot(-1, null);
+                }
+            }
         }
         Destroy(mouseItem.obj);
         mouseItem.item = null;
-
     }
     public void OnDrag(GameObject obj)
     {
@@ -132,6 +152,20 @@ public class DisplayInventory : MonoBehaviour
     public Vector3 GetPosition(int i)
     {
         return new Vector3(X_START + (X_SPACE_BETWEEN_ITEM * (i % NUMBER_OF_COLUMN)), Y_START + (-Y_SPACE_BETWEEN_ITEM * (i / NUMBER_OF_COLUMN)), 0f);
+    }
+
+    private bool IsPointerOverClueboard() 
+    {
+        PointerEventData eventData = new PointerEventData(EventSystem.current);
+        eventData.position = Input.mousePosition;
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventData, results);
+
+        foreach (RaycastResult result in results)
+        {
+            if (result.gameObject.CompareTag("Clueboard")) return true;
+        }
+        return false;
     }
 }
 
