@@ -15,11 +15,15 @@ public class TriggerTutorial : MonoBehaviour
     {
         //Debug.Log("Trigger: " + Inkvariable + " " + "value: " + trigger);
         //NewDialogueManager.Instance.EnterDialogue(inkJsonTest, null);
-        if (counter == 0)
+        if (inkJsonTest != null)
         {
-            NewDialogueManager.Instance.EnterDialogue(inkJsonTest, null);
-            counter++;
+            if (counter == 0)
+            {
+                NewDialogueManager.Instance.EnterDialogue(inkJsonTest, null);
+                counter++;
+            }
         }
+        
         
     }
 
