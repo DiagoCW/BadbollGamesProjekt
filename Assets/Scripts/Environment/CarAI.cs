@@ -14,8 +14,10 @@ public class CarAI : MonoBehaviour
     [Header("Sensors")]
     [SerializeField] private Transform sensorOrigin;
 
+    [Tooltip("Half the size of the detection box (X=Width, Y=Height, Z=Length). Increase X for wider vehicles like buses.")]
+    [SerializeField] private Vector3 boxHalfExtents = new Vector3(1.5f, 1f, 0.5f);
+
     private Transform endPoint;
-    private Vector3 boxHalfExtents = new Vector3(1.5f, 1f, 0.5f);
     private float currentSpeed;
     private bool isDriving = false;
 
@@ -103,9 +105,25 @@ public class CarAI : MonoBehaviour
     {
         if ((!Application.isPlaying || isDriving) && sensorOrigin != null)
         {
+            // Save the original world matrix to not break other gizmos
+            Matrix4x4 oldMatrix = Gizmos.matrix;
+
+            // Aligns the gizmo to the sensor's position and rotation
+            Gizmos.matrix = Matrix4x4.TRS(sensorOrigin.position, sensorOrigin.rotation, Vector3.one);
+
+            Vector3 sweepCenter = new Vector3(0f, 0f, detectionDistance / 2f);
+            Vector3 sweepSize = new Vector3(boxHalfExtents.x * 2f, boxHalfExtents.y * 2f, detectionDistance + (boxHalfExtents.z * 2f));
+
+            // Draws a box to see the volume 
+            Gizmos.color = new Color(0f, 1f, 1f, 0.2f); // 20% transparent cyan
+            Gizmos.DrawCube(sweepCenter, sweepSize);
+
+            // Draw the edges
             Gizmos.color = Color.cyan;
-            Gizmos.DrawRay(sensorOrigin.position, sensorOrigin.forward * detectionDistance);
-            Gizmos.DrawWireCube(sensorOrigin.position + sensorOrigin.forward * detectionDistance, boxHalfExtents * 2f);
+            Gizmos.DrawWireCube(sweepCenter, sweepSize);
+
+            // Put the matrix back
+            Gizmos.matrix = oldMatrix;
         }
     }
 }

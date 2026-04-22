@@ -53,6 +53,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 192
   sensorOrigin: {fileID: 870206546997012222}
+  boxHalfExtents: {x: 0.9, y: 1, z: 0.5}
 --- !u!1 &3797867571262263560
 GameObject:
   m_ObjectHideFlags: 0
@@ -585,7 +586,7 @@ Transform:
   m_GameObject: {fileID: 8454381222442780549}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.04003, y: 0, z: -0.0021}
+  m_LocalPosition: {x: 0.0489, y: -0, z: 0.0004}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
