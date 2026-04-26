@@ -7,7 +7,7 @@ public class DraggableClueV2 : MonoBehaviour
     [SerializeField] private float snapDistance = 100f;
 
     [Header("Correct Position")]
-    [SerializeField] public int correctSlotID = 1;
+    [SerializeField] public int correctSlotID = 1;   // Kept for future use if needed
 
     private RectTransform rectTransform;
     private Canvas canvas;
@@ -20,7 +20,7 @@ public class DraggableClueV2 : MonoBehaviour
     private Vector2 dragOffset;
 
     private bool isDragging = false;
-    private static bool isAnythingBeingDragged = false; 
+    private static bool isAnythingBeingDragged = false;
 
     private void Awake()
     {
@@ -66,7 +66,11 @@ public class DraggableClueV2 : MonoBehaviour
             if (dist <= grabProximityPx)
             {
                 isDragging = true;
-                isAnythingBeingDragged = true; // Lock other clues from being grabbed
+                isAnythingBeingDragged = true;
+
+                // Remove any existing wires before dragging
+                CorkboardManagerV2 manager = Object.FindAnyObjectByType<CorkboardManagerV2>();
+                if (manager != null) manager.RemoveConnectionsForClue(this);
 
                 SlotV2 currentSlot = GetComponentInParent<SlotV2>();
                 if (currentSlot != null)
@@ -75,9 +79,8 @@ public class DraggableClueV2 : MonoBehaviour
                 }
 
                 transform.SetParent(canvas.transform);
-                transform.SetAsLastSibling(); 
+                transform.SetAsLastSibling();
 
-               
                 RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRectTransform, mouse, activeCam, out Vector2 localMousePos);
                 dragOffset = rectTransform.anchoredPosition - localMousePos;
 
@@ -95,13 +98,11 @@ public class DraggableClueV2 : MonoBehaviour
             {
                 if (RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRectTransform, mouse, activeCam, out Vector2 localPos))
                 {
-                    // Apply the offset so it drags smoothly
                     rectTransform.anchoredPosition = localPos + dragOffset;
                 }
             }
             else
             {
-               
                 isDragging = false;
                 isAnythingBeingDragged = false;
 
@@ -112,21 +113,24 @@ public class DraggableClueV2 : MonoBehaviour
                 }
 
                 SlotV2 nearest = FindNearestSlot();
-                if (nearest != null && !nearest.IsOccupied())
+
+                if (nearest != null && nearest.GetComponentInChildren<DraggableClueV2>() == null)
                 {
-                    transform.SetParent(nearest.transform);
+                    // Snap to new slot
+                    transform.SetParent(nearest.transform, true);
 
                     rectTransform.anchorMin = new Vector2(0.5f, 0.5f);
                     rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
                     rectTransform.pivot = new Vector2(0.5f, 0.5f);
-
                     rectTransform.anchoredPosition = Vector2.zero;
+                    rectTransform.localRotation = Quaternion.identity;
 
                     nearest.Occupy(this);
                 }
                 else
                 {
-                    transform.SetParent(originalParent);
+                    // Return to tray
+                    transform.SetParent(originalParent, true);
                 }
             }
         }

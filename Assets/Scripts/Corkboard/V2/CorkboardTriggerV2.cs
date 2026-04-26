@@ -10,7 +10,7 @@ public class CorkboardTriggerV2 : MonoBehaviour
 
     [Header("Cameras")]
     [SerializeField] private GameObject playerCameraGO;
-    [SerializeField] private GameObject corkboardCameraGO;
+    [SerializeField] public GameObject corkboardCameraGO;
 
     [Header("Trigger Settings")]
     [SerializeField] private string playerTag = "Player";
@@ -108,7 +108,6 @@ public class CorkboardTriggerV2 : MonoBehaviour
         }
     }
 
-    // Maybe remove this later
     private void GameInput_OnExitAction(object sender, System.EventArgs e) 
     {
         if (isViewingCorkboard)

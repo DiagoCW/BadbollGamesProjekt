@@ -2,7 +2,7 @@
 
 public class SlotV2 : MonoBehaviour
 {
-    [Header("Correct Position")]
+    [Header("Slot Info")]
     [SerializeField] public int slotID = 1;
 
     private RectTransform rectTransform;
@@ -26,6 +26,7 @@ public class SlotV2 : MonoBehaviour
     }
 
     public Vector2 GetSnapPosition() => rectTransform.anchoredPosition;
-
     public RectTransform GetRect() => rectTransform;
+
+    public DraggableClueV2 GetCurrentClue() => currentClue;
 }
