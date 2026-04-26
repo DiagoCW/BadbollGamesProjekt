@@ -19335,6 +19335,22 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 192616563}
+    - target: {fileID: 1547451598274861484, guid: 36aad984599f71f4d8f6d9dd7d1259ce, type: 3}
+      propertyPath: outlineWidth
+      value: 0.005
+      objectReference: {fileID: 0}
+    - target: {fileID: 1547451598274861484, guid: 36aad984599f71f4d8f6d9dd7d1259ce, type: 3}
+      propertyPath: outlineColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1547451598274861484, guid: 36aad984599f71f4d8f6d9dd7d1259ce, type: 3}
+      propertyPath: outlineColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1547451598274861484, guid: 36aad984599f71f4d8f6d9dd7d1259ce, type: 3}
+      propertyPath: outlineColor.r
+      value: 0.8448255
+      objectReference: {fileID: 0}
     - target: {fileID: 1612484008675287576, guid: 36aad984599f71f4d8f6d9dd7d1259ce, type: 3}
       propertyPath: m_Mesh
       value: 

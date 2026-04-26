@@ -22,7 +22,6 @@ public class OutlineHighlighter : MonoBehaviour
 
     void CreateOutline()
     {
-
         if (outlineObject != null) return;
 
         outlineObject = new GameObject("Outline");
@@ -38,44 +37,31 @@ public class OutlineHighlighter : MonoBehaviour
         outlineRenderer = outlineObject.AddComponent<MeshRenderer>();
         outlineRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
 
-        // Shader selection
-        Shader outlineShader;
-        if (GraphicsSettings.defaultRenderPipeline != null)
-        {
-            string pipelineType = GraphicsSettings.defaultRenderPipeline.GetType().Name;
-            if (pipelineType.Contains("Universal"))
-                outlineShader = Shader.Find("Universal Render Pipeline/Unlit");
-            else
-                outlineShader = Shader.Find("HDRP/Unlit");
-        }
-        else
-        {
+        Shader outlineShader = Shader.Find("Universal Render Pipeline/Unlit");
+        if (outlineShader == null)
             outlineShader = Shader.Find("Unlit/Color");
-        }
 
         if (outlineShader == null)
             outlineShader = Shader.Find("Hidden/InternalErrorShader");
 
         Material outlineMat = new Material(outlineShader);
 
-        
-        Color hdrColor = outlineColor;
-        hdrColor *= 2.2f;                           
+        outlineMat.color = outlineColor;
 
-        outlineMat.color = hdrColor;
-        outlineMat.SetColor("_BaseColor", hdrColor);
+        if (outlineMat.HasProperty("_BaseColor"))
+            outlineMat.SetColor("_BaseColor", outlineColor);
 
-        outlineMat.EnableKeyword("_EMISSION");
-        outlineMat.SetColor("_EmissionColor", hdrColor * 1.1f);
-        outlineMat.SetFloat("_EmissionScale", 1f);
-
-        outlineMat.globalIlluminationFlags = MaterialGlobalIlluminationFlags.RealtimeEmissive;
-
-        
         outlineMat.SetInt("_ZWrite", 0);
-        outlineMat.SetInt("_Cull", (int)CullMode.Front);
+        outlineMat.SetInt("_Cull", (int)CullMode.Front);       
         outlineMat.SetInt("_ZTest", (int)CompareFunction.Always);
         outlineMat.renderQueue = 3000;
+
+        outlineMat.DisableKeyword("_EMISSION");
+        if (outlineMat.HasProperty("_EmissionColor"))
+            outlineMat.SetColor("_EmissionColor", Color.black);
+
+        if (outlineMat.HasProperty("_Surface"))
+            outlineMat.SetFloat("_Surface", 0); 
 
         outlineRenderer.material = outlineMat;
     }
