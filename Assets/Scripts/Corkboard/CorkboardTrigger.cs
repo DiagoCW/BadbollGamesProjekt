@@ -7,7 +7,7 @@ public class CorkboardTrigger : MonoBehaviour
 
     [Header("Cameras")]
     [SerializeField] private GameObject playerCameraGO;
-    [SerializeField] private GameObject corkboardCameraGO;
+    [SerializeField] public GameObject corkboardCameraGO;   // ← Made public for CorkboardManagerV2
 
     [Header("Trigger Settings")]
     [SerializeField] private string playerTag = "Player";
@@ -25,7 +25,6 @@ public class CorkboardTrigger : MonoBehaviour
     {
         if (playerCameraGO == null) Debug.LogError("PlayerCameraGO not assigned!", this);
         if (corkboardCameraGO == null) Debug.LogError("CorkboardCameraGO not assigned!", this);
-
         SetViewToPlayer();
         LockCursor(true);
     }
@@ -65,7 +64,6 @@ public class CorkboardTrigger : MonoBehaviour
             playerCameraGO.SetActive(false);
             corkboardCameraGO.SetActive(true);
             LockCursor(false);
-
             if (spawner != null) spawner.SpawnCollectedClues();
         }
         else
