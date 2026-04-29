@@ -130,6 +130,7 @@ public class PlayerController : MonoBehaviour
 
     /// <summary>
     /// Fires a raycast from the camera to detect and trigger IInteractable objects
+    /// REFACTOR THIS METHOD ASAP
     /// </summary>
     private void GameInput_OnInteractAction(object sender, EventArgs e)
     {
@@ -175,12 +176,13 @@ public class PlayerController : MonoBehaviour
                     }
                 }
             }
+            
             else
             {
                 // Find and call DialogueTrigger specifically
                 foreach (IInteractable interactable in interactables)
                 {
-                    if (interactable is DialogueTrigger)
+                    if (interactable is DialogueTrigger || interactable is InteractableItem)
                     {
                         interactable.Interact();
                         return;
@@ -228,7 +230,11 @@ public class PlayerController : MonoBehaviour
     private void HandleInteractionPrompt()
     {
         if (interactPromptText == null || playerCamera == null)
+        {
+            Debug.LogError("Interact text or player camera is null");
             return;
+        }
+            
 
         // Hide prompt if inventory open or dialogue playing
         if (IsInventoryOpen || IsDialoguePlaying)
@@ -242,7 +248,8 @@ public class PlayerController : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hitInfo, interactRange))
         {
             // Check if the hit object (or its parents) implement IInteractable
-            var interactable = hitInfo.collider.GetComponentInParent<MonoBehaviour>() as IInteractable;
+            //var interactable = hitInfo.collider.GetComponent<MonoBehaviour>() as IInteractable;
+            IInteractable interactable = hitInfo.collider.GetComponent<IInteractable>();
             if (interactable != null)
             {
                 // Use the root gameobject name as the display name
