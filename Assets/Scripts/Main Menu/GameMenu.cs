@@ -6,6 +6,8 @@ public class GameMenu : MonoBehaviour
    
    void Start()
     {
+        Time.timeScale = 1f;
+
         //Make the mouse invisible on the MainScene
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -17,6 +19,7 @@ public class GameMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.M))
         {
+            Time.timeScale = 1f;
             SceneManager.LoadSceneAsync("MainMenu");
         }
     }

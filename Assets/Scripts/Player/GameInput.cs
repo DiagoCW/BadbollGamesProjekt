@@ -41,6 +41,9 @@ public class GameInput : MonoBehaviour
         inputActions.Player.Inventory.performed -= Inventory_performed;
         inputActions.Player.Interact.performed -= Interact_performed;
         inputActions.Player.Exit.performed -= Exit_performed;
+
+        inputActions.Disable();
+        
         inputActions.Dispose();
     }
 

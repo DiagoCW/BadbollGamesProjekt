@@ -1,41 +1,67 @@
 using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Handles audio crossfading when the player enters or exits a specific area.
+/// Requieres a trigger collider on the GameObject this script is attached to.
+/// </summary>
 public class MusicZone : MonoBehaviour
 {
     public AudioSource mainMusic;
     public AudioSource barMusic;
-    public float fadeTime = 2.0f; // How many seconds the fade takes
-    public float maxVolume = 0.5f; // Your preferred music volume
+    public float fadeTime = 2.0f; 
+    public float maxVolume = 0.5f; 
 
+    // Tracks the active fade coroutine to interrupt if the player quickly runs in and out
     private Coroutine fadeRoutine;
 
+    /// <summary>
+    /// Triggered when another collider enters this objects trigger collider
+    /// </summary>
     void OnTriggerEnter(Collider other)
     {
-        // When the player walks IN, fade to the bar music
+       
         if (other.CompareTag("Player"))
         {
+            // If a fade is already happening, stop it to prevent conflicting volume changes
             if (fadeRoutine != null) StopCoroutine(fadeRoutine);
+            
+            // Start fading out the main music for the bar music
             fadeRoutine = StartCoroutine(Crossfade(mainMusic, barMusic));
         }
     }
 
+
+    /// <summary>
+    /// Triggered when another collider leaves this object's trigger collider
+    /// </summary>
+    /// <param name="other"></param>
     void OnTriggerExit(Collider other)
     {
-        // When the player walks OUT, fade back to the main music
+        // React if the object leaving the zone is the player
         if (other.CompareTag("Player"))
         {
+            // Stop any ongoing fade
             if (fadeRoutine != null) StopCoroutine(fadeRoutine);
+
+            // fade out the bar music and fade the main music back in
             fadeRoutine = StartCoroutine(Crossfade(barMusic, mainMusic));
         }
     }
 
+    /// <summary>
+    /// Transitions volume between two audio tracks
+    /// </summary>
+    /// <param name="trackToFadeOut">The audiosource that should go quiet</param>
+    /// <param name="trackToFadeIn">The audiosource that should get louder</param>
+    /// <returns></returns>
     IEnumerator Crossfade(AudioSource trackToFadeOut, AudioSource trackToFadeIn)
     {
-        // Make sure the new track is actually running
         if (!trackToFadeIn.isPlaying) trackToFadeIn.Play();
 
         float timer = 0f;
+
+
         float startVolOut = trackToFadeOut.volume;
         float startVolIn = trackToFadeIn.volume;
 
@@ -43,14 +69,14 @@ public class MusicZone : MonoBehaviour
         {
             timer += Time.deltaTime;
 
-            // Smoothly slide the volumes up and down
+           
             trackToFadeOut.volume = Mathf.Lerp(startVolOut, 0f, timer / fadeTime);
             trackToFadeIn.volume = Mathf.Lerp(startVolIn, maxVolume, timer / fadeTime);
 
             yield return null;
         }
 
-        // Pause the old track so it remembers where it left off!
+        // Pause the track that faded out.
         trackToFadeOut.Pause();
     }
 }
