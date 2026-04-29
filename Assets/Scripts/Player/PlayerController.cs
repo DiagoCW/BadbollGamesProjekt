@@ -221,7 +221,7 @@ public class PlayerController : MonoBehaviour
             {
                 // Use the root gameobject name as the display name
                 string displayName = hitInfo.collider.GetComponentInParent<Transform>().gameObject.name;
-                interactPromptText.text = $"Press E to talk to {displayName}";
+                interactPromptText.text = $"Press E to Interact with {displayName}";
                 if (!interactPromptText.gameObject.activeSelf)
                     interactPromptText.gameObject.SetActive(true);
                 return;
