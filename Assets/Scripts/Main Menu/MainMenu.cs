@@ -14,7 +14,7 @@ public class MainMenu : MonoBehaviour
     //Change scene by pressing the play button
     public void PlayGame()
     {
-        SceneManager.LoadSceneAsync("MainScene");
+        SceneManager.LoadSceneAsync("TutorialScene");
     }
 
     //Exit the game
