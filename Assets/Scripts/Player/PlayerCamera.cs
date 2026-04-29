@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Controls the player camera movement. Handles vertical pitch on the camera and horizontal yaw on the player's body
+/// </summary>
 public class PlayerCamera : MonoBehaviour
 {
     [Header("References")]
@@ -8,10 +11,10 @@ public class PlayerCamera : MonoBehaviour
 
     [Header("Settings")]
     [SerializeField] private float mouseSensitivity = 15f;
-    [SerializeField] private float minPitch = -80f;
-    [SerializeField] private float maxPitch = 80f;
+    [SerializeField] private float minPitch = -80f; // max looking down angle
+    [SerializeField] private float maxPitch = 80f; // max looking up angle
 
-    private float xRotation = 0f;
+    private float xRotation = 0f; // Tracks up/down rotation state to allow for clamping.
 
     private void Start()
     {
@@ -21,6 +24,7 @@ public class PlayerCamera : MonoBehaviour
 
     private void LateUpdate()
     {
+        // Prevent camera movement if the inventory is open so the player can use their mouse
         if (PlayerController.Instance != null && PlayerController.Instance.IsInventoryOpen)
         {
             return;
@@ -29,10 +33,14 @@ public class PlayerCamera : MonoBehaviour
         HandleCameraLook();
     }
 
+    /// <summary>
+    /// Reads mouse input and applies rotation to the camera and player body.
+    /// </summary>
     private void HandleCameraLook() 
     {
-        Vector2 lookVector = gameInput.GetLookVector();
+        Vector2 lookVector = gameInput.GetLookVector(); // Get input delta from GameInput
 
+        // Scale by sensitivity and time
         float mouseX = lookVector.x * mouseSensitivity * Time.deltaTime;
         float mouseY = lookVector.y * mouseSensitivity * Time.deltaTime;
 
