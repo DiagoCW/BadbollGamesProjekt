@@ -2,22 +2,30 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// Acts as a central hub for all player input. It wraps the generated Unity Input System class
+/// and exposes input actions as standard events and getter methods.
+/// </summary>
 public class GameInput : MonoBehaviour
 {
+    // Events that other scripts can subscribe to for action based inputs.
     public event EventHandler OnJumpAction;
     public event EventHandler OnHighlightAction;
     public event EventHandler OnInventoryAction;
     public event EventHandler OnInteractAction;
     public event EventHandler OnExitAction;
 
+    // Reference to the auto generated input map class
     private InputSystem_Actions inputActions;
 
     private void Awake()
     {
+        // Initialize the input system and enable the Player action map
         inputActions = new InputSystem_Actions();
         inputActions.Player.Enable();
 
-        // subscribe to input events
+        // Subscribe local methods to the input system's performed callbacks.
+        // This links the input detection to the event system
         inputActions.Player.Jump.performed += Jump_performed;
         inputActions.Player.Highlight.performed += Highlight_performed;
         inputActions.Player.Inventory.performed += Inventory_performed;
@@ -46,11 +54,19 @@ public class GameInput : MonoBehaviour
         OnHighlightAction?.Invoke(this, EventArgs.Empty);
     }
 
+    /// <summary>
+    /// Reads the current value of the movement keys.
+    /// </summary>
+    /// <returns>A normalized Vector2 representing the movement direction.</returns>
     public Vector2 GetMovementVectorNormalized()
     {
         return inputActions.Player.Move.ReadValue<Vector2>().normalized;
     }
 
+    /// <summary>
+    /// Reads the delta of the mouse for camera rotation
+    /// </summary>
+    /// <returns>A Vector2 representing the look delta</returns>
     public Vector2 GetLookVector() 
     {
         return inputActions.Player.Look.ReadValue<Vector2>();

@@ -2,14 +2,22 @@ using UnityEngine;
 using System;
 using TMPro;
 
+/// <summary>
+/// Defines an object that can be interacted with by the player.
+/// </summary>
 public interface IInteractable
 {
     void Interact();
 }
 
+/// <summary>
+/// The main place for player logic. Handles movement, interaction raycasting,
+/// inventory UI state
+/// </summary>
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
+    // static instance allowing other scripts to easily check player state
     public static PlayerController Instance { get; private set; }
 
     [Header("References")]
@@ -30,12 +38,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI interactPromptText;
 
     private CharacterController controller;
+    
+    // Physics variables
     private Vector3 verticalVelocity;
     private float gravity = -9.81f;
     private bool isGrounded;
     
     public bool IsInventoryOpen { get; private set; } = false;
     
+    // Helper property to check if dialogue is active
     private bool IsDialoguePlaying 
     {
         get 
@@ -52,6 +63,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        // Single player enforcement
         if (Instance != null) 
         {
             Debug.LogError("Multiple instances of PlayerController detected! There should only be one PlayerController in the scene.");
@@ -61,6 +73,7 @@ public class PlayerController : MonoBehaviour
 
         controller = GetComponent<CharacterController>();
 
+        // Fallback in case camera wasn't assigned in the inspector
         if (playerCamera == null)
         {
             playerCamera = Camera.main;
@@ -69,6 +82,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        // Subscribe to input events
         gameInput.OnJumpAction += GameInput_OnJumpAction;
         gameInput.OnInventoryAction += GameInput_OnInventoryAction;
         gameInput.OnInteractAction += GameInput_OnInteractAction;
@@ -86,6 +100,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnDestroy()
     {
+        // Unsubscribe to prevent memory leaks when changing scenes
         if (gameInput != null)
         {
             gameInput.OnJumpAction -= GameInput_OnJumpAction;
@@ -96,15 +111,16 @@ public class PlayerController : MonoBehaviour
 
     private void GameInput_OnJumpAction(object sender, EventArgs e)
     {
+        // Only jump if grounded and not in UI menus
         if (isGrounded && !IsInventoryOpen && !IsDialoguePlaying)
         {
-            verticalVelocity.y = Mathf.Sqrt(jumpHeight * -2f * (gravity * gravityMultiplier));
+            verticalVelocity.y = Mathf.Sqrt(jumpHeight * -2f * (gravity * gravityMultiplier)); // physics formula for jumping
         }
     }
 
     private void GameInput_OnInventoryAction(object sender, EventArgs e)
     {
-        if (IsDialoguePlaying) 
+        if (IsDialoguePlaying) // Prevent opening inventory during conversation
         {
             return;
         }
@@ -112,6 +128,9 @@ public class PlayerController : MonoBehaviour
         ToggleInventory();
     }
 
+    /// <summary>
+    /// Fires a raycast from the camera to detect and trigger IInteractable objects
+    /// </summary>
     private void GameInput_OnInteractAction(object sender, EventArgs e)
     {
         if (IsInventoryOpen || IsDialoguePlaying) 
@@ -172,6 +191,10 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Toggles the inventory interface and updates the cursor lock state and visibility based on the inventory's open
+    /// state.
+    /// </summary>
     private void ToggleInventory() 
     {
         IsInventoryOpen = !IsInventoryOpen;
@@ -199,6 +222,9 @@ public class PlayerController : MonoBehaviour
             HandleMovement();
     }
 
+    /// <summary>
+    /// Check what the player is looking at to display dynamic UI dialogue text.
+    /// </summary>
     private void HandleInteractionPrompt()
     {
         if (interactPromptText == null || playerCamera == null)
@@ -232,6 +258,9 @@ public class PlayerController : MonoBehaviour
             interactPromptText.gameObject.SetActive(false);
     }
 
+    /// <summary>
+    /// Handles physical movement using Unity's CharacterController
+    /// </summary>
     private void HandleMovement() 
     {
         isGrounded = controller.isGrounded;

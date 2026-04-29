@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// A simple AI for the vehicles that drives forward toward a target destination.
+/// </summary>
 public class CarAI : MonoBehaviour
 {
     [Header("Driving Settings")]
@@ -21,6 +24,10 @@ public class CarAI : MonoBehaviour
     private float currentSpeed;
     private bool isDriving = false;
 
+    /// <summary>
+    /// Initializes the car's destination and allows it to start driving
+    /// </summary>
+    /// <param name="targetEnd">The transform the car should drive towards.</param>
     public void SetRoute(Transform targetEnd)
     {
         endPoint = targetEnd;
@@ -35,6 +42,9 @@ public class CarAI : MonoBehaviour
         DriveForward();
     }
 
+    /// <summary>
+    /// Casts a box forward to detect obstacles and adjust currentSpeed based on distance.
+    /// </summary>
     private void CalculateSpeed()
     {
         if (sensorOrigin == null) return;
@@ -51,13 +61,16 @@ public class CarAI : MonoBehaviour
         float closestDistance = Mathf.Infinity;
         bool foundObstacle = false;
         
+        // Loop through everything the boxcast hit
         foreach (RaycastHit hit in hits)
         {
+            // ignore collisions with car's own colliders
             if (hit.collider.transform.root == this.transform.root)
             {
                 continue; 
             }
 
+            // Tracks of the closes obstacle hit
             if (hit.distance < closestDistance)
             {
                 closestDistance = hit.distance;
@@ -69,31 +82,40 @@ public class CarAI : MonoBehaviour
         {
             if (closestDistance <= stoppingDistance)
             {
+                // Hard stop if the obstacle is within the critical stopping distance
                 currentSpeed = 0f; 
             }
             else
             {
+                // Decelerate proportionally to how close the car is to the obstacle
                 float targetSpeed = maxDriveSpeed * (closestDistance / detectionDistance);
                 currentSpeed = Mathf.Lerp(currentSpeed, targetSpeed, Time.deltaTime * acceleration);
             }
         }
         else
         {
+            // No obstacles, accelerate back up to max speed
             currentSpeed = Mathf.Lerp(currentSpeed, maxDriveSpeed, Time.deltaTime * acceleration);
         }
     }
 
+    /// <summary>
+    /// Moves the car forward based on the calculated speed and handles deletion upon reaching destination.
+    /// </summary>
     private void DriveForward()
     {
+        // Move the car forward
         transform.Translate(Vector3.forward * currentSpeed * Time.deltaTime);
 
         if (endPoint != null)
         {
+            // Calculate distance, ignoring Y axis
             float distanceToTarget = Vector3.Distance(
                 new Vector3(transform.position.x, 0, transform.position.z),
                 new Vector3(endPoint.position.x, 0, endPoint.position.z)
             );
 
+            // If within 2 units of the end point, destroy the vehicle
             if (distanceToTarget < 2f)
             {
                 Destroy(gameObject);
@@ -101,6 +123,9 @@ public class CarAI : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Draws the boxcast detection area inte scene view for easy tuning
+    /// </summary>
     private void OnDrawGizmos()
     {
         if ((!Application.isPlaying || isDriving) && sensorOrigin != null)
