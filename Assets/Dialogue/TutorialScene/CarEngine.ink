@@ -1,6 +1,7 @@
 INCLUDE GlobalsMain2.ink
 
 {not carHood:
+Heat waves emanate from the hood of your car like a call for help, paint job merely hiding the damage beneath, this is a lovely car.
 ~carHood = true
 }
 Do you open the hood?
