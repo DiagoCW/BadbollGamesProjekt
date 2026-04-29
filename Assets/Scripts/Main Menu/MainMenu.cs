@@ -4,6 +4,10 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    [Header("References")]
+    [Tooltip("Drag MainMenuMusic object here")]
+    public MainMenuMusic musicManager;
+
     void Start()
     {
         //Make the mouse visible on the MainMenu scene
@@ -14,7 +18,15 @@ public class MainMenu : MonoBehaviour
     //Change scene by pressing the play button
     public void PlayGame()
     {
-        SceneManager.LoadSceneAsync("TutorialScene");
+        if (musicManager != null)
+        {
+            musicManager.StartGameWithFade();
+        }
+        else
+        {
+            Debug.LogWarning("Music Manager not assigned. Loading scene without music fade");
+            SceneManager.LoadSceneAsync("TutorialScene");
+        }
     }
 
     //Exit the game
