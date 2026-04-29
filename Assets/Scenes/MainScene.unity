@@ -11237,7 +11237,7 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 8385078600267347573, guid: d24036b8528041f4bbd0f932283a3613, type: 3}
-<<<<<<< Updated upstream
+
 --- !u!1 &781963241
 GameObject:
   m_ObjectHideFlags: 0
@@ -11313,7 +11313,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 781963241}
   m_CullTransparentMesh: 1
-=======
 --- !u!1001 &771390851
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11512,7 +11511,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6055701875776704771, guid: 8595716bf07c42340bbb8dd76589fdc5, type: 3}
   m_PrefabInstance: {fileID: 771390851}
   m_PrefabAsset: {fileID: 0}
->>>>>>> Stashed changes
 --- !u!1 &791692682
 GameObject:
   m_ObjectHideFlags: 0
