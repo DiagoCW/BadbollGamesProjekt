@@ -132,8 +132,8 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// Fires a raycast from the camera to detect and trigger IInteractable objects
-    /// REFACTOR THIS METHOD ASAP
+    /// Fires a raycast from the camera to detect and trigger IInteractable objects.
+    /// !!!!!!!!!!!!! REFACTOR ASAP !!!!!!!!!!!!!!
     /// </summary>
     private void GameInput_OnInteractAction(object sender, EventArgs e)
     {
@@ -163,33 +163,13 @@ public class PlayerController : MonoBehaviour
             
             if (interactables.Length == 0) return;
 
-        // Check if highlight mode is active
-        //HighlightActivatorIAVersion highlighter = GameObject
-        //    .FindGameObjectWithTag("Player")
-        //    .GetComponent<HighlightActivatorIAVersion>();
-        //    if (highlighter != null && highlighter.IsHighlighting)
-        //    {
-        //        // Find and call InteractableNPC specifically
-        //        foreach (IInteractable interactable in interactables)
-        //        {
-        //            if (interactable is InteractableNPC)
-        //            {
-        //                interactable.Interact();
-        //                return;
-        //            }
-        //        }
-        //    }
-            
-            else
+            // Find and call DialogueTrigger specifically
+            foreach (IInteractable interactable in interactables)
             {
-                // Find and call DialogueTrigger specifically
-                foreach (IInteractable interactable in interactables)
+                //if (interactable is DialogueTrigger || interactable is InteractableItem)
                 {
-                    if (interactable is DialogueTrigger || interactable is InteractableItem)
-                    {
-                        interactable.Interact();
-                        return;
-                    }
+                    interactable.Interact();
+                    return;
                 }
             }
         }
@@ -229,6 +209,7 @@ public class PlayerController : MonoBehaviour
 
     /// <summary>
     /// Check what the player is looking at to display dynamic UI dialogue text.
+    /// !!!!!!!!!!!!! REFACTOR ASAP !!!!!!!!!!!!!!
     /// </summary>
     private void HandleInteractionPrompt()
     {
@@ -238,7 +219,6 @@ public class PlayerController : MonoBehaviour
             return;
         }
             
-
         // Hide prompt if inventory open or dialogue playing
         if (IsInventoryOpen || IsDialoguePlaying)
         {
@@ -251,16 +231,30 @@ public class PlayerController : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hitInfo, interactRange))
         {
             // Check if the hit object (or its parents) implement IInteractable
-            //var interactable = hitInfo.collider.GetComponent<MonoBehaviour>() as IInteractable;
+            
             IInteractable interactable = hitInfo.collider.GetComponent<IInteractable>();
+
+            
+
             if (interactable != null)
             {
-                // Use the root gameobject name as the display name
                 string displayName = hitInfo.collider.GetComponentInParent<Transform>().gameObject.name;
-                interactPromptText.text = $"Press E to Interact with {displayName}";
-                if (!interactPromptText.gameObject.activeSelf)
-                    interactPromptText.gameObject.SetActive(true);
-                return;
+                if (interactable is DialogueTrigger)
+                {
+                    interactPromptText.text = $"Press E to Interact with {displayName}";
+                    if (!interactPromptText.gameObject.activeSelf)
+                        interactPromptText.gameObject.SetActive(true);
+                    return;
+                }
+                else if (interactable != null && interactable is InteractableItem)
+                {
+                    interactPromptText.text =
+                    GetComponent<HighlightActivatorIAVersion>().IsHighlighting ? $"Examine {displayName} [ E ]" : $"Inspect {displayName} [ E ]";
+                    if (!interactPromptText.gameObject.activeSelf)
+                        interactPromptText.gameObject.SetActive(true);
+                    return;
+                }
+
             }
         }
 
