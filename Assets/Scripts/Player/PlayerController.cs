@@ -37,6 +37,9 @@ public class PlayerController : MonoBehaviour
     [Header("Interaction UI")]
     [SerializeField] private TextMeshProUGUI interactPromptText;
 
+    // player inventory
+    [SerializeField] public InventoryObject inventory;
+
     private CharacterController controller;
     
     // Physics variables
@@ -161,21 +164,21 @@ public class PlayerController : MonoBehaviour
             if (interactables.Length == 0) return;
 
         // Check if highlight mode is active
-        HighlightActivatorIAVersion highlighter = GameObject
-            .FindGameObjectWithTag("Player")
-            .GetComponent<HighlightActivatorIAVersion>();
-            if (highlighter != null && highlighter.IsHighlighting)
-            {
-                // Find and call InteractableNPC specifically
-                foreach (IInteractable interactable in interactables)
-                {
-                    if (interactable is InteractableNPC)
-                    {
-                        interactable.Interact();
-                        return;
-                    }
-                }
-            }
+        //HighlightActivatorIAVersion highlighter = GameObject
+        //    .FindGameObjectWithTag("Player")
+        //    .GetComponent<HighlightActivatorIAVersion>();
+        //    if (highlighter != null && highlighter.IsHighlighting)
+        //    {
+        //        // Find and call InteractableNPC specifically
+        //        foreach (IInteractable interactable in interactables)
+        //        {
+        //            if (interactable is InteractableNPC)
+        //            {
+        //                interactable.Interact();
+        //                return;
+        //            }
+        //        }
+        //    }
             
             else
             {
