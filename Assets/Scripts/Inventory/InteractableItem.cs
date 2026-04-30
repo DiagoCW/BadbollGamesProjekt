@@ -3,8 +3,8 @@ using UnityEngine;
 public class InteractableItem : MonoBehaviour, IInteractable
 {
     [Header("References")]
-    public InventoryObject playerInventory;
-    public ItemObject garlicBreathClue;
+    private InventoryObject playerInventory;
+    public ItemObject item;
     [SerializeField] TextAsset inkJson;
 
 
@@ -12,9 +12,9 @@ public class InteractableItem : MonoBehaviour, IInteractable
     //HighlightActivatorIAVersion highlighter;
     
 
-    void Awake()
+    void Start()
     {
-        
+        playerInventory = PlayerController.Instance.inventory;
     }
 
     void Update()
@@ -27,7 +27,7 @@ public class InteractableItem : MonoBehaviour, IInteractable
             NewDialogueManager.Instance.EnterDialogue(inkJson, null);
 
         // Add the item to the inventory
-        playerInventory.AddItem(new Item(garlicBreathClue));
+        playerInventory.AddItem(new Item(item));
 
         GameObject.Destroy(gameObject);
         //gameObject.tag = "Untagged";
