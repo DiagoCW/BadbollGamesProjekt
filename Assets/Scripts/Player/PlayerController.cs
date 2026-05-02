@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using TMPro;
+using Unity.VisualScripting;
 
 /// <summary>
 /// Defines an object that can be interacted with by the player.
@@ -238,21 +239,32 @@ public class PlayerController : MonoBehaviour
 
             if (interactable != null)
             {
-                string displayName = hitInfo.collider.GetComponentInParent<Transform>().gameObject.name;
+                GameObject target = hitInfo.collider.GetComponentInParent<Transform>().gameObject;
                 if (interactable is DialogueTrigger)
                 {
-                    interactPromptText.text = $"Press E to Interact with {displayName}";
+                    interactPromptText.text = $"Speak to \n{target.name}";
                     if (!interactPromptText.gameObject.activeSelf)
                         interactPromptText.gameObject.SetActive(true);
                     return;
                 }
-                else if (interactable != null && interactable is InteractableItem)
+                else if (interactable is InteractableItem)
                 {
-                    interactPromptText.text =
-                    GetComponent<HighlightActivatorIAVersion>().IsHighlighting ? $"Examine {displayName} [ E ]" : $"Inspect {displayName} [ E ]";
-                    if (!interactPromptText.gameObject.activeSelf)
-                        interactPromptText.gameObject.SetActive(true);
-                    return;
+                    if (target.CompareTag("NPC"))
+                    {
+                        interactPromptText.text =
+                        GetComponent<HighlightActivatorIAVersion>().IsHighlighting ? $"Examine \n{target.name}" : $"Speak to \n{target.name}";
+                        if (!interactPromptText.gameObject.activeSelf)
+                            interactPromptText.gameObject.SetActive(true);
+                        return;
+                    }
+                    else
+                    {
+                        interactPromptText.text =
+                            GetComponent<HighlightActivatorIAVersion>().IsHighlighting ? $"Examine \n{target.name}" : $"Inspect \n{target.name}";
+                        if (!interactPromptText.gameObject.activeSelf)
+                            interactPromptText.gameObject.SetActive(true);
+                        return;
+                    }
                 }
 
             }

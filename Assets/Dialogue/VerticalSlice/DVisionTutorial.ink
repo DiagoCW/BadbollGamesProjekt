@@ -1,4 +1,4 @@
 -> Intro
 === Intro ===
 Ditt detektivsinne har blivit skärpt efter många år av detektivande, och du har den otroliga förmågan att kunna identifiera saker av intresse genom ett enkelt knapptryck; Tryck på V för att aktivera Detective Vision! # speaker: Tutorial
--> END
+-> END 
