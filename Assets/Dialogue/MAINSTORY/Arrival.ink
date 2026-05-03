@@ -2,7 +2,7 @@ INCLUDE globalsmainstory.INK
 
 VAR intro = true
 Föreställ er att skärmen är svart och man hör ljudet av en bil som åker brrrrrrr. kanske lite musik också
-As you hit the long loansome road, perched back in your reclined leather seat, you feel at ease. 
+As you hit the long loansome road, perched back in your reclined leather seat, you feel at ease. You are en route to the scene of the crime. 
 Your stereo plays the same song on repeat, over and over again. You've lost count how many times now, maybe 6 or 7? 
 It's not a particularly short song either, but it's all you've got to keep you company.
 After driving for a while, you see the outskirts of the town you're headed towards. It's dark now, and it's started raining. 
