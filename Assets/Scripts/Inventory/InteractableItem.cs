@@ -6,6 +6,9 @@ public class InteractableItem : MonoBehaviour, IInteractable
     private InventoryObject playerInventory;
     [SerializeField] ItemObject item;
     [SerializeField] TextAsset inkJson, inkJson2;
+
+    bool pickedUpClue = false;
+    
     HighlightActivatorIAVersion highlighter;
     ParticleSystem particles;
 
@@ -23,7 +26,7 @@ public class InteractableItem : MonoBehaviour, IInteractable
         }
     }
 
-    void Update()
+    void HandleParticles()
     {
         if (particles == null) return;
         if (highlighter.IsHighlighting)
@@ -31,23 +34,32 @@ public class InteractableItem : MonoBehaviour, IInteractable
         else
             particles.Stop();
     }
+    void Update()
+    {
+        HandleParticles();
+    }
     public void Interact()
     {
         if (highlighter.IsHighlighting)
         {
-            Debug.Log("Detective vision enabled, and item is interacted with");
+            //Debug.Log("Detective vision enabled, and item is interacted with");
 
             if (item != null)
             {
                 if (inkJson2 != null)
                     NewDialogueManager.Instance.EnterDialogue(inkJson2, null);
-                playerInventory.AddItem(new Item(item));
+                if (!pickedUpClue)
+                {
+                    playerInventory.AddItem(new Item(item));
+                    pickedUpClue = true;
+                    Debug.Log($"Added {item.name} to player inventory");
+                }
                 //Destroy(gameObject);
             }
             //gameObject.tag = "Untagged";
         }
         else if (inkJson != null && !highlighter.IsHighlighting)
             NewDialogueManager.Instance.EnterDialogue(inkJson, null);
-        else Debug.Log("Detective vision NOT enabled, and item is interacted with");
+        //else Debug.Log("Detective vision NOT enabled, and item is interacted with");
     }
 }

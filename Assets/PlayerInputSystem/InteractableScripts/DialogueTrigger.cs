@@ -28,7 +28,7 @@ public class DialogueTrigger : MonoBehaviour, IInteractable
         npcDir = this.transform;
         player = GameObject.FindGameObjectWithTag("Player").transform;
         //NewDialogueManager.Instance.currentStory.variablesState["foundSnusdosa"] = true;
-        highlighter = GameObject.FindGameObjectWithTag("Player").GetComponent<HighlightActivatorIAVersion>();
+        //highlighter = GameObject.FindGameObjectWithTag("Player").GetComponent<HighlightActivatorIAVersion>();
         npcAnimator = GetComponentInChildren<Animator>();
     }
 
