@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: 0
   uiDisplay: {fileID: 21300000, guid: 75135fe62f5aaa54eacd921572264873, type: 3}
-  description: 
+  description: You found this snuff on the victim's body at the crime scene, a few
+    nicotine pouches are  missing and it smells rancid.
