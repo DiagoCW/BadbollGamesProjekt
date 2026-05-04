@@ -20,17 +20,46 @@ public class DisplayInventory : MonoBehaviour
     public int NUMBER_OF_COLUMN;
     public int Y_SPACE_BETWEEN_ITEM;
 
+    [Header("Hover Tooltip")]
+    [SerializeField] private GameObject tooltipPanel;
+    [SerializeField] private TextMeshProUGUI tooltipNameText;
+    [SerializeField] private TextMeshProUGUI tooltipDescriptionText;
+    [SerializeField] private Vector2 tooltipOffset = new Vector2(10, -10);
+
     Dictionary<GameObject, InventorySlot> itemsDisplayed = new Dictionary<GameObject, InventorySlot>();
+    private GameObject currentHoveredSlot;
 
     void Start()
     {
         CreateSlots();
+        
+        // Hide tooltip initially
+        if (tooltipPanel != null)
+            tooltipPanel.SetActive(false);
     }
 
     void Update()
     {
         UpdateSlots();
     }
+    
+    // When the life cycle of the inventory ends, call null on everything to prevent floating items glitch -Hugo
+    private void OnDisable()
+    {
+        if (mouseItem.obj != null)
+        {
+            Destroy(mouseItem.obj);
+            mouseItem.obj = null;
+            mouseItem.item = null;
+        }
+        
+        // Hide tooltip when inventory closes
+        if (tooltipPanel != null)
+            tooltipPanel.SetActive(false);
+        
+        currentHoveredSlot = null;
+    }
+
     public void UpdateSlots()
     {
         foreach(KeyValuePair<GameObject, InventorySlot> _slot in itemsDisplayed)
@@ -76,23 +105,43 @@ public class DisplayInventory : MonoBehaviour
         eventTrigger.callback.AddListener(action);
         trigger.triggers.Add(eventTrigger);
     }
-
+    
+    // Hovers over a game object
     public void OnEnter(GameObject obj)
     {
         mouseItem.hoverObj = obj;
         if (itemsDisplayed.ContainsKey(obj))
         {
             mouseItem.hoverItem = itemsDisplayed[obj];
+            
+            // Show tooltip if slot has an item
+            if (mouseItem.hoverItem.ID >= 0)
+            {
+                currentHoveredSlot = obj;
+                ShowTooltip(mouseItem.hoverItem, obj);
+            }
         }
 
     }
+    
+    // Doesn't hover over a game object lol
     public void OnExit(GameObject obj)
     {
         mouseItem.hoverObj = null;
         mouseItem.hoverItem = null;
+        currentHoveredSlot = null;
+        
+        // Hide tooltip
+        HideTooltip();
     }
+    
+    // Apparent name but when you drag an object
     public void OnDragStart(GameObject obj)
     {
+        // Hide tooltip when starting to drag
+        HideTooltip();
+        currentHoveredSlot = null;
+        
         var mouseObject = new GameObject();
         var rt = mouseObject.AddComponent<RectTransform>();
         rt.sizeDelta = new Vector2(50, 50);
@@ -106,6 +155,8 @@ public class DisplayInventory : MonoBehaviour
         mouseItem.obj = mouseObject;
         mouseItem.item = itemsDisplayed[obj];
     }
+    
+    // Also obvious name but when you stop dragging an item
     public void OnDragEnd(GameObject obj)
     {
         if (mouseItem.hoverObj)
@@ -141,6 +192,8 @@ public class DisplayInventory : MonoBehaviour
         Destroy(mouseItem.obj);
         mouseItem.item = null;
     }
+    
+    // When you are CURRENTLY dragging an item
     public void OnDrag(GameObject obj)
     {
         if(mouseItem.obj != null)
@@ -166,6 +219,41 @@ public class DisplayInventory : MonoBehaviour
             if (result.gameObject.CompareTag("Clueboard")) return true;
         }
         return false;
+    }
+    
+    private void ShowTooltip(InventorySlot slot, GameObject slotObject)
+    {
+        if (tooltipPanel == null) return;
+        
+        // Get the ItemObject from the database
+        ItemObject itemObject = inventory.database.GetItem[slot.ID];
+        
+        // Set the name (from the scriptable object's name field)
+        if (tooltipNameText != null)
+        {
+            tooltipNameText.text = itemObject.name;
+        }
+        
+        // Set the description from the ItemObject
+        if (tooltipDescriptionText != null)
+        {
+            tooltipDescriptionText.text = itemObject.description;
+        }
+        
+        // Position the tooltip relative to the hovered slot
+        RectTransform slotRect = slotObject.GetComponent<RectTransform>();
+        if (slotRect != null)
+        {
+            tooltipPanel.transform.position = slotRect.position + (Vector3)tooltipOffset;
+        }
+        
+        tooltipPanel.SetActive(true);
+    }
+    
+    private void HideTooltip()
+    {
+        if (tooltipPanel != null)
+            tooltipPanel.SetActive(false);
     }
 }
 
