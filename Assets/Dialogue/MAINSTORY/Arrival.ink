@@ -1,9 +1,15 @@
 INCLUDE globalsmainstory.INK
 
 VAR intro = true
-Föreställ er att skärmen är svart och man hör ljudet av en bil som åker brrrrrrr. kanske lite musik också
+Vi jobbar fortfarande på intron, så du får använda lite fantasi.
+stäng dina ögon.
+Oj nu kan du inte läsa.
+Okej.
+Men läs detta och låtsas att dina ögon är stängda
+Föreställ dig att skärmen är svart och man hör ljudet av en bil som åker brrrrrrr. kanske lite musik också
 As you hit the long loansome road, perched back in your reclined leather seat, you feel at ease. You are en route to the scene of the crime. 
-Your stereo plays the same song on repeat, over and over again. You've lost count how many times now, maybe 6 or 7? 
+Your stereo plays the same song on repeat, over and over again. You've lost count how many times now, maybe 6 or 7?
+67.
 It's not a particularly short song either, but it's all you've got to keep you company.
 After driving for a while, you see the outskirts of the town you're headed towards. It's dark now, and it's started raining. 
 ... A *lot*, actually. You suddenly start hydroplaning. This is bad. You swerve uncontrollably.
