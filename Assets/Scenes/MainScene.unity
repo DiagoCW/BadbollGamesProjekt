@@ -21117,7 +21117,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5011339069101769240, guid: ca5085269d6e2a244a0d54115a4b33ef, type: 3}
       propertyPath: m_Name
-      value: DetectiveCar
+      value: ignoreCar
       objectReference: {fileID: 0}
     - target: {fileID: 5118877824917539701, guid: ca5085269d6e2a244a0d54115a4b33ef, type: 3}
       propertyPath: m_LocalPosition.x
@@ -22141,6 +22141,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4934547812581145554, guid: 5cefdb61d378ea84a91a8d09fd3d728b, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 2100000, guid: 4e4c435f917169046b258d93e7d1749d, type: 2}
     - target: {fileID: 5113590964553072803, guid: 5cefdb61d378ea84a91a8d09fd3d728b, type: 3}
       propertyPath: m_LocalScale.x
       value: 64.60671
@@ -34289,6 +34293,7 @@ PrefabInstance:
     - {fileID: 1740915783080122593, guid: 36aad984599f71f4d8f6d9dd7d1259ce, type: 3}
     - {fileID: 751895552424324203, guid: 36aad984599f71f4d8f6d9dd7d1259ce, type: 3}
     - {fileID: 8252248097848799372, guid: 36aad984599f71f4d8f6d9dd7d1259ce, type: 3}
+    - {fileID: 7773301996725948824, guid: 36aad984599f71f4d8f6d9dd7d1259ce, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 3879864866961450691, guid: 36aad984599f71f4d8f6d9dd7d1259ce, type: 3}
       insertIndex: -1

@@ -21,6 +21,7 @@ VAR cluesFoundonBody = 0
 VAR cluesFoundbyBody = 0
 VAR talkedToBossMan = false
 VAR talkToPolice = false
+VAR talkedToBartender = false
 
 // AKT 1:
 // INTERROGATE
