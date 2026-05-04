@@ -240,7 +240,7 @@ public class PlayerController : MonoBehaviour
                 GameObject target = hitInfo.collider.GetComponentInParent<Transform>().gameObject;
                 if (interactable is DialogueTrigger)
                 {
-                    interactPromptText.text = $"Speak to \n{target.name}";
+                    interactPromptText.text = target.CompareTag("NPC") ? $"Speak to \n{target.name}" : $"Inspect \n{target.name}";
                     if (!interactPromptText.gameObject.activeSelf)
                         interactPromptText.gameObject.SetActive(true);
                     return;

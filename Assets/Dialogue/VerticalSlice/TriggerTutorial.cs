@@ -17,7 +17,7 @@ public class TriggerTutorial : MonoBehaviour
         //NewDialogueManager.Instance.EnterDialogue(inkJsonTest, null);
         if (inkJsonTest != null)
         {
-            if (counter == 0)
+            
             {
                 NewDialogueManager.Instance.EnterDialogue(inkJsonTest, null, null);
                 counter++;
