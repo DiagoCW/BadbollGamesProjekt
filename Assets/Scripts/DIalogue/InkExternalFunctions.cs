@@ -11,7 +11,7 @@ public class InkExternalFunctions
         {
             Debug.Log($"External function triggered!");
             aiAgent?.StartPath();
-            aiAgent.tag = "Untagged";
+            //aiAgent.tag = "Untagged";
         });
 
 

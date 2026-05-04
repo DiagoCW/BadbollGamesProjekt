@@ -39,7 +39,7 @@ public class InteractableNPC : MonoBehaviour, IInteractable
         //if (!highlighter.IsHighlighting) return;
         if (!hasDiscoveredBreath)
         {
-            NewDialogueManager.Instance.EnterDialogue(inkJson, null);
+            NewDialogueManager.Instance.EnterDialogue(inkJson, null, null);
             Debug.Log("Wow, this guy needs a mint. Added Garlic Breath Clue!");
 
             // Add the item to the inventory

@@ -18,8 +18,10 @@ public class CorkboardTriggerV2 : MonoBehaviour
     //[Header("Optional Behaviour")]
     //[SerializeField] private MonoBehaviour[] scriptsToDisableWhileViewing;
 
-    private bool isViewingCorkboard = false;
-    private bool isPlayerNearBoard = false;
+    public bool isViewingCorkboard { get; private set; } = false;
+    public bool isPlayerNearBoard { get; private set; } = false;
+    private bool firstTimeViewing = true;
+    [SerializeField] TextAsset inkJson;
 
 
     private void Start()
@@ -80,6 +82,11 @@ public class CorkboardTriggerV2 : MonoBehaviour
 
         if (toCorkboard) 
         {
+            if (firstTimeViewing && inkJson != null)
+            {
+                NewDialogueManager.Instance.EnterDialogue(inkJson, null, null);
+                firstTimeViewing = false;
+            }
             playerCameraGO.SetActive(false);
             corkboardCameraGO.SetActive(true);
             Cursor.lockState = CursorLockMode.Confined;
@@ -102,7 +109,7 @@ public class CorkboardTriggerV2 : MonoBehaviour
 
     private void GameInput_OnInteractAction(object sender, System.EventArgs e) 
     {
-        if (isPlayerNearBoard) 
+        if (isPlayerNearBoard && !NewDialogueManager.Instance.dialogueIsPlaying) 
         {
             SwitchToCorkboard(!isViewingCorkboard);
         }
