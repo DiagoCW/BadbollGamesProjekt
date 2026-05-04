@@ -25,7 +25,7 @@ Nog om detta, jag tror jag har ett fall att lösa eller nåt...
 -> Inspect
 
 === Result ===
-    {cluesFoundbyBody >= 2: // om man hittat alla andra ledtrådar redan
+    {foundAllClues(): // om man hittat alla andra ledtrådar redan
     * Jag har allt jag behöver[.], jag borde prata med polisen.
         //~ talkToPolice = true
         -> DONE

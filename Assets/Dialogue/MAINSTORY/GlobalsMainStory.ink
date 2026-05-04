@@ -15,6 +15,10 @@ LIST items = (none), karaokeUSB
 
 === function getitem(x)
     ~ items += x
+    
+// --- Används till brottsplatsen, har spelaren hittat alla ledtrådar där?
+=== function foundAllClues()
+    ~ return cluesFoundonBody >= 2 and cluesFoundbyBody >= 1
 
 //INTRO
 VAR startIntro = false
