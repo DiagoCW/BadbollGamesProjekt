@@ -416,6 +416,15 @@ public class NewDialogueManager : MonoBehaviour
                             SnoringZoneLink.Instance.SetSnoringState(true);
                     }
                     break;
+                case "video":
+                    if (tagValue == "play_karaoke") 
+                    {
+                        if (InteractableTV.Instance != null) 
+                        {
+                            InteractableTV.Instance.PlayVideo();
+                        }
+                    }
+                    break;
                 default:
                     Debug.LogWarning($"Unknown tag key: {tagKey}");
                     break;
