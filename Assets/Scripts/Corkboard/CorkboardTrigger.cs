@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.InputSystem.LowLevel;
 
 public class CorkboardTrigger : MonoBehaviour
 {
@@ -20,6 +22,8 @@ public class CorkboardTrigger : MonoBehaviour
     [SerializeField] private MonoBehaviour[] scriptsToDisableWhileViewing;
 
     private bool isViewingCorkboard = false;
+    private bool firstTimeViewing = true;
+    [SerializeField] TextAsset inkJson;
 
     private void Awake()
     {
@@ -34,6 +38,11 @@ public class CorkboardTrigger : MonoBehaviour
         if (other.CompareTag(playerTag) && !isViewingCorkboard)
         {
             SwitchToCorkboard(true);
+            if (firstTimeViewing && inkJson != null)
+            {
+                NewDialogueManager.Instance.EnterDialogue(inkJson, null, null);
+                firstTimeViewing = false;
+            }
         }
     }
 

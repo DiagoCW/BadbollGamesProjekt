@@ -1,8 +1,9 @@
 INCLUDE globalsmainstory.INK
 VAR reminisce = false
 
+
 Dödsoffret. Han stinker av allt möjligt, så pass att han nästan luktar behagligt.
--> Inspect  
+{ talkToPolice: -> Inspect | I should talk to the officer before investigating the body. -> END }
 === Inspect ===
     { cluesFoundonBody >= 2: -> Result } // Dirigerar till sista delen om man hittat alla ledtrådar på kroppen
     * [*Inspektera fötterna*]
@@ -26,7 +27,7 @@ Nog om detta, jag tror jag har ett fall att lösa eller nåt...
 === Result ===
     {cluesFoundbyBody >= 2: // om man hittat alla andra ledtrådar redan
     * Jag har allt jag behöver[.], jag borde prata med polisen.
-        ~ talkToPolice = true
+        //~ talkToPolice = true
         -> DONE
     - else: // om man forfarande har ledtrådar kvar att hitta runtomkring
     * Jag har allt jag behöver[.] här, men jag borde fortsätta undersöka runtomkring. #speaker: Player

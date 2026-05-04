@@ -19,7 +19,7 @@ public class TriggerTutorial : MonoBehaviour
         {
             if (counter == 0)
             {
-                NewDialogueManager.Instance.EnterDialogue(inkJsonTest, null);
+                NewDialogueManager.Instance.EnterDialogue(inkJsonTest, null, null);
                 counter++;
             }
         }
@@ -51,7 +51,7 @@ public class TriggerTutorial : MonoBehaviour
         if (other.CompareTag("Player") && (bool)trigger 
             && !NewDialogueManager.Instance.dialogueIsPlaying)
         {
-            NewDialogueManager.Instance.EnterDialogue(inkJson, null);
+            NewDialogueManager.Instance.EnterDialogue(inkJson, null, null);
             Debug.Log($"Trigger {Inkvariable} activated");
         }
         

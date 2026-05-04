@@ -235,8 +235,6 @@ public class PlayerController : MonoBehaviour
             
             IInteractable interactable = hitInfo.collider.GetComponent<IInteractable>();
 
-            
-
             if (interactable != null)
             {
                 GameObject target = hitInfo.collider.GetComponentInParent<Transform>().gameObject;
@@ -266,8 +264,29 @@ public class PlayerController : MonoBehaviour
                         return;
                     }
                 }
-
             }
+
+            var corkboardTarget =
+                hitInfo.collider.GetComponent<CorkboardTriggerV2>();
+
+            //var ctarget = corkboardTarget.GetComponentInParent<Transform>();
+            //var trigger = FindAnyObjectByType<CorkboardTriggerV2>();
+            if (corkboardTarget != null && !corkboardTarget.isViewingCorkboard && corkboardTarget.isPlayerNearBoard)
+            {
+                interactPromptText.text = corkboardTarget.isViewingCorkboard ?
+                    $"Close \nCorkboard" : "Open \nCorkboard";
+                if (!interactPromptText.gameObject.activeSelf)
+                    interactPromptText.gameObject.SetActive(true);
+                return;
+            }
+
+            //var trigger = FindAnyObjectByType<CorkboardTriggerV2>();
+            
+            //if (corkboardTarget.isViewingCorkboard)
+            //{
+            //    interactPromptText.gameObject.SetActive(false);
+            //}
+                
         }
 
         if (interactPromptText.gameObject.activeSelf)
