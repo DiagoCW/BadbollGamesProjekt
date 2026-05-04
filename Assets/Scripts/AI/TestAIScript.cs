@@ -29,7 +29,6 @@ public class TestAIScript : MonoBehaviour
         //    }
         //}
 
-        float dist = agent.remainingDistance;
         if (Vector3.Distance(agent.transform.position, targetDestination.position) <= 1)
         {
             animator.ResetTrigger("Running");

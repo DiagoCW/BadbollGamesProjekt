@@ -264,6 +264,15 @@ public class PlayerController : MonoBehaviour
                         return;
                     }
                 }
+                else if (interactable is InteractableTV)
+                {
+                    interactPromptText.text = $"Turn on \n{target.name}";
+
+                    if (!interactPromptText.gameObject.activeSelf)
+                        interactPromptText.gameObject.SetActive(true);
+
+                    return;
+                }
             }
 
             var corkboardTarget =
