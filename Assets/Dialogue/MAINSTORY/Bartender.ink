@@ -78,7 +78,7 @@ He got way too drunk, and always took over the karaoke machine. Do you know what
 I found this beer bottle on his body. It's from your bar.
 
 #speaker: Bartender
-#anim: Nervous
+#anim: Talking
 The bartender becomes completely pale in the face. He looks left and right, lowering his voice. 
 Hey man, look, let's not jump to conclusions. You can't prove anything.
 

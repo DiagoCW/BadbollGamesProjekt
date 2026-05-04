@@ -2,6 +2,7 @@
 LIST Suspects = (none), bossMan, bartender, storeClerk
 LIST Clues = (none), snus, victimPockets, victimWallet, falafel, beer, trisslott
 LIST knowledge = (none), poisoned, stoleWallet, snusar, lookingForTrisslott
+LIST items = (none), karaokeUSB
 
 === function addsuspect(x)
     ~ Suspects += x
@@ -11,6 +12,9 @@ LIST knowledge = (none), poisoned, stoleWallet, snusar, lookingForTrisslott
     
 === function gainknowledge(x)
     ~ knowledge += x
+
+=== function getitem(x)
+    ~ items += x
 
 //INTRO
 VAR startIntro = false
@@ -22,6 +26,7 @@ VAR cluesFoundbyBody = 0
 VAR talkedToBossMan = false
 VAR talkToPolice = false
 VAR talkedToBartender = false
+VAR talkedToArmchairGuy = false
 
 // AKT 1:
 // INTERROGATE

@@ -245,9 +245,17 @@ public class NewDialogueManager : MonoBehaviour
         isTyping = true;
         dialogueCheck.enabled = false;
 
+        bool addingItalicsToText = false;
+
         foreach (char letter in line.ToCharArray())
         {
+            if (letter == '<') addingItalicsToText = true;
+            
             dialogueText.text += letter;
+
+            if (letter == '>') addingItalicsToText = false;
+
+            if (!addingItalicsToText)
             yield return new WaitForSeconds(typingSpeed);
         }
 
@@ -392,6 +400,18 @@ public class NewDialogueManager : MonoBehaviour
                     Debug.Log($"Animation: {tagValue}, currentTag: {currentValue}");
 
                     npcAnimator.SetTrigger(tagValue);
+                    break;
+                case "snore":
+                    if (tagValue == "stop")
+                    {
+                        if (SnoringZoneLink.Instance != null)
+                            SnoringZoneLink.Instance.SetSnoringState(false);
+                    }
+                    else if (tagValue == "start")
+                    {
+                        if (SnoringZoneLink.Instance != null)
+                            SnoringZoneLink.Instance.SetSnoringState(true);
+                    }
                     break;
                 default:
                     Debug.LogWarning($"Unknown tag key: {tagKey}");
