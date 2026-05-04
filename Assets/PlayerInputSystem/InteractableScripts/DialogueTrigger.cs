@@ -2,6 +2,8 @@ using UnityEngine;
 using Ink.Runtime;
 using Ink.Parsed;
 using Unity.VisualScripting;
+using UnityEngine.AI;
+using NUnit.Framework;
 
 /// <summary>
 /// Detta script läggs till på alla NPCs som spelaren ska kunna interagera med och starta dialog.
@@ -22,6 +24,7 @@ public class DialogueTrigger : MonoBehaviour, IInteractable
     /*[SerializeField]*/ HighlightActivatorIAVersion highlighter;
 
     Animator npcAnimator;
+    TestAIScript aiScript;
     
     void Awake()
     {
@@ -30,12 +33,18 @@ public class DialogueTrigger : MonoBehaviour, IInteractable
         //NewDialogueManager.Instance.currentStory.variablesState["foundSnusdosa"] = true;
         //highlighter = GameObject.FindGameObjectWithTag("Player").GetComponent<HighlightActivatorIAVersion>();
         npcAnimator = GetComponentInChildren<Animator>();
+        aiScript = GetComponentInChildren<TestAIScript>();
+    }
+
+    void Start()
+    {
+        
     }
 
     public void Interact()
     {
         //if (highlighter.IsHighlighting) return;
-        NewDialogueManager.Instance.EnterDialogue(inkJson, npcAnimator);
+        NewDialogueManager.Instance.EnterDialogue(inkJson, npcAnimator, aiScript);
     }
 
     void Update()

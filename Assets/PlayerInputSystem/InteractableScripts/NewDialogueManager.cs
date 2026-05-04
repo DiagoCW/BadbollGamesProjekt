@@ -37,7 +37,7 @@ public class NewDialogueManager : MonoBehaviour
 
     // Behövs för att binda en extern funktion inuti Ink, kan lämnas som den är nu men kan behövas ändras i framtiden
     [Header("External Function References")]
-    [SerializeField] TestAIScript aiAgent;
+    /*[SerializeField]*/ TestAIScript aiAgent;
 
     Animator npcAnimator; // referens till animatorn för en npc. Parsar tags inuti Ink-filer som sätter animationtriggers
     
@@ -270,13 +270,16 @@ public class NewDialogueManager : MonoBehaviour
 
 
 
-    public void EnterDialogue(TextAsset inkJson, Animator npc)
+    public void EnterDialogue(TextAsset inkJson, Animator npc, TestAIScript agent)
     {
         //PlayerController.Instance.enabled = false;
         npcAnimator = npc;
+        aiAgent = agent;
         currentStory = new(inkJson.text);
         dialogueVariables.StartListening(currentStory);
-        functions.Bind(currentStory, aiAgent);
+
+        //if (agent != null)
+            functions.Bind(currentStory, agent);
 
         dialogueIsPlaying = true;
         dialoguePanel.SetActive(true);
