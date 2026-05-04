@@ -1,6 +1,6 @@
 INCLUDE globalsmainstory.INK
 VAR confused = false
-{ talkedToBossMan: -> CanQuestion | -> Intro }
+{ talkedToBossMan: -> CanQuestion|-> Intro }
 #speaker: Boss Man
 === Intro ===
 { !Nice driving, asshole! | Like I said... Nice driving, asshole. } #anim: Talking
