@@ -1,5 +1,5 @@
 INCLUDE globalsmainstory.INK
-
+EXTERNAL FadeOut()
 VAR intro = true
 Vi jobbar fortfarande på intron, så du får använda lite fantasi.
 stäng dina ögon.
@@ -22,7 +22,8 @@ After driving for a while, you see the outskirts of the town you're headed towar
         You scream like a little kid and thrash around, tugging at your seatbelt, kicking everything within reach. The swerving gets worse. 
 - All other noises are drowned out by the sound of your breath. It feels peaceful almost. 
 As the car draws closer and closer to the town, time slows down exponentially. 
-Until it doesn't. You reach an abrupt stop, and time resumes again. sätt en trigger för ett ljud för bil som kraschar 
+Until it doesn't. You reach an abrupt stop, and time resumes again.
+~ FadeOut()
 You've hit a tree in the middle of a park. Your Honda Civic '89 has been absolutely demolished. 
 \*Sätt en trigger här som fadear ut från svart så att scenen blir synlig*
 You exit the driver's seat, miracolously without a single scratch. It all happened so fast, you think.
