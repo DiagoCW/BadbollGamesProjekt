@@ -1,20 +1,21 @@
 INCLUDE GlobalsMain2.ink
 
+{ introCompleted: Your work here is done. Now get to it! -> END }
 {not carHood:
 Heat waves emanate from the hood of your car like a call for help, the paint job barely hides the damage beneath. This is a lovely car.
 ~carHood = true
 }
-Do you open the hood?
+Pop the hood?
     *[Pop the hood]
     The hood of the car slides open.
     -> Examine
-    *[Don't]
-    You \*don't* open the hood. For whatever reason.
+    *[<b>Don't</b> pop the hood]
+    You <b>don't</b> open the hood. For whatever reason.
 -> END
 
 === Examine ===
 {not carEngine:
-The engine looks like a jumbled mess of wires and metal. If you were an engineer you could probably see the problem right away; you need a more manual approach.
+The engine looks like a jumbled mess of wires and metal. Some people know what this all means and how to fix it. I'll just have to poke around and hope for the best.
 ~carEngine = true
 }
 { What could the problem be? | {~That's not the problem here.| Nope. It's not that. | I can't imagine that would be the problem. } <>}
