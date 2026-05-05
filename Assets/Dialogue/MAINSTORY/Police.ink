@@ -30,7 +30,7 @@ I've heard that you have some kind of... sense. A vision. A Detective Vision, if
 -> DetectiveVision
 
 = DetectiveVision
-#speaker: Player
+#speaker:
 <i>When surveying a location, you might find it helpful to press 'V' to activate your Detective vision. This will highlight items of importance, helping you find clues to progress the case.</i>
 <i>Consider using it sparingly, however; each time you use your detective vision you will find yourself penalized by the end of the game.</i>
 <i>You can try it out now, however. Get a good overview of the crime scene, and then activate it to see if anything is <color=\#FFFF00>highlighted!</color></i>
