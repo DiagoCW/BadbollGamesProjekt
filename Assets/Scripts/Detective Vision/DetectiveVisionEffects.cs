@@ -5,7 +5,7 @@ using UnityEngine.Rendering.Universal;
 public class DetectiveVisionEffects : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] private HighlightActivator activator;
+    [SerializeField] private HighlightActivatorIAVersion activator;
     [SerializeField] private Volume volume;  
 
     [Header("Vision Settings")]
@@ -26,7 +26,7 @@ public class DetectiveVisionEffects : MonoBehaviour
     private float normalSaturation = 0f;
     private float normalVignette = 0f;
 
-    void Awake()
+    void Start()
     {
         if (volume == null)
         {

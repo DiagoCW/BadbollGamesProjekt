@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class CooldownUIVisual : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] private HighlightActivator activator;
+    [SerializeField] private HighlightActivatorIAVersion activator;
     [SerializeField] private Image cooldownFill;     // grey radial – fills 0 to 1 during cooldown
     [SerializeField] private Image activeFill;       // green radial – empties 1 to 0 during active
     [SerializeField] private Image icon;             // magnifying glass icon

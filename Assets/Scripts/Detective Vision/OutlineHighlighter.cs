@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using NUnit.Framework.Constraints;
+using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
 
@@ -13,12 +14,15 @@ public class OutlineHighlighter : MonoBehaviour
     private GameObject outlineObject;
     private Renderer outlineRenderer;
     private bool isHighlighted;
+    public bool hasBeenHighlighted { get; private set; } = false;
 
     void Awake()
     {
         CreateOutline();
         outlineObject.SetActive(false);
     }
+
+    
 
     void CreateOutline()
     {
@@ -75,19 +79,20 @@ public class OutlineHighlighter : MonoBehaviour
     public void SetHighlighted(bool value, float duration)
     {
         if (value == isHighlighted) return;
-
+        
         isHighlighted = value;
 
         if (isHighlighted)
         {
+            hasBeenHighlighted = true;
             CreateOutline();
             outlineObject.SetActive(true);
             
-            if (duration > 0f)
-            {
-                CancelInvoke(nameof(TurnOff));
-                Invoke(nameof(TurnOff), duration);
-            }
+            //if (duration > 0f)
+            //{
+            //    CancelInvoke(nameof(TurnOff));
+            //    Invoke(nameof(TurnOff), duration);
+            //}
         }
         else
         {
