@@ -23,27 +23,29 @@ public class TriggerTutorial : MonoBehaviour
                 counter++;
             }
         }
-        
-        
+        if (string.IsNullOrEmpty(Inkvariable))
+            trigger = true;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-
-        //trigger = (Ink.Runtime.BoolValue)
-        //NewDialogueManager.Instance.GetVariableState("dvisionTutorialTrigger");
+        if ((bool)trigger && string.IsNullOrEmpty(Inkvariable))
+        {
+            NewDialogueManager.Instance.EnterDialogue(inkJson, null, null);
+        }
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (NewDialogueManager.Instance.dialogueIsPlaying)
+        if (NewDialogueManager.Instance.dialogueIsPlaying || string.IsNullOrEmpty(Inkvariable))
             return;
 
         Debug.Log($"Globals variablename: {NewDialogueManager.Instance.dialogueVariables.variables.ContainsKey(Inkvariable)}");
         Debug.Log($"Trigger: {trigger}");
 
-        trigger =
-            NewDialogueManager.Instance.dialogueVariables.variables.TryGetValue(Inkvariable, out Ink.Runtime.Object value);
+        if (!string.IsNullOrEmpty(Inkvariable))
+            trigger =
+                NewDialogueManager.Instance.dialogueVariables.variables.TryGetValue(Inkvariable, out Ink.Runtime.Object value);
 
         //trigger = (Ink.Runtime.BoolValue)
         //NewDialogueManager.Instance.GetVariableState(Inkvariable);
@@ -55,7 +57,7 @@ public class TriggerTutorial : MonoBehaviour
             Debug.Log($"Trigger {Inkvariable} activated");
         }
         
-        if ((bool)trigger)
+        if ((bool)trigger && !string.IsNullOrEmpty(Inkvariable))
         {
             Debug.Log($"Destroying trigger " + Inkvariable);
             Destroy(gameObject);
