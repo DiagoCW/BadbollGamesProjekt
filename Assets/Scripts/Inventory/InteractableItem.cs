@@ -42,7 +42,7 @@ public class InteractableItem : MonoBehaviour, IInteractable
     }
     public void Interact()
     {
-        if (outline.hasBeenHighlighted)
+        if (outline != null && outline.hasBeenHighlighted)
         {
             //Debug.Log("Detective vision enabled, and item is interacted with");
 

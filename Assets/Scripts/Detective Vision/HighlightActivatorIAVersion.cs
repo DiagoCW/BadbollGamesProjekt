@@ -47,6 +47,7 @@ public class HighlightActivatorIAVersion : MonoBehaviour
     private void GameInput_OnHighlightAction(object sender, System.EventArgs e)
     {
         //if (Time.time >= CooldownEndTime && !IsHighlighting)
+        //if (!PlayerController.Instance.IsInventoryOpen && !NewDialogueManager.Instance.dialogueIsPlaying)
         {
             HighlightVisibleObjects();
         }
@@ -64,10 +65,17 @@ public class HighlightActivatorIAVersion : MonoBehaviour
             RefreshHighlights();
             totalTimeUsed += Time.deltaTime;
         }
-
-        float desiredFOV = IsHighlighting ? zoomFOV : currentFOV;
-        playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, desiredFOV, 3f * Time.deltaTime);
-        //detectiveVision.enabled = true;
+        
+        if (PlayerController.Instance.IsInventoryOpen || NewDialogueManager.Instance.dialogueIsPlaying)
+        {
+            playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, currentFOV, 10f * Time.deltaTime);
+            ClearCurrentHighlights();
+        }
+        else
+        {
+            float desiredFOV = IsHighlighting ? zoomFOV : currentFOV;
+            playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, desiredFOV, 3f * Time.deltaTime);
+        }
         Debug.Log($"Detective vision used for {totalTimeUsed} seconds");
     }
 

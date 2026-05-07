@@ -55,28 +55,41 @@ public class DetectiveVisionEffects : MonoBehaviour
     void Update()
     {
         if (activator == null) return;
-
         float t = Time.deltaTime * lerpSpeed;
 
-        
         if (colorAdj != null)
         {
-            float targetSat = activator.IsHighlighting ? visionSaturation : normalSaturation;
-            colorAdj.saturation.value = Mathf.Lerp(colorAdj.saturation.value, targetSat, t);
+            if (PlayerController.Instance.IsInventoryOpen || NewDialogueManager.Instance.dialogueIsPlaying)
+                colorAdj.saturation.value = Mathf.Lerp(colorAdj.saturation.value, normalSaturation, t);
+            else
+            {
+                float targetSat = activator.IsHighlighting ? visionSaturation : normalSaturation;
+                colorAdj.saturation.value = Mathf.Lerp(colorAdj.saturation.value, targetSat, t);
+            }
         }
 
         
         if (vignette != null)
         {
-            float targetVignette = activator.IsHighlighting ? visionVignetteIntensity : normalVignette;
-            vignette.intensity.value = Mathf.Lerp(vignette.intensity.value, targetVignette, t);
+            if (PlayerController.Instance.IsInventoryOpen || NewDialogueManager.Instance.dialogueIsPlaying)
+                vignette.intensity.value = normalVignette = Mathf.Lerp(vignette.intensity.value, normalVignette, t);
+            else
+            {
+                float targetVignette = activator.IsHighlighting ? visionVignetteIntensity : normalVignette;
+                vignette.intensity.value = Mathf.Lerp(vignette.intensity.value, targetVignette, t);
+            }
         }
 
         
         if (boostBloomDuringHighlight && bloom != null)
         {
-            float targetBloom = activator.IsHighlighting ? activeBloomIntensity : normalBloomIntensity;
-            bloom.intensity.value = Mathf.Lerp(bloom.intensity.value, targetBloom, t);
+            if (PlayerController.Instance.IsInventoryOpen || NewDialogueManager.Instance.dialogueIsPlaying)
+                bloom.intensity.value = Mathf.Lerp(bloom.intensity.value, normalBloomIntensity, t);
+            else
+            {
+                float targetBloom = activator.IsHighlighting ? activeBloomIntensity : normalBloomIntensity;
+                bloom.intensity.value = Mathf.Lerp(bloom.intensity.value, targetBloom, t);
+            }
         }
     }
 }
