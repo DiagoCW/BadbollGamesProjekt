@@ -31,9 +31,13 @@ I've heard that you have some kind of... sense. A vision. A Detective Vision, if
 
 = DetectiveVision
 #speaker:
-<i>When surveying a location, you might find it helpful to press 'V' to activate your Detective vision. This will highlight items of importance, helping you find clues to progress the case.</i>
-<i>Consider using it sparingly, however; each time you use your detective vision you will find yourself penalized by the end of the game.</i>
-<i>You can try it out now, however. Get a good overview of the crime scene, and then activate it to see if anything is <color=\#FFFF00>highlighted!</color></i>
+<i>When surveying a location, you might find it helpful to hold down the right mouse button to activate your Detective vision. This will zoom in your FOV and highlight items of importance, helping you find clues to progress the case.</i>
+Your detective vision will be necessary to find clues in the game. Unless a clue has been highlighted through the detective vision, you are unable to obtain it.
+<i>Consider using it sparingly, however; every time you use your detective vision, it tracks how long you've used it. Use it too much and you will find yourself penalized by the end of the game.</i>
+This doesn't mean that you should go around using it everywhere all the time! Some dialogue with characters will offer you directions on where you might need to go next to investigate.
+Using context clues and paying attention to what people tell you will most likely minimize the amount of time that you need to use your detective vision.
+<i>You should try it out now, however. Get a good overview of the crime scene, and then activate it to see if anything is <color=\#FFFF00>highlighted!</color></i>
+Remember; as long as you <b>hold</b> the right mouse button, you will be using your detective vision.
 -> END
 
 === Continued ===

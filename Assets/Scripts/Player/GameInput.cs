@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
 
 /// <summary>
 /// Acts as a central hub for all player input. It wraps the generated Unity Input System class
@@ -11,6 +12,7 @@ public class GameInput : MonoBehaviour
     // Events that other scripts can subscribe to for action based inputs.
     public event EventHandler OnJumpAction;
     public event EventHandler OnHighlightAction;
+    public event EventHandler OnHighlightCancel;
     public event EventHandler OnInventoryAction;
     public event EventHandler OnInteractAction;
     public event EventHandler OnExitAction;
@@ -28,6 +30,7 @@ public class GameInput : MonoBehaviour
         // This links the input detection to the event system
         inputActions.Player.Jump.performed += Jump_performed;
         inputActions.Player.Highlight.performed += Highlight_performed;
+        inputActions.Player.Highlight.canceled += Highlight_cancelled;
         inputActions.Player.Inventory.performed += Inventory_performed;
         inputActions.Player.Interact.performed += Interact_performed;
         inputActions.Player.Exit.performed += Exit_performed;
@@ -38,6 +41,7 @@ public class GameInput : MonoBehaviour
         // unsubscribe from input events to prevent memory leaks
         inputActions.Player.Jump.performed -= Jump_performed;
         inputActions.Player.Highlight.performed -= Highlight_performed;
+        inputActions.Player.Highlight.canceled -= Highlight_cancelled;
         inputActions.Player.Inventory.performed -= Inventory_performed;
         inputActions.Player.Interact.performed -= Interact_performed;
         inputActions.Player.Exit.performed -= Exit_performed;
@@ -55,6 +59,11 @@ public class GameInput : MonoBehaviour
     private void Highlight_performed(InputAction.CallbackContext obj)
     {
         OnHighlightAction?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void Highlight_cancelled(InputAction.CallbackContext obj)
+    {
+        OnHighlightCancel?.Invoke(this, EventArgs.Empty);
     }
 
     /// <summary>
@@ -88,5 +97,11 @@ public class GameInput : MonoBehaviour
     private void Exit_performed(InputAction.CallbackContext obj) 
     {
         OnExitAction?.Invoke(this, EventArgs.Empty);
+    }
+
+    // Optional helper to read the highlight Vector2 value:
+    public Vector2 GetHighlightVector()
+    {
+        return inputActions.Player.Highlight.ReadValue<Vector2>();
     }
 }

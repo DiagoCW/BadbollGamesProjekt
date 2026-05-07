@@ -1,15 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.Rendering;
 
 public class HighlightActivatorIAVersion : MonoBehaviour
 {
     [Header("Input Reference")]
-    [SerializeField] private GameInput gameInput; 
+    [SerializeField] private GameInput gameInput;
+    /*[SerializeField]*/ private Camera playerCamera;
+    float currentFOV;
+    float zoomFOV;
 
     [Header("Settings")]
     public float highlightDuration = 5f;
     public float cooldownDuration = 25f;
-    [SerializeField] private float maxDistance = 50f;
+    public float totalTimeUsed = 0f;
+    [SerializeField] private float maxDistance = 15f;
 
     private List<OutlineHighlighter> currentHighlighters = new List<OutlineHighlighter>();
 
@@ -22,7 +27,11 @@ public class HighlightActivatorIAVersion : MonoBehaviour
         if (gameInput != null)
         {
             gameInput.OnHighlightAction += GameInput_OnHighlightAction;
+            gameInput.OnHighlightCancel += GameInput_OnHighlightCancel;
         }
+        playerCamera = GetComponentInChildren<Camera>();
+        currentFOV = playerCamera.fieldOfView;
+        zoomFOV = playerCamera.fieldOfView - 20;
     }
 
     private void OnDestroy()
@@ -31,28 +40,98 @@ public class HighlightActivatorIAVersion : MonoBehaviour
         if (gameInput != null)
         {
             gameInput.OnHighlightAction -= GameInput_OnHighlightAction;
+            gameInput.OnHighlightCancel -= GameInput_OnHighlightCancel;
         }
     }
 
     private void GameInput_OnHighlightAction(object sender, System.EventArgs e)
     {
-        if (Time.time >= CooldownEndTime && !IsHighlighting)
+        //if (Time.time >= CooldownEndTime && !IsHighlighting)
         {
             HighlightVisibleObjects();
         }
     }
 
+    private void GameInput_OnHighlightCancel(object sender, System.EventArgs e)
+    {
+        ClearCurrentHighlights();
+    }
+
     void Update()
     {
-        if (IsHighlighting && Time.time >= HighlightEndTime)
+        if (IsHighlighting)
         {
+            RefreshHighlights();
+            totalTimeUsed += Time.deltaTime;
+        }
+
+        float desiredFOV = IsHighlighting ? zoomFOV : currentFOV;
+        playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, desiredFOV, 3f * Time.deltaTime);
+        //detectiveVision.enabled = true;
+        Debug.Log($"Detective vision used for {totalTimeUsed} seconds");
+    }
+
+    /// <summary>
+    /// Add any newly visible candidates to the currentHighlighters list and remove
+    /// ones that are no longer visible or are out of range. This is called every
+    /// frame while the highlight input is held so highlights update dynamically.
+    /// </summary>
+    private void RefreshHighlights()
+    {
+        GameObject[] candidates = GameObject.FindGameObjectsWithTag("Clue");
+        if (candidates == null || candidates.Length == 0)
+        {
+            // If there are no candidates in the scene, clear everything
             ClearCurrentHighlights();
+            return;
+        }
+
+        Plane[] frustumPlanes = GeometryUtility.CalculateFrustumPlanes(Camera.main);
+
+        var desired = new System.Collections.Generic.HashSet<OutlineHighlighter>();
+
+        foreach (GameObject go in candidates)
+        {
+            Renderer rend = go.GetComponent<Renderer>();
+            if (rend == null) continue;
+
+            if (!GeometryUtility.TestPlanesAABB(frustumPlanes, rend.bounds)) continue;
+
+            if (Vector3.Distance(Camera.main.transform.position, go.transform.position) > maxDistance)
+                continue;
+
+            OutlineHighlighter highlighter = go.GetComponent<OutlineHighlighter>();
+            if (highlighter != null)
+            {
+                desired.Add(highlighter);
+            }
+        }
+
+        // Add new highlights
+        foreach (var h in desired)
+        {
+            if (!currentHighlighters.Contains(h))
+            {
+                h.SetHighlighted(true, highlightDuration);
+                currentHighlighters.Add(h);
+            }
+        }
+
+        // Remove highlights that are no longer desired
+        for (int i = currentHighlighters.Count - 1; i >= 0; i--)
+        {
+            var h = currentHighlighters[i];
+            if (h == null || !desired.Contains(h))
+            {
+                if (h != null) h.SetHighlighted(false, 0f);
+                currentHighlighters.RemoveAt(i);
+            }
         }
     }
 
     private void HighlightVisibleObjects()
     {
-        ClearCurrentHighlights();
+        //ClearCurrentHighlights();
 
         GameObject[] candidates = GameObject.FindGameObjectsWithTag("Clue");
         if (candidates == null || candidates.Length == 0) return;
@@ -72,12 +151,13 @@ public class HighlightActivatorIAVersion : MonoBehaviour
             OutlineHighlighter highlighter = go.GetComponent<OutlineHighlighter>();
             if (highlighter != null)
             {
-                highlighter.SetHighlighted(true, highlightDuration);
+                highlighter.SetHighlighted(true, totalTimeUsed);
                 currentHighlighters.Add(highlighter);
+                
             }
         }
 
-        if (currentHighlighters.Count > 0)
+        //if (currentHighlighters.Count > 0)
         {
             CooldownEndTime = Time.time + cooldownDuration;
             HighlightEndTime = Time.time + highlightDuration;

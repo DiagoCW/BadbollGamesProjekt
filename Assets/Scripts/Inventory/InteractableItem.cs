@@ -11,11 +11,13 @@ public class InteractableItem : MonoBehaviour, IInteractable
     
     HighlightActivatorIAVersion highlighter;
     ParticleSystem particles;
+    OutlineHighlighter outline;
 
     void Start()
     {
         playerInventory = PlayerController.Instance.inventory;
         highlighter = GameObject.FindGameObjectWithTag("Player").GetComponent<HighlightActivatorIAVersion>();
+        outline = GetComponentInChildren<OutlineHighlighter>();
 
         particles = GetComponentInChildren<ParticleSystem>();
         if (particles != null)
@@ -40,7 +42,7 @@ public class InteractableItem : MonoBehaviour, IInteractable
     }
     public void Interact()
     {
-        if (highlighter.IsHighlighting)
+        if (outline.hasBeenHighlighted)
         {
             //Debug.Log("Detective vision enabled, and item is interacted with");
 
@@ -53,6 +55,7 @@ public class InteractableItem : MonoBehaviour, IInteractable
                     playerInventory.AddItem(new Item(item));
                     pickedUpClue = true;
                     Debug.Log($"Added {item.name} to player inventory");
+                    gameObject.tag = "Untagged";
                 }
                 //Destroy(gameObject);
             }
