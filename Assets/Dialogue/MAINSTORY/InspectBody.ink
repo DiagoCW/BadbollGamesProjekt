@@ -1,36 +1,38 @@
 INCLUDE globalsmainstory.INK
 VAR reminisce = false
 
-
-Dödsoffret. Han stinker av allt möjligt, så pass att han nästan luktar behagligt.
-{ talkToPolice: -> Inspect | I should talk to the officer before investigating the body. -> END }
+The victim. It's not even in the early stages of decay, and he still smells awful.
+{ talkToPolice: Now, where to start... -> Inspect | I should talk to the officer before investigating the body. -> END }
 === Inspect ===
     { cluesFoundonBody >= 2: -> Result } // Dirigerar till sista delen om man hittat alla ledtrådar på kroppen
-    * [*Inspektera fötterna*]
-        Stora fötter... Stora skor.  
+    * [-Inspect his person]
+        As the officer said, he was a known drunk. That would explain this rancid smell. Seems like all these years of drinking finally caught up to him last night.
+        However, there are signs indicative of a struggle. He has minor lacerations on his neck, but nothing fatal.
+        If he was murdered, it's not apparent how. I should put a pin in this.
         ~cluesFoundonBody++
         -> Inspect
-    * [Inspektera kroppen]
-        Alla fickor har vänts ut och in... 
-        Mördaren måste ha letat efter nåt. Osäkert om de hittade det de letade efter, eftersom alla fickor ser ut att vara tömda.
-        Passade de på att plundra kroppen i efterhand, eller var det anledningen till mordet?
+    * [-Inspect his clothes]
+        His pockets are emptied. All of them... Someone must have been looking for something, but what? This could have been the motive for a murder. 
+        Wait, best not to get ahead of myself, it could have been opportunistic. Whoever found him could have decided to loot his body after the fact.
+        I need to find out what could have been on him, it could crack this whole case.
+        ~ gainknowledge(pocketsEmptied)
         ~cluesFoundonBody++
         -> Inspect
-    + {!reminisce} [Tänk tillbaka på ditt förflutna.]
-        {Allt var bättre förr. -> Inspect | Jag skulle köpt BitCoin när jag hade tillfället. -> Inspect | Jag är ett äckel, jag är konstig. Vad tusan gör jag här? -> Inspect | -> StopThinking }
+    + {!reminisce} [Think back on your past.]
+        {Everything was better way back when. -> Inspect | I should've bought BitCoin when I had the chance... -> Inspect | I'm a creep, I'm a weirdo. What the hell am I doing here? -> Inspect | -> StopThinking }
 
 = StopThinking
-Nog om detta, jag tror jag har ett fall att lösa eller nåt...
+Enough of this, focus...
 ~ reminisce = true
 -> Inspect
 
 === Result ===
     {foundAllClues(): // om man hittat alla andra ledtrådar redan
-    * Jag har allt jag behöver[.], jag borde prata med polisen.
+    * I have everything I need[.], I should talk to the officer.
         //~ talkToPolice = true
         -> DONE
     - else: // om man forfarande har ledtrådar kvar att hitta runtomkring
-    * Jag har allt jag behöver[.] här, men jag borde fortsätta undersöka runtomkring. #speaker: Player
+    * I have everything I need[.] here, but I should inspect the scene again. #speaker: Player
         -> DONE
 }
 

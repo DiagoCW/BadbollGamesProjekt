@@ -10,7 +10,7 @@ public class DetectiveVisionEffects : MonoBehaviour
 
     [Header("Vision Settings")]
     [SerializeField, Range(-100f, 0f)] private float visionSaturation = -65f;
-    [SerializeField, Range(0f, 0.8f)] private float visionVignetteIntensity = 0.4f;  
+    [SerializeField, Range(0f, 0.8f)] private float visionVignetteIntensity = 0.8f;  
     [SerializeField, Range(0.5f, 15f)] private float lerpSpeed = 8f;  
 
     [Header("Bloom Boost (optional)")]

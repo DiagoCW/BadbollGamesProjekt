@@ -71,7 +71,7 @@ How's it going?
 === StartQuestion(msg) ===
 ~ talkedToBossMan = true
 {msg}
-* { Clues ? victimWallet } [Victim's wallet] -> Wallet
+* { Clues ? victimWallet } [Ask about Wallet] -> Wallet
 * { Suspects ? bossMan } [Did you make the call?] -> Call
 + [Did you know the victim?] -> Relation
 * [See you later.] -> END
