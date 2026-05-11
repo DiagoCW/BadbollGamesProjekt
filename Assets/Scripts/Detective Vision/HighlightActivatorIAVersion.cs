@@ -31,7 +31,7 @@ public class HighlightActivatorIAVersion : MonoBehaviour
         }
         playerCamera = GetComponentInChildren<Camera>();
         currentFOV = playerCamera.fieldOfView;
-        zoomFOV = playerCamera.fieldOfView - 20;
+        zoomFOV = playerCamera.fieldOfView - 30;
     }
 
     private void OnDestroy()
@@ -74,7 +74,7 @@ public class HighlightActivatorIAVersion : MonoBehaviour
         else
         {
             float desiredFOV = IsHighlighting ? zoomFOV : currentFOV;
-            playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, desiredFOV, 3f * Time.deltaTime);
+            playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, desiredFOV, 8f * Time.deltaTime);
         }
         Debug.Log($"Detective vision used for {totalTimeUsed} seconds");
     }

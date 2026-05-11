@@ -1,7 +1,8 @@
 // INVENTORY
 LIST Suspects = (none), bossMan, bartender, storeClerk
-LIST Clues = (none), snus, victimPockets, victimWallet, falafel, beer, trisslott
-LIST knowledge = (none), poisoned, stoleWallet, snusar, lookingForTrisslott
+LIST Clues = (none), snus, victimWallet, falafel, beer, trisslott, kylarVätska
+// --- Kunskap om saker som kan leda till nya dialogval
+LIST knowledge = (none), poisoned, pocketsEmptied, stoleWallet, snusar, lookingForTrisslott
 LIST items = (none), karaokeUSB
 
 === function addsuspect(x)
@@ -9,6 +10,7 @@ LIST items = (none), karaokeUSB
 
 === function getclue(x)
     ~ Clues += x
+    //~ return LIST_COUNT(Clues) <= 2 // kollar ifall detta är första ledtråden som spelaren hittat
     
 === function gainknowledge(x)
     ~ knowledge += x

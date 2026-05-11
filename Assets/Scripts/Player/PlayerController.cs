@@ -124,11 +124,11 @@ public class PlayerController : MonoBehaviour
 
     private void GameInput_OnInventoryAction(object sender, EventArgs e)
     {
-        if (IsDialoguePlaying) // Prevent opening inventory during conversation
+        if (IsDialoguePlaying || inventory == null || inventoryCanvas == null) // Prevent opening inventory during conversation
         {
             return;
         }
-
+        
         ToggleInventory();
     }
 
