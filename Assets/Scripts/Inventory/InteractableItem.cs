@@ -4,7 +4,7 @@ public class InteractableItem : MonoBehaviour, IInteractable
 {
     [Header("References")]
     private InventoryObject playerInventory;
-    [SerializeField] ItemObject item;
+    [SerializeField] ItemObject item, item2;
     [SerializeField] TextAsset inkJson, inkJson2;
 
     bool pickedUpClue = false;
@@ -45,18 +45,20 @@ public class InteractableItem : MonoBehaviour, IInteractable
         if (outline != null && outline.hasBeenHighlighted)
         {
             //Debug.Log("Detective vision enabled, and item is interacted with");
-
             if (inkJson2 != null)
                 NewDialogueManager.Instance.EnterDialogue(inkJson2, null, null);
             if (!pickedUpClue && item != null)
             {
+                if (item2 != null)
+                {
+                    playerInventory.AddItem(new Item(item2));
+                    Debug.Log($"Added {item2.name} to player inventory");
+                }
+                    
                 playerInventory.AddItem(new Item(item));
                 pickedUpClue = true;
-                Debug.Log($"Added {item.name} to player inventory");
                 gameObject.tag = "Untagged";
             }
-            //Destroy(gameObject);
-            //gameObject.tag = "Untagged";
         }
         else if (inkJson != null && !highlighter.IsHighlighting)
             NewDialogueManager.Instance.EnterDialogue(inkJson, null, null);

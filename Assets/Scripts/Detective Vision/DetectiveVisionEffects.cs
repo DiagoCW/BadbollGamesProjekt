@@ -10,7 +10,7 @@ public class DetectiveVisionEffects : MonoBehaviour
 
     [Header("Vision Settings")]
     [SerializeField, Range(-100f, 0f)] private float visionSaturation = -65f;
-    [SerializeField, Range(0f, 0.8f)] private float visionVignetteIntensity = 0.8f;  
+    [SerializeField, Range(0f, 0.8f)] private float visionVignetteIntensity = 0.4f;  
     [SerializeField, Range(0.5f, 15f)] private float lerpSpeed = 8f;  
 
     [Header("Bloom Boost (optional)")]
@@ -25,6 +25,11 @@ public class DetectiveVisionEffects : MonoBehaviour
 
     private float normalSaturation = 0f;
     private float normalVignette = 0f;
+
+    void Awake()
+    {
+        volume.enabled = true;
+    }
 
     void Start()
     {
@@ -72,7 +77,7 @@ public class DetectiveVisionEffects : MonoBehaviour
         if (vignette != null)
         {
             if (PlayerController.Instance.IsInventoryOpen || NewDialogueManager.Instance.dialogueIsPlaying)
-                vignette.intensity.value = normalVignette = Mathf.Lerp(vignette.intensity.value, normalVignette, t);
+                vignette.intensity.value = normalVignette = Mathf.Lerp(vignette.intensity.value, 0f, t);
             else
             {
                 float targetVignette = activator.IsHighlighting ? visionVignetteIntensity : normalVignette;
@@ -92,4 +97,5 @@ public class DetectiveVisionEffects : MonoBehaviour
             }
         }
     }
+    
 }

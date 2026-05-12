@@ -1,8 +1,9 @@
 // INVENTORY
 LIST Suspects = (none), bossMan, bartender, storeClerk
-LIST Clues = (none), snus, victimWallet, falafel, beer, trisslott, kylarVätska
-// --- Kunskap om saker som kan leda till nya dialogval
-LIST knowledge = (none), poisoned, pocketsEmptied, stoleWallet, snusar, lookingForTrisslott
+// --- Fysiska ledtrådar i spelet
+LIST Clues = (none), snus, receipts, victimPockets, (victimWallet), beer, trisslott, kylarVätska
+// --- Kunskap om saker för att kunna pussla ihop ledtrådar
+LIST knowledge = (none), victimPoisoned, pocketsEmptied, (receiptsBelongToVictim), stoleWallet, knowAboutTrisslott, bartenderAlibi, cashierAlibi
 LIST items = (none), karaokeUSB
 
 === function addsuspect(x)
@@ -29,10 +30,17 @@ VAR startIntro = false
 // BROTTSPLATSEN
 VAR cluesFoundonBody = 0
 VAR cluesFoundbyBody = 0
+VAR talkToPolice = true
+VAR finishedCrimeScene = false
+
+// BOSS MAN
 VAR talkedToBossMan = false
-VAR talkToPolice = false
+
+// BARTENDER
 VAR talkedToBartender = false
 VAR talkedToArmchairGuy = false
+
+// CASHIER
 
 // AKT 1:
 // INTERROGATE
