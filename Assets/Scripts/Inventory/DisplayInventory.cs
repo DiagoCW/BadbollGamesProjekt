@@ -60,6 +60,15 @@ public class DisplayInventory : MonoBehaviour
         currentHoveredSlot = null;
     }
 
+    private void OnDestroy()
+    {
+        // Clear inventory when this display is destroyed (e.g., scene change)
+        if (inventory != null)
+        {
+            inventory.Clear();
+        }
+    }
+
     public void UpdateSlots()
     {
         foreach(KeyValuePair<GameObject, InventorySlot> _slot in itemsDisplayed)

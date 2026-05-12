@@ -59,33 +59,42 @@ public class InventoryObject : ScriptableObject
     //    }
     //}
 
-    [ContextMenu("Save")]
-    public void Save()
-    {
-        string saveData = JsonUtility.ToJson(this, true);
-        BinaryFormatter bf = new BinaryFormatter();
-        FileStream file = File.Create(string.Concat(Application.persistentDataPath, savePath));
-        bf.Serialize(file, saveData);
-        file.Close();
-    }
+    // Don't include for now
+    //[ContextMenu("Save")]
+    //public void Save()
+    //{
+    //    string saveData = JsonUtility.ToJson(this, true);
+    //    BinaryFormatter bf = new BinaryFormatter();
+    //    FileStream file = File.Create(string.Concat(Application.persistentDataPath, savePath));
+    //    bf.Serialize(file, saveData);
+    //    file.Close();
+    //}
 
-    [ContextMenu("Load")]
-    public void Load()
-    {
-        if (File.Exists(string.Concat(Application.persistentDataPath, savePath)))
-        {
-            BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open(string.Concat(Application.persistentDataPath, savePath), FileMode.Open);
-            JsonUtility.FromJsonOverwrite(bf.Deserialize(file).ToString(), this);
-            file.Close();
-        }
-    }
+    //[ContextMenu("Load")]
+    //public void Load()
+    //{
+    //    if (File.Exists(string.Concat(Application.persistentDataPath, savePath)))
+    //    {
+    //        BinaryFormatter bf = new BinaryFormatter();
+    //        FileStream file = File.Open(string.Concat(Application.persistentDataPath, savePath), FileMode.Open);
+    //        JsonUtility.FromJsonOverwrite(bf.Deserialize(file).ToString(), this);
+    //        file.Close();
+    //    }
+    //}
 
     [ContextMenu("Clear")]
     public void Clear()
     {
         Container = new Inventory();
     }
+
+    #if UNITY_EDITOR
+    private void OnDisable()
+    {
+        // Clear inventory when exiting play mode in the Editor
+        Clear();
+    }
+    #endif
 }
 
 [System.Serializable]
