@@ -69,6 +69,12 @@ public class ClueNode : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         transform.SetAsLastSibling(); // Force the item to render on top of all other UI elements
 
         canvasGroup.blocksRaycasts = false; // Disable raycasting blocking so the mouse can see through the image to find the clues below it
+
+        // Tell the board we are dragging a photo so the player can't exit
+        if (ThreadManager.Instance != null && ThreadManager.Instance.boardTrigger != null)
+        {
+            ThreadManager.Instance.boardTrigger.isDraggingClue = true;
+        }
     }
 
     /// <summary>
@@ -135,6 +141,19 @@ public class ClueNode : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         transform.SetParent(previousParent, false);
         rectTransform.anchoredPosition = Vector2.zero;
         rectTransform.localScale = Vector3.one;
+
+        ClueSlot oldSlot = previousParent.GetComponent<ClueSlot>();
+        if (oldSlot != null) 
+        {
+            currentSlot = oldSlot;
+            oldSlot.Occupy(this);
+        }
+
+        // allow the player to exit the board again
+        if (ThreadManager.Instance != null && ThreadManager.Instance.boardTrigger != null)
+        {
+            ThreadManager.Instance.boardTrigger.isDraggingClue = false;
+        }
     }
 
     /// <summary>
@@ -219,7 +238,19 @@ public class ClueNode : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             {
                 transform.SetParent(previousParent, false);
                 rectTransform.localPosition = Vector3.zero;
+
+                ClueSlot oldSlot = previousParent.GetComponent<ClueSlot>();
+                if (oldSlot != null) 
+                {
+                    currentSlot = oldSlot;
+                    oldSlot.Occupy(this);
+                }
             }
+        }
+
+        if (ThreadManager.Instance != null && ThreadManager.Instance.boardTrigger != null)
+        {
+            ThreadManager.Instance.boardTrigger.isDraggingClue = false;
         }
     }
 }

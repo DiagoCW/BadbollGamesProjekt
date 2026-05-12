@@ -1,5 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System;
+using UnityEngine.ProBuilder.MeshOperations;
+using UnityEditor.Search;
 
 /// <summary>
 /// Manages the creation, routing, and validation of visual threads between SuspectNodes and ClueSlots.
@@ -7,6 +10,13 @@ using System.Collections.Generic;
 public class ThreadManager : MonoBehaviour
 {
     public static ThreadManager Instance { get; private set; }
+
+    // Other scripts can listen to this to trigger whatever is to be triggered
+    public static event Action OnCaseSolved;
+    public static event Action OnCaseFailed;
+
+    // This tells the submit button to check if it should change color
+    public static event Action OnThreadsChanged;
 
     [Header("Case Solutions")]
     [Tooltip("Defines the required clue combinations for each suspect.")]
@@ -39,6 +49,7 @@ public class ThreadManager : MonoBehaviour
 
     private void Awake()
     {
+        // Singleton setup
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
     }
@@ -142,13 +153,12 @@ public class ThreadManager : MonoBehaviour
             connections.Add(slot, activeLine);
             suspectWebs[activeSuspect].Enqueue(slot);
 
-            // Check  the suspect's solution state.
-            CheckSuspectSolution(activeSuspect);
-
             // Reset drawing state variables.
             activeSuspect = null;
             activeLine = null;
             boardTrigger.isDraggingThread = false;
+
+            OnThreadsChanged?.Invoke(); // Tell the ui button that a thread was attached
         }
     }
 
@@ -184,111 +194,88 @@ public class ThreadManager : MonoBehaviour
                     break;
                 }
             }
+
+            OnThreadsChanged?.Invoke(); // Tell UI button that a thread was removed
         }
     }
 
     /// <summary>
-    /// evaluates the connected clues for a suspect against their clue solving solution
+    /// Checks if any suspect on the board 3 clues attached to them. If so, the submit button will turn green
     /// </summary>
-    public void CheckSuspectSolution(SuspectNode suspect)
+    public bool IsBoardReadyToSubmit() 
     {
-        SuspectSolution solution = caseSolutions.Find(s => s.suspect == suspect);
-
-        // No evaluation if no valid solution configuration exists for this node
-        if (solution.suspect == null || solution.requiredClues.Count == 0) return;
-        if (!suspectWebs.ContainsKey(suspect)) return;
-
-        Queue<ClueSlot> connectedSlots = suspectWebs[suspect];
-
-        // Collect IDs of clues currently submitted
-        List<int> playerSubmittedIDs = new List<int>();
-        foreach (ClueSlot slot in connectedSlots)
+        foreach (var web in suspectWebs.Values) 
         {
-            if (slot.currentClue != null)
-                playerSubmittedIDs.Add(slot.currentClue.itemID);
+            if (web.Count == 3) return true;
         }
-
-        // Resolve required ItemObjects to their IDs.
-        List<int> requiredIDs = new List<int>();
-        foreach (ItemObject item in solution.requiredClues)
-        {
-            if (item != null) requiredIDs.Add(item.Id);
-        }
-
-        // Verification
-        string reqString = string.Join(", ", requiredIDs);
-        string subString = string.Join(", ", playerSubmittedIDs);
-        Debug.Log($"[Validation] {suspect.name} requires IDs: [{reqString}]. Submitted: [{subString}]");
-
-        // check connection count matches the required count
-        if (playerSubmittedIDs.Count != requiredIDs.Count)
-        {
-            Debug.Log($"[Validation] Failed: {suspect.name} connection count mismatch.");
-            return;
-        }
-
-        // check exact match of submitted clues against required clues
-        List<int> tempRequired = new List<int>(requiredIDs);
-        foreach (int id in playerSubmittedIDs)
-        {
-            if (tempRequired.Contains(id))
-            {
-                tempRequired.Remove(id);
-            }
-            else
-            {
-                Debug.Log($"[Validation] Failed: Clue ID {id} is not valid for {suspect.name}.");
-                return;
-            }
-        }
-
-        Debug.Log($"[Validation] Success: {suspect.name} solution verified.");
-        CheckEntireBoard();
+        return false;
     }
 
     /// <summary>
-    /// Evaluates all configured suspect solutions to determine if the entire board is solved.
+    /// Called when the player clicks the submit case button. Evaluates only the suspects that have exactly 3 clues.
     /// </summary>
-    private void CheckEntireBoard()
+    public void SubmitCase() 
     {
-        int totalSolved = 0;
+        if (!IsBoardReadyToSubmit()) return;
 
-        foreach (SuspectSolution solution in caseSolutions)
+        bool solvedCorrectly = false;
+
+        foreach (var kvp in suspectWebs) 
         {
-            if (!suspectWebs.ContainsKey(solution.suspect)) continue;
+            SuspectNode suspect = kvp.Key;
+            Queue<ClueSlot> connectedSlots = kvp.Value;
 
+            // If the suspect doesn't have 3 clues, ignore them
+            if (connectedSlots.Count != 3) continue;
+
+            // Check if this suspect has a solution in the database
+            SuspectSolution solution = caseSolutions.Find(s => s.suspect == suspect);
+            if (solution.suspect == null || solution.requiredClues.Count == 0) continue;
+
+            // Gather the IDs of the clues the player attached
             List<int> playerSubmittedIDs = new List<int>();
-            foreach (ClueSlot slot in suspectWebs[solution.suspect])
+            foreach (ClueSlot slot in connectedSlots) 
             {
                 if (slot.currentClue != null) playerSubmittedIDs.Add(slot.currentClue.itemID);
             }
 
-            // resolve required ItemObjects to IDs
+            // gather the IDs of the clues required to prove the suspect guilty
             List<int> requiredIDs = new List<int>();
-            foreach (ItemObject item in solution.requiredClues)
+            foreach (ItemObject item in solution.requiredClues) 
             {
                 if (item != null) requiredIDs.Add(item.Id);
             }
 
-            // skip strict validation if the lengths do not match.
-            if (playerSubmittedIDs.Count != requiredIDs.Count) continue;
-
-            List<int> tempRequired = new List<int>(requiredIDs);
-            bool isCorrect = true;
-            foreach (int id in playerSubmittedIDs)
+            // Check if they match
+            if (playerSubmittedIDs.Count == requiredIDs.Count) 
             {
-                if (tempRequired.Contains(id)) tempRequired.Remove(id);
-                else { isCorrect = false; break; }
-            }
+                List<int> tempRequired = new List<int>(requiredIDs);
+                bool isCorrect = true;
 
-            // Increment solved count if all conditions are ther
-            if (isCorrect) totalSolved++;
+                foreach (int id in playerSubmittedIDs) 
+                {
+                    if (tempRequired.Contains(id)) tempRequired.Remove(id);
+                    else { isCorrect = false; break; }
+                }
+
+                if (isCorrect) 
+                {
+                    solvedCorrectly = true;
+                    break;
+                }
+            }
         }
 
-        // Verify if the number of solved suspects matches the total number of configured case solutions.
-        if (totalSolved == caseSolutions.Count && caseSolutions.Count > 0)
+        // Trigger end game
+        if (solvedCorrectly) 
         {
             Debug.Log("The case is solved");
+            OnCaseSolved?.Invoke(); // Tells other scripts that the player solved the case
+        }
+        else 
+        {
+            Debug.Log("The clues dont add up, sorry bro I think you failed");
+            OnCaseFailed?.Invoke(); // Tells other scripts that the player failed the case
         }
     }
 }
