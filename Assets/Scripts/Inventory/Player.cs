@@ -16,18 +16,20 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            inventory.Save();
-        }
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            inventory.Load();
-        }
+        // Don't include for now
+        //if (Input.GetKeyDown(KeyCode.Z))
+        //{
+        //    inventory.Save();
+        //}
+        //if (Input.GetKeyDown(KeyCode.X))
+        //{
+        //    inventory.Load();
+        //}
     }
 
     private void OnApplicationQuit()
     {
+        inventory.Clear();
         inventory.Container.Items = new InventorySlot[12];
     }
 }
