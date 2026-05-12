@@ -1,10 +1,10 @@
 // INVENTORY
 LIST Suspects = (none), bossMan, bartender, storeClerk
 // --- Fysiska ledtrådar i spelet
-LIST Clues = (none), snus, receipts, victimPockets, (victimWallet), beer, trisslott, kylarVätska
+LIST Clues = (none), snus, receipts, victimPockets, victimWallet, beer, trisslott, kylarVätska
 // --- Kunskap om saker för att kunna pussla ihop ledtrådar
-LIST knowledge = (none), victimPoisoned, pocketsEmptied, (receiptsBelongToVictim), stoleWallet, knowAboutTrisslott, bartenderAlibi, cashierAlibi
-LIST items = (none), karaokeUSB
+LIST knowledge = (none), victimPoisoned, pocketsEmptied, receiptsBelongToVictim, stoleWallet, knowAboutTrisslott, bartenderAlibi, cashierAlibi, foundCoolantBartender, foundCoolantKiosk
+LIST items = (none), karaokeUSB, beerz
 
 === function addsuspect(x)
     ~ Suspects += x
@@ -23,28 +23,32 @@ LIST items = (none), karaokeUSB
 === function foundAllClues()
     ~ return cluesFoundonBody >= 2 and cluesFoundbyBody >= 1
 
-//INTRO
+//INTRO AKT 0
 VAR startIntro = false
 
 // AKT 1:
 // BROTTSPLATSEN
 VAR cluesFoundonBody = 0
 VAR cluesFoundbyBody = 0
-VAR talkToPolice = true
+VAR talkToPolice = false
 VAR finishedCrimeScene = false
+
+// AKT 2: SUSPECTS
 
 // BOSS MAN
 VAR talkedToBossMan = false
-
 // BARTENDER
 VAR talkedToBartender = false
-VAR talkedToArmchairGuy = false
-
+VAR bartenderToldHisAlibi = false
 // CASHIER
-
+VAR talkedToCashier = false
+// Armchair Guy
+VAR talkedToArmchairGuy = false
+// Suspicious Guy
+VAR talkedToSuspiciousGuy = false
 // AKT 1:
 // INTERROGATE
-VAR canInterrogate = false
+//VAR canInterrogate = false
 
 
 /*
@@ -398,4 +402,8 @@ LIST WindowKnowledge = steam_on_glass, fingerprints_on_glass, fingerprints_on_gl
     -> END
 
 
+
+-> END
+
+ND
 

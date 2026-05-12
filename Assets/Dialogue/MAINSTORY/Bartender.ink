@@ -8,7 +8,7 @@ INCLUDE globalsmainstory.INK
 { !What can I get you? | So? Are you gonna buy something or just stand there? } #anim: Talking
     * [A beer.]
         Coming right up. That'll be fifty spänn.
-        ~ getclue(beer)
+        ~ getclue(Clues.beer)
         ~ talkedToBartender = true
         -> IntroCont
     + [I need information.]
@@ -48,7 +48,7 @@ Need another drink? Or just more talk?
 #speaker: Bartender
 {msg}
 
-* { Clues ? beer } [I found this beer bottle on his body.] -> BeerMiscommunication
+* { Clues ? Clues.beer } [I found this beer bottle on his body.] -> BeerMiscommunication
 * [Why didn't you just kick him out?] -> KickOut
 + [Actually, I have other questions.] -> StartQuestion("What else do you need?")
 
