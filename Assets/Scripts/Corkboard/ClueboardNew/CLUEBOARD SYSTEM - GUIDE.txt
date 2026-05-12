@@ -1,0 +1,78 @@
+CLUEBOARD SYSTEM - SETUP & USAGE GUIDE
+
+The Clueboard system is designed to be modular, you can add clues, change suspects, and update the puzzle solutions directly in the Unity Inspector without writing any code.
+
+Below is a quick guide on how to set up and modify the board.
+
+UNDERSTANDING THE HIERARCHY
+
+	The Clueboard is split into two main parts:
+
+	clueboardCanvas: This holds all the visual UI elements (the background, the empty slots, the suspect frames). You generally don't need to touch this unless you are moving the UI around on the screen.
+	
+	ClueboardManagers: This holds the three main scripts(SuspectManager, ClueboardSpawner, ThreadManager). This is where you will do most setup
+
+HOW TO ADD OR CHANGE CLUES
+
+	When the player investigates an item from their inventory, the board needs to know which image to spawn.
+
+	Click on the "ClueboardManagers" object in the Hierarchy.
+
+	Look at the child "Clueboard Spawner" and its script in the Inspector.
+
+        Find the "Clue Database" list and click the "+" button.
+
+        "Inventory Item ID": Type the ID number of the item (this must match the ID from the main Item Database).
+
+        "Clue Sprite": Drag and drop the 2D sprite you want to appear on the board.
+
+HOW TO ADD OR CHANGE SUSPECTS
+
+	Suspects start hidden and are revealed when the player learns about them (ex. after a specific dialogue).
+
+	To set up the suspect data:
+
+    	Click on the "ClueboardManagers" object.
+
+    	Look at the child "Suspect Manager" and its script in the Inspector.
+
+        Find the "Suspect Database" list and click the "+" button.
+
+        Give the suspect a unique "Suspect ID" (ex. 0, 1, or 2).
+
+        Drag and drop their portrait into the "Suspect Photo" slot.
+
+	To unlock a suspect in a script, call this line of code:
+	SuspectManager.Instance.UnlockSuspect(*insert suspect ID*);
+
+HOW TO SET THE CASE SOLUTIONS
+
+        This is where you choose which clues prove which suspect is guilty.
+
+   	Click on the "ClueboardManagers" object.
+
+    	Look at the child "Thread Manager" and its script in the Inspector.
+
+        Find the "Case Solutions" list and click the "+" button.
+
+        "Suspect": Drag one of the suspect nodes from the Hierarchy (ex. "suspectnode1" from inside the Canvas) into this box.
+
+        "Required Clues": Click the "+" button for however many clues are needed to solve this suspect.
+
+        For each required clue, drag the actual "ItemObject" data file directly from your Project folders into the box.
+
+PLAYER CONTROLS
+
+        Here is how the controls work:
+
+    	Open/Close: Walk up to the board and press Interact (E).
+
+	Open your inventory and drop the clues into the board
+
+        Left click and drag a photo from the spawn tray to an empty clue slot.
+
+    	Left click a Suspect photo to pull a thread, then left click a Clue slot to attach it.
+
+        Left click a Clue slot that already has a string to cut it.
+
+        Right-click any Clue photo on the board to put it back in your inventory.
