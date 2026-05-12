@@ -71,12 +71,12 @@ public class HighlightActivatorIAVersion : MonoBehaviour
             playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, currentFOV, 10f * Time.deltaTime);
             ClearCurrentHighlights();
         }
-        else
+        //else
         {
             float desiredFOV = IsHighlighting ? zoomFOV : currentFOV;
             playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, desiredFOV, 8f * Time.deltaTime);
         }
-        Debug.Log($"Detective vision used for {totalTimeUsed} seconds");
+        //Debug.Log($"Detective vision used for {totalTimeUsed} seconds");
     }
 
     /// <summary>

@@ -14,6 +14,7 @@ public class DialogueTrigger : MonoBehaviour, IInteractable
 {
     [Header("Transform NPC & Player")]
     Transform npcDir;
+    Transform initialNpcDir;
     Transform player;
     
     // Ink JSON fil som håller dialogen som objektet ska visa vid interaktion
@@ -29,6 +30,7 @@ public class DialogueTrigger : MonoBehaviour, IInteractable
     void Awake()
     {
         npcDir = this.transform;
+        initialNpcDir = npcDir;
         player = GameObject.FindGameObjectWithTag("Player").transform;
         //NewDialogueManager.Instance.currentStory.variablesState["foundSnusdosa"] = true;
         //highlighter = GameObject.FindGameObjectWithTag("Player").GetComponent<HighlightActivatorIAVersion>();
@@ -49,12 +51,20 @@ public class DialogueTrigger : MonoBehaviour, IInteractable
 
     void Update()
     {
-        if (gameObject.CompareTag("NPC"))
+        if (gameObject.CompareTag("NPC") && gameObject.name != "ArmchairGuy")
         {
             if (/*NewDialogueManager.Instance.dialogueIsPlaying ||*/
             Vector3.Distance(npcDir.position, player.position) <= PlayerController.Instance.InteractRange() + 0.5f)
                 FacePlayer();
+            //else
+            //{
+            //    Vector3 rotation = new Vector3(-transform.position.x, transform.position.y, -transform.position.y);
+            //    transform.LookAt(rotation);
+            //    return;
+            //}
+            
         }
+        
     }
 
     public void FacePlayer()
