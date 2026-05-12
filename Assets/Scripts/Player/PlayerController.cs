@@ -158,7 +158,7 @@ public class PlayerController : MonoBehaviour
         // If you want to see the ray when you press interact button you can uncomment this line of code.
         //Debug.DrawRay(ray.origin, ray.direction * interactRange, Color.red, 2f);
 
-        if (Physics.Raycast(ray, out RaycastHit hitInfo, interactRange))
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, interactRange, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Collide))
         {
             IInteractable[] interactables = hitInfo.collider.GetComponents<IInteractable>();
             
@@ -229,7 +229,7 @@ public class PlayerController : MonoBehaviour
         }
 
         Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
-        if (Physics.Raycast(ray, out RaycastHit hitInfo, interactRange))
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, interactRange, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Collide))
         {
             // Check if the hit object (or its parents) implement IInteractable
             
@@ -272,6 +272,20 @@ public class PlayerController : MonoBehaviour
                         interactPromptText.gameObject.SetActive(true);
 
                     return;
+                }
+                else if (interactable is ClueboardTrigger)
+                {
+                    ClueboardTrigger board = (ClueboardTrigger)interactable;
+
+                    if (board.isPlayerNear)
+                    {
+                        interactPromptText.text = board.isViewingBoard ? "Close \nClueboard" : "Inspect \nClueboard";
+
+                        if (!interactPromptText.gameObject.activeSelf)
+                            interactPromptText.gameObject.SetActive(true);
+
+                        return;
+                    }
                 }
             }
 
