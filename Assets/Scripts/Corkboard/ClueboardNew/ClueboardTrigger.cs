@@ -21,8 +21,11 @@ public class ClueboardTrigger : MonoBehaviour, IInteractable
     public bool isViewingBoard { get; private set; } = false;
     public bool isPlayerNear { get; private set; } = false;
 
-    // Flag used by the ThreadManager to prevent the board from closing mid interaction
+    // Flags to prevent the board closing mid interaction
     public bool isDraggingThread = false;
+    public bool isDraggingClue = false;
+
+    private bool IsHoldingSomething => isDraggingClue || isDraggingThread;
 
     private void Start()
     {
@@ -64,7 +67,7 @@ public class ClueboardTrigger : MonoBehaviour, IInteractable
             isPlayerNear = false;
 
             // close the board if the player walks away, however not happening when they dragging a thread
-            if (isViewingBoard && !isDraggingThread)
+            if (isViewingBoard && !IsHoldingSomething)
             {
                 ToggleBoard(false);
             }
@@ -74,7 +77,7 @@ public class ClueboardTrigger : MonoBehaviour, IInteractable
     public void Interact()
     {
         // Only allow interaction if the player is in range and not currently drawing a connection
-        if (isPlayerNear && !isDraggingThread)
+        if (isPlayerNear && !IsHoldingSomething)
         {
             ToggleBoard(!isViewingBoard);
         }
@@ -136,7 +139,7 @@ public class ClueboardTrigger : MonoBehaviour, IInteractable
     private void Update()
     {
         // Failsafe to ensure the cursor remains free and visible while the board is open.
-        if (isViewingBoard && !isDraggingThread)
+        if (isViewingBoard && !IsHoldingSomething)
         {
             if (Cursor.lockState != CursorLockMode.Confined || !Cursor.visible)
             {
