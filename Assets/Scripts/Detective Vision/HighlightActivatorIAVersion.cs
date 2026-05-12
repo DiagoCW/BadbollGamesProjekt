@@ -94,6 +94,8 @@ public class HighlightActivatorIAVersion : MonoBehaviour
             return;
         }
 
+        if (playerCamera == null || !playerCamera.isActiveAndEnabled) return;
+
         Plane[] frustumPlanes = GeometryUtility.CalculateFrustumPlanes(Camera.main);
 
         var desired = new System.Collections.Generic.HashSet<OutlineHighlighter>();
@@ -144,7 +146,7 @@ public class HighlightActivatorIAVersion : MonoBehaviour
         GameObject[] candidates = GameObject.FindGameObjectsWithTag("Clue");
         if (candidates == null || candidates.Length == 0) return;
 
-        Plane[] frustumPlanes = GeometryUtility.CalculateFrustumPlanes(Camera.main);
+        Plane[] frustumPlanes = GeometryUtility.CalculateFrustumPlanes(playerCamera);
 
         foreach (GameObject go in candidates)
         {

@@ -79,16 +79,19 @@ public class NewDialogueManager : MonoBehaviour
 
     private void Start()
     {
-        dialoguePanel.SetActive(false);
-        dialogueIsPlaying = false;
-        isTyping = false;
-
-        choicesText = new TextMeshProUGUI[choices.Length];
-        for (int i = 0; i < choices.Length; i++)
+        if (dialoguePanel != null) 
         {
-            choicesText[i] = choices[i].GetComponentInChildren<TextMeshProUGUI>();
+            dialoguePanel.SetActive(false);
+            dialogueIsPlaying = false;
+            isTyping = false;
+
+            choicesText = new TextMeshProUGUI[choices.Length];
+            for (int i = 0; i < choices.Length; i++)
+            {
+                choicesText[i] = choices[i].GetComponentInChildren<TextMeshProUGUI>();
+            }
+            Debug.Log("DialogueManager active");
         }
-        Debug.Log("DialogueManager active");
     }
 
     public Ink.Runtime.Object GetVariableState(string variableName)

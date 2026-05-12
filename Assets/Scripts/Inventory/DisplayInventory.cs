@@ -180,11 +180,11 @@ public class DisplayInventory : MonoBehaviour
             if (IsPointerOverClueboard())
             {
                 int itemToDropID = itemsDisplayed[obj].ID;
-
-                CorkboardSpawnerV2 spawner = FindFirstObjectByType<CorkboardSpawnerV2>();
+                
+                ClueboardSpawner spawner = FindFirstObjectByType<ClueboardSpawner>();
                 if (spawner != null)
                 {
-                    spawner.SpawnSingleClue(itemToDropID);
+                    spawner.SpawnClue(itemToDropID);
                     itemsDisplayed[obj].UpdateSlot(-1, null);
                 }
             }
