@@ -10,8 +10,7 @@ VAR isAsleep = true
 === Intro ===
 The man is slumped deep in the armchair, snoring loudly. He hasn't even taken a single bite from his princesstårta before he fell asleep.
     * [Wake him up.]
-        #speaker: Player
-        Hey. Wake up.
+        Hey. Wake up. #speaker: Player
         
         #speaker: Armchair Guy
         #anim: Shake
@@ -25,7 +24,6 @@ The man is slumped deep in the armchair, snoring loudly. He hasn't even taken a 
 
 === Hub ===
 { isAsleep: -> SleepingHub | -> AwakeHub }
-
 === SleepingHub ===
 #speaker: Armchair Guy
 <i>loud snoring</i>
@@ -33,7 +31,6 @@ The man is slumped deep in the armchair, snoring loudly. He hasn't even taken a 
     + [Wake him up.]
         #speaker: Player
         Hey!
-        
         #speaker: Armchair Guy
         #anim: Shake
         #snore: stop
@@ -43,7 +40,6 @@ The man is slumped deep in the armchair, snoring loudly. He hasn't even taken a 
     + [Leave him be.]
         -> DONE
 
-
 === AwakeHub ===
 #speaker: Armchair Guy
 What do you want?
@@ -52,7 +48,16 @@ What do you want?
     * {KnowPeter} [I need that recording of Peter.] -> TheTape
     + [Did you see anything suspicious last night?] -> LastNight
     + [I'll leave you alone now.] -> AwakeExit
-
+    * { knowledge ? bartenderAlibi } [Bartender's alibi] -> BartenderAlibi
+    
+= BartenderAlibi
+Loiter guy told me that you and he left around the same time last night, is this true? #speaker: Player
+<i>He falls back asleep.</i> #snore: start #speaker:
+HEY! <i>You snap your fingers in his face.</i> #speaker: Player
+Yeah! Yeah, sorry, that's right. I decided to go home and catch up on some Z's, and left with loiter guy. #speaker: Armchair Guy #snore: stop
+The only person left here was Peter. I wonder where he is now? He's usually here by this hour.
+<i>That confirms it. The bartender lied about his alibi.</i> 
+-> END
 === KnowPeter ===
 #speaker: Player
 Did you know a guy named Peter Grip?
@@ -85,7 +90,7 @@ Did you see anything suspicious last night?
 
 #speaker: Armchair Guy
 #snore: start
-<i>He immediately falls back to sleep </i> 
+<i>He immediately falls back to sleep.</i> 
 ~ isAsleep = true
 -> Hub
 

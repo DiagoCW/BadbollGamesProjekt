@@ -34,7 +34,6 @@ No witnesses have come forward to share any information yet, but we haven't had 
         ** { not talkedToBossMan } [Boss Man?]
             The falafel guy across the street. 
         -- <> He found the body on his way home after closing up shop last night.
-        ~ addsuspect(bossMan)
             -> opts
     * -> cont
 - (cont) - Before you go, you should take a moment to inspect the scene. Though our initial discovery gave no interesting results, maybe you'll have better luck.
@@ -63,7 +62,7 @@ Tills att vi implementerar detta i Tutorialscenen så får det vara kvar här:
 }
 
 =Questions
-{ !All done, detective? | Anything else? } #speaker: Police
+{ !All done, detective? | Anything else? | And? } #speaker: Police
 * [The victim's pockets]
     We found nothing on him. #speaker: Police
     That's it? #speaker: Player
@@ -76,15 +75,15 @@ Tills att vi implementerar detta i Tutorialscenen så får det vara kvar här:
     Well, he was no stranger to brawling. These injuries are nothing compared to the state I've seen him in before. #speaker: Police
     I can tell you one thing for certain; <i>these injuries are not what did him in</i>. I'm telling you that he succumbed to the bottle. It was inevitable.
 <>-> Questions
-* Snus[What do you make of this?] #speaker: Player
+* [Snus]
+    What do you make of this? #speaker: Player
     You hold the tin of snus up to the officer's face. He takes a long good whiff. #speaker:
     Fyfan, bort med den där! Det luktar skit! #speaker: Police
     Doesn't it smell off somehow? I recognize this smell from somewhere, or <i>something.</i> #speaker: Player
     It all smells the same. I don't touch the stuff.
     <> -> Questions
 * -> finish
-- (finish)
-Look, detective; I know that you think this is yet another murder-mystery that you have to solve, but there's really nothing to it. Just take Boss Man's statement and call it a day.
+- (finish) - Look, detective; I know that you think this is yet another murder-mystery that you have to solve, but there's really nothing to it. Just take Boss Man's statement and call it a day.
 If you still feel the need to investigate more thoroughly, you can come back to me and I'll help point you in the right direction.
 ~ finishedCrimeScene = true
 -> END

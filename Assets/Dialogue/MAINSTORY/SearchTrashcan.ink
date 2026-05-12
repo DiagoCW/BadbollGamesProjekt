@@ -1,0 +1,3 @@
+Just some good ol' trash. #speaker: Player
+Makes me hungry...
+-> END

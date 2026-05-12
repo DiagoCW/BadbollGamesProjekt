@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: 6
   uiDisplay: {fileID: 21300000, guid: 9e9b89662baaacd41854dbcf665ca853, type: 3}
-  description: Receipt found in trash. Dated to last night. Number of card ends in
-    3233.
+  description: Receipts found in trash. Dated to last night around the time of the
+    victim's death, and they share the same card number. Whoever they belong to bought
+    some snus and a falafel.
