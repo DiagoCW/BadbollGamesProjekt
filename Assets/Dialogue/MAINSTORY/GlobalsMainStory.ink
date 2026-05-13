@@ -6,6 +6,8 @@ LIST Clues = (none), snus, receipts, victimPockets, victimWallet, beer, trisslot
 LIST knowledge = (none), victimPoisoned, pocketsEmptied, receiptsBelongToVictim, stoleWallet, knowAboutTrisslott, bartenderAlibi, cashierAlibi, foundCoolantBartender, foundCoolantKiosk
 LIST items = (none), karaokeUSB, beerz
 
+EXTERNAL runAway()
+
 === function addsuspect(x)
     ~ Suspects += x
 
