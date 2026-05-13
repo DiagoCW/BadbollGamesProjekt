@@ -1,5 +1,5 @@
 INCLUDE globalsmainstory.INK
-EXTERNAL runAway()
+//EXTERNAL runAway()
 VAR ranaway = false
 { talkedToSuspiciousGuy: -> QuestionHub | -> Intro }
 === Intro ===

@@ -33,6 +33,7 @@ public class TestAIScript : MonoBehaviour
         {
             animator.ResetTrigger("Running");
             animator.SetTrigger("StopRunning");
+            agent.tag = "NPC";
             //Destroy(gameObject);
         }
             
@@ -55,6 +56,7 @@ public class TestAIScript : MonoBehaviour
         if (targetDestination != null)
         {
             agent.SetDestination(targetDestination.position);
+            agent.tag = "Untagged";
         }
         else
         {

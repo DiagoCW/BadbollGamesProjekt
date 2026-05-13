@@ -357,7 +357,7 @@ public class NewDialogueManager : MonoBehaviour
                     if (tagValue.Equals(null)) tagValue = "Test";
                     if (tagValue.Equals("Player"))
                     {
-                        playerText.text = tagValue;
+                        playerText.text = "Justin Time";
                         npcPanel.SetActive(false);
                         playerPanel.SetActive(true);
                     }

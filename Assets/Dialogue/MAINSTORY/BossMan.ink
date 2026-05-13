@@ -1,8 +1,8 @@
 INCLUDE globalsmainstory.INK
 VAR confused = false
 VAR exhaustedOptions = false
-{ Suspects ? bossMan: -> CanQuestion.Question }
-{ talkedToBossMan: -> CanQuestion|-> Intro }
+{ Suspects ? bossMan: -> StartQuestion("Are you going to arrest me...?") }
+{ talkedToBossMan: <>-> CanQuestion|-> Intro }
 #speaker: Boss Man
 === Intro ===
 { !Nice driving, asshole! | Like I said... Nice driving, asshole. } #anim: Talking
@@ -73,6 +73,7 @@ How's it going?
 === StartQuestion(msg) ===
 ~ talkedToBossMan = true
 {msg} #speaker: Boss Man
+* { knowledge ? receiptsBelongToVictim and Clues !? victimWallet } [The victim came here last night.] -> InquireAboutReceipt
 * { Clues ? victimWallet and knowledge !? stoleWallet } [About this wallet...] -> Wallet
 * { Suspects !? bossMan } [Did you make the call?] -> Call // Endast om Boss Man inte är en suspect 
 * { Suspects !? bossMan } [Did you know the victim?] -> Relation
@@ -80,14 +81,30 @@ How's it going?
 * { Suspects ? bartender or Suspects ? storeClerk } [Ask about other suspects] -> AskAboutSuspects
 * -> DeadEnd
 
+= InquireAboutReceipt
+Huh? #speaker: Boss Man
+I have proof that he came here. I have a receipt from this shop that matches his card number. #speaker: Player
+Oh. Well, that's nothing out of the ordinary. #speaker: Boss Man
+Huh? #speaker: Player
+Did you know he constantly lost his wallet? Someone must have found it and treated themself to one of my famous rolls. It's not the first time or the last. #speaker: Boss Man
+Though, I guess this actually <b>would</b> be the last time...
+I guess that makes sense... The bartender did tell me he often lost it. #speaker: Player
+To weasel out of paying his tab, no doubt! #speaker: Boss Man
+Look, he didn't come here, alright? But I guess I could keep an eye out in case his card shows up again.
+-> StartQuestion("Anything else?")
+-> END
+
 = DeadEnd
-{ Suspects ? storeClerk:
-    Suppose this leads nowhere, I'm bringing you in. I'll have the officer keep an eye on you.
+{ Suspects ? bossMan:
+    Suppose this leads nowhere, I'm bringing you in. I'll have the officer keep an eye on you. #speaker: Player
     -> END
 - else:
     He knows more than he lets on. Call it a hunch, but I've seen this type of guy before... #speaker:
     Som på Bollen i Rullen 25 på nobeltorget.
-    Maybe he really doesn't know anything. Or I could take a little look around his shop...
+    Maybe he really doesn't know anything. Or I could take a little look around his shop... But I need to distract him somehow. 
+    Det har uppstått lite svårigheter med NavMeshen så det här blev inte bra! Men han kommer glida iväg nu hur som helst.
+    Tanken är att han ska gå iväg så att du kan ta dig in och titta runt lite :)
+    ~ runAway()
 }
 -> END
 
@@ -147,11 +164,11 @@ He died <i>shortly</i> after leaving your shop. You know how it looks, right? #s
 Yeah, but that's just why I <b>COULDN'T</b> have killed him! I heard you talking to the officer over there earlier, he said he died of alcohol poisoning or something, right? #speaker: Boss Man
 Probably. He had injuries indicative of a struggle, though. You could have knocked him the fuck out, and it happened to kill him. Let's just say it was manslaughter and call it a day, huh? Heat of the moment! #speaker: Player
 I didn't <b>DO IT.</b> As for his injuries, I can explain. He told me as much about them last night. #speaker: Boss Man
-He had a falling out with the clerk by the gas station, said he tried to get something from him. 
+He had a falling out with the clerk by the gas station, said they fought over something.
 Something? Like what? #speaker: Player
 He didn't say. I could tell that he didn't want to talk about it, either.
-Please, I'm telling you... If he really was murdered, I suppose I can't prove my innocense, but he sure as hell knows something about this.
-~ addsuspect(storeClerk)
+Please, I'm telling you... If he really was murdered, I suppose I can't prove my innocense, but the store clerk sure as hell knows something about all this.
+// ~ addsuspect(storeClerk)
 -> DeadEnd
 = Call
 Didn't you already take my statement about this? #speaker: Boss Man

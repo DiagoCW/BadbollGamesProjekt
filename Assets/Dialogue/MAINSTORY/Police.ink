@@ -6,29 +6,29 @@ The officer has been patiently waiting for you to arrive. He stands diligently w
 Your sudden arrival seems to have thrown him off his balance, though.
 Hello detective, quite an entrance you made there. There was really no need to rush. #speaker: Police
     * [I drive.]
-        Not anymore, it would seem. You should probably take care of that later...
+        Not anymore, it would seem. You should probably take care of that later... Let's just get this done with.
     * [What seems to be the problem?]
-        I was expecting you to already be briefed about it, but I suppose I could give you the run-down. There's not much to it.
+        I was expecting you to already be briefed about it, but I suppose I could give you the run-down. There's not much to it, really.
     * [Cut to the chase.]
 - Last night, the body of 57-year old Peter Grip was found lying here. The official cause of death is yet to be determined, but knowing him I'd say it was inevitable.
 Why do you say that? Did you know the victim? #speaker: Player
-He was a known drunk. I've dealt with him before on many occassions when he's had a few too many at the bar. I tended to run into him frequently. If a call is made, it's likely he was involved somehow.
-Anyway, he has no immediate family. Any family he has left wants nothing to do with him. Seems he burned his bridges since way back.
+He was a known drunk. I've dealt with him before on many occassions when he's had a few too many at the bar. I tended to run into him frequently. If a call was made, it's likely he was involved somehow. #speaker: Police
+Anyway, he has no immediate family. Any family he has left wants nothing to do with him. He had already burned his bridges since way back.
 No witnesses have come forward to share any information yet, but we haven't had the chance to interview anyone yet either. We'll leave that to you, though I can't imagine anything will come of it.
     -(opts)
     * { Suspects ? bossMan } [About Boss Man...]
         Did you get an initial statement from him? #speaker: Player
         Only that he found the body after closing up shop. Though I figured that you could do the rest, seeing as you're here. #speaker: Police
-        Anything suspiscious about him?
-        Other than that he found a dead drunk lying here? Not a pretty sight, but someone had to stumble upon him sooner or later.
+        Anything suspicious about him? #speaker: Player
+        Other than that he found a dead drunk lying here? Not a pretty sight, but someone had to stumble upon him sooner or later. #speaker: Police
         -> opts
     * [Potential murder?]
-        I knew you would start going off on the murder aspect... I suppose, but we really have no reason to suspect or classify it as such. As I said, this came a surprise to no one. 
+        I knew you would start going off on the murder aspect... I suppose, but we really have no reason to suspect or classify it as such. As I said, this came a surprise to no one. #speaker: Police
         We tested his blood alcohol level, and it was surprisingly high even for a guy like him. Seems like his liver gave up, kidneys shut down... And the rest is history.
         -> opts
     * [Who found the body?]
         As you said, somebody found the body. That someone must have phoned it in? #speaker: Justin Time
-        They did. <i>Boss Man.</i>
+        They did. <i>Boss Man.</i> #speaker: Police
         ** { talkedToBossMan } [I crashed my car behind his shop.]
             Then I take it that you've already introduced yourselves.
         ** { not talkedToBossMan } [Boss Man?]
@@ -57,31 +57,32 @@ Tills att vi implementerar detta i Tutorialscenen så får det vara kvar här:
 { foundAllClues():
     -> Questions
 - else:
-    I think you still have a few things to check out. Inspect the body and its surroundings to make sure you've got everything.
+    I think you still have a few things to check out. Inspect the body and its surroundings to make sure you've got everything. #speaker: Police
     -> END
 }
 
 =Questions
-{ !All done, detective? | Anything else? | And? } #speaker: Police
+- (options)
+{ !All done, detective? | Anything else? | Anything else? | -> finish } #speaker: Police
 * [The victim's pockets]
     We found nothing on him. #speaker: Police
     That's it? #speaker: Player
     That's it. #speaker: Police
     You don't find that odd? You usually carry <i>something</i> with you, like a wallet maybe. Could he have been robbed? #speaker: Player
     Excuse my french, men han var pissfattig. Everyone knew that. He could have nothing of value on him that anyone would want. #speaker: Police
-    <>-> Questions
+    -> options
 * [Victim's injuries]
     The victim has some injuries, from a struggle perhaps? Leading to his death? #speaker: Player
     Well, he was no stranger to brawling. These injuries are nothing compared to the state I've seen him in before. #speaker: Police
     I can tell you one thing for certain; <i>these injuries are not what did him in</i>. I'm telling you that he succumbed to the bottle. It was inevitable.
-<>-> Questions
+    -> options
 * [Snus]
     What do you make of this? #speaker: Player
     You hold the tin of snus up to the officer's face. He takes a long good whiff. #speaker:
     Fyfan, bort med den där! Det luktar skit! #speaker: Police
     Doesn't it smell off somehow? I recognize this smell from somewhere, or <i>something.</i> #speaker: Player
-    It all smells the same. I don't touch the stuff.
-    <> -> Questions
+    It all smells the same. I don't touch the stuff. #speaker: Police
+    -> options
 * -> finish
 - (finish) - Look, detective; I know that you think this is yet another murder-mystery that you have to solve, but there's really nothing to it. Just take Boss Man's statement and call it a day.
 If you still feel the need to investigate more thoroughly, you can come back to me and I'll help point you in the right direction.
@@ -89,7 +90,7 @@ If you still feel the need to investigate more thoroughly, you can come back to 
 -> END
 
 === Hub ===
-Här ska spelaren i framtiden få information om vart de borde gå härnäst, baserat på vilken information och ledtrådar de har för tillfället. Just nu under construction
+Här ska spelaren i framtiden få information om vart de borde gå härnäst, baserat på vilken information och ledtrådar de har för tillfället. Just nu under construction #speaker: 
 * [About Boss Man...] -> AboutBossMan
 * { Suspects ? storeClerk } [Gas Station Clerk...] -> AboutStoreClerk
 * { Suspects ? bartender } [About the bartender...] -> AboutBartender
@@ -97,7 +98,7 @@ Här ska spelaren i framtiden få information om vart de borde gå härnäst, ba
 
 = AboutBossMan
 * { Suspects ? bossMan } [He stole the victim's wallet.]
-    No kidding? 
+    No kidding? #speaker: Police
     -> Hub
 * -> END
 

@@ -1,11 +1,8 @@
 INCLUDE globalsmainstory.INK
-
-// Check if we've met him before
-{ talkedToBartender: -> CanQuestion | -> Intro }
-
+{ talkedToBartender: <>-> CanQuestion | -> Intro }
 #speaker: Bartender
-=== Intro ===
-{ !What can I get you? | So? What did you want to know? } #anim: Talking
+=== Intro() ===
+{ !What can I get you? | { ~Anything else? | What'll it be? } } #anim: Talking
     * { items !? items.beerz } [A beer.]
         Coming right up. That'll be fifty spänn.
         ~ getitem(items.beerz)
@@ -15,14 +12,14 @@ INCLUDE globalsmainstory.INK
             The sooner you buy a beer, the sooner I'll tell ya.
             -> Intro
         - else:
-        -> StartQuestion("Save yourself the trouble of asking in the future. Everyone knew the guy.")
+        -> StartQuestion("Did I ever. Save yourself the trouble of asking in the future, everyone knew the guy.")
             }
-    + [I gots to go, baby.] 
+    + [I gots to go, baby.]
         Yeah, don't let the door hit you.
         -> DONE
 
 === CanQuestion ===
-{ Suspects ? bartender and Suspects !? storeClerk: The bartender has a strong case for being the murderer. But I get the feeling I still have a few loose threads to look into. -> END }
+{ Suspects ? bartender and Suspects !? storeClerk: <i>The bartender has made a strong case for being the culprit. But I get the feeling I still have a few loose threads to look into...</i> -> END }
 #speaker: Bartender
 Need another drink? I'd really prefer if you'd buy another beer.
 * { finishedCrimeScene } [I've got some questions for you.]
