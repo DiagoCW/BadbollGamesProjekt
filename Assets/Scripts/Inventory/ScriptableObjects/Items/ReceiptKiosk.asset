@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46db39dea7ad8e84bab99ebae6da6802, type: 3}
   m_Name: ReceiptKiosk
   m_EditorClassIdentifier: 
-  Id: 6
+  Id: 8
   uiDisplay: {fileID: 21300000, guid: 9e9b89662baaacd41854dbcf665ca853, type: 3}
   description: Receipts found in trash. Dated to last night around the time of the
     victim's death, and they share the same card number. Whoever they belong to bought
