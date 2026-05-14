@@ -2,7 +2,7 @@ INCLUDE globalsmainstory.INK
 { talkedToBartender: <>-> CanQuestion | -> Intro }
 #speaker: Bartender
 === Intro() ===
-{ !What can I get you? | { ~Anything else? | What'll it be? } } #anim: Talking
+{ What can I get you? | { ~Anything else? | What'll it be? } } #anim: Talking
     * { items !? items.beerz } [A beer.]
         Coming right up. That'll be fifty spänn.
         ~ getitem(items.beerz)
@@ -12,10 +12,10 @@ INCLUDE globalsmainstory.INK
             The sooner you buy a beer, the sooner I'll tell ya.
             -> Intro
         - else:
-        -> StartQuestion("Did I ever. Save yourself the trouble of asking in the future, everyone knew the guy.")
+        -> StartQuestion("Did I. Save yourself the trouble of asking in the future by the way, everyone knew the guy.")
             }
     + [I gots to go, baby.]
-        Yeah, don't let the door hit you.
+        Don't let the door hit you.
         -> DONE
 
 === CanQuestion ===
@@ -130,8 +130,9 @@ No, no. Sleepyhead over there and loiter man was here all night. Then they all l
 It was another dull and uneventful night. Well, except for Peter's singing.
 Anything else? Was he acting out of character, or did he tell you anything? #speaker: Player
 No, not really. Business as usual. #speaker: Bartender
-Alright, that'll be all.
+* { knowledge ? bartenderAlibi } [This ain't right...] -> Alibi
 ~ bartenderToldHisAlibi = true
+Alright, that'll be all.
 -> StartQuestion("Anything else")
 
 = ShowReceipt
