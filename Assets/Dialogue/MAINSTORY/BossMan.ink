@@ -73,6 +73,10 @@ How's it going?
 === StartQuestion(msg) ===
 ~ talkedToBossMan = true
 {msg} #speaker: Boss Man
+* [Start walking, buddy.]
+    Ok :)
+    ~ startMovement("Walking")
+    -> END
 * { knowledge ? receiptsBelongToVictim and Clues !? victimWallet } [The victim came here last night.] -> InquireAboutReceipt
 * { Clues ? victimWallet and knowledge !? stoleWallet } [About this wallet...] -> Wallet
 * { Suspects !? bossMan } [Did you make the call?] -> Call // Endast om Boss Man inte är en suspect 
@@ -100,11 +104,11 @@ Look, he didn't come here, alright? But I guess I could keep an eye out in case 
     -> END
 - else:
     He knows more than he lets on. Call it a hunch, but I've seen this type of guy before... #speaker:
-    Som på Bollen i Rullen 25 på nobeltorget.
+    Som på Bollen i Rullen 25 på Nobeltorget.
     Maybe he really doesn't know anything. Or I could take a little look around his shop... But I need to distract him somehow. 
-    Det har uppstått lite svårigheter med NavMeshen så det här blev inte bra! Men han kommer glida iväg nu hur som helst.
-    Tanken är att han ska gå iväg så att du kan ta dig in och titta runt lite :)
-    ~ runAway()
+    //Det har uppstått lite svårigheter med NavMeshen så det här blev inte bra! Men han kommer glida iväg nu hur som helst.
+    //Tanken är att han ska gå iväg så att du kan ta dig in och titta runt lite :)
+    //~ startMovement("Walking")
 }
 -> END
 

@@ -8,10 +8,10 @@ public class InkExternalFunctions
 {
     public void Bind(Story story, TestAIScript aiAgent)
     {
-        story.BindExternalFunction("runAway", () =>
+        story.BindExternalFunction("startMovement", (string name) =>
         {
             Debug.Log($"External function triggered!");
-            aiAgent?.StartPath();
+            aiAgent?.StartPath(name);
             //aiAgent.tag = "Untagged";
         });
         story.BindExternalFunction("FadeIn", () =>
@@ -41,7 +41,7 @@ public class InkExternalFunctions
 
     public void Unbind(Story story)
     {
-        story.UnbindExternalFunction("runAway");
+        story.UnbindExternalFunction("startMovement");
         story.UnbindExternalFunction("FadeIn");
         story.UnbindExternalFunction("FadeOut");
     }

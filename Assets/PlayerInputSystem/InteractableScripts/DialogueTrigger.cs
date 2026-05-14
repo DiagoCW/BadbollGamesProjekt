@@ -8,7 +8,6 @@ using NUnit.Framework;
 /// <summary>
 /// Detta script läggs till på alla NPCs som spelaren ska kunna interagera med och starta dialog.
 /// Den innehåller en JSON-fil med dess Inkdialog som skickas till DialogueManager.
-/// 
 /// </summary>
 public class DialogueTrigger : MonoBehaviour, IInteractable
 {
@@ -69,6 +68,7 @@ public class DialogueTrigger : MonoBehaviour, IInteractable
 
     public void FacePlayer()
     {
+        if (aiScript != null && aiScript.isMoving) return;
         Vector3 rotation = new Vector3(player.position.x, transform.position.y, player.position.z);
         transform.LookAt(rotation);
     }

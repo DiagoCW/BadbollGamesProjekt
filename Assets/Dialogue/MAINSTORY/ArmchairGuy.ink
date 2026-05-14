@@ -82,7 +82,7 @@ Did you see anything suspicious last night?
 #snore: start
 <i>He immediately goes back to sleep.</i> 
 ~ isAsleep = true
--> Hub
+<>-> Hub
 
 === AwakeExit ===
 #speaker: Player

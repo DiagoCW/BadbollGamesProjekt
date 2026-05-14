@@ -1,5 +1,5 @@
 INCLUDE globalsmainstory.INK
-//EXTERNAL runAway()
+//EXTERNAL runAway(x) // sätt namnet på animation trigger här
 VAR ranaway = false
 { talkedToSuspiciousGuy: -> QuestionHub | -> Intro }
 === Intro ===
@@ -16,9 +16,9 @@ The man before you is clearly intoxicated. Inebriated, even. Absolutely piss dru
 
 = GainEntry
 - What? Why? #speaker: Some guy
-~ runAway()
+~ startMovement("Running")
 ~ ranaway = true
-You'll never catch me pig!!! # anim: Running
+You'll never catch me pig!!! //# anim: Running
 <i>He darts across the road and immediately stops by the convience store to catch his breath. He seems suspicious...</i> #speaker:
 ->END
 

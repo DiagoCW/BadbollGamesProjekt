@@ -278,6 +278,7 @@ public class NewDialogueManager : MonoBehaviour
         //PlayerController.Instance.enabled = false;
         npcAnimator = npc;
         aiAgent = agent;
+        if (aiAgent != null && aiAgent.isMoving) return;
         currentStory = new(inkJson.text);
         dialogueVariables.StartListening(currentStory);
 
