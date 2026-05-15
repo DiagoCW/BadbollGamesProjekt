@@ -19,7 +19,7 @@ public class ClueboardTutorial : MonoBehaviour
 
     [Header("Input")]
     [Tooltip("The key the player needf to press to open/close the instructions")]
-    public KeyCode toggleKey = KeyCode.T;
+    private KeyCode toggleKey = KeyCode.I;
 
     private void OnEnable()
     {
@@ -41,7 +41,7 @@ public class ClueboardTutorial : MonoBehaviour
             return;
         }
 
-        // If the board is open, make the "Press T" prompt visible 
+        // If the board is open, make the "Press " prompt visible 
         if (promptUI != null && !promptUI.activeSelf)
         {
             promptUI.SetActive(true);
