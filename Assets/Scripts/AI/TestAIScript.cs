@@ -7,7 +7,7 @@ public class TestAIScript : MonoBehaviour
 {
     public Transform targetDestination;
     [SerializeField] List<Transform> targetDestinations;
-    static int destIndex = 0;
+    private int destIndex = 0;
 
     private NavMeshAgent agent;
     private Animator animator;

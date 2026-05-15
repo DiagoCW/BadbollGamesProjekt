@@ -9,6 +9,8 @@ public class OutlineHighlighter : MonoBehaviour
     [SerializeField] private Color outlineColor = Color.yellow;
     [SerializeField] private float outlineWidth = 0.03f;
     //[SerializeField] private ClueType clueType = ClueType.Regular;
+    [SerializeField] private string inkTrigger = string.Empty; // the INK variable that must be true for the outline to activate. Leave empty if no such check is needed
+    bool trigger = false; // the bool that tries to get the value of the inkTrigger string. Defaults to true if the InkTrigger string is empty
     public enum ClueType { Regular, Important, Critical, Hidden }
 
     private GameObject outlineObject;
@@ -21,8 +23,6 @@ public class OutlineHighlighter : MonoBehaviour
         CreateOutline();
         outlineObject.SetActive(false);
     }
-
-    
 
     void CreateOutline()
     {
@@ -76,13 +76,18 @@ public class OutlineHighlighter : MonoBehaviour
             DestroyImmediate(outlineObject);
     }
 
+    
+
     public void SetHighlighted(bool value, float duration)
     {
         if (value == isHighlighted) return;
         
         isHighlighted = value;
 
-        if (isHighlighted)
+        trigger = string.IsNullOrEmpty(inkTrigger) || (NewDialogueManager.Instance.dialogueVariables.variables.TryGetValue(inkTrigger, out Ink.Runtime.Object inkvalue) ||
+            NewDialogueManager.Instance.InkListContainsItem(inkTrigger, "knowledge"));
+
+        if (isHighlighted && trigger)
         {
             hasBeenHighlighted = true;
             CreateOutline();

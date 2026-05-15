@@ -6365,7 +6365,7 @@ Transform:
   m_GameObject: {fileID: 518353620}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 13.074884, y: 1.627767, z: 17.810875}
+  m_LocalPosition: {x: 13.074884, y: 1.627767, z: 14.816}
   m_LocalScale: {x: 2.3789, y: 2.3789, z: 2.3789}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -12433,6 +12433,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1716885946}
   - {fileID: 637334923}
   - {fileID: 29877217}
   - {fileID: 1137176714}
@@ -12442,7 +12443,6 @@ RectTransform:
   - {fileID: 1619485448}
   - {fileID: 10990723}
   - {fileID: 1118400103}
-  - {fileID: 1716885946}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -22972,6 +22972,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeImage: {fileID: 1716885947}
   fadeDuration: 1.5
+  FadeInOnStart: 0
 --- !u!4 &1266457901
 Transform:
   m_ObjectHideFlags: 0
@@ -23374,6 +23375,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outlineColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   outlineWidth: 1.58
+  inkTrigger: 
 --- !u!1001 &1315322736
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23523,6 +23525,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outlineColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   outlineWidth: 0.03
+  inkTrigger: 
 --- !u!23 &1330437926
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -23622,6 +23625,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outlineColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   outlineWidth: 0.03
+  inkTrigger: 
 --- !u!23 &1334121074
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -28251,6 +28255,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outlineColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   outlineWidth: 0.02
+  inkTrigger: bartenderAlibi
 --- !u!23 &1691326494
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -30967,6 +30972,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outlineColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   outlineWidth: 0.12
+  inkTrigger: talkedToBossMan
 --- !u!114 &1808297818
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32882,7 +32888,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 763743370412578557, guid: 0993b5793f98947409e773b6431cd003, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 11.25
+      value: 9.149
       objectReference: {fileID: 0}
     - target: {fileID: 763743370412578557, guid: 0993b5793f98947409e773b6431cd003, type: 3}
       propertyPath: m_LocalPosition.y
@@ -32890,7 +32896,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 763743370412578557, guid: 0993b5793f98947409e773b6431cd003, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 7.99
+      value: 4.984
       objectReference: {fileID: 0}
     - target: {fileID: 763743370412578557, guid: 0993b5793f98947409e773b6431cd003, type: 3}
       propertyPath: m_LocalRotation.w
@@ -35636,6 +35642,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outlineColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   outlineWidth: 0.48
+  inkTrigger: talkToPolice
 --- !u!114 &2102050741
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37514,6 +37521,10 @@ PrefabInstance:
     - target: {fileID: 1433581478486252078, guid: 36aad984599f71f4d8f6d9dd7d1259ce, type: 3}
       propertyPath: m_LocalPosition.z
       value: -2.733
+      objectReference: {fileID: 0}
+    - target: {fileID: 1547451598274861484, guid: 36aad984599f71f4d8f6d9dd7d1259ce, type: 3}
+      propertyPath: inkTrigger
+      value: talkedToBossMan
       objectReference: {fileID: 0}
     - target: {fileID: 1547451598274861484, guid: 36aad984599f71f4d8f6d9dd7d1259ce, type: 3}
       propertyPath: outlineWidth

@@ -36,7 +36,7 @@ Need another drink? I'd really prefer if you'd buy another beer.
 -(opts)
 * [About the victim...] -> KnowPeter
 * { Suspects ? bossMan } [Ask about Boss Man] -> BossMan
-* { knowledge !? receiptsBelongToVictim} [Last night?] -> LastNight
+* /*{ knowledge !? receiptsBelongToVictim}*/ [Last night?] -> LastNight
 * { knowledge ? bartenderAlibi and Suspects !? bartender } [About your alibi...] -> Alibi
 * [See you later.] -> END
 
@@ -95,7 +95,7 @@ I've got nothing. Sorry. Just keeping you on your toes! Got to go now baby. #spe
 = KnowPeter
 I know that he died, yes. Awful way to go. #speaker: Bartender
 What way would that be? #speaker: Player
-Alcohol, as anyone else would tell you. I guess I feel somewhat responsible for it, being the proprietor and supplier of his lifestyle... But he was a big boy, he could make his own decisions. #speaker: Bartender
+Alcohol, as anyone else would tell you. I guess I feel somewhat responsible for it, being the proprietor and main supplier of his lifestyle... But he was a big boy, he could make his own decisions. #speaker: Bartender
 Not a very empathetic guy, are you? #speaker: Player
 I'm plenty empathic, kompis. All my friends tell me I'm an empath. #speaker: Bartender
 Anyway, it was hard to appreciate the guy. 
@@ -117,11 +117,16 @@ Come to think of it, he did pay last night. I had to do a double take when I hea
 When the body was found, his pockets were emptied. He didn't have his wallet on him. #speaker: Player
     Then he lost it, simple as. He was prone to losing his wallet during his benders. 
     He would use it as an excuse to put off paying his tab, but he never had any money to begin with. #speaker: Bartender
-* { Clues ? receipts } [-Show receipt from trash] -> ShowReceipt
-* { knowledge !? stoleWallet } [Did he drop it here?]
+* { Clues ? receipts and knowledge !? receiptsBelongToVictim} [-Show receipt from trash] -> ShowReceipt
+* { knowledge !? stoleWallet and Clues !? victimWallet } [Did he drop it here?]
     Nope, hasn't turned up here. He usually found it by himself somehow. Not that it matters. #speaker: Bartender
     <i>Nothing of note here. It's not hard to believe a drunk like him would lose his wallet constantly.</i> #speaker:
-    <i>But he always got it back somehow. I need to find out more about this. If I find the wallet, have I found the killer?</i>
+    <i>But he always got it back, one way or another. I need to find out more about this somehow.</i>
+    -> LastNightCont
+* { Clues ? victimWallet } [Boss Man has his wallet.]
+    Huh, go figure. That's probably how he kept getting it back. He was as much of a regular there as he was here. #speaker: Bartender
+    You don't think that Boss Man could have stolen it? #speaker: Player
+    Look, I know the guy, he wouldn't steal his wallet. Unless you know something that I don't.
     -> LastNightCont
     
 = LastNightCont
@@ -130,10 +135,14 @@ No, no. Sleepyhead over there and loiter man was here all night. Then they all l
 It was another dull and uneventful night. Well, except for Peter's singing.
 Anything else? Was he acting out of character, or did he tell you anything? #speaker: Player
 No, not really. Business as usual. #speaker: Bartender
-* { knowledge ? bartenderAlibi } [This ain't right...] -> Alibi
-~ bartenderToldHisAlibi = true
-Alright, that'll be all.
--> StartQuestion("Anything else")
+{ knowledge ? bartenderAlibi: 
+    * [This ain't right...] -> Alibi 
+- else: 
+    ~ bartenderToldHisAlibi = true
+    Alright, that'll be all. #speaker: Player
+    }
+
+-> StartQuestion("Anything else?")
 
 = ShowReceipt
 Wait, do you still have any of his receipts from last night? #speaker: Player
@@ -146,7 +155,9 @@ Here's one from last night. #anim: Talking
 - else:
     <i>...and then lost his wallet somehow. Could it have been stolen before his death? Or after his death...?</i>
     <i>I need to find that wallet.</i>
-}
+} 
 ~ gainknowledge(receiptsBelongToVictim)
 Thank you. This has been a big help. #speaker: Player
--> StartQuestion("Glad to be of service. Let me know if you need anything else.")
+* [Continue hearing the rest] -> LastNightCont
+* [I have everything I need.]
+    -> StartQuestion("Glad to be of service. Let me know if you need anything else.")
