@@ -14,7 +14,7 @@ public class MainMenuMusic : MonoBehaviour
     [Tooltip("How long it takes for the menu music to fade to silence.")]
     [SerializeField] private float fadeDuration = 1.5f;
 
-    [Tooltip("The EXACT name of the next scene")]
+    [Tooltip("The name of the next scene")]
     [SerializeField] private string sceneToLoad;
 
     private void Awake()
@@ -26,6 +26,15 @@ public class MainMenuMusic : MonoBehaviour
     {
         // Optional: Disable the button here so the player can't spam click it while it fades
         StartCoroutine(FadeOutAndLoadRoutine());
+
+        if (FadeInOut.Instance != null && !string.IsNullOrEmpty(sceneToLoad)) 
+        {
+            FadeInOut.Instance.FadeToScene(sceneToLoad, fadeDuration);
+        }
+        else 
+        {
+            Debug.LogError("Missing FadeInOut instance or scene name");
+        }
     }
 
     private IEnumerator FadeOutAndLoadRoutine()
@@ -43,15 +52,5 @@ public class MainMenuMusic : MonoBehaviour
 
         // Turns the volume to 0
         audioSource.volume = 0f;
-
-        // load the next scene
-        if (!string.IsNullOrEmpty(sceneToLoad))
-        {
-            SceneManager.LoadScene(sceneToLoad);
-        }
-        else
-        {
-            Debug.LogError("MainMenuMusic: You forgot to type the scene name in the Inspector!");
-        }
     }
 }
