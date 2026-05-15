@@ -501,6 +501,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outlineColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   outlineWidth: 0.03
+  inkTrigger: 
 --- !u!1001 &7182282
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31072,6 +31073,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeImage: {fileID: 600435014}
   fadeDuration: 1.5
+  FadeInOnStart: 1
 --- !u!1001 &1118261664
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -58448,6 +58450,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outlineColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   outlineWidth: 0.1
+  inkTrigger: carEngine
 --- !u!114 &2121211193
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58462,7 +58465,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: aa2fe190051d9c247a129c4205d52b83, type: 2}
   item2: {fileID: 0}
-  inkJson: {fileID: 4900000, guid: 38ee754d2fa8fc84696d6c97b4550a0e, type: 3}
+  inkJson: {fileID: 4900000, guid: 0e5b2f62da6f5a34289dde72d3614956, type: 3}
   inkJson2: {fileID: 4900000, guid: 38ee754d2fa8fc84696d6c97b4550a0e, type: 3}
 --- !u!65 &2121211194
 BoxCollider:
