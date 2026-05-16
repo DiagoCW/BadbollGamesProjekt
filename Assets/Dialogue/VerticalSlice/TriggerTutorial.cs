@@ -29,9 +29,11 @@ public class TriggerTutorial : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Animator anim = FindFirstObjectByType<DialogueTrigger>().GetComponent<Animator>();
+        TestAIScript aiScript = FindFirstObjectByType<DialogueTrigger>().GetComponent<TestAIScript>();
         if ((bool)trigger && string.IsNullOrEmpty(Inkvariable))
         {
-            NewDialogueManager.Instance.EnterDialogue(inkJson, null, null);
+            NewDialogueManager.Instance.EnterDialogue(inkJson, anim, aiScript);
         }
     }
 
@@ -62,6 +64,5 @@ public class TriggerTutorial : MonoBehaviour
             Debug.Log($"Destroying trigger " + Inkvariable);
             Destroy(gameObject);
         }
-            
     }
 }

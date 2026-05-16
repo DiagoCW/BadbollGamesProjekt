@@ -55,19 +55,14 @@ Absolutely. This aggression will not stand, man. You gotta find out who did this
 I was at the bar for most of the night. Loitering. Peter and some other guy was there snoring his head off. We had a good time! #speaker: Some Guy
 Peter did his usual karaoke routine, to the dismay of the bartender. He can't stand his singing.
 After pounding a few cold ones he went to the gas station to get some snus.
-/** { Clues ? snus and knowledge ? receiptsBelongToVictim } [This snus?]
-    <i>You show him the snus that you found by the victim. He catches a whiff.</i> #speaker:
-    That's his, he's the only one that snuses that shit. #speaker: Some Guy
-    But it smells <i>way</i> worse than it should... What's up with that?
-    Anyway, <>*/
 I guess something must have happened when he went there, because when he came back he wasn't his usual self. We asked what had happened and he just waved his hand and sat down by himself by the counter.
 After that, me and the other guy left an hour before closing and Peter was alone with the bartender.
 { bartenderToldHisAlibi: 
-<i>Hold on a minute. The bartender told you that they all left during the same time last night...</i>
+<i>Hold on a minute. The bartender told you that they all left during the same time last night...</i> #speaker:
 Are you sure? The bartender told me that you all left at around the same time. #speaker: Player
 That ain't right. After Peter came back from the shop, he was lowkey ruining the mood, so me and sleepyhead went home. #speaker: Some Guy
 ~ gainknowledge(bartenderAlibi)
-<i>The bartender pulled the wool over your eyes, you fucking idiot. You got to go back there <b>right now</b> and confront him about this.</i>
+<i>The bartender pulled the wool over your eyes, you fucking idiot. You got to go back there <b>right now</b> and confront him about this.</i> #speaker: 
 -> QuestionHub
 - else:
 And they can corroborate your alibi? Where can I find him? #speaker: Player
