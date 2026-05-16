@@ -104,6 +104,18 @@ public class NewDialogueManager : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// Check if a list in INK contains the item
+    /// </summary>
+    /// <param name="itemName">The item to look for</param>
+    /// <param name="listName">The INK list to check in</param>
+    /// <returns></returns>
+    public bool InkListContainsItem(string itemName, string listName)
+    {
+        var list = currentStory.variablesState[listName] as InkList;
+        return list.ContainsItemNamed(itemName);
+    }
+
     private void OnEnable()
     {
         CorkboardManager.OnCorkboardCompleted += OnCorkboardCompletedHandler;
@@ -278,6 +290,7 @@ public class NewDialogueManager : MonoBehaviour
         //PlayerController.Instance.enabled = false;
         npcAnimator = npc;
         aiAgent = agent;
+        if (aiAgent != null && aiAgent.isMoving) return;
         currentStory = new(inkJson.text);
         dialogueVariables.StartListening(currentStory);
 

@@ -25,7 +25,7 @@ public class ClueboardTrigger : MonoBehaviour, IInteractable
     public bool isDraggingThread = false;
     public bool isDraggingClue = false;
 
-    private bool IsHoldingSomething => isDraggingClue || isDraggingThread;
+    private bool CanCloseBoard => !isDraggingClue && !isDraggingThread;
 
     private void Start()
     {
@@ -67,7 +67,7 @@ public class ClueboardTrigger : MonoBehaviour, IInteractable
             isPlayerNear = false;
 
             // close the board if the player walks away, however not happening when they dragging a thread
-            if (isViewingBoard && !IsHoldingSomething)
+            if (isViewingBoard)
             {
                 ToggleBoard(false);
             }
@@ -77,7 +77,7 @@ public class ClueboardTrigger : MonoBehaviour, IInteractable
     public void Interact()
     {
         // Only allow interaction if the player is in range and not currently drawing a connection
-        if (isPlayerNear && !IsHoldingSomething)
+        if (isPlayerNear && CanCloseBoard)
         {
             ToggleBoard(!isViewingBoard);
         }
@@ -88,8 +88,8 @@ public class ClueboardTrigger : MonoBehaviour, IInteractable
     /// </summary>
     private void GameInput_OnExitAction(object sender, System.EventArgs e)
     {
-        // Close the board view if it is currently active and no thread is being dragged
-        if (isViewingBoard && !isDraggingThread)
+        // Close the board view if it is currently active and the player is not doing something with it
+        if (isViewingBoard && CanCloseBoard)
         {
             ToggleBoard(false);
         }
@@ -115,6 +115,11 @@ public class ClueboardTrigger : MonoBehaviour, IInteractable
         }
         else
         {
+            if (ThreadManager.Instance != null && isDraggingThread) 
+            {
+                ThreadManager.Instance.CancelDrawing(); //If the board is shut while drawing a thread, go out of drawing
+            }
+
             // Restore player camera and disable board camera
             clueboardCamera.SetActive(false);
             playerCamera.SetActive(true);
@@ -139,7 +144,7 @@ public class ClueboardTrigger : MonoBehaviour, IInteractable
     private void Update()
     {
         // Failsafe to ensure the cursor remains free and visible while the board is open.
-        if (isViewingBoard && !IsHoldingSomething)
+        if (isViewingBoard)
         {
             if (Cursor.lockState != CursorLockMode.Confined || !Cursor.visible)
             {

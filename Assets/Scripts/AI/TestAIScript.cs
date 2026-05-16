@@ -1,12 +1,19 @@
+using Ink.Parsed;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class TestAIScript : MonoBehaviour
 {
     public Transform targetDestination;
+    [SerializeField] List<Transform> targetDestinations;
+    private int destIndex = 0;
 
     private NavMeshAgent agent;
     private Animator animator;
+
+    private string animtrigger;
+    public bool isMoving = false;
 
     void Start()
     {
@@ -28,13 +35,17 @@ public class TestAIScript : MonoBehaviour
         //        }
         //    }
         //}
-
-        if (Vector3.Distance(agent.transform.position, targetDestination.position) <= 1)
+        if (!isMoving) return;
+        if (Vector3.Distance(agent.transform.position, targetDestinations[destIndex - 1].position) <= 0.5f)
         {
-            animator.ResetTrigger("Running");
-            animator.SetTrigger("StopRunning");
+            //animator.ResetTrigger("Running");
+            animator.SetTrigger($"Stop{animtrigger}");
             agent.tag = "NPC";
-            //Destroy(gameObject);
+            isMoving = false;
+            if (destIndex >= targetDestinations.Count)
+            {
+                destIndex = 0;
+            }
         }
             
 
@@ -51,12 +62,15 @@ public class TestAIScript : MonoBehaviour
 
     }
 
-    public void StartPath()
+    public void StartPath(string trigger)
     {
+        animtrigger = trigger;
         if (targetDestination != null)
         {
-            agent.SetDestination(targetDestination.position);
-            agent.tag = "Untagged";
+            animator.SetTrigger(animtrigger);
+            agent.SetDestination(targetDestinations[destIndex++ % targetDestinations.Count].position);
+            //agent.tag = "Untagged";
+            isMoving = true;
         }
         else
         {

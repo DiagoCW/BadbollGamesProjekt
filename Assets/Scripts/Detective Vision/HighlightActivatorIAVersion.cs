@@ -46,11 +46,14 @@ public class HighlightActivatorIAVersion : MonoBehaviour
 
     private void GameInput_OnHighlightAction(object sender, System.EventArgs e)
     {
-        //if (Time.time >= CooldownEndTime && !IsHighlighting)
-        //if (!PlayerController.Instance.IsInventoryOpen && !NewDialogueManager.Instance.dialogueIsPlaying)
-        {
-            HighlightVisibleObjects();
-        }
+        if (playerCamera == null || !playerCamera.isActiveAndEnabled) return; // Prevent use if the camera is disabled
+
+        if (ThreadManager.Instance != null && ThreadManager.Instance.boardTrigger != null && ThreadManager.Instance.boardTrigger.isViewingBoard) return; // Prevent use if player is looking at clueboard
+
+      //  if (PlayerController.Instance.IsInventoryOpen || NewDialogueManager.Instance.dialogueIsPlaying) return; // Prevent use if inventory or dialogue is open
+
+        HighlightVisibleObjects();
+        
     }
 
     private void GameInput_OnHighlightCancel(object sender, System.EventArgs e)
@@ -96,7 +99,7 @@ public class HighlightActivatorIAVersion : MonoBehaviour
 
         if (playerCamera == null || !playerCamera.isActiveAndEnabled) return;
 
-        Plane[] frustumPlanes = GeometryUtility.CalculateFrustumPlanes(Camera.main);
+        Plane[] frustumPlanes = GeometryUtility.CalculateFrustumPlanes(playerCamera);
 
         var desired = new System.Collections.Generic.HashSet<OutlineHighlighter>();
 
@@ -107,7 +110,7 @@ public class HighlightActivatorIAVersion : MonoBehaviour
 
             if (!GeometryUtility.TestPlanesAABB(frustumPlanes, rend.bounds)) continue;
 
-            if (Vector3.Distance(Camera.main.transform.position, go.transform.position) > maxDistance)
+            if (Vector3.Distance(playerCamera.transform.position, go.transform.position) > maxDistance)
                 continue;
 
             OutlineHighlighter highlighter = go.GetComponent<OutlineHighlighter>();

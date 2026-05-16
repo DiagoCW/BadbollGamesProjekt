@@ -190,7 +190,6 @@ MonoBehaviour:
   tutorialBox: {fileID: 7183650302118786396}
   promptUI: {fileID: 3035036864854686160}
   boardTrigger: {fileID: 0}
-  toggleKey: 116
 --- !u!1 &4702340014121569149
 GameObject:
   m_ObjectHideFlags: 0
@@ -429,7 +428,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 2117955373, guid: d179fc759c617df41817255c13bbb3ff, type: 3}
+  m_Sprite: {fileID: -837657620, guid: 09e1824de39f87e4f946c31507a258ea, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

@@ -3,10 +3,11 @@ LIST Suspects = (none), bossMan, bartender, storeClerk
 // --- Fysiska ledtrådar i spelet
 LIST Clues = (none), snus, receipts, victimPockets, victimWallet, beer, trisslott, kylarVätska
 // --- Kunskap om saker för att kunna pussla ihop ledtrådar
-LIST knowledge = (none), victimPoisoned, pocketsEmptied, receiptsBelongToVictim, stoleWallet, knowAboutTrisslott, bartenderAlibi, cashierAlibi, foundCoolantBartender, foundCoolantKiosk
+LIST knowledge = (none), victimPoisoned, (pocketsEmptied), receiptsBelongToVictim, stoleWallet, knowAboutTrisslott, bartenderAlibi, cashierAlibi, foundCoolantBartender, foundCoolantKiosk
 LIST items = (none), karaokeUSB, beerz
 
-EXTERNAL runAway()
+// Binder en metod som kan kallas av ett script i unity för att starta en navmeshagent. Parametern är till för att sätta animation trigger
+EXTERNAL startMovement(x)
 
 === function addsuspect(x)
     ~ Suspects += x
@@ -33,7 +34,7 @@ VAR startIntro = false
 VAR cluesFoundonBody = 0
 VAR cluesFoundbyBody = 0
 VAR talkToPolice = false
-VAR finishedCrimeScene = false
+VAR finishedCrimeScene = true
 
 // AKT 2: SUSPECTS
 
