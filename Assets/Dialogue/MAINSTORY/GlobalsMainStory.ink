@@ -4,7 +4,7 @@ LIST Suspects = (none), bossMan, bartender, storeClerk
 LIST Clues = (none), snus, receipts, victimPockets, victimWallet, beer, trisslott, kylarVätska
 // --- Kunskap om saker för att kunna pussla ihop ledtrådar
 LIST knowledge = (none), victimPoisoned, (pocketsEmptied), receiptsBelongToVictim, stoleWallet, knowAboutTrisslott, bartenderAlibi, cashierAlibi, foundCoolantBartender, foundCoolantKiosk
-LIST items = (none), karaokeUSB, beerz
+LIST items = (none), karaokeUSB, beerz, backdoorkey
 
 // Binder en metod som kan kallas av ett script i unity för att starta en navmeshagent. Parametern är till för att sätta animation trigger
 EXTERNAL startMovement(x)
@@ -45,6 +45,8 @@ VAR talkedToBartender = false
 VAR bartenderToldHisAlibi = false
 // CASHIER
 VAR talkedToCashier = false
+VAR cashierToldHisAlibi = false
+VAR canEnterStorage = false
 // Armchair Guy
 VAR talkedToArmchairGuy = false
 // Suspicious Guy
