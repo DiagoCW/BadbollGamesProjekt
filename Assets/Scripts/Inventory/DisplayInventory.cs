@@ -29,20 +29,26 @@ public class DisplayInventory : MonoBehaviour
     Dictionary<GameObject, InventorySlot> itemsDisplayed = new Dictionary<GameObject, InventorySlot>();
     private GameObject currentHoveredSlot;
 
-    void Start()
+    private void Awake()
     {
         CreateSlots();
-        
+
         // Hide tooltip initially
         if (tooltipPanel != null)
             tooltipPanel.SetActive(false);
     }
 
+    void Start()
+    {
+        
+    }
+
     void Update()
     {
-        UpdateSlots();
+        if (PlayerController.Instance != null && PlayerController.Instance.IsInventoryOpen)
+            UpdateSlots();
     }
-    
+
     // When the life cycle of the inventory ends, call null on everything to prevent floating items glitch -Hugo
     private void OnDisable()
     {
@@ -52,22 +58,23 @@ public class DisplayInventory : MonoBehaviour
             mouseItem.obj = null;
             mouseItem.item = null;
         }
-        
+
         // Hide tooltip when inventory closes
         if (tooltipPanel != null)
             tooltipPanel.SetActive(false);
-        
+
         currentHoveredSlot = null;
     }
 
-    private void OnDestroy()
-    {
-        // Clear inventory when this display is destroyed (e.g., scene change)
-        if (inventory != null)
-        {
-            inventory.Clear();
-        }
-    }
+    // Detta breakar inventory mellan scenbyten! Av någon anledning kan man ej kalla inventory.Clear()
+    //private void OnDestroy()
+    //{
+    //    // Clear inventory when this display is destroyed (e.g., scene change)
+    //    if (inventory != null)
+    //    {
+    //        inventory.Clear();
+    //    }
+    //}
 
     public void UpdateSlots()
     {

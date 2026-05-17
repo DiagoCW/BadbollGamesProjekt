@@ -32,7 +32,15 @@ The engine looks like a jumbled mess of wires and metal. Some people know what t
     * ->
         You can't make sense of any of this. You're more like a mechanic of justice and criminal proceedings, not cars. 
         Take a look around your car to see if there's anything irregular.
-        -> END
+        -> DetectiveVisionTutorial
+        
+= DetectiveVisionTutorial
+<i>One of your main mechanics for progressing through the story is the use of your Detective Vision.</i>
+ <i>When you hold down the right mouse button, your senses become heightened and your vision becomes narrower. This is your Detective Vision, and it might help you identify things of interest through their <color=\#FFFF00>yellow highlight!</color></i>
+<i>You might have noticed a strange blue liquid running from underneath your car. If you interact with it normally, nothing interesting will happen.</i>
+<i>However, try using your Detective Vision now and interacting with it again!</i>
+
+-> END
 === FoundProblem ===
 Wait... You've gotta leak. As in, you've got \*A* leak. A coolant leak.
 Time to fix 'er up and get going. Dead bodies don't hang around waiting for somebody to investigate them.
