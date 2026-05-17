@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Threading;
 
 /// <summary>
 /// Handles audio crossfading when the player enters or exits a specific area.
@@ -11,21 +12,51 @@ public class MusicZone : MonoBehaviour
     public AudioSource barMusic;
     public float fadeTime = 2.0f; 
     public float maxVolume = 0.5f; 
+    
 
     // Tracks the active fade coroutine to interrupt if the player quickly runs in and out
     private Coroutine fadeRoutine;
+
+    private void Awake()
+    {
+        //PrepareAudioSource(mainMusic);
+        PrepareAudioSource(barMusic);
+    }
+
+    void Start()
+    {
+        
+    }
+
+    private void PrepareAudioSource(AudioSource src)
+    {
+        if (src == null) return;
+
+        float originalVol = src.volume;
+        // clamp stored volume to the configured maxVolume
+        originalVol = Mathf.Clamp(originalVol, 0f, maxVolume);
+
+        // set to silent, play & pause to prime the audio decoding, then restore
+        src.volume = 0f;
+        src.Play();
+        src.Pause();
+        src.volume = originalVol;
+    }
 
     /// <summary>
     /// Triggered when another collider enters this objects trigger collider
     /// </summary>
     void OnTriggerEnter(Collider other)
     {
-       
         if (other.CompareTag("Player"))
         {
             // If a fade is already happening, stop it to prevent conflicting volume changes
             if (fadeRoutine != null) StopCoroutine(fadeRoutine);
+
+            //Thread musicThread = new Thread(() => { fadeRoutine = StartCoroutine(Crossfade(mainMusic, barMusic)); });
+            //musicThread.Start();
             
+
             // Start fading out the main music for the bar music
             fadeRoutine = StartCoroutine(Crossfade(mainMusic, barMusic));
         }
@@ -43,6 +74,10 @@ public class MusicZone : MonoBehaviour
         {
             // Stop any ongoing fade
             if (fadeRoutine != null) StopCoroutine(fadeRoutine);
+
+            //Thread musicThread = new Thread(() => { fadeRoutine = StartCoroutine(Crossfade(barMusic, mainMusic)); });
+            //musicThread.Start();
+            
 
             // fade out the bar music and fade the main music back in
             fadeRoutine = StartCoroutine(Crossfade(barMusic, mainMusic));
@@ -79,4 +114,5 @@ public class MusicZone : MonoBehaviour
         // Pause the track that faded out.
         trackToFadeOut.Pause();
     }
+
 }

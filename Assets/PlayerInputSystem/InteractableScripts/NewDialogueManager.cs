@@ -113,7 +113,11 @@ public class NewDialogueManager : MonoBehaviour
     public bool InkListContainsItem(string itemName, string listName)
     {
         var list = currentStory.variablesState[listName] as InkList;
-        return list.ContainsItemNamed(itemName);
+        if (list!= null)
+        {
+            return list.ContainsItemNamed(itemName);
+        }
+        return false;
     }
 
     private void OnEnable()

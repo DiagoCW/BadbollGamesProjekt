@@ -14013,7 +14013,7 @@ MonoBehaviour:
   dialogueText: {fileID: 1222944802}
   dialogueCheck: {fileID: 1524672869}
   itemPortrait: {fileID: 311183211}
-  itemDatabase: {fileID: 11400000, guid: ebf6e610692fd9a41b8525a59d798fac, type: 2}
+  itemDatabase: {fileID: 11400000, guid: 65c1ec72b1754a84b83107db8121c438, type: 2}
   loadGlobalsJSON: {fileID: 4900000, guid: a8f400a28ebe2a54cac6981451dfcf0a, type: 3}
   choicesContainer: {fileID: 2126608902}
   choices:
@@ -23073,7 +23073,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1246613008}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5d7855afebe271449a568d9d328a8b96, type: 3}
   m_Name: 
@@ -23192,7 +23192,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainMusic: {fileID: 2105992391}
   barMusic: {fileID: 1246613011}
-  fadeTime: 3
+  fadeTime: 1
   maxVolume: 0.17
 --- !u!65 &1246613013
 BoxCollider:
@@ -29703,7 +29703,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1716885946
 RectTransform:
   m_ObjectHideFlags: 0

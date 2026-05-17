@@ -39,7 +39,7 @@ No witnesses have come forward to share any information yet, but we haven't had 
 - (cont) - Before you go, you should take a moment to inspect the scene. Though our initial discovery gave no interesting results, maybe you'll have better luck.
 I've heard that you have some kind of... sense. A vision. A Detective Vision, if you will.
 ~ talkToPolice = true
--> DetectiveVision
+-> END
 
 = DetectiveVision
 #speaker:
