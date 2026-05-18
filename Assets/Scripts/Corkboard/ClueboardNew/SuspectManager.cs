@@ -11,6 +11,7 @@ public class SuspectManager : MonoBehaviour
     [System.Serializable]
     public struct SuspectData
     {
+        public string suspectName;
         public int suspectID;
         public Sprite suspectPhoto;
     }
@@ -41,7 +42,7 @@ public class SuspectManager : MonoBehaviour
         // Find the photo for this ID in our database
         foreach (var data in suspectDatabase)
         {
-            if (data.suspectID == id)
+            if (data.suspectID == id /*&& NewDialogueManager.Instance.CheckSuspectsList(data.suspectName)*/)
             {
                 photoToAssign = data.suspectPhoto;
                 break;

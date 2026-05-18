@@ -116,8 +116,21 @@ public class NewDialogueManager : MonoBehaviour
         if (list!= null)
         {
             return list.ContainsItemNamed(itemName);
+            
         }
         return false;
+    }
+
+    /// <summary>
+    /// For spawning Suspects to clueboard. Checks the Suspects INK list too see if it contains the suspect you want to unlock
+    /// </summary>
+    /// <param name="itemName"></param>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    public bool CheckSuspectsList(string itemName)
+    {
+        var list = currentStory.variablesState["Suspects"] as InkList;
+        return list.ContainsItemNamed(itemName);
     }
 
     private void OnEnable()

@@ -28,6 +28,10 @@ public class InkExternalFunctions
                 FadeInOut.Instance.FadeScreenOnly(0f, 2f); // Fades from black to clear in over 2 seconds
             }
         });
+        story.BindExternalFunction("unlockSuspect", (int id) =>
+        {
+            SuspectManager.Instance.UnlockSuspect(id);
+        });
     }
 
     //private void FadeInAndLoadScene()
@@ -49,5 +53,6 @@ public class InkExternalFunctions
         story.UnbindExternalFunction("startMovement");
         story.UnbindExternalFunction("FadeIn");
         story.UnbindExternalFunction("FadeOut");
+        story.UnbindExternalFunction("unlockSuspect");
     }
 }

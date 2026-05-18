@@ -4,6 +4,10 @@ VAR askedQuestion = false
 { askedQuestion: Welcome back! Hope you didn't have any more questions, because I won't answer them. | Welcome, welcome! What can I do for you today? }
 -> Intro
 === Intro ===
+* [LÅS UPP SOM SUSPECT]
+    ~ addsuspect(storeClerk)
+    ~ unlockSuspect(storeClerkID)
+    -> Intro
 * {finishedCrimeScene and not askedQuestion } [Did you know the victim?] -> Victim
 * {finishedCrimeScene and not askedQuestion } [About last night...] -> LastNight
 * {AltercationVictim} [What happened last night?] -> LastNightForReal

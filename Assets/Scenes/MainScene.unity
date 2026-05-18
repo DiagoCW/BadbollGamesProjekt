@@ -3619,6 +3619,11 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!4 &299498701 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5766751733794440475, guid: 2ee64159029778e4d9759a36ec2450b7, type: 3}
+  m_PrefabInstance: {fileID: 1587196096}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &306750950 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 67348428271027408, guid: b8d5071f79d7e6846807c5c4f88205ac, type: 3}
@@ -6225,6 +6230,18 @@ PrefabInstance:
     - target: {fileID: 3861978111505060752, guid: f63db0fb3eeb6e44d809851f0b4ff4a9, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4789774487583169714, guid: f63db0fb3eeb6e44d809851f0b4ff4a9, type: 3}
+      propertyPath: suspectDatabase.Array.data[0].suspectName
+      value: storeClerk
+      objectReference: {fileID: 0}
+    - target: {fileID: 4789774487583169714, guid: f63db0fb3eeb6e44d809851f0b4ff4a9, type: 3}
+      propertyPath: suspectDatabase.Array.data[1].suspectName
+      value: bossMan
+      objectReference: {fileID: 0}
+    - target: {fileID: 4789774487583169714, guid: f63db0fb3eeb6e44d809851f0b4ff4a9, type: 3}
+      propertyPath: suspectDatabase.Array.data[2].suspectName
+      value: bartender
       objectReference: {fileID: 0}
     - target: {fileID: 4923207432898097230, guid: f63db0fb3eeb6e44d809851f0b4ff4a9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -27883,7 +27900,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 2124614902}
     m_Modifications:
     - target: {fileID: 2220229139293130648, guid: 2ee64159029778e4d9759a36ec2450b7, type: 3}
       propertyPath: targetDestination
@@ -27899,15 +27916,15 @@ PrefabInstance:
       objectReference: {fileID: 4729351021780862078, guid: 1a17a99ab6802194fa7fd2f1d4dfa9d7, type: 3}
     - target: {fileID: 5766751733794440475, guid: 2ee64159029778e4d9759a36ec2450b7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -41.292
+      value: -41.027187
       objectReference: {fileID: 0}
     - target: {fileID: 5766751733794440475, guid: 2ee64159029778e4d9759a36ec2450b7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.388
+      value: -0.6935384
       objectReference: {fileID: 0}
     - target: {fileID: 5766751733794440475, guid: 2ee64159029778e4d9759a36ec2450b7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -14.696
+      value: -17.58781
       objectReference: {fileID: 0}
     - target: {fileID: 5766751733794440475, guid: 2ee64159029778e4d9759a36ec2450b7, type: 3}
       propertyPath: m_LocalRotation.w
@@ -30598,7 +30615,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inkJson: {fileID: 4900000, guid: e4402ae7ffb386a4aa0592d6f3c28485, type: 3}
   inkJsonTest: {fileID: 0}
-  Inkvariable: foundReceipt
+  Inkvariable: 
 --- !u!65 &1750845727
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -37236,6 +37253,7 @@ Transform:
   - {fileID: 911281955}
   - {fileID: 90627380}
   - {fileID: 1553278436}
+  - {fileID: 299498701}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &2126200940
@@ -41526,4 +41544,3 @@ SceneRoots:
   - {fileID: 1250976920}
   - {fileID: 211331204}
   - {fileID: 1817989569}
-  - {fileID: 1587196096}
