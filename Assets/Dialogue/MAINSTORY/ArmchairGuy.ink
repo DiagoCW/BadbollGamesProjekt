@@ -36,12 +36,10 @@ The man is slumped deep in the armchair, snoring loudly. He hasn't even taken a 
         -> DONE
 
 === AwakeHub ===
-#speaker: Armchair Guy
-What do you want?
     * { items !? karaokeUSB } [Do you know Peter Grip?] -> KnowPeter
     * { KnowPeter } [I need that recording of Peter.] -> TheTape
     + [Did you see anything suspicious last night?] -> LastNight
-    + [I'll leave you alone now.] -> AwakeExit
+    + [I gots to go, baby.] -> AwakeExit
     * { knowledge ? bartenderAlibi } [Bartender's alibi] -> BartenderAlibi
     
 = BartenderAlibi
@@ -80,13 +78,30 @@ Look, I already transferred it to a USB stick. You can have it.
 Did you see anything suspicious last night?
 #speaker: Armchair Guy
 #snore: start
-<i>He immediately goes back to sleep.</i> 
+<i>He immediately goes back to sleep.</i>
+{ cashierToldHisAlibi: -> StoreClerkAlibi }
+#speaker: Player
+{ LastNight > 2: I'm not getting anything out of this guy like this... }
 ~ isAsleep = true
 <>-> Hub
 
+= StoreClerkAlibi
+<b>WAKE THE FUCK UP!</b> #speaker: Player
+Why are you shouting? I'm awake. #snore: stop #speaker: Armchair Guy
+I wanted to ask you about the store clerk by the gas station. Do you know where he was last night? #speaker: Player
+Uh, he's still on the same shift now I think. Poor guy probably still has a few more hours to go. He looked beat when I went there last night at around 2. #speaker: Armchair Guy
+You were there last night? Do you know if he ever left his post?
+<i>He falls back asleep.</i> #speaker: #snore: start
+<i><b>NOT!</b> Got you. Alright, back to the story.</i> #store: stop
+Well, I don't know if he left... but he came out of the storage after I'd been waiting at the counter for a few minutes. #speaker: Armchair Guy
+~ gainknowledge(cashierAlibi)
+~ askedQuestion = false
+<i>So there's at least a few minutes where he can't be placed at his post... I should confront him about this.</i>
+-> Hub
+
 === AwakeExit ===
 #speaker: Player
-I'll leave you alone now.
+I'll leave you to it, then.
 #speaker: Armchair Guy
 Ha det bäst mannen.
 -> END

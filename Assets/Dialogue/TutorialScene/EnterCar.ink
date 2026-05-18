@@ -1,9 +1,8 @@
 INCLUDE globalsmain2.INK
 EXTERNAL FadeIn()
-{ introCompleted: <>-> Drive | I can't leave until this dog gone car gets going. }
+{ introCompleted: <>-> Drive | <i>I can't leave until this dog gone car gets going.</i> }
 
 === Drive ===
-Time to rock hard
 ~ FadeIn()
-Oh yeah...
+Time to rock hard... Oh yeah... #speaker: Player
 -> END

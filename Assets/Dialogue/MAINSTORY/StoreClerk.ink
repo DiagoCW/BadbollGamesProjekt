@@ -1,5 +1,4 @@
 INCLUDE globalsmainstory.INK
-VAR askedQuestion = false
 #speaker: Store Clerk #anim: Talking
 { askedQuestion: Welcome back! Hope you didn't have any more questions, because I won't answer them. | Welcome, welcome! What can I do for you today? }
 -> Intro

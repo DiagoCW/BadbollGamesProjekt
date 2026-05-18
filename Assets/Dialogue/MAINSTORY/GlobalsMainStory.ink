@@ -1,5 +1,5 @@
 // INVENTORY
-VAR debug = true
+VAR debug = false
 VAR storeClerkID = 0
 VAR bossManID = 1
 VAR bartenderID = 2
@@ -13,6 +13,14 @@ LIST items = (none), karaokeUSB, beerz, backdoorkey
 // Binder en metod som kan kallas av ett script i unity för att starta en navmeshagent. Parametern är till för att sätta animation trigger
 EXTERNAL startMovement(x)
 EXTERNAL unlockSuspect(int)
+
+=== function unlockAllSuspects()
+    ~ addsuspect(storeClerk)
+    ~ addsuspect(bossManID)
+    ~ addsuspect(bartender)
+    ~ unlockSuspect(storeClerkID)
+    ~ unlockSuspect(bossManID)
+    ~ unlockSuspect(bartenderID)
 
 === function addsuspect(x)
     ~ Suspects += x
@@ -33,12 +41,16 @@ EXTERNAL unlockSuspect(int)
 
 //INTRO AKT 0
 VAR startIntro = false
+VAR panicked = false
+VAR steppedOnGas = false
+VAR resignedToFate = false
 
 // AKT 1:
 // BROTTSPLATSEN
 VAR cluesFoundonBody = 0
 VAR cluesFoundbyBody = 0
 VAR talkToPolice = false
+VAR talkToPoliceAgain = false
 VAR finishedCrimeScene = false
 
 // AKT 2: SUSPECTS
@@ -51,6 +63,7 @@ VAR bartenderToldHisAlibi = false
 // CASHIER
 VAR talkedToCashier = false
 VAR cashierToldHisAlibi = false
+VAR askedQuestion = false
 VAR canEnterStorage = false
 // Armchair Guy
 VAR talkedToArmchairGuy = false
