@@ -33,7 +33,7 @@ public class TriggerTutorial : MonoBehaviour
         TestAIScript aiScript = FindFirstObjectByType<DialogueTrigger>().GetComponent<TestAIScript>();
         if ((bool)trigger && string.IsNullOrEmpty(Inkvariable))
         {
-            Debug.Log($"Activated function for {anim.name}, {aiScript.name}");
+           // Debug.Log($"Activated function for {anim.name}, {aiScript.name}");
             NewDialogueManager.Instance.EnterDialogue(inkJson, anim, aiScript);
         }
     }

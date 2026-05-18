@@ -3,25 +3,33 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-   
+
 
     /// <summary>
     /// Pause Menu in game play
 
-
+    [Header("References")]
     [SerializeField] GameObject pauseMenu;
-    //bool isPaused = false;
+
+    [Header("Settings")]
+    [Tooltip("How long it takes to fade to black when quitting to the main menu")]
+    [SerializeField] private float quitFadeDuration = 1.5f;
+
+    private bool isPaused = false;
 
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape))
         {
-            Pause();
+            if (isPaused) Resume();
+            else Pause();
         }
     }
 
     public void Pause()
     {
+        isPaused = true;
+       
         //Make mouse visible
         pauseMenu.SetActive(true);
         Cursor.lockState = CursorLockMode.None;
@@ -29,12 +37,11 @@ public class PauseMenu : MonoBehaviour
 
         //Make game time freeze during menu
         Time.timeScale = 0; 
-
-        //isPaused = true;
     }
 
     public void Resume()
     {
+        isPaused = false;
         //Make mouse invisible
         pauseMenu.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
@@ -42,8 +49,6 @@ public class PauseMenu : MonoBehaviour
 
         //Make game time run after pressing resume
         Time.timeScale = 1;
-
-        //isPaused = false; 
     }
 
     public void RestartGame()
@@ -52,6 +57,13 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1;
 
         //Go back to Main Menu
-        SceneManager.LoadScene("MainMenu");
+        if (FadeInOut.Instance != null) 
+        {
+            FadeInOut.Instance.FadeToScene("MainMenu", quitFadeDuration);
+        }
+        else 
+        {
+            SceneManager.LoadScene("MainMenu");
+        }
     }
 }
