@@ -113,5 +113,14 @@ public class FadeInOut : MonoBehaviour
 
         SceneManager.LoadScene(sceneName); // When previous step is done, then load the next scene
     }
+
+    /// <summary>
+    /// Checks if the black screen is currently active or fading. To be used for preventing various inputs during transitions
+    /// </summary>
+    public bool IsScreenObscured() 
+    {
+        // Returns true if the black image is turned on and hasnt completely faded yet
+        return fadeImage != null && fadeImage.gameObject.activeSelf && fadeImage.color.a > 0f;
+    }
 }
 
