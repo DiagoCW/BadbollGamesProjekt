@@ -3,6 +3,10 @@ INCLUDE globalsmainstory.INK
 #speaker: Bartender
 === Intro() ===
 { What can I get you? | { ~Anything else? | What'll it be? } } #anim: Talking
+    * {debug} [LÅS UPP SOM SUSPECT]
+        ~ addsuspect(bartender)
+        ~ unlockSuspect(bartenderID)
+        -> Intro
     * { items !? items.beerz } [A beer.]
         Coming right up. That'll be fifty spänn.
         ~ getitem(items.beerz)
@@ -78,6 +82,7 @@ The trisslott. It all makes sense. #speaker: Player
 You never mentioned that either, and that was to cover your tracks. But I know that the victim was flaunting it around last night, and you seemed <i>especially</i> interested in it.
 With your business failing, and his tab racking up more and more debt... You saw an opportunity. You saw big money. 
 ~ addsuspect(bartender)
+~ unlockSuspect(bartenderID)
 You're... you're wrong. I didn't do it. I couldn't... #speaker: Bartender
 UNDER CONSTRUCTION: bartendern är nu en suspect, och han ska ge mer information angående kassabiträdet så fort vi implementerat det i spelet :)
 -> END

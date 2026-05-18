@@ -6,6 +6,10 @@ VAR exhaustedOptions = false
 === Intro ===
 Nice driving, asshole! #anim: Yelling
     { talkToPolice: -> CanQuestion.Question } 
+    * {debug} [LÅS UPP SOM SUSPECT]
+        ~ addsuspect(bossMan)
+        ~ unlockSuspect(bossManID)
+        -> Intro
     * [Thanks.]
         Yeah, real nice... Business is already bad as it is, a totaled car right behind the shop is going to do wonders for the customers. #anim: Angry
         -> IntroCont
@@ -145,6 +149,7 @@ What's there to explain? You have his wallet, the only way you could have it is 
 Like you took his wallet, I'm taking you... in, for murder.
 No, wait! I <i>DID</i> take his wallet after I found his body, yeah? But I didn't <i>KILL HIM!</i>
 ~ addsuspect(bossMan)
+~ unlockSuspect(bossManID)
 -> StartQuestion("Please, let me explain...")
 
 = LastNight
