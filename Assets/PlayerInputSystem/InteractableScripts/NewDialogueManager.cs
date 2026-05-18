@@ -186,8 +186,12 @@ public class NewDialogueManager : MonoBehaviour
         if (!dialogueIsPlaying /*||
             currentStory.currentChoices.Count > 0*/ || choicesContainer.activeSelf) return;
 
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape)) 
+        {
+            if (FadeInOut.Instance != null) FadeInOut.Instance.FadeScreenOnly(0f, 1f); // failsafe if the screen is still black when dialogue is skipped
             ExitDialogue();
+        }
+            
 
         //StartCoroutine(CanContinue());
 
