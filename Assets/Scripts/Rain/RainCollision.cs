@@ -4,6 +4,11 @@ using System.Collections;
 
 public class RainCollision : MonoBehaviour
 {
+     
+
+    /// <summary>
+    /// Rain system = When rain hits something object/boxcollider function is called
+    /// reuses splashes instead of creating new ones 
     //New Splashsystem is in scene to prevent too many clones
     public ParticleSystem[] splashes;
     private int currentSplash = 0;

@@ -3,12 +3,18 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
+   
+
+    /// <summary>
+    /// Pause Menu in game play
+
+
     [SerializeField] GameObject pauseMenu;
     //bool isPaused = false;
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.P))
+        if(Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape))
         {
             Pause();
         }
