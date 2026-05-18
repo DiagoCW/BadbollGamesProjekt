@@ -12,8 +12,8 @@ Looks like someone took a piss here, right underneath my car. For shame.
     -> tutorial
 }
     - (tutorial)
-    <i><color=\#FFA500>If you return back to the hood of your car, you will see that a new option has become available. This means that some items that you find through Detective Vision will allow you to progress through the story by unlocking new dialogue with characters or other objects.</color></i>
-    <i><color=\#FFA500>More often than not, you must meet a certain condition for the item to be highlighted through your Detective Vision.</color></i>
+    <i><color=\#FFA500>When you return back to the hood of your car, you will notice that a new option has become available, highlighted in <color=\#FFFF00>yellow</color>. This means that you must find certain items in order to progress the dialogue with other objects or characters</color></i>
+    <i><color=\#FFA500>More often than not, you must meet a certain condition for the item to be highlighted through your Detective Vision. What that condition could be is for you to figure out.</color></i>
     <i><color=\#FFA500>If something catches your eye but it isn't highlighted while using your Detective Vision, try coming back to it later! It might just be because you're missing a piece of the puzzle.</color></i>
     <b>READ TUTORIAL AGAIN?</b>
         + [Ja tack!]

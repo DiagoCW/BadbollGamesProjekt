@@ -32,7 +32,7 @@ Your car, a Honda Civic '89', has ceased functioning on the side of the road. No
 * [I should call a tow truck...]
     <i>That could take a few hours. You need to get to that crime scene immediately. You can try fixing the problem yourself.</i>
         **[That's fine. I can wait.]
-            <i>No, you really can't. Get this thing running again, or resign from your department effective immediately.</i>
+            <i>No, you really can't. Get this thing running again, or resign from your department effective immediately from pure shame.</i>
         **[<b>Check under the hood</b>]
             <i>That's the spirit!</i> <>
     - <i>Pop that hood and have a look, it can't be that difficult.</i>

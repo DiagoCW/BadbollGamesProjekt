@@ -31,8 +31,14 @@ INCLUDE GlobalsMain2.ink
     * ->
         <i>You can't make sense of any of this. You're more like a mechanic of justice and criminal proceedings, not cars.</i>
         <i>Take a look around your car to see if there's anything irregular. Make sure to use that <color=\#FFA500>special vision</color> of yours...</i>
-        -> DetectiveVisionTutorial
+        -> DickVision
         
+        
+= DickVision
+ <i><color=\#FFA500>When you hold down the right mouse button, your senses become heightened and your vision becomes narrower. This is your Detective Vision, and it will help you identify things of interest through their <color=\#FFFF00>yellow highlight!</color></i>
+<i><color=\#FFA500>Behind your car, you might have noticed a strange blue liquid running from underneath. If you interact with it normally, nothing interesting will happen.</color></i>
+<i><color=\#FFA500>However, try viewing it using your Detective Vision and interact with it again!</color></i>
+-> END
 = DetectiveVisionTutorial
 <i><color=\#FFA500>One of your main mechanics for progressing through the story is the use of your Detective Vision.</color></i> #speaker:
  <i><color=\#FFA500>When you hold down the right mouse button, your senses become heightened and your vision becomes narrower. This is your Detective Vision, and it will help you identify things of interest through their <color=\#FFFF00>yellow highlight!</color></i>
@@ -41,7 +47,7 @@ INCLUDE GlobalsMain2.ink
 
 -> END
 === FoundProblem ===
-Wait... I've gotta leak. As in, I've got \*A* leak. A coolant leak.
-Time to fix 'er up and get going. Dead bodies don't hang around waiting for somebody to investigate them.
+There's the problem. I've gotta leak. As in, I've got <b>\*A*</b> leak. A coolant leak.
+Time to fill 'er up and get going. Dead bodies usually don't hang around waiting for somebody to investigate them.
 ~ introCompleted = true
 -> END
