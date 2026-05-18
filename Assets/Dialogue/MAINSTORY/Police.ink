@@ -72,15 +72,20 @@ No witnesses have come forward to share any information either. We don't have mu
 }
 
 =Questions
+Did you find anything of note, detective? #speaker: Police
+Did you beat this poor drunk man to death and then rob him, officer? #speaker: Player
+Don't be silly. What do you mean? #speaker: Police
+You say there's nothing that indicates a murder, or even a robbery gone wrong, but after a brief inspection I can safely say that you're either dumb or full of shit. #speaker: Player
+Detective, if you have any questions about what you've found...
 - (options)
-{ !Did you find anything of note, detective? | Anything else? | Anything else? | -> finish } #speaker: Police
+{ <> | Anything else? | Anything else? | -> finish } #speaker: Police
 * [<b>The victim's pockets</b>]
-    His pockets were empty, or <i>emptied</i>, rather. Did you take something from his body? #speaker: Player
-    We found nothing on him. #speaker: Police
+    His pockets were empty, or <i>emptied</i>, rather. Did you find anything on his body? #speaker: Player
+    Nope. Nothing. #speaker: Police
     That's it? #speaker: Player
     That's it. #speaker: Police
     You don't find that odd? You usually carry <i>something</i> with you, like a wallet maybe. Could he have been robbed? #speaker: Player
-    He dropped his wallet a lot, so that's nothing weird. I have found it myself a few times. Unless he got rich somehow, he would have nothing of value to rob him off. #speaker: Police
+    He dropped his wallet a lot, so that's nothing weird. I have found it myself quite a few times. Unless he got rich somehow, he would have nothing of value to rob him off. #speaker: Police
     -> options
 * [Victim's injuries]
     He has some pretty serious injuries. From a struggle perhaps? Leading to his death? #speaker: Player
@@ -90,7 +95,7 @@ No witnesses have come forward to share any information either. We don't have mu
 * [Snus]
     What do you make of this, officer? #speaker: Player
     <i>You hold the tin of snus up to the officer's face. He takes a long good whiff.</i> #portrait: 4 #speaker:
-    Fyfan, bort med den där! Det luktar skit! #speaker: Police
+    Fyfan, bort med den där! Det luktar skit! #speaker: Police portrait:
     Doesn't it smell weird somehow? I recognize this smell from somewhere, or <i>something.</i> #speaker: Player
     It all smells the same to me. #speaker: Police
     -> options

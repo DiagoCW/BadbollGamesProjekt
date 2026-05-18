@@ -68,7 +68,7 @@ What's going on, big guy? Crash any cars lately? #speaker: Boss Man #anim: Talki
     Ok :)
     ~ startMovement("Walking")
     -> END
-* { knowledge ? receiptsBelongToVictim and Clues !? victimWallet } [The victim came here last night.] -> InquireAboutReceipt
+* { knowledge ? receiptsBelongToVictim and Clues !? victimWallet } [<color=\#FFFF00>The victim came here last night.</color>] -> InquireAboutReceipt
 * { Clues ? victimWallet and knowledge !? stoleWallet } [About this wallet...] -> Wallet
 * { Suspects !? bossMan } [Did you make the call?] -> Call // Endast om Boss Man inte är en suspect 
 * { Suspects !? bossMan } [Did you know the victim?] -> Relation
