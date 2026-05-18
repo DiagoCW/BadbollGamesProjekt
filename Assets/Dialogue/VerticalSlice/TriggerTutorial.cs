@@ -17,7 +17,7 @@ public class TriggerTutorial : MonoBehaviour
         //NewDialogueManager.Instance.EnterDialogue(inkJsonTest, null);
         if (inkJsonTest != null)
         {
-            
+
             {
                 NewDialogueManager.Instance.EnterDialogue(inkJsonTest, null, null);
                 counter++;
@@ -29,11 +29,12 @@ public class TriggerTutorial : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Animator anim = FindFirstObjectByType<DialogueTrigger>().GetComponentInChildren<Animator>();
-        TestAIScript aiScript = FindFirstObjectByType<DialogueTrigger>().GetComponent<TestAIScript>();
         if ((bool)trigger && string.IsNullOrEmpty(Inkvariable))
         {
-           // Debug.Log($"Activated function for {anim.name}, {aiScript.name}");
+            Animator anim = GameObject.Find("StoreClerk").GetComponentInChildren<Animator>();
+            TestAIScript aiScript = GameObject.Find("StoreClerk").GetComponent<TestAIScript>();
+
+            Debug.Log($"Activated function for {anim.name}, {aiScript.name}");
             NewDialogueManager.Instance.EnterDialogue(inkJson, anim, aiScript);
         }
     }
@@ -53,13 +54,13 @@ public class TriggerTutorial : MonoBehaviour
         //trigger = (Ink.Runtime.BoolValue)
         //NewDialogueManager.Instance.GetVariableState(Inkvariable);
 
-        if (other.CompareTag("Player") && (bool)trigger 
+        if (other.CompareTag("Player") && (bool)trigger
             && !NewDialogueManager.Instance.dialogueIsPlaying)
         {
             NewDialogueManager.Instance.EnterDialogue(inkJson, null, null);
             Debug.Log($"Trigger {Inkvariable} activated");
         }
-        
+
         if ((bool)trigger && !string.IsNullOrEmpty(Inkvariable))
         {
             Debug.Log($"Destroying trigger " + Inkvariable);

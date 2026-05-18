@@ -1,97 +1,111 @@
 INCLUDE globalsmainstory.INK
-{ talkToPolice: <>-> Continued | -> Intro }
+{ talkToPolice: <>-> Brief | -> Intro }
 === Intro ===
 #speaker: 
-The officer has been patiently waiting for you to arrive. He stands diligently watching over the crime scene, not moving an inch. 
-Your sudden arrival seems to have thrown him off his balance, though.
-Hello detective, quite an entrance you made there. There was really no need to rush. #speaker: Police
-    * [I drive.]
-        Not anymore, it would seem. You should probably take care of that later... Let's just get this done with.
-    * [What seems to be the problem?]
-        I was expecting you to already be briefed about it, but I suppose I could give you the run-down. There's not much to it, really.
-    * [Cut to the chase.]
-- Last night, the body of 57-year old Peter Grip was found lying here. The official cause of death is yet to be determined, but knowing him I'd say it was inevitable.
-Why do you say that? Did you know the victim? #speaker: Player
-He was a known drunk. I've dealt with him before on many occassions when he's had a few too many at the bar. I tended to run into him frequently. If a call was made, it's likely he was involved somehow. #speaker: Police
-Anyway, he has no immediate family. Any family he has left wants nothing to do with him. He had already burned his bridges since way back.
-No witnesses have come forward to share any information yet, but we haven't had the chance to interview anyone yet either. We'll leave that to you, though I can't imagine anything will come of it.
-    -(opts)
-    * { Suspects ? bossMan } [About Boss Man...]
-        Did you get an initial statement from him? #speaker: Player
-        Only that he found the body after closing up shop. Though I figured that you could do the rest, seeing as you're here. #speaker: Police
-        Anything suspicious about him? #speaker: Player
-        Other than that he found a dead drunk lying here? Not a pretty sight, but someone had to stumble upon him sooner or later. #speaker: Police
-        -> opts
-    * [Potential murder?]
-        I knew you would start going off on the murder aspect... I suppose, but we really have no reason to suspect or classify it as such. As I said, this came a surprise to no one. #speaker: Police
-        We tested his blood alcohol level, and it was surprisingly high even for a guy like him. Seems like his liver gave up, kidneys shut down... And the rest is history.
-        -> opts
-    * [Who found the body?]
-        As you said, somebody found the body. That someone must have phoned it in? #speaker: Justin Time
-        They did. <i>Boss Man.</i> #speaker: Police
-        ** { talkedToBossMan } [I crashed my car behind his shop.]
-            Then I take it that you've already introduced yourselves.
-        ** { not talkedToBossMan } [Boss Man?]
-            The falafel guy across the street. 
-        -- <> He found the body on his way home after closing up shop last night.
-            -> opts
-    * -> cont
-- (cont) - Before you go, you should take a moment to inspect the scene. Though our initial discovery gave no interesting results, maybe you'll have better luck.
-I've heard that you have some kind of... sense. A vision. A Detective Vision, if you will.
+Jesus, are you alright?! What happened? #speaker: Police #anim: Talking
+{ panicked: -> Panicked }
+{ resignedToFate: -> Fate }
+{ steppedOnGas: -> Gas }
+- (Panicked)
+The car started swerving, so I panicked. So what? Big deal, happens to the best of us. #speaker: Player
+But you were barely going 20km an hour... #speaker: Police
+<> -> introcont
+- (Fate)
+I left my fate in the hands of God, and he led me right where I needed to be. Praise his name. #speaker: Player
+Yes, praise his name indeed... #speaker: Police
+<> -> introcont 
+- (Gas)
+I started flooring it. Once I set my mind to something, I have to do it. #speaker: Player
+You really don't have to do everything that comes to mind... #speaker: Police
+<> -> introcont
+- (introcont) Anyway, what took you so long? I've been waiting for quite a while... #speaker: Police
+My car broke down on my way here, but it's alright. I fixed it using my <color=\#FFFF00>Detective Vision.</color> #speaker: Player
+Uh... Ok. I don't know what that means. It sounds cool though, I'm happy for you. #speaker: Police #anim: Shake
+Stop wasting my time, officer. Let's get on with the briefing. #speaker: Player 
+Alright, settle down... Walk with me, it's just over here. #speaker: Police
+~ startMovement("Walking")
 ~ talkToPolice = true
 -> END
 
-= DetectiveVision
-#speaker:
-Tills att vi implementerar detta i Tutorialscenen så får det vara kvar här:
-<i>When surveying a location, you might find it helpful to hold down the right mouse button to activate your Detective vision. This will zoom in your FOV and highlight items of importance, helping you find clues to progress the case.</i>
-<i>Your detective vision will be necessary to find clues in the game. Unless a clue has been highlighted through the detective vision, you are unable to obtain it.</i>
-<i>Consider using it sparingly, however; every time you use your detective vision, it puts unneccessary strain on your mind and it tracks how long you've used it. Use it too much and you will find yourself penalized by the end of the game.</i>
-<i>Using context clues and paying attention to what people tell you will most likely minimize the amount of time that you need to use your detective vision.</i>
-<i>You should try it out now, however. Get a good overview of the crime scene, and then activate it to see if anything is <color=\#FFFF00>highlighted!</color></i>
+=== Brief ===
+{ talkToPoliceAgain: -> Continued }
+Last night, the body of 27-year old Peter Grip was found lying here. The official cause of death is yet to be determined, but knowing him I'd say it's clear as day. #speaker: Police
+Why do you say that? Did you know the victim? #speaker: Player
+He was a known drunk. I've dealt with him before on many occassions when he's had a few too many at the bar, I tended to run into him quite frequently. #speaker: Police
+No witnesses have come forward to share any information either. We don't have much to go on, but I think it's pretty evident what happened. The drunk did drank too much. Case solved. 
+    -(opts)
+    * [<b>Potential murder?</b>]
+        Absolutely not. We really have no reason to suspect or classify it as such. This is a cut and dry case. #speaker: Police
+        We tested his blood alcohol level, and it was surprisingly high even for a guy like him. Seems like his liver gave up, kidneys shut down... And the rest is history.
+        -> opts
+    * [Who found the body?]
+        As you said, somebody found the body. That someone must have phoned it in? #speaker: Player
+        They did. <i>Boss Man.</i> #speaker: Police
+        ** { talkedToBossMan } [I crashed my car behind his shop.]
+            Then I take it that you've already introduced yourselves. I hope you apologized to him, I heard him shouting at you when you arrived... #speaker: Police
+            Don't you worry, we squashed the beef. <>
+        ** { not talkedToBossMan } [Boss Man?]
+            The falafel guy, he has his shop right behind where you totaled your car. #speaker: Police
+            It's a wonder that you didn't drive it straight into his shop... You should probably apologize to him later.
+        -- Did you get an initial statement from him? #speaker: Player
+        Only that he found the body after closing up shop. Though I figured that you could take care of the rest. #speaker: Police
+        Anything suspicious about him? #speaker: Player
+        Other than that he found a dead drunk lying here? Not a pretty sight, but someone had to stumble upon him sooner or later. #speaker: Police
+        I know that Peter was at his shop basically every day, you should ask if he came by yesterday.
+            -> opts
+    * -> cont
+- (cont) - Detective, you should take a moment to inspect the scene before you go talk with Boss Man. I doubt you'll find anything useful, but go ahead and knock yourself out.
+//~ startMovement("Walking")
+<color=\#FFFF00><i>If you ever need a refresher on how your Detective Vision works, open up your <b>Field Manual</b> in the main menu.</i></color> #speaker:
+~ talkToPoliceAgain = true
 -> END
-<i>This means that you shouldn't go around using it everywhere all the time! Some dialogue with characters will offer you directions on where you might need to go next to investigate.</i>
 
 === Continued ===
 { finishedCrimeScene: -> Hub }
 { foundAllClues():
     -> Questions
 - else:
-    I think you still have a few things to check out. Inspect the body and its surroundings to make sure you've got everything. #speaker: Police
+    C'mon, you barely scoured the scene. Go back and make sure that you didn't miss anything. #speaker: Police
+    Not that I care, but just in case.
+    The name's Justin Time, actually. #speaker: Player
     -> END
 }
 
 =Questions
 - (options)
-{ !All done, detective? | Anything else? | Anything else? | -> finish } #speaker: Police
-* [The victim's pockets]
+{ !Did you find anything of note, detective? | Anything else? | Anything else? | -> finish } #speaker: Police
+* [<b>The victim's pockets</b>]
+    His pockets were empty, or <i>emptied</i>, rather. Did you take something from his body? #speaker: Player
     We found nothing on him. #speaker: Police
     That's it? #speaker: Player
     That's it. #speaker: Police
     You don't find that odd? You usually carry <i>something</i> with you, like a wallet maybe. Could he have been robbed? #speaker: Player
-    Excuse my french, men han var pissfattig. Everyone knew that. He could have nothing of value on him that anyone would want. #speaker: Police
+    He dropped his wallet a lot, so that's nothing weird. I have found it myself a few times. Unless he got rich somehow, he would have nothing of value to rob him off. #speaker: Police
     -> options
 * [Victim's injuries]
-    The victim has some injuries, from a struggle perhaps? Leading to his death? #speaker: Player
-    Well, he was no stranger to brawling. These injuries are nothing compared to the state I've seen him in before. #speaker: Police
-    I can tell you one thing for certain; <i>these injuries are not what did him in</i>. I'm telling you that he succumbed to the bottle. It was inevitable.
+    He has some pretty serious injuries. From a struggle perhaps? Leading to his death? #speaker: Player
+    Well, he was no stranger to brawling. They're nothing compared to the state I've seen him in before. #speaker: Police
+    See that bruise on his cheek? I did that last week after he resisted an arrest. Right in the kisser!
     -> options
 * [Snus]
-    What do you make of this? #speaker: Player
-    You hold the tin of snus up to the officer's face. He takes a long good whiff. #speaker:
+    What do you make of this, officer? #speaker: Player
+    <i>You hold the tin of snus up to the officer's face. He takes a long good whiff.</i> #portrait: 4 #speaker:
     Fyfan, bort med den där! Det luktar skit! #speaker: Police
-    Doesn't it smell off somehow? I recognize this smell from somewhere, or <i>something.</i> #speaker: Player
-    It all smells the same. I don't touch the stuff. #speaker: Police
+    Doesn't it smell weird somehow? I recognize this smell from somewhere, or <i>something.</i> #speaker: Player
+    It all smells the same to me. #speaker: Police
     -> options
 * -> finish
 - (finish) - Look, detective; I know that you think this is yet another murder-mystery that you have to solve, but there's really nothing to it. Just take Boss Man's statement and call it a day.
-If you still feel the need to investigate more thoroughly, you can come back to me and I'll help point you in the right direction.
+If you still feel the need to investigate more thoroughly, you can always come back to me and I'll help point you in the right direction.
 ~ finishedCrimeScene = true
 -> END
 
 === Hub ===
-Här ska spelaren i framtiden få information om vart de borde gå härnäst, baserat på vilken information och ledtrådar de har för tillfället. Just nu under construction #speaker: 
-* [About Boss Man...] -> AboutBossMan
+Här ska spelaren i framtiden få information om vart de borde gå härnäst, baserat på vilken information och ledtrådar de har för tillfället. Just nu under construction #speaker:
+* [Where should I go next?]
+    { not talkedToBossMan: You can start with getting Boss Man's statement, as we've already discussed. -> END }
+    { not talkedToBartender: Still not satisfied with Boss Man's statement, huh? You can check out the bar across the street. Maybe someone's heard or seen something. -> END }
+    { not talkedToCashier: You're still here? Go home, detective. We have everything we need. If you still intend to stay, go to the gas station and get yourself a coffee at least. -> END }
 * { Suspects ? storeClerk } [Gas Station Clerk...] -> AboutStoreClerk
 * { Suspects ? bartender } [About the bartender...] -> AboutBartender
 * -> END
