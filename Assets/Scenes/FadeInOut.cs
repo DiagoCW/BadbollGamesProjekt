@@ -34,15 +34,15 @@ public class FadeInOut : MonoBehaviour
             // Whenever a new scene loads, start fading in from black (alpha 1f) to clear (alpha 0f)
             StartCoroutine(FadeRoutine(1f, 0f, fadeDuration));  // 1f = black, 0f = clear
         }
-        //else // If a fade in is not desired, instantly make the image invisible and turn off.
-        //{
-        //    Color clearColor = fadeImage.color;
-        //    clearColor.a = 0f;
-        //    fadeImage.color = clearColor;
+        else // If a fade in is not desired, instantly make the image invisible and turn off.
+        {
+            Color clearColor = fadeImage.color;
+            clearColor.a = 0f;
+            fadeImage.color = clearColor;
 
-        //    fadeImage.gameObject.SetActive(true); // disable gameobject so it doesnt block anything
-        //}
-        
+            fadeImage.gameObject.SetActive(true); // disable gameobject so it doesnt block anything
+        }
+
     }
 
     /// <summary>
