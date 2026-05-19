@@ -1,0 +1,24 @@
+My inventory system, (my, being hugo in this case):
+
+Each "clue" is a seperate value in a database wherein every posible clue is heald, the players inventory is predefined with 12 empty inventory slots that start at id:-1 and each number above that reperesents a clue; the system primarily uses scriptable objects.
+The scripts to make an inventory, database or item/clue scriptable object are in ScriptableObjects > inventory > Scripts and ScriptableObjects > Items > Scripts.
+
+Instructions on how to make an inventory:
+Firstly the Project must have a database: Create > Inventory System > Items > Database.
+(The current databse is heald in Assets > Scripts > Inventory > ScriptableObjects > Items > Resources).
+The database must contain every item thats in the game, the clues must have the same Id as they their element order in the database for the system to work.
+
+Create an inventory through: Create > Inventory System > Inventory. 
+(The current inventory is heald in Assets > Scripts > Inventory > ScriptableObjects > Inventory).
+The inventory must have a specified save path defined in "Save Path", ex:"/SavePathInventoryTest", which determines what the JSon file in the project is called. The inventory must also have a specified database which can be drag dropped in under "Database". Lastly you define how many items are meant to be in the inventory by writing how many next to "Items".
+Make sure that every element has a starting value of -1 so that they initialize as empty inventory slots.
+
+Make sure the inventory is linked up with the player, the inventory should be drag dropped into the "Player Controller" script, under "Inventory".
+
+To create a visual display for the inventory you would need to create a panel on the canvas and add the Display Inventory script as a component to it whereafter you drag in the corosponding inventory slot prefab and player inventory; ajust the X_START, Y_START, X_SPACES_BETWEEN, NUMBER_OF_COLUMNS and Y_SPACES_BETWEEN to size depending on the canvas. Ad another panel and text component for the inventory tooltip; (Make sure the tooltip dosen't apear above the corosponding item).
+
+Lastly instructions on how to add items:
+Add add a new scriptable object: Create > Inventory System > Items > Default.
+This is an item, drag the item into the database and assign an Id corospoding to it's placement in the database, The Ui Display is the image that will apear on the displayed inventory and the description is the text that will apear on the tooltip.
+
+To assign the clue/item to an object in the scenen you need to give the object an "Interactable Item" script and assign the clue under "Item" there. 
