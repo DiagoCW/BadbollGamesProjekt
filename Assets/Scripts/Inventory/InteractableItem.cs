@@ -2,6 +2,11 @@ using UnityEngine;
 
 public class InteractableItem : MonoBehaviour, IInteractable
 {
+    // this script is used for items that can be interacted with in the world,
+    // such as clues. It checks if the player is using detective vision and
+    // gives different dialogue and items based on that. It replaced the
+    // previus clues interact script -Hugo
+
     [Header("References")]
     private InventoryObject playerInventory;
     [SerializeField] ItemObject item, item2;
