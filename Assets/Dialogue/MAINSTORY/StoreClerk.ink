@@ -1,10 +1,9 @@
 INCLUDE globalsmainstory.INK
-VAR askedQuestion = false
 #speaker: Store Clerk #anim: Talking
 { askedQuestion: Welcome back! Hope you didn't have any more questions, because I won't answer them. | Welcome, welcome! What can I do for you today? }
 -> Intro
 === Intro ===
-* [LÅS UPP SOM SUSPECT]
+* { debug } [LÅS UPP SOM SUSPECT]
     ~ addsuspect(storeClerk)
     ~ unlockSuspect(storeClerkID)
     -> Intro
@@ -32,9 +31,9 @@ Alright, <i>one question.</i> #speaker: Store Clerk
         Fine, thank you. #speaker: Store Clerk
         Busy day? #speaker: Player
         -> LastNightEnd
-    * [-Come back later]
+    * [Come back later]
         Could I come back and ask about this later? #speaker: Player
-        Absolutely, sir! That counts as a question though, so actually no. Thank you! 
+        Absolutely, sir! That counts as a question though, so actually no. Thank you! #speaker: Store Clerk
         ~ askedQuestion = true
         -> END
 
@@ -46,7 +45,7 @@ You don't sound too thrilled to hear his name. Did something happen? #speaker: S
 = LastNightEnd
 That's your second question, I'm afraid. As I said, I'm happy to answer any questions you might have once I get off my shift. #speaker: Store Clerk
 { LastNightVictim and (Suspects ? bossMan or talkedToSuspiciousGuy): 
-    * [-Keep pressing him] -> AltercationVictim
+    * [<color=\#FFFF00><b>Keep pressing him</b></color>] -> AltercationVictim
 - else:
     ~ askedQuestion = true
     <i>Damn, I didn't think he meant literally one question... Should I have asked something else?</i>
@@ -54,14 +53,16 @@ That's your second question, I'm afraid. As I said, I'm happy to answer any ques
 }
 
 = AltercationVictim
-No, you will riddle me this. I have some people claiming that you got into some altercation with the victim last night, and I would like to know what that was. #speaker: Player
+No, you will riddle me this. I have some people claiming that you got into some altercation with the victim last night, and I would like to know what it was about. #speaker: Player
 That's... it was nothing, he just flew off into some drunken stupor like he always did. I had to rough him up a bit, you know? #speaker: Store Clerk #Shake
 <i>Did?</i> I never told you who the victim was, and you implied that you didn't know who it was, either. But you speak about him in the past tense. #speaker: Player
 Oh... oh. #speaker: Store Clerk
 Oh is right, buddy. So you knew who the victim was, and there are independent witnesses that claim something happened between you two yesterday. #speaker: Player
-Alright, I'll tell you... 
--> Intro
+Alright, I'll tell you... #speaker: Store Clerk
+<> -> Intro
 
 = LastNightForReal
-
+Under construction :) Men han är tillagd som suspect nu vsg
+~ addsuspect(storeClerk)
+~ unlockSuspect(storeClerkID)
 -> END

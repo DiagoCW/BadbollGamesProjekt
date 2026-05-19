@@ -1,6 +1,6 @@
 INCLUDE globalsmainstory.INK
 { Clues ? snus: Don't need it. -> END }
-A snusdosa, thrown off to the side by the victim. It still has a few pouches left. #portrait: 0
+A snusdosa, thrown off to the side by the victim. It still has a few pouches left. #portrait: 4
 Smells worse than it should... Something about it smells familiar, but I can't quite sätta fingret på det... 
 Could be important though.
 ~cluesFoundbyBody++

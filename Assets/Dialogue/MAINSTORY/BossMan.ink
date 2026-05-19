@@ -5,7 +5,7 @@ VAR exhaustedOptions = false
 #speaker: Boss Man
 === Intro ===
 Nice driving, asshole! #anim: Yelling
-    { talkToPolice: -> CanQuestion.Question } 
+    //{ talkToPolice: -> CanQuestion.Question } 
     * {debug} [LÅS UPP SOM SUSPECT]
         ~ addsuspect(bossMan)
         ~ unlockSuspect(bossManID)
@@ -33,10 +33,14 @@ Nice driving, asshole! #anim: Yelling
         ** [Yeah.]
             -> Apologize
     * [{I'm sorry. | For crashing my car behind your shop epic style.}]
-        That's all I wanted. I guess the car is kind of a selling point, now that I think about it. 
-        People will be intrigued by the commotion, and flock towards my shop... Yeah...
+        That wasn't so hard, now was it? Now get lost, I don't wanna see your face again.
         ~ talkedToBossMan = true
-        -> DONE
+        { finishedCrimeScene: 
+            Actually... I kinda need to take your statement. I'm here on behalf of Peter.
+            -> StartQuestion("For fuck's sake.")
+        - else:
+          -> DONE  
+            } 
 
 = Apologize // loopar igenom tills spelaren ber om ursäkt
 { &You still haven't. | Still waiting. | What was that? }
@@ -46,9 +50,8 @@ Nice driving, asshole! #anim: Yelling
     -> Apologize
 
 === CanQuestion
-How's it going?
-    { talkToPolice: -> Question | Don't I have something better to do? Like, inspect a body? -> END } 
-
+What's going on, big guy? Crash any cars lately? #speaker: Boss Man #anim: Talking
+{ finishedCrimeScene: -> Question | I don't have time for this bozo, I've got a crime scene to investigate. -> END }
 
 = Question
 * [I've got some questions for you.]
@@ -61,26 +64,26 @@ How's it going?
 === StartQuestion(msg) ===
 ~ talkedToBossMan = true
 {msg} #speaker: Boss Man #anim: Talking
-* [Start walking, buddy.]
+* { debug } [Start walking, buddy.]
     Ok :)
     ~ startMovement("Walking")
     -> END
-* { knowledge ? receiptsBelongToVictim and Clues !? victimWallet } [The victim came here last night.] -> InquireAboutReceipt
+* { knowledge ? receiptsBelongToVictim and Clues !? victimWallet } [<color=\#FFFF00>The victim came here last night.</color>] -> InquireAboutReceipt
 * { Clues ? victimWallet and knowledge !? stoleWallet } [About this wallet...] -> Wallet
 * { Suspects !? bossMan } [Did you make the call?] -> Call // Endast om Boss Man inte är en suspect 
 * { Suspects !? bossMan } [Did you know the victim?] -> Relation
-* { Suspects ? bossMan } [More about last night] -> LastNight
+* { Suspects ? bossMan } [What happened last night?] -> LastNight
 * { Suspects ? bartender or Suspects ? storeClerk } [Ask about other suspects] -> AskAboutSuspects
 * -> DeadEnd
 
 = InquireAboutReceipt
 Huh? #speaker: Boss Man
 I have proof that he came here. I have a receipt from this shop that matches his card number. #speaker: Player #portrait: 0
-Oh. Well, that's nothing. #speaker: Boss Man
-Huh? #speaker: Player portrait: 
+Oh. Well, that's nothing. #speaker: Boss Man portrait: 
+Huh? #speaker: Player 
 Did you know he constantly lost his wallet? Someone must have found it and treated themself to one of my famous rolls. It's not the first time it's happened, or the last. #speaker: Boss Man
 Though, I guess this actually <b>would</b> be the last time... #anim: Shake
-I guess that makes sense... The bartender did tell me he often lost it. #speaker: Player
+I guess that makes sense... Both the officer and bartender did tell me he often lost it. #speaker: Player
 To weasel out of paying his tab, no doubt! #speaker: Boss Man
 Look, he didn't come here, alright? But I guess I could keep an eye out in case it shows up again.
 -> StartQuestion("Anything else?")
@@ -88,7 +91,7 @@ Look, he didn't come here, alright? But I guess I could keep an eye out in case 
 
 = DeadEnd
 { Suspects ? bossMan:
-    Suppose this leads nowhere, I'm bringing you in. I'll have the officer keep an eye on you. #speaker: Player
+    Suppose this leads nowhere, I'm bringing you in. I'll make sure the officer keep an eye on you. #speaker: Player
     -> END
 - else:
     He knows more than he lets on. Call it a hunch, but I've seen this type of guy before... #speaker:
@@ -106,35 +109,35 @@ Look, he didn't come here, alright? But I guess I could keep an eye out in case 
 = Relation
 Sure, if being pestered by an alcoholic in nearly every aspect of my life counts as knowing him. #speaker: Boss Man
 I'd say that counts. #speaker: Player
-Alright, he wasn't all bad. He was a paying customer, which not all people would say about him. #speaker: Boss Man
+Alright, he wasn't all bad. He was a paying customer, which isn't something that most people would agree with me on. #speaker: Boss Man
 What do you mean? #speaker: Player
 He goes to the bar pretty much every day, drinking his life away. He's racked up a pretty sizeable tab I've heard, which won't ever get paid off at this point. #speaker: Boss Man
 The bartender is too good on him. Peter knew that shit wouldn't fly with me though, but the bartender needs all the business he can get. Even if that business is putting him deeper in debt.
-I see. I'll make sure to talk to him as well, but right now I'm interested in your relationship to the victim. #speaker: Player
-Can't tell you much else. He came, he paid, he died. <>
+I see. I'll make sure to talk to him as well, but right now I'm more interested in your relationship to the victim. #speaker: Player
+Sorry, I can't tell you anything that I haven't already said. <>
 -> StartQuestion("Anything else?")
 
 = Wallet
 Did you steal that from my shop? #speaker: Boss Man #anim: Angry
 It's not stealing if it's not yours, is it? #speaker: Player
 I don't like what you're implying. Look, I know it belonged to Peter. He would lose his wallet <i>constantly</i>. I find it, hold on to it, he comes back the next day and asks if I found it. Rinse and repeat. #speaker: Boss Man #anim: Angry
-It was like my other full time job, except I never got anything in the form of gratitude. He would just expect me to have it, and that we would keep having this back and forth.
-Only this time he never came back...
+It was like my other full time job, except I never got anything in the form of gratitude. He would just expect me to have it, and we would keep having this little back and forth.
+Only this time he never came back... #anim: Shake
 When did you find this wallet, exactly? #speaker: Player
-    Let's see... I must have found it sometime before 2 A.M. He probably dropped it after he left the bar. #speaker: Boss Man
+Let's see... I must have found it sometime before 2 A.M. He probably dropped it after he left the bar. #speaker: Boss Man
+And you're sure that he never came here at any point last night? #speaker: Player
+Like I said. Are we done here? #speaker: Boss Man
 { knowledge ? receiptsBelongToVictim: 
     -> WalletCont
 - else:
-    He's only telling half the truth. You can't press this issue further though, you have to find something more tangible and come back to this. #speaker:
+    <i>He's only telling half the truth. You can't press this issue further though, you have to find something more tangible and come back to this.</i> #speaker:
     -> StartQuestion("Anything else?")
     }
 -> END
 
 = WalletCont
 <i>The receipts you found in the trash earlier contradict this statement. They clearly show that a purchase was made with his card after the time Boss Man supposedly found the wallet.</i> #portrait: 0
-And you're sure that he never came here at any point last night? #speaker: Player #portrait:
-Like I said. Are we done here? #speaker: Boss Man
-That doesn't add up. Take a look at this receipt here.
+That doesn't add up. Take a look at this receipt here. #portrait:
 You see Boss Man's eyes glance across the receipt, while he's trying to understand where you're going with this. #speaker:
 I'd recognize a receipt from my shop, obviously. What's the angle here? #speaker: Boss Man
 Well, guess who this receipt belonged to? #speaker: Player

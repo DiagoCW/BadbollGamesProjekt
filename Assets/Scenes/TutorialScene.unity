@@ -19568,7 +19568,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -453.44025, y: -498.70728}
+  m_AnchoredPosition: {x: -525, y: -498.70728}
   m_SizeDelta: {x: 400, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &699836133
@@ -19591,7 +19591,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press T to Skip Tutorial
+  m_text: 'Press T to Skip '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -31165,7 +31165,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeImage: {fileID: 600435014}
-  fadeDuration: 1.5
+  fadeDuration: 5
+  startBlack: 1
   FadeInOnStart: 1
 --- !u!1001 &1118261664
 PrefabInstance:
@@ -41983,8 +41984,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 478.84525, y: 59.432243}
-  m_SizeDelta: {x: 310, y: 50}
+  m_AnchoredPosition: {x: 327, y: 59.432243}
+  m_SizeDelta: {x: 210, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1453049297
 MonoBehaviour:

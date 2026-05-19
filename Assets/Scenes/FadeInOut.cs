@@ -18,6 +18,10 @@ public class FadeInOut : MonoBehaviour
     [Tooltip("Default fade time")]
     public float fadeDuration = 1.5f;
 
+    // FadeInOnStart is dependent on startBlack being true. If startblack is false, then Fade in on start wont work either. Look at the if statement in Start()
+    [Tooltip("Should the screen start black")]
+    public bool startBlack = true;
+
     [Tooltip("Should the screen fade in from black when this scene starts?")]
     public bool FadeInOnStart = true;
 
@@ -29,20 +33,28 @@ public class FadeInOut : MonoBehaviour
 
     void Start()
     {
-        if (FadeInOnStart) 
+        if (startBlack)
         {
-            // Whenever a new scene loads, start fading in from black (alpha 1f) to clear (alpha 0f)
-            StartCoroutine(FadeRoutine(1f, 0f, fadeDuration));  // 1f = black, 0f = clear
-        }
-        //else // If a fade in is not desired, instantly make the image invisible and turn off.
-        //{
-        //    Color clearColor = fadeImage.color;
-        //    clearColor.a = 0f;
-        //    fadeImage.color = clearColor;
+            // Make the screen be black immediately
+            Color blackColor = fadeImage.color;
+            blackColor.a = 1f;
+            fadeImage.color = blackColor;
+            fadeImage.gameObject.SetActive(true);
 
-        //    fadeImage.gameObject.SetActive(true); // disable gameobject so it doesnt block anything
-        //}
-        
+            // If we want auto fade, start the coroutine, if not it will stay black
+            if (FadeInOnStart)
+            {
+                StartCoroutine(FadeRoutine(1f, 0f, fadeDuration));
+            }
+        }
+        else
+        {
+            // If startBlack is false, instantly make the image invisible and turn it off.
+            Color clearColor = fadeImage.color;
+            clearColor.a = 0f;
+            fadeImage.color = clearColor;
+            fadeImage.gameObject.SetActive(false);
+        }
     }
 
     /// <summary>
@@ -100,6 +112,15 @@ public class FadeInOut : MonoBehaviour
         yield return StartCoroutine(FadeRoutine(0f, 1f, duration)); // Wait for the screen to turn completely black. yield return StartCoroutine will make this coroutine pause intil the FadeRoutine finishes its entire loop.
 
         SceneManager.LoadScene(sceneName); // When previous step is done, then load the next scene
+    }
+
+    /// <summary>
+    /// Checks if the black screen is currently active or fading. To be used for preventing various inputs during transitions
+    /// </summary>
+    public bool IsScreenObscured() 
+    {
+        // Returns true if the black image is turned on and hasnt completely faded yet
+        return fadeImage != null && fadeImage.gameObject.activeSelf && fadeImage.color.a > 0f;
     }
 }
 

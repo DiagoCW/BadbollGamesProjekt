@@ -1,43 +1,86 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
+    /// <summary>
+    /// Pause Menu in game play
+
+    [Header("References")]
     [SerializeField] GameObject pauseMenu;
-    //bool isPaused = false;
+    [Tooltip("The Are you sure you want to exit? panel")]
+    [SerializeField] private GameObject confirmationPanel;
+    [Tooltip("The field manual container")]
+    [SerializeField] private GameObject fieldManualPanel;
+
+    [Header("Settings")]
+    [Tooltip("How long it takes to fade to black when quitting to the main menu")]
+    [SerializeField] private float quitFadeDuration = 1.5f;
+
+    private bool isPaused = false;
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.P))
+        if(Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape)) // Toggle pause state when pressing p or ESC
         {
-            Pause();
+            if (!isPaused && FadeInOut.Instance != null && FadeInOut.Instance.IsScreenObscured())
+                return; // Do not allow the pause the pause menu to be opened when the screen is black and/or fading
+            
+            if (isPaused) Resume();
+            else Pause();
         }
     }
 
     public void Pause()
     {
-        //Make mouse visible
+        isPaused = true;
         pauseMenu.SetActive(true);
-        Cursor.lockState = CursorLockMode.None;
+
+        // Force close sub menus when pausing
+        if (confirmationPanel != null) confirmationPanel.SetActive(false);
+        if (fieldManualPanel != null) fieldManualPanel.SetActive(false);
+
+        // just a fix for a small visual bug for the red check marks in the pause menu
+        // Forces unity to forget whatever button you were hovering over last time the pause menu was open
+        EventSystem.current.SetSelectedGameObject(null); 
+
+        Cursor.lockState = CursorLockMode.None; //Make mouse visible
         Cursor.visible = true;
 
         //Make game time freeze during menu
         Time.timeScale = 0; 
-
-        //isPaused = true;
     }
 
     public void Resume()
     {
-        //Make mouse invisible
+        isPaused = false;
         pauseMenu.SetActive(false);
-        Cursor.lockState = CursorLockMode.Locked;
+
+        if (confirmationPanel != null) confirmationPanel.SetActive(false);
+        if (fieldManualPanel != null) fieldManualPanel.SetActive(false);
+
+        Cursor.lockState = CursorLockMode.Locked;  //Make mouse invisible
         Cursor.visible = false;
 
         //Make game time run after pressing resume
         Time.timeScale = 1;
+    }
 
-        //isPaused = false; 
+    /// <summary>
+    /// Called by the Restart Case button. Shows the confirmation pop up
+    /// </summary>
+    public void ShowQuitConfirmation() 
+    {
+        if (confirmationPanel != null) confirmationPanel.SetActive(true);
+    }
+
+    /// <summary>
+    /// Hides the confirmation pop up if the player presses no
+    /// </summary>
+    public void HideQuitConfirmation() 
+    {
+        if (confirmationPanel != null) confirmationPanel.SetActive(false);
     }
 
     public void RestartGame()
@@ -46,6 +89,13 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1;
 
         //Go back to Main Menu
-        SceneManager.LoadScene("MainMenu");
+        if (FadeInOut.Instance != null) 
+        {
+            FadeInOut.Instance.FadeToScene("MainMenu", quitFadeDuration);
+        }
+        else 
+        {
+            SceneManager.LoadScene("MainMenu");
+        }
     }
 }

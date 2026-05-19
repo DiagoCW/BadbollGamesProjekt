@@ -9,10 +9,7 @@ VAR isAsleep = true
 The man is slumped deep in the armchair, snoring loudly. He hasn't even taken a single bite from his princesstårta before he fell asleep.
     * { finishedCrimeScene } [Wake him up.]
         Hey. Wake up. #speaker: Player
-        #speaker: Armchair Guy
-        #anim: Shake
-        #snore: stop
-        Huh?! I'm awake! I wasn't sleeping, I was just... Okay, you got me I was sleeping.
+        Huh?! I'm awake! I wasn't sleeping, I was just... Okay, you got me I was sleeping. #speaker: Armchair Guy #anim: Shake #snore: stop
         ~ talkedToArmchairGuy = true
         ~ isAsleep = false
         -> Hub
@@ -22,26 +19,20 @@ The man is slumped deep in the armchair, snoring loudly. He hasn't even taken a 
 === Hub ===
 { isAsleep: -> SleepingHub | -> AwakeHub }
 === SleepingHub ===
-#speaker: Armchair Guy
     + [Wake him up.]
-        #speaker: Player
-        Hey!
-        #speaker: Armchair Guy
-        #anim: Shake
-        #snore: stop
-        Sorry.
+        Hey! #speaker: Player
+        Sorry. #speaker: Armchair Guy #anim: Shake #snore: stop
         ~ isAsleep = false
-        -> Hub
+        { LastNight > 1: <i>I'm never getting anything out of the guy like this... Maybe down the line he will provide me with some information to blow this whole case wide open. But that time is not now.</i> } #speaker:
+        <>-> Hub
     + [Leave him be.]
         -> DONE
 
 === AwakeHub ===
-#speaker: Armchair Guy
-What do you want?
     * { items !? karaokeUSB } [Do you know Peter Grip?] -> KnowPeter
     * { KnowPeter } [I need that recording of Peter.] -> TheTape
-    + [Did you see anything suspicious last night?] -> LastNight
-    + [I'll leave you alone now.] -> AwakeExit
+    + [See anything suspicious last night?] -> LastNight
+    + [I gots to go, baby.] -> AwakeExit
     * { knowledge ? bartenderAlibi } [Bartender's alibi] -> BartenderAlibi
     
 = BartenderAlibi
@@ -50,43 +41,53 @@ Loiter guy told me that you and he left around the same time last night, is this
 HEY! <i>You snap your fingers in his face.</i> #speaker: Player
 Yeah! Yeah, sorry, that's right. I decided to go home and catch up on some Z's, and left with loiter guy. #speaker: Armchair Guy #snore: stop
 The only person left here was Peter. I wonder where he is now? He's usually here by this hour.
-<i>That confirms it. The bartender lied about his alibi.</i> 
+<i>That confirms it. The bartender lied about his alibi.</i>
 -> END
 
 === KnowPeter ===
 Do you know a guy named Peter Grip? #speaker: Player
-Do I ever! He's here every night, singing his heart out on the karaoke machine.
+Do I ever! He's here every night, singing his heart out on the karaoke machine. #speaker: Armchair Guy
 But between you and me? His singing is ass. #speaker: Armchair Guy
 { talkedToBartender:
 The bartender mentioned he liked ABBA. #speaker: Player
-Liked is an understatement. I actually recorded him on my phone last night to prove to my wife why I have to drink. #speaker: Armchair Guy
+Liked is an understatement. <>
 - else:
 Oh yeah? What would he sing? #speaker: Player
-<i>ABBA's Greatest Hits.</i> No exceptions. I actually recorded him on my phone last night to prove to my wife why I have to drink. #speaker: Armchair Guy
-} 
+<i>ABBA's Greatest Hits.</i> No exceptions. <>
+}
+I actually recorded him on my phone last night to prove to my wife why I have to drink. #speaker: Armchair Guy
 -> Hub
 
 === TheTape ===
-#speaker: Player
-You recorded him last night? I need that video. It could be evidence.
-#speaker: Armchair Guy
-Evidence of what? You're talking like he's been involved in something.
-Look, I already transferred it to a USB stick. You can have it.
+You recorded him last night? I need that video. It could be evidence. #speaker: Player
+Evidence of what? You're talking like he's been involved in something. Look, I already transferred it to a USB stick. You can have it. #speaker: Armchair Guy
+<i> Where is he, anyway? He's usually here at this hour...</i>
 ~ getitem(karaokeUSB)
 -> Hub
 
 === LastNight ===
-#speaker: Player
-Did you see anything suspicious last night?
-#speaker: Armchair Guy
-#snore: start
-<i>He immediately goes back to sleep.</i> 
+Did you see anything suspicious last night? #speaker: Player
+<i>He immediately goes back to sleep.</i> #speaker: #snore: start
 ~ isAsleep = true
+{ cashierToldHisAlibi: -> StoreClerkAlibi }
 <>-> Hub
 
+= StoreClerkAlibi
+<b>WAKE THE FUCK UP!</b> #speaker: Player
+~ isAsleep = false
+Why are you shouting? I'm awake. #snore: stop #speaker: Armchair Guy
+I wanted to ask you about the store clerk by the gas station. Do you know where he was last night? #speaker: Player
+Uh, he's still on the same shift now as he was last night I think. Poor guy probably still has a few more hours to go. He looked beat when I went there last night at around 2AM. #speaker: Armchair Guy
+You were there last night? Do you know if he ever left his post?
+<i>He falls back asleep.</i> #speaker: #snore: start
+<i><b>NOT!</b> Got you. Alright, back to the story.</i> #snore: stop
+Well, I don't know if he left... but he came out of the storage after I'd been waiting at the counter for a few minutes. #speaker: Armchair Guy
+~ gainknowledge(cashierAlibi)
+~ askedQuestion = false
+<i>So there's at least a few minutes where he can't be placed at his post... I should confront him about this.</i>
+-> Hub
+
 === AwakeExit ===
-#speaker: Player
-I'll leave you alone now.
-#speaker: Armchair Guy
-Ha det bäst mannen.
+I'll leave you to it, then. #speaker: Player
+Ha det bäst mannen. #speaker: Armchair Guy
 -> END
