@@ -1,6 +1,12 @@
 INCLUDE GlobalsMain2.ink
 
 { introCompleted: <i>Your work here is done. Now jump back behind the wheel and get going!</i> -> END }
+
+{ isHoodOpen:
+    <i>You stare down at the exposed engine.</i>
+    -> Examine
+}
+
 {not carHood:
 <i>Heat waves emanate from the hood of your car like a call for help.</i>
 ~carHood = true
@@ -8,6 +14,7 @@ INCLUDE GlobalsMain2.ink
 <i><b>Pop the hood?</b></i>
     *[Pop the hood]
     The hood of the car slides open.
+    ~isHoodOpen = true
     -> Examine
     *[<b>Don't</b> pop the hood]
     <i>You <b>don't</b> open the hood. For whatever reason. You can always come back whenever you feel like taking this seriously.</i>
@@ -48,6 +55,9 @@ INCLUDE GlobalsMain2.ink
 -> END
 === FoundProblem ===
 There's the problem. I've gotta leak. As in, I've got <b>\*A*</b> leak. A coolant leak.
+
 Time to fill 'er up and get going. Dead bodies usually don't hang around waiting for somebody to investigate them.
 ~ introCompleted = true
+~ isHoodOpen = false
+
 -> END
