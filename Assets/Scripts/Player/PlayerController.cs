@@ -4,7 +4,9 @@ using TMPro;
 using Unity.VisualScripting;
 
 /// <summary>
-/// Defines an object that can be interacted with by the player.
+/// Defines an object that can be interacted with by the player. As the name suggests, it is implemented by all
+/// interactable game objects such as NPCs, items, doors that can be opened, etc. This allows us to implement any
+/// logic that we want within the Interact() method and have it be called by the player themselves.
 /// </summary>
 public interface IInteractable
 {
@@ -238,6 +240,12 @@ public class PlayerController : MonoBehaviour
             if (interactable != null)
             {
                 GameObject target = hitInfo.collider.GetComponentInParent<Transform>().gameObject;
+                //switch (interactable)
+                //{
+                //    case DialogueTrigger:
+
+                //        break;
+                //}
                 if (interactable is DialogueTrigger)
                 {
                     interactPromptText.text = target.CompareTag("NPC") ? $"Speak to \n{target.name}" : $"Inspect \n{target.name}";
@@ -286,6 +294,15 @@ public class PlayerController : MonoBehaviour
 
                         return;
                     }
+                }
+                else if (interactable is OpenDoor)
+                {
+                    //interactPromptText.text = $"Interact Door";
+
+                    if (!interactPromptText.gameObject.activeSelf)
+                        interactPromptText.gameObject.SetActive(true);
+
+                    return;
                 }
             }
 

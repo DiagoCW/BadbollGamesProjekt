@@ -4,6 +4,11 @@ using System.Collections.Generic;
 using System.Collections;
 using Unity.VisualScripting;
 
+/// <summary>
+/// Gets variables from within INK and saves any changes to their states. Is used by DialogueManager to listen in on
+/// any changes made to variables to persist between dialogue. 
+/// Made by @ShapedByRainStudios on Youtube, no other changes made. 
+/// </summary>
 public class DialogueVariables
 {
     public Dictionary<string, Ink.Runtime.Object> variables { get; private set; }
@@ -45,5 +50,4 @@ public class DialogueVariables
             
         }
     }
-    
 }

@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+/// <summary>
+/// Author: Stefan & Isak
+///
+/// </summary>
 public class TestAIScript : MonoBehaviour
 {
     public Transform targetDestination;
@@ -24,21 +28,9 @@ public class TestAIScript : MonoBehaviour
 
     void Update()
     {
-        //if (!agent.pathPending)
-        //{
-        //    if (agent.remainingDistance <= agent.stoppingDistance)
-        //    {
-        //        if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f)
-        //        {
-        //            // Done
-        //            animator.ResetTrigger("Running");
-        //        }
-        //    }
-        //}
         if (!isMoving) return;
         if (Vector3.Distance(agent.transform.position, targetDestinations[destIndex - 1].position) <= 0.5f)
         {
-            //animator.ResetTrigger("Running");
             animator.SetTrigger($"Stop{animtrigger}");
             agent.tag = "NPC";
             isMoving = false;
@@ -48,20 +40,7 @@ public class TestAIScript : MonoBehaviour
             }
         }
             
-
-
-        //if (agent.remainingDistance <= agent.stoppingDistance)
-        //{
-        //    //agent.isStopped = true;
-        //    //animator.SetTrigger("StopRunning");
-        //    animator.ResetTrigger("Running");
-        //    //animator.SetBool("Idle", true);
-
-            //    //Destroy(gameObject);
-            //}
-
     }
-
     public void StartPath(string trigger)
     {
         animtrigger = trigger;
@@ -76,6 +55,5 @@ public class TestAIScript : MonoBehaviour
         {
             Debug.LogError("Target destination not set for TestAIScript on " + gameObject.name);
         }
-        
     }
 }

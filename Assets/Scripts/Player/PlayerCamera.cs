@@ -26,8 +26,7 @@ public class PlayerCamera : MonoBehaviour
     private void LateUpdate()
     {
         // Prevent camera movement if the inventory is open so the player can use their mouse
-        if (PlayerController.Instance != null && PlayerController.Instance.IsInventoryOpen 
-            || NewDialogueManager.Instance != null && NewDialogueManager.Instance.dialogueIsPlaying)
+        if (PlayerController.Instance != null && PlayerController.Instance.IsInventoryOpen)
         {
             return;
         }
