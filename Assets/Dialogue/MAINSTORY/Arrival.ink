@@ -23,6 +23,7 @@ VAR intro = true
         <i>You scream like a little kid and start thrashing around, tugging at your seatbelt and kicking everything within reach. The swerving gets worse.</i>
         ~ panicked = true
 - <i>As the car draws closer and closer to the town, time slows down exponentially. Until it doesn't. You reach an abrupt stop, and time resumes again.</i>
+~ playAudio("car-crash")
 ~ FadeOut()
 <i>You've hit a tree in the middle of a park. Your Honda Civic '89 has been absolutely demolished. You exit the driver's seat, miracolously without a single scratch. It all happened so fast, you think.</i>
 <i>When in reality, you never went above 20km/h, and this whole situation was easily avoidable. The damage to the car is not proportional to the impact, since it was kind of a piece of shit to begin with.</i>
