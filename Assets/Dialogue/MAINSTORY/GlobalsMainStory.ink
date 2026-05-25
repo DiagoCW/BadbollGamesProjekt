@@ -13,6 +13,7 @@ LIST items = (none), karaokeUSB, beerz, backdoorkey
 // Binder en metod som kan kallas av ett script i unity för att starta en navmeshagent. Parametern är till för att sätta animation trigger
 EXTERNAL startMovement(x)
 EXTERNAL unlockSuspect(int)
+EXTERNAL playAudio(string)
 
 === function unlockAllSuspects()
     ~ addsuspect(storeClerk)
