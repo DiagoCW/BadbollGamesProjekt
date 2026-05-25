@@ -10,6 +10,14 @@ using System;
 using UnityEngine.UIElements;
 using UnityEngine.UI;
 //using Ink.Parsed;
+/// <summary>
+/// Singleton script for the DialogueManager. This handles all dialogue interactions from a parsed JSON file,
+/// and gets / sets variables within INK; including checking bool triggers, if lists contains certain items, etc.
+/// It also handles animations and navmeshagents, and binds methods that can be called from within INK
+/// to set a certain animation for the currently talking NPC, or have them move between points.
+/// Huge thanks to @ShapedByRainStudios on Youtube for much of the framework that this script was built on.
+/// 
+/// </summary>
 public class NewDialogueManager : MonoBehaviour
 {
     // Alla komponenter för dialogpanelen
@@ -18,12 +26,14 @@ public class NewDialogueManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI dialogueText;
     [SerializeField] UnityEngine.UI.Image dialogueCheck;
     [SerializeField] UnityEngine.UI.Image itemPortrait;
-    //[SerializeField] TextMeshProUGUI displayNameText;
     [SerializeField] ItemDatabaseObject itemDatabase;
 
+    // This is a globals file that contains variables that all dialogue files need access to, in order to 
+    // persist variables between characters and objects. 
     [Header("Load Globals JSON")]
     [SerializeField] TextAsset loadGlobalsJSON;
 
+    // The container that holds all assets for the dialogue box. 
     [Header("Choices UI")]
     [SerializeField] GameObject choicesContainer;
     [SerializeField] GameObject[] choices;
@@ -35,12 +45,9 @@ public class NewDialogueManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI npcText;
     [SerializeField] TextMeshProUGUI playerText;
 
-    // Behövs för att binda en extern funktion inuti Ink, kan lämnas som den är nu men kan behövas ändras i framtiden
-    [Header("External Function References")]
-    /*[SerializeField]*/ TestAIScript aiAgent;
-
-    Animator npcAnimator; // referens till animatorn för en npc. Parsar tags inuti Ink-filer som sätter animationtriggers
-    
+    // References for animating characters and controlling them as navmeshagents.
+    TestAIScript aiAgent;
+    Animator npcAnimator;
 
     [SerializeField] float typingSpeed = 0.03f;
     // Add with other private fields
@@ -51,7 +58,7 @@ public class NewDialogueManager : MonoBehaviour
     public bool dialogueIsPlaying { get; private set; } // Referens som andra klasser kan hämta för att kontrollera att en dialog är aktiv eller inte 
     bool isTyping;
 
-    private Coroutine displayLineCoroutine;
+    private Coroutine displayLineCoroutine; // Should contain the Coroutine for typing out text one char at a time
 
     public DialogueVariables dialogueVariables { get; private set; } // Lagrar alla globala variabler som finns delade mellan olika Ink-filer 
     public InkExternalFunctions functions { get; private set; } // Denna kallas för att binda / unbinda externa funktioner inuti en Ink-fil 
@@ -133,67 +140,16 @@ public class NewDialogueManager : MonoBehaviour
         return list.ContainsItemNamed(itemName);
     }
 
-    private void OnEnable()
-    {
-        CorkboardManager.OnCorkboardCompleted += OnCorkboardCompletedHandler;
-    }
-
-    private void OnDisable()
-    {
-        CorkboardManager.OnCorkboardCompleted -= OnCorkboardCompletedHandler;
-    }
-
-    private void OnCorkboardCompletedHandler()
-    {
-        Debug.Log("OnCorkboardCompletedHandler triggered");
-        // Try to get the current value from the cached globals
-        Ink.Runtime.Object value = GetVariableState("foundCulprit");
-
-        bool currentBool = false;
-        bool toggleResult = true; // default to true if variable missing or not bool
-
-        if (value == null)
-        {
-            Debug.LogWarning("Variable 'foundCulprit' not found in DialogueVariables. Creating it and setting to true.");
-            toggleResult = true;
-        }
-        else if (value is Ink.Runtime.BoolValue boolVal)
-        {
-            currentBool = boolVal.value;
-            toggleResult = !currentBool;
-        }
-        else
-        {
-            Debug.LogWarning($"Variable 'foundCulprit' exists but is not a bool (type: {value.GetType()}). Overwriting with true.");
-            toggleResult = true;
-        }
-
-        // Update the cached globals dictionary so future stories get the change
-        dialogueVariables?.variables?.Remove("foundCulprit");
-        dialogueVariables?.variables?.Add("foundCulprit", new Ink.Runtime.BoolValue(toggleResult));
-
-        // Also update the currently playing story so the change takes effect immediately
-        if (currentStory != null)
-        {
-            currentStory.variablesState.SetGlobal("foundCulprit", new Ink.Runtime.BoolValue(toggleResult));
-        }
-
-        Debug.Log($"Set 'foundCulprit' = {toggleResult}");
-    }
-
     private void Update()
     {
         if (!dialogueIsPlaying /*||
-            currentStory.currentChoices.Count > 0*/ || choicesContainer.activeSelf) return;
+            currentStory.currentChoices.Count > 0 || choicesContainer.activeSelf*/) return;
 
         if (Input.GetKeyDown(KeyCode.Escape)) 
         {
             if (FadeInOut.Instance != null) FadeInOut.Instance.FadeScreenOnly(0f, 1f); // failsafe if the screen is still black when dialogue is skipped
             ExitDialogue();
         }
-            
-
-        //StartCoroutine(CanContinue());
 
         if (Input.GetKeyDown(KeyCode.E) && Time.time >= inputCooldownUntil)
         {
@@ -216,64 +172,11 @@ public class NewDialogueManager : MonoBehaviour
         }
     }
 
-    IEnumerator CanContinue()
-    {
-        yield return new WaitUntil(() => currentStory.canContinue || currentStory.currentChoices.Count > 0 || 
-        !currentStory.canContinue);
-
-        if (Input.GetKeyDown(KeyCode.E) && currentStory.currentChoices.Count == 0)
-        {
-            if (!isTyping)
-            {
-                ContinueStory();
-            }
-            else
-            {
-                if (displayLineCoroutine != null)
-                {
-                    StopCoroutine(displayLineCoroutine);
-                }
-                dialogueText.text = currentStory.currentText;
-                isTyping = false;
-            }
-        }
-    }
-
-
-    //IEnumerator TypeText(string line)
-    //{
-    //    HideChoices();
-    //    // Denna gör att nuvarande val dyker upp så fort dialogen är klar; Enda nackdelen är att det inte går att
-    //    // autocompletea dialogen. Försök fixa det
-    //    if (currentStory.currentChoices.Count > 0)
-    //    {
-    //        yield return new WaitForSeconds(1f);
-    //        //isTyping = false;
-    //        //dialogueText.text = string.Empty;
-    //        DisplayChoices();
-    //        //yield return new WaitForSeconds(0.01f);
-    //    }
-    //    //else
-    //    {
-    //        dialogueText.text = string.Empty;
-    //        isTyping = true;
-    //        foreach (char letter in line.ToCharArray())
-    //        {
-    //            dialogueText.text += letter;
-    //            yield return new WaitForSeconds(typingSpeed);
-    //        }
-    //        isTyping = false;
-
-    //        // Om man istället har den här så måste man klicka en extra gång för att få upp valen.
-    //        // Inte lika snyggt men fungerar att autocompleta dialogen när det finns val.
-    //        //if (currentStory.currentChoices.Count > 0)
-    //        //{
-    //        //    yield return new WaitForSeconds(0.1f);
-    //        //    DisplayChoices();
-    //        //}
-    //    }
-    //}
-
+    /// <summary>
+    /// Types out the dialogue text one character at a time.
+    /// </summary>
+    /// <param name="line">The next line of dialogue to type out.</param>
+    /// <returns></returns>
     IEnumerator TypeText(string line)
     {
         HideChoices();
@@ -304,14 +207,11 @@ public class NewDialogueManager : MonoBehaviour
         }
     }
 
-
-
     public void EnterDialogue(TextAsset inkJson, Animator npc, TestAIScript agent)
     {
-        //PlayerController.Instance.enabled = false;
         npcAnimator = npc;
         aiAgent = agent;
-        if (aiAgent != null && aiAgent.isMoving) return;
+        if (aiAgent != null && aiAgent.isMoving) return; // Do not initiate dialogue if a character is moving
         currentStory = new(inkJson.text);
         dialogueVariables.StartListening(currentStory);
 
@@ -327,9 +227,7 @@ public class NewDialogueManager : MonoBehaviour
 
     private void ExitDialogue()
     {
-
         dialogueVariables.StopListening(currentStory);
-        //PlayerController.Instance.enabled = true;
         functions.Unbind(currentStory);
         dialogueIsPlaying = false;
         dialoguePanel.SetActive(false);
@@ -339,8 +237,8 @@ public class NewDialogueManager : MonoBehaviour
 
     void ContinueStory()
     {
-        Debug.Log($"ContinueStory called. canContinue: {currentStory.canContinue}, " +
-                  $"choices: {currentStory.currentChoices.Count}");
+        //Debug.Log($"ContinueStory called. canContinue: {currentStory.canContinue}, " +
+        //          $"choices: {currentStory.currentChoices.Count}");
 
         if (currentStory.canContinue)
         {
@@ -348,13 +246,13 @@ public class NewDialogueManager : MonoBehaviour
                 StopCoroutine(displayLineCoroutine);
 
             string line = currentStory.Continue();
-            Debug.Log($"Continued. Line: '{line}', canContinue after: {currentStory.canContinue}, " +
-                      $"choices after: {currentStory.currentChoices.Count}");
+            //Debug.Log($"Continued. Line: '{line}', canContinue after: {currentStory.canContinue}, " +
+            //          $"choices after: {currentStory.currentChoices.Count}");
 
             if (string.IsNullOrWhiteSpace(line) && !currentStory.canContinue
                 && currentStory.currentChoices.Count == 0)
             {
-                Debug.Log("Empty line with nothing left — exiting.");
+                //Debug.Log("Empty line with nothing left — exiting.");
                 ExitDialogue();
                 return;
             }
@@ -364,11 +262,18 @@ public class NewDialogueManager : MonoBehaviour
         }
         else if (currentStory.currentChoices.Count == 0)
         {
-            Debug.Log("Nothing left — exiting.");
+            //Debug.Log("Nothing left — exiting.");
             ExitDialogue();
         }
     }
 
+    /// <summary>
+    /// In INK, you can set global #tags for the entire file or after individual lines. This method parses
+    /// them, and sets their values to the corresponding thing. Example:
+    /// "#anim: Walking" parses the 'anim' tag and enters the corresponding switch statement, 
+    /// gets the descriptor string 'Walking', and sets the string as the animation trigger for the current character or object.
+    /// </summary>
+    /// <param name="currentTags">All tags collected from the latest Continue() call of the story.</param>
     void HandleTags(List<string> currentTags)
     {
         foreach (string tag in currentTags)
@@ -388,14 +293,13 @@ public class NewDialogueManager : MonoBehaviour
                 case SPEAKER_TAG:
                     // Hantera talare, t.ex. ändra namn eller färg på texten
                     Debug.Log($"Speaker: {tagValue}");
-                    if (tagValue.Equals(null)) tagValue = "Test";
+                    //if (tagValue.Equals(null)) tagValue = "Test";
                     if (tagValue.Equals("Player"))
                     {
                         playerText.text = "Justin Time";
                         npcPanel.SetActive(false);
                         playerPanel.SetActive(true);
                     }
-                        
                     else
                     {
                         npcText.text = tagValue;
@@ -407,23 +311,14 @@ public class NewDialogueManager : MonoBehaviour
                 case PORTRAIT_TAG:
                     // Hantera porträtt, t.ex. visa en bild av talaren
                     Debug.Log($"Portrait: {tagValue}");
-                    //itemPortrait.enabled = true;
-                    //itemPortrait.sprite = Resources.Load<Sprite>(tagValue);
-                    //itemPortrait.sprite = ScriptableObject.FindFirstObjectByType<ItemDatabaseObject>()
-                    //foreach (var clue in ScriptableObject.FindFirstObjectByType<ItemDatabaseObject>().items)
-                    //{
-                    //    if (clue.Id.Equals(Convert.ToInt32(tagValue)))
-                    //    {
-                    //        itemPortrait.sprite = clue.uiDisplay;
-                    //        break;
-                    //    }
-                    //}
 
                     if (int.TryParse(tagValue, out int itemId) && itemDatabase.GetItem.TryGetValue(itemId, out ItemObject item))
                     {
                         itemPortrait.sprite = item.uiDisplay;
                         itemPortrait.gameObject.SetActive(true);
                     }
+                    else if (string.IsNullOrEmpty(tagValue))
+                        itemPortrait.gameObject.SetActive(false);
                     else
                     {
                         Debug.LogWarning($"Portrait tag value '{tagValue}' not found in item database.");
@@ -431,10 +326,10 @@ public class NewDialogueManager : MonoBehaviour
                     }
 
                     break;
-                case LAYOUT_TAG:
-                    // Hantera layout, t.ex. ändra position eller stil på dialogrutan
-                    Debug.Log($"Layout: {tagValue}");
-                    break;
+                //case LAYOUT_TAG:
+                //    // Hantera layout, t.ex. ändra position eller stil på dialogrutan
+                //    Debug.Log($"Layout: {tagValue}");
+                //    break;
                 case ANIM_TAG:
                     if (npcAnimator == null) return;
                     Debug.Log($"Animation: {tagValue}, currentTag: {currentValue}");
@@ -476,6 +371,10 @@ public class NewDialogueManager : MonoBehaviour
             choice.SetActive(false);
     }
 
+    /// <summary>
+    /// If the latest Continue() call for the current story contains dialogue choices, this method displays
+    /// them at the end of the dialogue line. 
+    /// </summary>
     void DisplayChoices()
     {
         List<Choice> currentChoices = currentStory.currentChoices;
@@ -510,6 +409,7 @@ public class NewDialogueManager : MonoBehaviour
         
     }
 
+    // A workaround method for registering button presses for the Event System. I have no idea how or why it works
     private IEnumerator SelectFirstChoice()
     {
         EventSystem.current.SetSelectedGameObject(null);
@@ -517,6 +417,11 @@ public class NewDialogueManager : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(choices[0]);
     }
 
+    /// <summary>
+    /// This method is wired to their respective button game components in the Dialogue UI. When a button with
+    /// index n is pressed, it calls this method and sends that as the parameter, and then continues the story.
+    /// </summary>
+    /// <param name="choiceIndex"></param>
     public void MakeChoice(int choiceIndex)
     {
         currentStory.ChooseChoiceIndex(choiceIndex);

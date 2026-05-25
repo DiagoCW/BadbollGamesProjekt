@@ -6,8 +6,11 @@ using UnityEngine.AI;
 using NUnit.Framework;
 
 /// <summary>
-/// Detta script läggs till på alla NPCs som spelaren ska kunna interagera med och starta dialog.
-/// Den innehåller en JSON-fil med dess Inkdialog som skickas till DialogueManager.
+/// Author: Isak
+/// The most basic script for starting dialogue with characters or objects. 
+/// Implements an interface that allows the player to call the interface method when interacting with the object.
+/// The method then simply calls the EnterDialogue() method, and passes along arguments for their animator component
+/// as well as NavMesh-script for controlling movement. 
 /// </summary>
 public class DialogueTrigger : MonoBehaviour, IInteractable
 {
@@ -19,9 +22,6 @@ public class DialogueTrigger : MonoBehaviour, IInteractable
     // Ink JSON fil som håller dialogen som objektet ska visa vid interaktion
     [Header("Ink JSON")]
     [SerializeField] TextAsset inkJson;
-    //[SerializeField] public string npcName;
-    
-    /*[SerializeField]*/ HighlightActivatorIAVersion highlighter;
 
     Animator npcAnimator;
     TestAIScript aiScript;
@@ -31,20 +31,12 @@ public class DialogueTrigger : MonoBehaviour, IInteractable
         npcDir = this.transform;
         initialNpcDir = npcDir;
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        //NewDialogueManager.Instance.currentStory.variablesState["foundSnusdosa"] = true;
-        //highlighter = GameObject.FindGameObjectWithTag("Player").GetComponent<HighlightActivatorIAVersion>();
         npcAnimator = GetComponentInChildren<Animator>();
         aiScript = GetComponentInChildren<TestAIScript>();
     }
 
-    void Start()
-    {
-        
-    }
-
     public void Interact()
     {
-        //if (highlighter.IsHighlighting) return;
         NewDialogueManager.Instance.EnterDialogue(inkJson, npcAnimator, aiScript);
     }
 
@@ -66,9 +58,10 @@ public class DialogueTrigger : MonoBehaviour, IInteractable
         
     }
 
+    // Rotates the NPC within range to face the player
     public void FacePlayer()
     {
-        if (aiScript != null && aiScript.isMoving) return;
+        if (aiScript != null && aiScript.isMoving) return; // returns if they are currently moving, as to not face the player
         Vector3 rotation = new Vector3(player.position.x, transform.position.y, player.position.z);
         transform.LookAt(rotation);
     }

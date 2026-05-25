@@ -1,12 +1,15 @@
 using UnityEngine;
 
+/// <summary>
+/// Author: Isak
+/// A more advanced script for triggering dialogue, commonly used for Items that are obtainable or otherwise needs to
+/// check a certain condition if they can be interacted with, often through the use of Detective Vision.
+/// Defaults to dialogue with the first INK file, and once a condition is met it instead displays the second INK file. 
+/// Holds a reference to the Outline Highlighter script to determine whether the object has been highlighted or not.
+/// Also holds item objects that can be obtained by the player. 
+/// </summary>
 public class InteractableItem : MonoBehaviour, IInteractable
 {
-    // this script is used for items that can be interacted with in the world,
-    // such as clues. It checks if the player is using detective vision and
-    // gives different dialogue and items based on that. It replaced the
-    // previus clues interact script -Hugo
-
     [Header("References")]
     private InventoryObject playerInventory;
     [SerializeField] ItemObject item, item2;
@@ -24,27 +27,27 @@ public class InteractableItem : MonoBehaviour, IInteractable
         highlighter = GameObject.FindGameObjectWithTag("Player").GetComponent<HighlightActivatorIAVersion>();
         outline = GetComponentInChildren<OutlineHighlighter>();
 
-        particles = GetComponentInChildren<ParticleSystem>();
-        if (particles != null)
-        {
-            particles.Play();
-            particles.Clear();
-            particles.Stop();
-        }
+        //particles = GetComponentInChildren<ParticleSystem>();
+        //if (particles != null)
+        //{
+        //    particles.Play();
+        //    particles.Clear();
+        //    particles.Stop();
+        //}
     }
 
-    void HandleParticles()
-    {
-        if (particles == null) return;
-        if (highlighter.IsHighlighting)
-            particles.Play();
-        else
-            particles.Stop();
-    }
-    void Update()
-    {
-        HandleParticles();
-    }
+    //void HandleParticles()
+    //{
+    //    if (particles == null) return;
+    //    if (highlighter.IsHighlighting)
+    //        particles.Play();
+    //    else
+    //        particles.Stop();
+    //}
+    //void Update()
+    //{
+    //    HandleParticles();
+    //}
     public void Interact()
     {
         if (outline != null && outline.hasBeenHighlighted)
@@ -54,15 +57,9 @@ public class InteractableItem : MonoBehaviour, IInteractable
                 NewDialogueManager.Instance.EnterDialogue(inkJson2, null, null);
             if (!pickedUpClue && item != null)
             {
-                if (item2 != null)
-                {
-                    playerInventory.AddItem(new Item(item2));
-                    Debug.Log($"Added {item2.name} to player inventory");
-                }
-                    
                 playerInventory.AddItem(new Item(item));
                 pickedUpClue = true;
-                gameObject.tag = "Untagged";
+                gameObject.tag = "Untagged"; // removes "clue" tag so that object no longer can be highlighted
             }
         }
         else if (inkJson != null && !highlighter.IsHighlighting)
