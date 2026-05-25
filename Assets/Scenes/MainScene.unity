@@ -26464,7 +26464,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7a0546d8a4f33c4f9a41334728422a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inkTrigger: 
+  inkTrigger: backdoorkey
+  inkJson: {fileID: 4900000, guid: 83c7faf72148a1246bed308491d8e75f, type: 3}
 --- !u!1001 &1513258835
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33726,7 +33727,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 265d8379ea94a64448cf58fb52633ac6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inkJson: {fileID: 4900000, guid: 277ea4dfbab8cda409c44ec8ee504087, type: 3}
+  inkJson: {fileID: 4900000, guid: 29956346f91dd4141bbc8225e64eb4d7, type: 3}
 --- !u!65 &2052940620
 BoxCollider:
   m_ObjectHideFlags: 0

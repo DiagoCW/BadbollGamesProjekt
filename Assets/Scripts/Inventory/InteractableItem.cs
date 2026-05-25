@@ -54,7 +54,11 @@ public class InteractableItem : MonoBehaviour, IInteractable
         {
             //Debug.Log("Detective vision enabled, and item is interacted with");
             if (inkJson2 != null)
+            {
                 NewDialogueManager.Instance.EnterDialogue(inkJson2, null, null);
+                gameObject.tag = "Untagged";
+            }
+                
             if (!pickedUpClue && item != null)
             {
                 playerInventory.AddItem(new Item(item));

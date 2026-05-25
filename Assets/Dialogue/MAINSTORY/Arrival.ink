@@ -2,34 +2,39 @@ INCLUDE globalsmainstory.INK
 EXTERNAL FadeOut()
 VAR intro = true
 ~ playAmbience("highway-travel-interior")
-<i>As you hit the long loansome road, perched back in your reclined leather seat, you feel at ease. You are en route to the scene of the crime.<i> #speaker:
-<i>Your name is Justin Time. You're a real cool detective. You've been cracking heads and cases as long as there's been heads and cases to crack. Which is a very long time to be cracking heads and cases.</i>
-<i>You've been called to a little known suburb outside of Malmö to investigate a murder that happened last night.</i>
-<i>Or, you hope it's a murder. Because that's what you do, you solve murders.</i>
-//<i>Your attention shifts to your stereo. It's been playing the same song on repeat, over and over again. You've lost count how many times now, maybe 6 or 7?</i>
-//<i>It's not a particularly good song either, but it's all you've got to keep you company.</i>
-<i>The calling officer didn't seem thrilled about having you come over to investigate. You have a penchant for drama, and you often try to uncover crimes where there are none.</i>
-<i>He made it a point to mention that there's really nothing of interest here, but they need you to at least take a look at the scene and take some statements since they don't have any other available units.</i>
-<i><b>Bullshit artist.</b> There's always a crime to be uncovered. Your instincts are screaming as much.</i>
-<i>After driving for a while, you see the outskirts of the town you're headed towards. It's dark now, and it's started raining.</i>
-<i>...a *lot*, actually. You suddenly start hydroplaning. This is <b>really bad.<b> You start swerving uncontrollably.</i>
+<i>You slam the door shut, shift into gear, and off you go. You are en route to the scene of the crime.<i> #speaker:
+<i>Your name is Justin Time. You're an old school detective. You've been cracking heads and cases as long as there's been heads and cases to crack. Which is a very long time to be cracking heads and cases. Except...</i>
+This sucks. I haven't had a proper case to solve in, what... 20 years now? And they call me in to take a look at some low-life drunk they found dead in an alley? #speaker: Player
+I used to solve the biggest cases. Everywhere I rolled up I would say my iconic catchphrase, <i>"Looks like I'm... <b>Justin Time</b>."</i>, and then I solved the case. And everyone loved me for it.
+The officer who called me in didn't seem even the least bit thrilled to have me over. He didn't even consider the prospect that we could have a murder on our hands.
+Are law enforcement so quick to rule out cold-blooded murder these days? As if there's not a crime to be solved?
+<b>Bullshit artist.</b> There's always a crime to be solved. My instincts are screaming as much.
+This will be my epic comeback. I'm sure of it. I'll prove it was a murder, and everyone will love and appreciate me for solving the case. Like they used to do...
+<i>After driving for a while, you see the outskirts of the town you're headed towards. It's dark now, and it's started raining.</i> #speaker: 
+<i>...a *lot*, actually. You suddenly start hydroplaning. This is <b>really bad.<b> You swerve uncontrollably.</i>
+That's not good. But what if I... #speaker: Player
     * [<b>Step on the gas</b>]
-        <i>You inexplicably start flooring it.</i>
-        <i>It felt like the right thing to do in the heat of the moment, but there's no going back now. You've comitted to this.</i>
+        <i>You inexplicably start flooring it. The car speeds up.</i> #speaker: 
+        Uh-oh. #speaker: Player
+        <i>It felt like the right thing to do in the heat of the moment, but there's no going back now.</i> #speaker: 
         ~ steppedOnGas = true
-    * [<b>Resign to your fate</b>]
-        <i>You close your eyes and let go of the wheel. You won't open them again until you either see God or have reached your destination.</i> 
+    * [<b>Resign to my fate</b>]
+        <i>You close your eyes and let go of the wheel. It's all in God's hands now.</i> #speaker: 
+        This is fine. Soon it will all be over... #speaker: Player
         ~ resignedToFate = true
     * [<b>Start panicking</b>]
-        <i>You scream like a little kid and start thrashing around, tugging at your seatbelt and kicking everything within reach. The swerving gets worse.</i>
+        <i>You scream like a little kid and start thrashing around, tugging at your seatbelt and kicking everything within reach.</i> #speaker: 
+        AIIEHH!! I DON'T WANT TO DIE! SOMEBODY FUCKING SAVE ME!!!!!!!!! #speaker: Player
+        <i>The swerving gets worse.</i> #speaker: 
         ~ panicked = true
+- ~ stopAmbience()
+- ~ playAudio("car-crash")
 - <i>As the car draws closer and closer to the town, time slows down exponentially. Until it doesn't. You reach an abrupt stop, and time resumes again.</i>
-~ stopAmbience()
-~ playAudio("car-crash")
 ~ FadeOut()
-<i>You've hit a tree in the middle of a park. Your Honda Civic '89 has been absolutely demolished. You exit the driver's seat, miracolously without a single scratch. It all happened so fast, you think.</i>
-<i>When in reality, you never went above 20km/h, and this whole situation was easily avoidable. The damage to the car is not proportional to the impact, since it was kind of a piece of shit to begin with.</i>
-<i>Your car doesn't care though, as it's still absolutely fucked. You're not going anywhere anytime soon. Not that you need to either, you're right where you belong.</i>
-<i>You seem to have crashed in the middle of the park. You see the officer from across your shoulder, he's rushed towards you after he heard the crash. Best not keep him waiting any longer.</i>
-<i>You also hear someone shouting by the street behind you somewhere...</i>
+<i>You've hit a tree in the middle of a park. Your Honda Civic '89 has been absolutely demolished. You exit the driver's seat, miracolously without a single scratch.</i>
+My car... My lovely little car... A shame that there was no way to avoid this situation. #speaker: Player
+<i>In reality, you never went above 20km/h and this whole situation was easily avoidable.</i> #speaker: 
+<i>Your car doesn't care though, as it's absolutely fucked.</i>
+<i>You see the officer from across your shoulder, rushing towards you after he heard the crash.</i>
+Ah, Officer! I'll be with you in but a moment. #speaker: Player
 -> END

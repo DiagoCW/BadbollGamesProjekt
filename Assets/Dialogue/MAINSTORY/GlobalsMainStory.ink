@@ -19,7 +19,7 @@ EXTERNAL stopAmbience()
 
 === function unlockAllSuspects()
     ~ addsuspect(storeClerk)
-    ~ addsuspect(bossManID)
+    ~ addsuspect(bossMan)
     ~ addsuspect(bartender)
     ~ unlockSuspect(storeClerkID)
     ~ unlockSuspect(bossManID)
@@ -432,4 +432,5 @@ LIST WindowKnowledge = steam_on_glass, fingerprints_on_glass, fingerprints_on_gl
 -> END
 
 ND
+
 
