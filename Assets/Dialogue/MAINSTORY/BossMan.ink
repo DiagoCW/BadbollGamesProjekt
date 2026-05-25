@@ -2,16 +2,15 @@ INCLUDE globalsmainstory.INK
 VAR exhaustedOptions = false
 { Suspects ? bossMan: -> StartQuestion("Are you going to arrest me...?") }
 { talkedToBossMan: <>-> CanQuestion|-> Intro }
-#speaker: Boss Man
 === Intro ===
-Nice driving, asshole! #anim: Yelling
+Nice driving, asshole! #anim: Yelling #speaker: Boss Man
     //{ talkToPolice: -> CanQuestion.Question } 
     * {debug} [LÅS UPP SOM SUSPECT]
         ~ addsuspect(bossMan)
         ~ unlockSuspect(bossManID)
         -> Intro
     * [Thanks.]
-        Yeah, real nice... Business is already bad as it is, a totaled car right behind the shop is going to do wonders for the customers. #anim: Angry
+        Yeah, real nice... Business is already bad as it is, a totaled car right behind the shop is going to do wonders for the customers. #anim: Angry #speaker: Boss Man
         -> IntroCont
     * [That wasn't me, it was the other guy.]
         Oh, the other guy. Of course. The one standing here talking to me right now about the other guy. THAT guy. Him. #anim: Shake
@@ -36,7 +35,7 @@ Nice driving, asshole! #anim: Yelling
         That wasn't so hard, now was it? Now get lost, I don't wanna see your face again.
         ~ talkedToBossMan = true
         { finishedCrimeScene: 
-            Actually... I kinda need to take your statement. I'm here on behalf of Peter.
+            Actually... I kinda need to take your statement. I'm here on behalf of Peter. #speaker: Player
             -> StartQuestion("For fuck's sake.")
         - else:
           -> DONE  
@@ -64,6 +63,7 @@ What's going on, big guy? Crash any cars lately? #speaker: Boss Man #anim: Talki
 === StartQuestion(msg) ===
 ~ talkedToBossMan = true
 {msg} #speaker: Boss Man #anim: Talking
+{ Call and Relation: -> DeadEnd }
 * { debug } [Start walking, buddy.]
     Ok :)
     ~ startMovement("Walking")
@@ -74,16 +74,16 @@ What's going on, big guy? Crash any cars lately? #speaker: Boss Man #anim: Talki
 * { Suspects !? bossMan } [Did you know the victim?] -> Relation
 * { Suspects ? bossMan } [What happened last night?] -> LastNight
 * { Suspects ? bartender or Suspects ? storeClerk } [Ask about other suspects] -> AskAboutSuspects
-* -> DeadEnd
+* [Bye loser.] -> END
 
 = InquireAboutReceipt
 Huh? #speaker: Boss Man
 I have proof that he came here. I have a receipt from this shop that matches his card number. #speaker: Player #portrait: 0
-Oh. Well, that's nothing. #speaker: Boss Man portrait: 
+Oh. Well, that's nothing. #speaker: Boss Man #portrait: 
 Huh? #speaker: Player 
 Did you know he constantly lost his wallet? Someone must have found it and treated themself to one of my famous rolls. It's not the first time it's happened, or the last. #speaker: Boss Man
 Though, I guess this actually <b>would</b> be the last time... #anim: Shake
-I guess that makes sense... Both the officer and bartender did tell me he often lost it. #speaker: Player
+I guess that makes sense... The officer told me he would lose it a lot. Even the bartender said so. #speaker: Player
 To weasel out of paying his tab, no doubt! #speaker: Boss Man
 Look, he didn't come here, alright? But I guess I could keep an eye out in case it shows up again.
 -> StartQuestion("Anything else?")
@@ -94,9 +94,9 @@ Look, he didn't come here, alright? But I guess I could keep an eye out in case 
     Suppose this leads nowhere, I'm bringing you in. I'll make sure the officer keep an eye on you. #speaker: Player
     -> END
 - else:
-    He knows more than he lets on. Call it a hunch, but I've seen this type of guy before... #speaker:
-    Som på Bollen i Rullen 25 på Nobeltorget.
-    Maybe he really doesn't know anything. Or I could take a little look around his shop... But I need to distract him somehow. 
+    <i>He knows more than he lets on. Call it a hunch, but I've seen this type of guy before...</i> #speaker:
+    <i>Som på Bollen i Rullen 25 på Nobeltorget.</i>
+    <i>Maybe he really doesn't know anything. Or I could take a little look around his shop... But I need to distract him somehow.</i>
 }
 -> END
 

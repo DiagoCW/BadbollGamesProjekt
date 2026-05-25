@@ -1,26 +1,27 @@
 INCLUDE globalsmainstory.INK
 VAR reminisce = false
 { cluesFoundonBody >= 2: -> Result }
-<i>The (murder?) victim. He's not even in the early stages of decay, and he still smells awful.</i>
-{ talkToPoliceAgain: Now, where to start... -> Inspect | I should talk to the officer before investigating the body. -> END }
+{ not talkToPoliceAgain: I should talk to the officer before investigating the body. -> END } #speaker: Player
+<i>The victim. He's not even in the early stages of decay, and he still smells awful.</i>
+Now, where to start... -> Inspect
 === Inspect ===
     { cluesFoundonBody >= 2: -> Result } // Dirigerar till sista delen om man hittat alla ledtrådar på kroppen
-    * [-Inspect his person]
-        Was this guy really only 27 years old? He looks a hell of a lot older... Alcohol will do that to you. I'm staying straight edge.
-        There are appears to be signs indicative of a struggle. He has pretty major bruising on his face, he's slouched over to the side... Did the officer not think this was noteworthy?
+    * [<b>Inspect his person</b>]
+        Was this guy really only 27 years old? He looks a hell of a lot older... Alcohol will do that to you. Myself? I'm Straight Edge 4 Life.
+        There are appears to be signs indicative of a struggle. He has pretty major bruising on his face, he's slouched over to the side... He's taken a pretty big beating.
+        The officer did say that he died from alcohol poisoning, but how come he didn't mention these injuries?
         ~cluesFoundonBody++
         -> Inspect
-    * [-Inspect his clothes]
-        His pockets appears emptied. All of them... Was he robbed?
-        Someone could have been after something that he was carrying, and that was the reason for...
-        ...wait, best not to get ahead of myself. But this really makes no sense.
-        He has some pretty major injuries, and his pockets have clearly been emptied after the fact. There's obviously some foul play going on here.
-        I need to find out what could have been on him, it might help me make sense of this...
+    * [<b>Inspect his clothes</b>]
+        There's nothing on him. #speaker: Player
+        That's strange though. It looks like all of his pockets have been emptied. Was he robbed?
+        This alone is reason enough for not ruling anything out. It could even have been a, dare I say it, <i>murder?</i>
+        If he really was robbed, I need to find out what could have been on him.
         ~ gainknowledge(pocketsEmptied)
         ~cluesFoundonBody++
         -> Inspect
-    + {!reminisce} [Think back on your past.]
-        {Everything was better in the '50s. -> Inspect | I should've bought BitCoin when I had the chance... -> Inspect | I'm a creep, I'm a weirdo. What the hell am I doing here? -> Inspect | -> StopThinking }
+    + {!reminisce} [<b>Think back on your past.</b>]
+        {Allt var bättre förr. -> Inspect | Jag skulle ha köpt BitCoin när jag hade chansen... -> Inspect | I'm a creep, I'm a weirdo. What the hell am I doing here? -> Inspect | -> StopThinking } #speaker: Player
 
 = StopThinking
 Enough of this, focus... #speaker: Player
@@ -29,18 +30,12 @@ Enough of this, focus... #speaker: Player
 
 === Result ===
 The officer seems confident that he just fell over and happened to die by himself, but everything here indicates something else entirely. #speaker: Player
-Maybe I just didn't know the guy like the officer did... In fact, I didn't know him at all.
+Maybe I just didn't know the guy like the officer did... In fact, I didn't know him at all. But even at a cursory glance it doesn't add up.
     {foundAllClues(): // om man hittat alla andra ledtrådar redan
     * I have everything I need[.], I should talk to the officer.
-        //~ talkToPolice = true
         -> DONE
     - else: // om man forfarande har ledtrådar kvar att hitta runtomkring
     * I have everything I need[.] here, but I should inspect the scene again. #speaker: Player
         -> DONE
 }
-
-
-
-
-
 

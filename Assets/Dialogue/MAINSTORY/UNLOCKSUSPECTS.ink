@@ -1,4 +1,7 @@
 INCLUDE globalsmainstory.INK
-UNLOCKING ALL SUSPECTS ON CLUEBOARD
-~ unlockAllSuspects()
--> END
+Unlock all suspects?
+* [Ja bitte]
+    UNLOCKING ALL SUSPECTS ON CLUEBOARD
+    ~ unlockAllSuspects()
+* [Nej tack:)]
+- -> END
