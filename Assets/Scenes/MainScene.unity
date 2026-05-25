@@ -733,7 +733,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  outlineWidth: 0.03
+  outlineScale: {x: 1.03, y: 1.03, z: 1.03}
+  isFlatDecal: 0
   inkTrigger: canEnterStorage
 --- !u!114 &41521409
 MonoBehaviour:
@@ -12070,6 +12071,32 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7018617153130126481, guid: fb39eb55e01a3044499b68d55b6ee95e, type: 3}
   m_PrefabInstance: {fileID: 566645144}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &568869061 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2187217000307559685, guid: 36aad984599f71f4d8f6d9dd7d1259ce, type: 3}
+  m_PrefabInstance: {fileID: 3396380074959735793}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &568869065
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 568869061}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.0432848, y: 0.064784236, z: 0.043284796}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &570180089
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17137,6 +17164,32 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 420679290244240194, guid: 788c5aa2357abec4c83a80227ae69c87, type: 3}
   m_PrefabInstance: {fileID: 951838462}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &953244428 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3112397317012513620, guid: 36aad984599f71f4d8f6d9dd7d1259ce, type: 3}
+  m_PrefabInstance: {fileID: 3396380074959735793}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &953244432
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 953244428}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.0432848, y: 0.064784236, z: 0.043284796}
+  m_Center: {x: 0.00000011920929, y: 0, z: 0}
 --- !u!1001 &960533577
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18028,6 +18081,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 583602067}
     m_Modifications:
+    - target: {fileID: 252891940240160499, guid: b39871bbd2ef23449948787e6100ab8f, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 96e4b16bef309854d8d7ce6aa1099d9e, type: 3}
     - target: {fileID: 430712740014621650, guid: b39871bbd2ef23449948787e6100ab8f, type: 3}
       propertyPath: m_Color.a
       value: 1
@@ -23268,7 +23325,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  outlineWidth: 1.58
+  outlineScale: {x: 1.03, y: 1.03, z: 1.03}
+  isFlatDecal: 0
   inkTrigger: 
 --- !u!1001 &1315322736
 PrefabInstance:
@@ -23548,7 +23606,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  outlineWidth: 0.03
+  outlineScale: {x: 1.03, y: 1.03, z: 1.03}
+  isFlatDecal: 0
   inkTrigger: 
 --- !u!23 &1330437926
 MeshRenderer:
@@ -23648,7 +23707,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  outlineWidth: 0.03
+  outlineScale: {x: 1.03, y: 1.03, z: 1.03}
+  isFlatDecal: 0
   inkTrigger: 
 --- !u!23 &1334121074
 MeshRenderer:
@@ -28000,7 +28060,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  outlineWidth: 0.02
+  outlineScale: {x: 1.03, y: 1.03, z: 1.03}
+  isFlatDecal: 0
   inkTrigger: bartenderAlibi
 --- !u!23 &1691326494
 MeshRenderer:
@@ -29948,7 +30009,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  outlineWidth: 0.12
+  outlineScale: {x: 1.03, y: 1.03, z: 1.03}
+  isFlatDecal: 0
   inkTrigger: talkedToBossMan
 --- !u!114 &1808297818
 MonoBehaviour:
@@ -33734,7 +33796,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  outlineWidth: 0.48
+  outlineScale: {x: 1.03, y: 1.03, z: 1.03}
+  isFlatDecal: 0
   inkTrigger: talkToPolice
 --- !u!114 &2102050741
 MonoBehaviour:
@@ -37949,6 +38012,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8067591523327201363, guid: 36aad984599f71f4d8f6d9dd7d1259ce, type: 3}
       insertIndex: -1
       addedObject: {fileID: 460544741}
+    - targetCorrespondingSourceObject: {fileID: 3112397317012513620, guid: 36aad984599f71f4d8f6d9dd7d1259ce, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 953244432}
+    - targetCorrespondingSourceObject: {fileID: 2187217000307559685, guid: 36aad984599f71f4d8f6d9dd7d1259ce, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 568869065}
     - targetCorrespondingSourceObject: {fileID: 2386645286312267574, guid: 36aad984599f71f4d8f6d9dd7d1259ce, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3396380074959735795}

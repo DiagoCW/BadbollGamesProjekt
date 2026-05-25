@@ -7,8 +7,12 @@ using UnityEngine.UI;
 public class OutlineHighlighter : MonoBehaviour
 {
     [SerializeField] private Color outlineColor = Color.yellow;
-    [SerializeField] private float outlineWidth = 0.03f;
+    [Tooltip("Adjust how much the outline expands. For flat surfaces, set Y to 1")]
+    [SerializeField] private Vector3 outlineScale = new Vector3(1.03f, 1.03f, 1.03f);
+    //[SerializeField] private float outlineWidth = 0.03f;
     //[SerializeField] private ClueType clueType = ClueType.Regular;
+    [Tooltip("Check this box if the object is flat")]
+    [SerializeField] private bool isFlatDecal = false;
     [SerializeField] private string inkTrigger = string.Empty; // the INK variable that must be true for the outline to activate. Leave empty if no such check is needed
     bool trigger = false; // the bool that tries to get the value of the inkTrigger string. Defaults to true if the InkTrigger string is empty
     public enum ClueType { Regular, Important, Critical, Hidden }
@@ -32,7 +36,8 @@ public class OutlineHighlighter : MonoBehaviour
         outlineObject.transform.SetParent(transform);
         outlineObject.transform.localPosition = Vector3.zero;
         outlineObject.transform.localRotation = Quaternion.identity;
-        outlineObject.transform.localScale = Vector3.one * (1f + outlineWidth);
+        outlineObject.transform.localScale = outlineScale;
+        //outlineObject.transform.localScale = Vector3.one * (1f + outlineWidth);
 
         MeshFilter mf = GetComponent<MeshFilter>();
         MeshFilter outlineMF = outlineObject.AddComponent<MeshFilter>();
@@ -56,9 +61,19 @@ public class OutlineHighlighter : MonoBehaviour
             outlineMat.SetColor("_BaseColor", outlineColor);
 
         outlineMat.SetInt("_ZWrite", 0);
-        outlineMat.SetInt("_Cull", (int)CullMode.Front);       
-        outlineMat.SetInt("_ZTest", (int)CompareFunction.Always);
-        outlineMat.renderQueue = 3000;
+        if (isFlatDecal)
+        {
+            // For flat objects render a solid shape
+            outlineMat.SetInt("_Cull", (int)CullMode.Off);
+            outlineMat.SetInt("_ZTest", (int)CompareFunction.LessEqual);
+        }
+        else
+        {
+            // For 3D objects
+            outlineMat.SetInt("_Cull", (int)CullMode.Front);
+            outlineMat.SetInt("_ZTest", (int)CompareFunction.Always);
+        }
+        outlineMat.renderQueue = 2950; // Used to be 3000, if something is off try to set it to 3000 again
 
         outlineMat.DisableKeyword("_EMISSION");
         if (outlineMat.HasProperty("_EmissionColor"))
