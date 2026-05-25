@@ -29,11 +29,11 @@ public class StartAudioManager : MonoBehaviour
     {
         switch (id)
         {
-            case "carInterior":
+            case "highway-travel-interior":
                 ambienceSource.clip = carInteriorLoop;
                 ambienceSource.loop = true;
                 ambienceSource.Play();
-                break;
+            break;
         }
     }
 
@@ -48,7 +48,7 @@ public class StartAudioManager : MonoBehaviour
         {
             case "car-crash":
                 sfxSource.PlayOneShot(carCrash);
-                break;
+            break;
         }
     }
 }
