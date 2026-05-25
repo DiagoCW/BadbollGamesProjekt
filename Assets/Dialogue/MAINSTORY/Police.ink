@@ -32,7 +32,7 @@ Alright, settle down... Walk with me, it's just over here. #speaker: Police
 Last night, the body of 27-year old Peter Grip was found lying here. The official cause of death is yet to be determined, but knowing him I'd say it's clear as day. #speaker: Police
 Why do you say that? Did you know the victim? #speaker: Player
 He was a known drunk. I've dealt with him before on many occassions when he's had a few too many at the bar, I tended to run into him quite frequently. #speaker: Police
-No witnesses have come forward to share any information either. We don't have much to go on, but I think it's pretty evident what happened. The drunk did drank too much. Case solved. 
+No witnesses have come forward to share any information either. We don't have much to go on, but I think it's pretty evident what happened. The drunk drank too much. Case solved. 
     -(opts)
     * [<b>Potential murder?</b>]
         Absolutely not. We really have no reason to suspect or classify it as such. This is a cut and dry case. #speaker: Police

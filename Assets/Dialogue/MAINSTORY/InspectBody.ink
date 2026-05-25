@@ -29,7 +29,7 @@ Enough of this, focus... #speaker: Player
 
 === Result ===
 The officer seems confident that he just fell over and happened to die by himself, but everything here indicates something else entirely. #speaker: Player
-Maybe I just didn't now the guy like the officer did... In fact, I didn't know him at all.
+Maybe I just didn't know the guy like the officer did... In fact, I didn't know him at all.
     {foundAllClues(): // om man hittat alla andra ledtrådar redan
     * I have everything I need[.], I should talk to the officer.
         //~ talkToPolice = true
