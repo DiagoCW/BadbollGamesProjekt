@@ -304,29 +304,18 @@ public class PlayerController : MonoBehaviour
 
                     return;
                 }
+                else if (interactable is CarDoorAnimator) 
+                {
+                    CarDoorAnimator door = (CarDoorAnimator)interactable;
+                    
+                    interactPromptText.text = door.isOpen ? $"Close \n{target.name}" : $"Open \n{target.name}";
+                    
+                    if (!interactPromptText.gameObject.activeSelf)
+                        interactPromptText.gameObject.SetActive(true);
+
+                    return;
+                }
             }
-
-            var corkboardTarget =
-                hitInfo.collider.GetComponent<CorkboardTriggerV2>();
-
-            //var ctarget = corkboardTarget.GetComponentInParent<Transform>();
-            //var trigger = FindAnyObjectByType<CorkboardTriggerV2>();
-            if (corkboardTarget != null && !corkboardTarget.isViewingCorkboard && corkboardTarget.isPlayerNearBoard)
-            {
-                interactPromptText.text = corkboardTarget.isViewingCorkboard ?
-                    $"Close \nCorkboard" : "Open \nCorkboard";
-                if (!interactPromptText.gameObject.activeSelf)
-                    interactPromptText.gameObject.SetActive(true);
-                return;
-            }
-
-            //var trigger = FindAnyObjectByType<CorkboardTriggerV2>();
-            
-            //if (corkboardTarget.isViewingCorkboard)
-            //{
-            //    interactPromptText.gameObject.SetActive(false);
-            //}
-                
         }
 
         if (interactPromptText.gameObject.activeSelf)

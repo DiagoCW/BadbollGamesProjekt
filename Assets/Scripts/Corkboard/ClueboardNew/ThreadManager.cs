@@ -7,7 +7,7 @@ using UnityEditor.Search;
 /// <summary>
 /// Manages the creation, routing, and validation of visual threads between SuspectNodes and ClueSlots.
 /// </summary>
-public class ThreadManager : MonoBehaviour
+public class ThreadManager : MonoBehaviour // Author - Stefan Cwiek
 {
     public static ThreadManager Instance { get; private set; }
 
@@ -132,8 +132,13 @@ public class ThreadManager : MonoBehaviour
                 suspectWebs[activeSuspect] = new Queue<ClueSlot>();
             }
 
+            // Trying something new. Dynamically find how many clues this specific case needs
+            int maxConnectionsAllowed = 3;
+            SuspectSolution solution = caseSolutions.Find(s => s.suspect == activeSuspect);
+            if (solution.suspect != null) maxConnectionsAllowed = solution.requiredClues.Count;
+
             // limit connections to 3 by removing the oldest one.
-            if (suspectWebs[activeSuspect].Count >= 3)
+            if (suspectWebs[activeSuspect].Count >= maxConnectionsAllowed)
             {
                 ClueSlot oldestSlot = suspectWebs[activeSuspect].Dequeue();
                 if (connections.ContainsKey(oldestSlot))
@@ -204,9 +209,16 @@ public class ThreadManager : MonoBehaviour
     /// </summary>
     public bool IsBoardReadyToSubmit() 
     {
-        foreach (var web in suspectWebs.Values) 
+        foreach (var web in suspectWebs) 
         {
-            if (web.Count == 3) return true;
+            SuspectNode suspect = web.Key;
+            Queue<ClueSlot> connectedSlots = web.Value;
+
+            SuspectSolution solution = caseSolutions.Find(s => s.suspect == suspect);
+            if (solution.suspect != null && connectedSlots.Count == solution.requiredClues.Count) 
+            {
+                return true;
+            }
         }
         return false;
     }
@@ -231,6 +243,8 @@ public class ThreadManager : MonoBehaviour
             // Check if this suspect has a solution in the database
             SuspectSolution solution = caseSolutions.Find(s => s.suspect == suspect);
             if (solution.suspect == null || solution.requiredClues.Count == 0) continue;
+
+            if (connectedSlots.Count != solution.requiredClues.Count) continue; // Removes the earlier hardcoded 3, now relies on the solution count instead
 
             // Gather the IDs of the clues the player attached
             List<int> playerSubmittedIDs = new List<int>();
