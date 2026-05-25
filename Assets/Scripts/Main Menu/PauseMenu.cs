@@ -22,24 +22,24 @@ public class PauseMenu : MonoBehaviour
 
     void Update()
     {
-        if((Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape)) && !isPaused) // Toggle pause state when pressing p or ESC
+        if((Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape)) /*&& !isPaused*/) // Toggle pause state when pressing p or ESC
         {
-            if(FadeInOut.Instance != null && FadeInOut.Instance.IsScreenObscured())
-            {
-                return;
-            }
+            //if(FadeInOut.Instance != null && FadeInOut.Instance.IsScreenObscured())
+            //{
+            //    return;
+            //}
             // Updated Version //Bella - now the pausemenu wont cloe by pressing same button twice
             // Do not allow the pause the pause menu to be opened when the screen is black and/or fading
 
-            Pause();
+            //Pause();
 
-            //OLD - REMOVE
-            //if (!isPaused && FadeInOut.Instance != null && FadeInOut.Instance.IsScreenObscured())
-            //    return; // Do not allow the pause the pause menu to be opened when the screen is black and/or fading
+            
+            if (!isPaused && FadeInOut.Instance != null && FadeInOut.Instance.IsScreenObscured())
+                return; // Do not allow the pause the pause menu to be opened when the screen is black and/or fading
 
-            //if (isPaused) Resume();
-            //else Pause();
-            //OLD - REMOVE
+            if (isPaused) Resume();
+            else Pause();
+            
         }
     }
 
