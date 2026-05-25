@@ -50,6 +50,14 @@ public class InkExternalFunctions
         {
             StartAudioManager.Instance.PlaySFX(id);
         });
+        story.BindExternalFunction("playAmbience", (string id) =>
+        {
+            StartAudioManager.Instance.PlayAmbience(id);
+        });
+        story.BindExternalFunction("stopAmbience", () =>
+        {
+            StartAudioManager.Instance.StopAmbience();
+        });
     }
 
     public void Unbind(Story story)
@@ -59,5 +67,7 @@ public class InkExternalFunctions
         story.UnbindExternalFunction("FadeOut");
         story.UnbindExternalFunction("unlockSuspect");
         story.UnbindExternalFunction("playAudio");
+        story.UnbindExternalFunction("playAmbience");
+        story.UnbindExternalFunction("stopAmbience");
     }
 }

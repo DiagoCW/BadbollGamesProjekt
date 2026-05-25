@@ -1,6 +1,7 @@
 INCLUDE globalsmainstory.INK
 EXTERNAL FadeOut()
 VAR intro = true
+~ playAmbience("highway-travel-interior")
 <i>As you hit the long loansome road, perched back in your reclined leather seat, you feel at ease. You are en route to the scene of the crime.<i> #speaker:
 <i>Your name is Justin Time. You're a real cool detective. You've been cracking heads and cases as long as there's been heads and cases to crack. Which is a very long time to be cracking heads and cases.</i>
 <i>You've been called to a little known suburb outside of Malmö to investigate a murder that happened last night.</i>
@@ -23,6 +24,7 @@ VAR intro = true
         <i>You scream like a little kid and start thrashing around, tugging at your seatbelt and kicking everything within reach. The swerving gets worse.</i>
         ~ panicked = true
 - <i>As the car draws closer and closer to the town, time slows down exponentially. Until it doesn't. You reach an abrupt stop, and time resumes again.</i>
+~ stopAmbience()
 ~ playAudio("car-crash")
 ~ FadeOut()
 <i>You've hit a tree in the middle of a park. Your Honda Civic '89 has been absolutely demolished. You exit the driver's seat, miracolously without a single scratch. It all happened so fast, you think.</i>

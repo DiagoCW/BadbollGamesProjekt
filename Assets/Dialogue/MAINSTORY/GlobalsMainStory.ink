@@ -14,6 +14,8 @@ LIST items = (none), karaokeUSB, beerz, backdoorkey
 EXTERNAL startMovement(x)
 EXTERNAL unlockSuspect(int)
 EXTERNAL playAudio(string)
+EXTERNAL playAmbience(string)
+EXTERNAL stopAmbience()
 
 === function unlockAllSuspects()
     ~ addsuspect(storeClerk)
