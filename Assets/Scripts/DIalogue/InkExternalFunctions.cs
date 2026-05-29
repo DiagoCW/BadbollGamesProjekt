@@ -46,17 +46,26 @@ public class InkExternalFunctions
         {
             SuspectManager.Instance.UnlockSuspect(id);
         });
+
+        // Plays a clip without looping
         story.BindExternalFunction("playAudio", (string id) =>
         {
             StartAudioManager.Instance.PlaySFX(id);
         });
+        // Plays an audio on loop until stopped, only one can play at a time
         story.BindExternalFunction("playAmbience", (string id) =>
         {
             StartAudioManager.Instance.PlayAmbience(id);
         });
-        story.BindExternalFunction("stopAmbience", () =>
+        // Stops a currently playing ambience
+        story.BindExternalFunction("stopAmbience", (string id) =>
         {
-            StartAudioManager.Instance.StopAmbience();
+            StartAudioManager.Instance.StopAmbience(id);
+        });
+        // Or add a new function to stop all
+        story.BindExternalFunction("stopAllAmbience", () =>
+        {
+            StartAudioManager.Instance.StopAllAmbience();
         });
     }
 
@@ -66,8 +75,11 @@ public class InkExternalFunctions
         story.UnbindExternalFunction("FadeIn");
         story.UnbindExternalFunction("FadeOut");
         story.UnbindExternalFunction("unlockSuspect");
+
+        // Audio functions
         story.UnbindExternalFunction("playAudio");
         story.UnbindExternalFunction("playAmbience");
         story.UnbindExternalFunction("stopAmbience");
+        story.UnbindExternalFunction("stopAllAmbience");
     }
 }
