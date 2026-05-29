@@ -1,5 +1,7 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class StartAudioManager : MonoBehaviour
 {
@@ -120,4 +122,16 @@ public class StartAudioManager : MonoBehaviour
             Debug.LogWarning($"SFX clip with id '{id}' not found!");
         }
     }
+
+    public IEnumerator LowerPitch(string id)
+    {
+        const float decrease = 0.02f;
+        var source = activeAmbienceSources[id];
+        while (source.pitch > 0)
+        {
+            source.pitch -= decrease;
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
+
 }

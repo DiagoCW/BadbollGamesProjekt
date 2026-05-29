@@ -63,16 +63,17 @@ Yeah? Got any proof of that? #speaker: Bartender
 { knowledge ? foundCoolantBartender: 
 -> AlibiEnd
 - else:
-No, not really. I was winging it and hoped you would come clean... #speaker: Player
-You've got some fucking nerve, kompis... <b>NO BEER FOR YOU!</b> #speaker: Bartender
+<i>If the victim was poisoned, I should be able to find something around here that he could've used to do it, as well as figure out how he did it. But for the time being...</i> #speaker: Player
+No, not really. I was winging it and hoped you would come clean...
+-> StartQuestion("You've got some fucking nerve, kompis... <b>NO BEER FOR YOU!</b>")
 -> END
 }
 
 = AlibiEnd
-For starters, what's up with the empty malplaced cannister of coolant in your bathroom? #speaker: Player
-That's... for my car, obviously... #speaker: Bartender
-<b>Bullshit artist.</b> You don't got no car that I've ever seen. That means you don't have a car. #speaker: Player
-You lied about your alibi. You were alone with Peter for at least an hour, at which point you had ample opportunity to poison him. Otherwise you wouldn't have lied about it.
+For starters, what's up with the excessive amount of rat poison all over the place? #speaker: Player
+It's for rats. Obviously. #speaker: Bartender
+And Peter, it would seem. I found one of his beers, and it didn't smell like beer should, even if we're talking about the overpriced shitty beer you serve here. #speaker: Player
+You lied about your alibi. You were alone with Peter for at least an hour, at which point you had ample opportunity to poison him. When he inevitably dropped dead, you had ample opportunity to loot his body.
 I had no reason to kill him though, this is naught but the conjecture of a delusional detective! You have 0 proof! #speaker: Bartender
 <i>This is it. I need one final push and I got him dead to rights. Here goes...</i> #speaker: 
 { knowledge ? knowAboutTrisslott: 
@@ -82,7 +83,6 @@ With your business failing, and his tab racking up more and more debt... You saw
 ~ addsuspect(bartender)
 ~ unlockSuspect(bartenderID)
 You're... you're wrong. I didn't do it. I couldn't... #speaker: Bartender
-UNDER CONSTRUCTION: bartendern är nu en suspect, och han ska ge mer information angående kassabiträdet så fort vi implementerat det i spelet :)
 -> END
 - else:
 I've got nothing. Sorry. Just keeping you on your toes! Got to go now baby. #speaker: Player
@@ -129,7 +129,7 @@ When the body was found, his pockets were emptied. He didn't have his wallet on 
 * { Clues ? victimWallet } [<color=\#FFFF00>Boss Man has his wallet.</color>]
     Huh, go figure. That's probably how he kept getting it back. He was as much of a regular there as he was here. #speaker: Bartender
     You don't think that Boss Man could have stolen it? #speaker: Player
-    Look, I know the guy, he wouldn't steal his wallet. Unless you know something that I don't. #speaker: Bartender
+    I don't think so. Unless you know something that I don't, of course. #speaker: Bartender
     -> LastNightCont
     
 = LastNightCont
@@ -138,12 +138,9 @@ No, no. Sleepyhead over there and loiter man was here all night. Then they all l
 It was another dull and uneventful night. Well, except for Peter's singing.
 Anything else? Was he acting out of character, or did he tell you anything? #speaker: Player
 No, not really. Business as usual. #speaker: Bartender
-{ knowledge ? bartenderAlibi: 
-    * [<color=\#FFFF00>This ain't right...</color>] -> Alibi 
-- else: 
-    ~ bartenderToldHisAlibi = true
-    Alright, that'll be all. #speaker: Player
-    }
+* { knowledge ? bartenderAlibi } [<color=\#FFFF00>That ain't right...</color>] -> Alibi 
+~ bartenderToldHisAlibi = true
+Alright, that'll be all. #speaker: Player
 -> StartQuestion("Anything else?")
 
 = ShowReceipt

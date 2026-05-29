@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Crosshair : MonoBehaviour
 {
@@ -11,13 +12,7 @@ public class Crosshair : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PlayerController.Instance.IsInventoryOpen || NewDialogueManager.Instance.dialogueIsPlaying)
-        {
-            gameObject.SetActive(false);
-        }
-        else
-        {
-            gameObject.SetActive(true);
-        }
+        gameObject.SetActive(PlayerController.Instance.IsInventoryOpen || NewDialogueManager.Instance.dialogueIsPlaying);
+        
     }
 }

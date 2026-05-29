@@ -6,7 +6,8 @@ Could be important though.
 ~cluesFoundbyBody++
 ~getclue(snus)
 // --- Dirigera till tutorial om detta är första ledtråden spelaren hittar
-{ LIST_COUNT(Clues) <= 2: -> ClueIntro | -> END }
+//{ LIST_COUNT(Clues) <= 2: -> ClueIntro | -> END }
+-> END
 
 === ClueIntro ===
 #portrait:
