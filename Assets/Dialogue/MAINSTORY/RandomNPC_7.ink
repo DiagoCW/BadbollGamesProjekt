@@ -1,2 +1,2 @@
-Hey idiot! You can't park there!
+Hey, eyes up here buddy.
     -> END

@@ -1,2 +1,2 @@
-You’re Justin Time? I was expecting you like… yesterday.
+Can I choose to not be involved in whatever you’re doing?
     -> END

@@ -1,2 +1,2 @@
-God there are so many choices... I don't know what to pick. 
+Justin Time? Yeah... that would've been great like five minutes ago. I forgot my keys inside the building.
     -> END
