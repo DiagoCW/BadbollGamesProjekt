@@ -15,6 +15,10 @@ public class InteractableItem : MonoBehaviour, IInteractable
     [SerializeField] ItemObject item, item2;
     [SerializeField] TextAsset inkJson, inkJson2;
 
+    [Header("Settings")]
+    [Tooltip("Should this object be destroyed when picked up?")]
+    [SerializeField] private bool destroyOnPickup = false;
+
     bool pickedUpClue = false;
     
     HighlightActivatorIAVersion highlighter;
@@ -50,7 +54,7 @@ public class InteractableItem : MonoBehaviour, IInteractable
     //}
     public void Interact()
     {
-        if (outline != null && outline.hasBeenHighlighted)
+        if (outline != null && highlighter.IsHighlighting) //outline.hasBeenHighlighted)
         {
             //Debug.Log("Detective vision enabled, and item is interacted with");
             if (inkJson2 != null)
@@ -64,6 +68,8 @@ public class InteractableItem : MonoBehaviour, IInteractable
                 playerInventory.AddItem(new Item(item));
                 pickedUpClue = true;
                 gameObject.tag = "Untagged"; // removes "clue" tag so that object no longer can be highlighted
+
+                if (destroyOnPickup) Destroy(gameObject); // If box checked, destroy the object when its been picked up
             }
         }
         else if (inkJson != null && !highlighter.IsHighlighting)

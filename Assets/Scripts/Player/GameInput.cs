@@ -7,7 +7,7 @@ using UnityEngine.InputSystem.Controls;
 /// Acts as a central hub for all player input. It wraps the generated Unity Input System class
 /// and exposes input actions as standard events and getter methods.
 /// </summary>
-public class GameInput : MonoBehaviour
+public class GameInput : MonoBehaviour // Author: Stefan Cwiek
 {
     // Events that other scripts can subscribe to for action based inputs.
     public event EventHandler OnJumpAction;

@@ -215,6 +215,14 @@ public class NewDialogueManager : MonoBehaviour
         currentStory = new(inkJson.text);
         dialogueVariables.StartListening(currentStory);
 
+        //currentStory.BindExternalFunction("unlockSuspect", (int id) => 
+        //{
+        //    if (SuspectManager.Instance != null) 
+        //    {
+        //        SuspectManager.Instance.UnlockSuspect(id);
+        //    }
+        //}); //
+
         //if (agent != null)
             functions.Bind(currentStory, agent);
 
@@ -228,6 +236,7 @@ public class NewDialogueManager : MonoBehaviour
     private void ExitDialogue()
     {
         dialogueVariables.StopListening(currentStory);
+       // currentStory.UnbindExternalFunction("unlockSuspect");
         functions.Unbind(currentStory);
         dialogueIsPlaying = false;
         dialoguePanel.SetActive(false);

@@ -1,4 +1,5 @@
 INCLUDE GlobalsMain2.ink
+EXTERNAL unlockSuspect(id)
 
 { introCompleted: <i>Your work here is done. Now jump back behind the wheel and get going!</i> -> END }
 

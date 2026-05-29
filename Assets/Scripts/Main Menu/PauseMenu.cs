@@ -37,7 +37,11 @@ public class PauseMenu : MonoBehaviour
             if (!isPaused && FadeInOut.Instance != null && FadeInOut.Instance.IsScreenObscured())
                 return; // Do not allow the pause the pause menu to be opened when the screen is black and/or fading
 
-            if (isPaused) Resume();
+            if (isPaused)
+            {
+                Resume();
+                Cursor.visible = false;
+            }
             else Pause();
             
         }

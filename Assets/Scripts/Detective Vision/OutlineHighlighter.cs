@@ -15,6 +15,10 @@ public class OutlineHighlighter : MonoBehaviour
     [SerializeField] private bool isFlatDecal = false;
     [SerializeField] private string inkTrigger = string.Empty; // the INK variable that must be true for the outline to activate. Leave empty if no such check is needed
     bool trigger = false; // the bool that tries to get the value of the inkTrigger string. Defaults to true if the InkTrigger string is empty
+
+    [Tooltip("If true, you cannot interact with this object until the ink trigger is met.")]
+    public bool hideInteractionUntilTriggered = false; // Defaults to false
+
     public enum ClueType { Regular, Important, Critical, Hidden }
 
     private GameObject outlineObject;
@@ -91,7 +95,21 @@ public class OutlineHighlighter : MonoBehaviour
             DestroyImmediate(outlineObject);
     }
 
-    
+    public bool CheckInkCondition() 
+    {
+        if (string.IsNullOrEmpty(inkTrigger)) return true;
+
+        if (NewDialogueManager.Instance == null) return false;
+
+        Ink.Runtime.Object inkObj = NewDialogueManager.Instance.GetVariableState(inkTrigger);
+        if (inkObj is Ink.Runtime.BoolValue boolVal) 
+        {
+            return boolVal.value;
+        }
+
+        return false;
+    }
+
 
     public void SetHighlighted(bool value, float duration)
     {
