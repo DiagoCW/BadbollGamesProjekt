@@ -1,2 +1,2 @@
-I asked one driver if he stops here. He laughed.. I think.
+You’re Justin Time? I was expecting you like… yesterday.
     -> END

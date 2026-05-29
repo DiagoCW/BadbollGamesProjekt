@@ -1,2 +1,2 @@
-Gas prices are crazy man...I’m out here driving on prayers.
+I asked for heavy metal and they played Waterloo by ABBA... Haven't been the same since.
     -> END
