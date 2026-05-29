@@ -1,8 +1,10 @@
 INCLUDE globalsmainstory.INK
 EXTERNAL FadeOut()
 VAR intro = true
-~ playAmbience("highway-travel-interior")
+~ playAudio("cardoor-open-close")
 <i>You slam the door shut, shift into gear, and off you go. You are en route to the scene of the crime.<i> #speaker:
+~ playAmbience("highway-travel-interior")
+~ playAmbience("PREMONITION-IN-THE-PARK")
 <i>Your name is Justin Time. You're an old school detective. You've been cracking heads and cases as long as there's been heads and cases to crack. Which is a very long time to be cracking heads and cases. Except...</i>
 This sucks. I haven't had a proper case to solve in, what... 20 years now? And they call me in to take a look at some low-life drunk they found dead in an alley? #speaker: Player
 I used to solve the biggest cases. Everywhere I rolled up I would say my iconic catchphrase, <i>"Looks like I'm... <b>Justin Time</b>."</i>, and then I solved the case. And everyone loved me for it.
@@ -27,8 +29,10 @@ That's not good. But what if I... #speaker: Player
         AIIEHH!! I DON'T WANT TO DIE! SOMEBODY FUCKING SAVE ME!!!!!!!!! #speaker: Player
         <i>The swerving gets worse.</i> #speaker: 
         ~ panicked = true
-- ~ stopAmbience()
 - ~ playAudio("car-crash")
+- ~ stopAmbience("highway-travel-interior")
+- ~ stopAmbience("PREMONITION-IN-THE-PARK")
+- ~ playAmbience("ambiens-1")
 - <i>As the car draws closer and closer to the town, time slows down exponentially. Until it doesn't. You reach an abrupt stop, and time resumes again.</i>
 ~ FadeOut()
 <i>You've hit a tree in the middle of a park. Your Honda Civic '89 has been absolutely demolished. You exit the driver's seat, miracolously without a single scratch.</i>
