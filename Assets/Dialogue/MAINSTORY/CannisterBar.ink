@@ -11,3 +11,6 @@ Wait... of course, I'm so stupid. The victim's snus smells <b>exactly</b> like t
 ~ gainknowledge(victimPoisoned)
 }
 -> END
+
+An empty can of rat poison. Feels like a health hazard to keep it in the bathroom... #speaker: Player
+

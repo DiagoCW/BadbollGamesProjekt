@@ -29,12 +29,14 @@ That's not good. But what if I... #speaker: Player
         AIIEHH!! I DON'T WANT TO DIE! SOMEBODY FUCKING SAVE ME!!!!!!!!! #speaker: Player
         <i>The swerving gets worse.</i> #speaker: 
         ~ panicked = true
-- ~ playAudio("car-crash")
 - ~ stopAmbience("highway-travel-interior")
-- ~ stopAmbience("PREMONITION-IN-THE-PARK")
-- ~ playAmbience("ambiens-1")
-- <i>As the car draws closer and closer to the town, time slows down exponentially. Until it doesn't. You reach an abrupt stop, and time resumes again.</i>
+- ~ lowerPitch("PREMONITION-IN-THE-PARK")
+- <i>As the car draws closer and closer to the town, time slows down exponentially until it stands completely still.</i>
+~ playAudio("car-crash")
+~ stopAmbience("PREMONITION-IN-THE-PARK")
+</i>Until it doesn't. You reach an abrupt stop, and time resumes again.</i>
 ~ FadeOut()
+~ playAmbience("ambiens-1")
 <i>You've hit a tree in the middle of a park. Your Honda Civic '89 has been absolutely demolished. You exit the driver's seat, miracolously without a single scratch.</i>
 My car... My lovely little car... A shame that there was no way to avoid this situation. #speaker: Player
 <i>In reality, you never went above 20km/h and this whole situation was easily avoidable.</i> #speaker: 

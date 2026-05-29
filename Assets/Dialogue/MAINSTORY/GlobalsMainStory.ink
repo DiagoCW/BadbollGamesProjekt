@@ -5,10 +5,15 @@ VAR bossManID = 1
 VAR bartenderID = 2
 LIST Suspects = (none), bossMan, bartender, storeClerk
 // --- Fysiska ledtrådar i spelet
-LIST Clues = (none), snus, receipts, victimPockets, victimWallet, beer, trisslott, kylarVätska
+LIST Clues = (none), snus, receipts, victimPockets, victimWallet, beer, trisslott, kylarVätska, ratPoison
 // --- Kunskap om saker för att kunna pussla ihop ledtrådar
 LIST knowledge = none, victimPoisoned, pocketsEmptied, receiptsBelongToVictim, stoleWallet, knowAboutTrisslott, bartenderAlibi, cashierAlibi, foundCoolantBartender, foundCoolantKiosk
 LIST items = (none), karaokeUSB, beerz, backdoorkey
+
+// Efter att man har löst clueboard ska denna tilldelas "Boss Man", "The Bartender", eller "The Store Clerk"
+VAR finalSuspect = "None"
+// Ett script I unity måste sätta in ett värde på denna från Detective Vision när man har löst clueboard
+VAR dvisionTotalTime = 0
 
 // Binder en metod som kan kallas av ett script i unity för att starta en navmeshagent. Parametern är till för att sätta animation trigger
 EXTERNAL startMovement(x)
@@ -18,6 +23,7 @@ EXTERNAL playAudio(string)
 EXTERNAL playAmbience(string)
 EXTERNAL stopAmbience(string)
 EXTERNAL stopAllAmbience()
+EXTERNAL lowerPitch(string)
 
 === function unlockAllSuspects()
     ~ addsuspect(storeClerk)

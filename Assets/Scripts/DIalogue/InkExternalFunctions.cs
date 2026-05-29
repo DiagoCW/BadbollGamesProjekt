@@ -67,6 +67,12 @@ public class InkExternalFunctions
         {
             StartAudioManager.Instance.StopAllAmbience();
         });
+        story.BindExternalFunction("lowerPitch", (string id) =>
+        {
+            CoroutineRunner.instance.StartCoroutine(StartAudioManager.Instance.LowerPitch(id));
+            
+        });
+        
     }
 
     public void Unbind(Story story)
