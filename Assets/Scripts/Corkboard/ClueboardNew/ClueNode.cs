@@ -134,6 +134,10 @@ public class ClueNode : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             // Update state variables
             currentSlot = foundSlot;
             foundSlot.Occupy(this);
+
+            if (ThreadManager.Instance != null && ThreadManager.Instance.boardTrigger != null)
+                ThreadManager.Instance.boardTrigger.isDraggingClue = false;
+
             return;
         }
 

@@ -166,6 +166,12 @@ public class PlayerController : MonoBehaviour
             
             if (interactables.Length == 0) return;
 
+            OutlineHighlighter outline = hitInfo.collider.GetComponentInChildren<OutlineHighlighter>();
+            if (outline != null && outline.hideInteractionUntilTriggered && !outline.CheckInkCondition()) 
+            {
+                return;
+            }
+
             // Find and call DialogueTrigger specifically
             foreach (IInteractable interactable in interactables)
             {
@@ -246,6 +252,15 @@ public class PlayerController : MonoBehaviour
 
                 //        break;
                 //}
+
+                OutlineHighlighter outline = target.GetComponentInChildren<OutlineHighlighter>();
+                if (outline != null && outline.hideInteractionUntilTriggered && !outline.CheckInkCondition()) 
+                {
+                    if (interactPromptText.gameObject.activeSelf)
+                        interactPromptText.gameObject.SetActive(false);
+                    return;
+                }
+
                 if (interactable is DialogueTrigger)
                 {
                     interactPromptText.text = target.CompareTag("NPC") ? $"Speak to \n{target.name}" : $"Inspect \n{target.name}";
