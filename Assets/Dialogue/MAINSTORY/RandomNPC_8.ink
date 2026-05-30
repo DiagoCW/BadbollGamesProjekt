@@ -1,2 +1,2 @@
-Peter Grip? I saw nothing. That's my final statement. #speaker: Yvonne
+Peter Grip? I saw nothing. That's my final statement. 
     -> END

@@ -34,7 +34,7 @@ That's not good. But what if I... #speaker: Player
 - <i>As the car draws closer and closer to the town, time slows down exponentially until it stands completely still.</i>
 ~ playAudio("car-crash")
 ~ stopAmbience("PREMONITION-IN-THE-PARK")
-</i>Until it doesn't. You reach an abrupt stop, and time resumes again.</i>
+</i>And then it doesn't. You reach an abrupt stop, and time resumes again.</i>
 ~ FadeOut()
 ~ playAmbience("ambiens-1")
 <i>You've hit a tree in the middle of a park. Your Honda Civic '89 has been absolutely demolished. You exit the driver's seat, miracolously without a single scratch.</i>

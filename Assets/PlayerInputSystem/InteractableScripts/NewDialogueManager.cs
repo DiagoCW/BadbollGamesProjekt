@@ -49,7 +49,7 @@ public class NewDialogueManager : MonoBehaviour
     TestAIScript aiAgent;
     Animator npcAnimator;
 
-    [SerializeField] float typingSpeed = 0.03f;
+    public float typingSpeed = 0.03f;
     // Add with other private fields
     private float inputCooldownUntil;
     private const float INPUT_COOLDOWN = 0.1f;

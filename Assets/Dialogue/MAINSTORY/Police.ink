@@ -1,10 +1,9 @@
 INCLUDE globalsmainstory.INK
 { talkToPolice: <>-> Brief | -> Intro }
 === Intro ===
-#speaker: 
 Jesus, are you alright?! What happened? #speaker: Police #anim: Talking
 Looks like I'm... <i>Jus imhime...</i> time to... Justin... #speaker: Player
-What? What are you talking about, did you have a concussion or something?
+What? What are you talking about, did you have a concussion or something? #speaker: Police
 { panicked: -> Panicked }
 { resignedToFate: -> Fate }
 { steppedOnGas: -> Gas }

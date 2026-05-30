@@ -1,2 +1,2 @@
-Skånetrafiken is confident the bus comes ‘soon’. I admire that confidence. #speaker: Hugo
+Skånetrafiken is confident the bus comes ‘soon’. I admire that confidence. 
     -> END
