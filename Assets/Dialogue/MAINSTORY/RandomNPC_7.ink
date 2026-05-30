@@ -1,2 +1,2 @@
-Hey, eyes up here buddy. #speaker: Gudrun
+Hey, eyes up here buddy.
     -> END

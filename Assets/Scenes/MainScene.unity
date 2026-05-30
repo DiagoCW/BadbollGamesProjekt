@@ -24165,7 +24165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 265d8379ea94a64448cf58fb52633ac6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inkJson: {fileID: 4900000, guid: 3b5cd04ce2198ef41884ffc3870842f2, type: 3}
+  inkJson: {fileID: 4900000, guid: 93cc74fd534c6354db5b812a25c75ee1, type: 3}
 --- !u!4 &1236568804 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7389661407780354265, guid: f8618990be700c141a31e070f1fded1c, type: 3}

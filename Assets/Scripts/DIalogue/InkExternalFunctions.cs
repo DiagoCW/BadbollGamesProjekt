@@ -86,6 +86,14 @@ public class InkExternalFunctions
         {
             return ThreadManager.Instance.isLocked;
         });
+        story.BindExternalFunction("changeTypingSpeed", (float speed) =>
+        {
+            NewDialogueManager.Instance.typingSpeed = speed;
+        });
+        story.BindExternalFunction("fadeToBlack", (float alpha, float duration) =>
+        {
+            FadeInOut.Instance.FadeScreenOnly(alpha, duration);
+        });
 
     }
 
@@ -98,6 +106,8 @@ public class InkExternalFunctions
         story.UnbindExternalFunction("isSolutionCorrect");
         story.UnbindExternalFunction("unlockBoard");
         story.UnbindExternalFunction("isBoardLocked");
+        story.UnbindExternalFunction("changeTypingSpeed");
+        story.UnbindExternalFunction("fadeToBlack");
 
         // Audio functions
         story.UnbindExternalFunction("playAudio");
