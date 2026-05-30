@@ -11,3 +11,4 @@ VAR carIsFixed = false
 VAR seenPuddle = false
 VAR boardSubmitted = false
 VAR failCount = 0
+VAR pickedUpFirstItem = false
