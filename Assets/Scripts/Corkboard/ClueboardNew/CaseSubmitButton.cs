@@ -9,6 +9,9 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Button), typeof(Image))]
 public class CaseSubmitButton : MonoBehaviour
 {
+    [Header("Confirmation UI")]
+    [SerializeField] private ClueboardConfirmationUI confirmationUI;
+
     [Header("Colors")]
     [Tooltip("The color of the button when no suspect has enough clues yet.")]
     public Color notReadyColor = new Color(0.8f, 0.2f, 0.2f, 1f); // Red
@@ -51,6 +54,12 @@ public class CaseSubmitButton : MonoBehaviour
 /// </summary>
    private void UpdateButtonVisuals() 
     {
+        if (ThreadManager.Instance != null && ThreadManager.Instance.isLocked) 
+        {
+            buttonComponent.interactable = false;
+            return;
+        }
+
         if (ThreadManager.Instance != null && ThreadManager.Instance.IsBoardReadyToSubmit()) 
         {
             buttonImage.color = readyColor;
@@ -70,6 +79,9 @@ public class CaseSubmitButton : MonoBehaviour
     // Tell the threadmanager to grade the board when button clicked
     private void OnButtonClicked() 
     {
-        ThreadManager.Instance.SubmitCase();
+        if (confirmationUI != null) 
+        {
+            confirmationUI.ShowPanel();
+        }
     }
 }

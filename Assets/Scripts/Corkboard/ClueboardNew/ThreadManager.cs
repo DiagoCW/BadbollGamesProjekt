@@ -22,6 +22,8 @@ public class ThreadManager : MonoBehaviour // Author - Stefan Cwiek
     [Tooltip("Defines the required clue combinations for each suspect.")]
     public List<SuspectSolution> caseSolutions = new List<SuspectSolution>();
 
+    public bool isLocked = false; // toggle board state
+
     /// <summary>
     /// Insertr the required solution data for a specific suspect.
     /// </summary>
@@ -95,6 +97,8 @@ public class ThreadManager : MonoBehaviour // Author - Stefan Cwiek
     /// </summary>
     public void StartDrawing(SuspectNode suspect)
     {
+        if (isLocked) return;
+        
         // dont do initialization if a draw operation is already in progress
         if (activeSuspect != null) return;
 
@@ -110,6 +114,8 @@ public class ThreadManager : MonoBehaviour // Author - Stefan Cwiek
     /// </summary>
     public void TryConnect(ClueSlot slot)
     {
+        if (isLocked) return; // cannot connect or disconnect threads if the board is locked
+
         // disconnection if no drawing operation is active
         if (activeSuspect == null && connections.ContainsKey(slot))
         {
@@ -224,13 +230,11 @@ public class ThreadManager : MonoBehaviour // Author - Stefan Cwiek
     }
 
     /// <summary>
-    /// Called when the player clicks the submit case button. Evaluates only the suspects that have exactly 3 clues.
+    /// Evaluates the board and returns true if correct, false if wrong
     /// </summary>
-    public void SubmitCase() 
+    public bool EvaluateBoard() 
     {
-        if (!IsBoardReadyToSubmit()) return;
-
-        bool solvedCorrectly = false;
+        if (!IsBoardReadyToSubmit()) return false;
 
         foreach (var kvp in suspectWebs) 
         {
@@ -274,22 +278,21 @@ public class ThreadManager : MonoBehaviour // Author - Stefan Cwiek
 
                 if (isCorrect) 
                 {
-                    solvedCorrectly = true;
-                    break;
+                    return true;
                 }
             }
         }
 
-        // Trigger end game
-        if (solvedCorrectly) 
-        {
-            Debug.Log("The case is solved");
-            OnCaseSolved?.Invoke(); // Tells other scripts that the player solved the case
-        }
-        else 
-        {
-            Debug.Log("The clues dont add up, sorry bro I think you failed");
-            OnCaseFailed?.Invoke(); // Tells other scripts that the player failed the case
-        }
+        return false;
+    }
+
+    /// <summary>
+    /// Locks or unlocks the board and forces the UI to uppdate
+    /// </summary>
+    /// <param name="state"></param>
+    public void SetBoardLockState(bool state) 
+    {
+        isLocked = state;
+        OnThreadsChanged?.Invoke();
     }
 }

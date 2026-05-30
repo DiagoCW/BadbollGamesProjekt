@@ -1,10 +1,16 @@
 INCLUDE GlobalsMain2.ink
 EXTERNAL unlockSuspect(id)
+EXTERNAL isSolutionCorrect()
+EXTERNAL unlockBoard()
+EXTERNAL isBoardLocked()
 
 { carIsFixed: 
-    <i>I jammed the chewing gum into the puncture, wrapped it tight with the evidence tape, and topped off the reservoir with the water.</i>
-    <i>Always said I was a genius. Time to hit the road.</i> 
+<i>Man, this car fucking sucks. I should totally get a Chinese EV...</i>
     -> END 
+}
+
+{ isBoardLocked():
+-> EvaluateSolution
 }
 
 { isHoodOpen:
@@ -75,6 +81,48 @@ EXTERNAL unlockSuspect(id)
     -> END
 
 = tutorial
-<i><color=\#FFA500>You just unlocked your first "Suspect" on the Clueboard</color></i>
-<i><color=\#FFA500>Find the necessary items, open the Clueboard in the trunk, and connect the red threads from the Engine to the 3 correct items to fix the car.</color></i>
+<i><color=\#FFA500>That's enough information to build a profile. Whenever I piece together a major lead or inspect key evidence, a new "Suspect" will unlock on my Clueboard.</color></i>
+<i><color=\#FFA500>My first suspect? This busted engine. Now, I need to find 3 items to patch the leak, open the trunk, and tie them to the Engine with red string.</color></i>
 -> END
+
+=== EvaluateSolution ===
+<i>Like my grandma used to say: It's all shits and giggles 'til someone giggles and shits. Let's see if my solution holds up.</i>
+
+~ temp correct = isSolutionCorrect()
+
+{ correct:
+    <i>Well, I'll be damned. It actually works.</i>
+    <i>Gum in the hole, evidence tape wrapped tight, and the reservoir topped off with stale water.</i>
+    ~ isHoodOpen = false
+    <i>...I'm so smart and cool. Time to hit the road.</i> 
+    ~ carIsFixed = true
+    ~ boardSubmitted = false
+    ~ introCompleted = true
+-> END 
+
+- else:
+    ~ failCount = failCount + 1
+    
+    { failCount == 1:
+        <i>I'm such a fraud. This isn't working at all!</i>
+        <i>I need to go back to my clueboard and rethink those connections.</i>
+        <i><color=\#FFA500>Lucky for me, this is just a busted engine. I can rethink this mess and try again. At a real crime scene, I'd only get one shot at the clueboard.</color></i>
+    }
+    
+    { failCount == 2:
+        <i>This is getting embarrassing. Let's try another combination.</i>
+    }
+    
+    { failCount >= 3:
+        <i>Hey you behind the computer screen!</i>
+        <i>Genuine question. Did your mom drop you as a child?</i>
+    }
+
+    ~ unlockBoard()
+    -> END
+}
+
+~ boardSubmitted = false
+~ unlockBoard()
+-> END
+}

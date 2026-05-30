@@ -50,6 +50,7 @@ public class ClueNode : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     /// </summary>
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (ThreadManager.Instance != null && ThreadManager.Instance.isLocked) return;
         if (canvas == null) canvas = GetComponentInParent<Canvas>(); // failsafe if the canvas reference was lost
 
         // If the clue is in a slot, close any thread connections before moving it
@@ -82,6 +83,7 @@ public class ClueNode : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     /// </summary>
     public void OnDrag(PointerEventData eventData)
     {
+        if (ThreadManager.Instance != null && ThreadManager.Instance.isLocked) return;
         if (canvas == null) return;
 
         // Translates the coordinates of the mouse into local coordinates of the canvas
@@ -100,6 +102,8 @@ public class ClueNode : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     /// </summary>
     public void OnEndDrag(PointerEventData eventData)
     {
+        if (ThreadManager.Instance != null && ThreadManager.Instance.isLocked) return;
+
         canvasGroup.blocksRaycasts = true; // Enable raycasts again so the item can be clicked again
         hitObjects.Clear(); // Clear the previous frame's raycast data
         EventSystem.current.RaycastAll(eventData, hitObjects); // Shoot a raycast through the UI stack at the mouse position
@@ -165,6 +169,8 @@ public class ClueNode : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     /// </summary>
     public void OnPointerClick(PointerEventData eventData) 
     {
+        if (ThreadManager.Instance != null && ThreadManager.Instance.isLocked) return;
+
         if (eventData.button == PointerEventData.InputButton.Right)  // Right click returns item to inventory
         {
             ReturnToInventory();

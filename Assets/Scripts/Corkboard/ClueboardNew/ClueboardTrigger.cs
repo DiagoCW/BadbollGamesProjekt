@@ -15,6 +15,10 @@ public class ClueboardTrigger : MonoBehaviour, IInteractable
     [Tooltip("Clueboard camera")]
     [SerializeField] private GameObject clueboardCamera;
 
+    //[Header("UI Fix")]
+    //[Tooltip("Drag your Submit Case button here")]
+    //[SerializeField] private GameObject submitButton;
+
     private string playerTag = "Player";
 
     // State tracking properties
@@ -112,6 +116,7 @@ public class ClueboardTrigger : MonoBehaviour, IInteractable
             // Free the cursor and confine it to the game window
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = true;
+
         }
         else
         {

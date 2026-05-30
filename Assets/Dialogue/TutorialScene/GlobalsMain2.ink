@@ -9,3 +9,5 @@ VAR checkedCoolant = false
 VAR inspectedHole = false
 VAR carIsFixed = false
 VAR seenPuddle = false
+VAR boardSubmitted = false
+VAR failCount = 0

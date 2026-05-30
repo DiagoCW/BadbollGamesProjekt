@@ -166,8 +166,8 @@ public class PlayerController : MonoBehaviour
             
             if (interactables.Length == 0) return;
 
-            OutlineHighlighter outline = hitInfo.collider.GetComponentInChildren<OutlineHighlighter>();
-            if (outline != null && outline.hideInteractionUntilTriggered && !outline.CheckInkCondition()) 
+            OutlineHighlighter outline = hitInfo.collider.GetComponentInChildren<OutlineHighlighter>(); // Check if the object has an Detective vision highlighter 
+            if (outline != null && outline.hideInteractionUntilTriggered && !outline.CheckInkCondition()) // If the inspector is checked to hide this item and the ink condition isnt met, ingore the "E to interact"
             {
                 return;
             }
@@ -254,9 +254,11 @@ public class PlayerController : MonoBehaviour
                 //}
 
                 OutlineHighlighter outline = target.GetComponentInChildren<OutlineHighlighter>();
+
+                // If the item is supposed to remain hidden until the story progresses, and the required Ink variable is still false
                 if (outline != null && outline.hideInteractionUntilTriggered && !outline.CheckInkCondition()) 
                 {
-                    if (interactPromptText.gameObject.activeSelf)
+                    if (interactPromptText.gameObject.activeSelf) // force the UI interact prompt to disappear
                         interactPromptText.gameObject.SetActive(false);
                     return;
                 }
