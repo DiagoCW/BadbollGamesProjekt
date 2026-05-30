@@ -15,7 +15,7 @@ public class PlayerCamera : MonoBehaviour
     [SerializeField] private float maxPitch = 80f; // max looking up angle
 
     private float xRotation = 0f; // Tracks up/down rotation state to allow for clamping.
-    private float yRotation = 0f; // Tracks left/right rotation state
+   // private float yRotation = 0f; // Tracks left/right rotation state
 
     private void Start()
     {

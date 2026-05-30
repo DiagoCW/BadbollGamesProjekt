@@ -54,7 +54,7 @@ public class InteractableItem : MonoBehaviour, IInteractable
     //}
     public void Interact()
     {
-        if (outline != null && highlighter.IsHighlighting) //outline.hasBeenHighlighted)
+        if (outline != null && outline.hasBeenHighlighted) //highlighter.IsHighlighting)
         {
             //Debug.Log("Detective vision enabled, and item is interacted with");
             if (inkJson2 != null)
@@ -62,7 +62,7 @@ public class InteractableItem : MonoBehaviour, IInteractable
                 NewDialogueManager.Instance.EnterDialogue(inkJson2, null, null);
                 gameObject.tag = "Untagged";
             }
-                
+
             if (!pickedUpClue && item != null)
             {
                 playerInventory.AddItem(new Item(item));

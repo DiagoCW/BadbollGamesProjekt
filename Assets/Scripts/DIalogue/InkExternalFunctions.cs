@@ -70,9 +70,23 @@ public class InkExternalFunctions
         story.BindExternalFunction("lowerPitch", (string id) =>
         {
             CoroutineRunner.instance.StartCoroutine(StartAudioManager.Instance.LowerPitch(id));
-            
         });
-        
+        // Allow ink to know if the solution is correct
+        story.BindExternalFunction("isSolutionCorrect", () =>
+        {
+            return ThreadManager.Instance.EvaluateBoard();
+        });
+        // Allows ink to unlock the clueboard if the players gets the solution wrong (This is for the tutorial)
+        story.BindExternalFunction("unlockBoard", () =>
+        {
+            ThreadManager.Instance.SetBoardLockState(false);
+        });
+        // allows ink to ask if the board is locked before evaluating
+        story.BindExternalFunction("isBoardLocked", () =>
+        {
+            return ThreadManager.Instance.isLocked;
+        });
+
     }
 
     public void Unbind(Story story)
@@ -81,11 +95,15 @@ public class InkExternalFunctions
         story.UnbindExternalFunction("FadeIn");
         story.UnbindExternalFunction("FadeOut");
         story.UnbindExternalFunction("unlockSuspect");
+        story.UnbindExternalFunction("isSolutionCorrect");
+        story.UnbindExternalFunction("unlockBoard");
+        story.UnbindExternalFunction("isBoardLocked");
 
         // Audio functions
         story.UnbindExternalFunction("playAudio");
         story.UnbindExternalFunction("playAmbience");
         story.UnbindExternalFunction("stopAmbience");
         story.UnbindExternalFunction("stopAllAmbience");
+        story.UnbindExternalFunction("lowerPitch");
     }
 }

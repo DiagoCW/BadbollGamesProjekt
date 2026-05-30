@@ -19,6 +19,9 @@ public class OutlineHighlighter : MonoBehaviour
     [Tooltip("If true, you cannot interact with this object until the ink trigger is met.")]
     public bool hideInteractionUntilTriggered = false; // Defaults to false
 
+    [Tooltip("How many seconds the player remembers that something is a clue after DV is turned off")]
+    public float memoryDuration = 5f;
+
     public enum ClueType { Regular, Important, Critical, Hidden }
 
     private GameObject outlineObject;
@@ -95,13 +98,20 @@ public class OutlineHighlighter : MonoBehaviour
             DestroyImmediate(outlineObject);
     }
 
+    /// <summary>
+    /// Checks the state of an objects assigned ink variable 
+    /// to determine if the story has progressed enough for this item to become a clue.
+    /// </summary>
+    /// <returns>True if the condition is met.</returns>
     public bool CheckInkCondition() 
     {
-        if (string.IsNullOrEmpty(inkTrigger)) return true;
+        if (string.IsNullOrEmpty(inkTrigger)) return true; // if no trigger string is set in the inspector, the object is always interactable
 
         if (NewDialogueManager.Instance == null) return false;
 
-        Ink.Runtime.Object inkObj = NewDialogueManager.Instance.GetVariableState(inkTrigger);
+        Ink.Runtime.Object inkObj = NewDialogueManager.Instance.GetVariableState(inkTrigger); // Fetch the variable from ink
+
+        // check if the variable exists and is a bool, then return its true/false value
         if (inkObj is Ink.Runtime.BoolValue boolVal) 
         {
             return boolVal.value;
@@ -110,12 +120,13 @@ public class OutlineHighlighter : MonoBehaviour
         return false;
     }
 
-
     public void SetHighlighted(bool value, float duration)
     {
         if (value == isHighlighted) return;
         
         isHighlighted = value;
+
+
 
         trigger = string.IsNullOrEmpty(inkTrigger) || (NewDialogueManager.Instance.dialogueVariables.variables.TryGetValue(inkTrigger, out Ink.Runtime.Object inkvalue) ||
             NewDialogueManager.Instance.InkListContainsItem(inkTrigger, "knowledge"));
@@ -123,6 +134,9 @@ public class OutlineHighlighter : MonoBehaviour
         if (isHighlighted && trigger)
         {
             hasBeenHighlighted = true;
+
+            CancelInvoke(nameof(ForgetHighlight));
+
             CreateOutline();
             outlineObject.SetActive(true);
             
@@ -144,5 +158,16 @@ public class OutlineHighlighter : MonoBehaviour
             outlineObject.SetActive(false);
         isHighlighted = false;
        // gameObject.tag = null;
+
+        if (hasBeenHighlighted) 
+        {
+            Invoke(nameof(ForgetHighlight), memoryDuration);
+        }
+    }
+
+    private void ForgetHighlight() 
+    {
+        hasBeenHighlighted = false;
+        // Debug.Log("Clue has been forgotten");
     }
 }

@@ -1,1 +1,2 @@
-<i>A jug of motor oil I keep in the backseat for emergencies.</i>
+<i>A jug of motor oil. I had to move it to the backseat to make room for the clueboard in the trunk. Maybe I really am crazy.</i>
+<i>Crazy? I was crazy once, they locked me in a room, a rubber room, a rubber room with rats, and rats make me crazy.</i>
