@@ -3,6 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
+/// <summary>
+/// Author: Hugo
+/// Manages audio playback for the game, including ambience tracks and sound effects.
+/// Implements a singleton pattern to persist across scenes. Supports multiple simultaneous
+/// ambience tracks and one-shot sound effects. Audio clips are configured via the Inspector
+/// using ID-based lookup for scalability.
+/// </summary>
 public class StartAudioManager : MonoBehaviour
 {
     public static StartAudioManager Instance;
@@ -20,6 +27,10 @@ public class StartAudioManager : MonoBehaviour
     private Dictionary<string, AudioClip> sfxDict;
     private Dictionary<string, AudioSource> activeAmbienceSources = new Dictionary<string, AudioSource>();
 
+    /// <summary>
+    /// Data structure for associating an audio clip with a string identifier.
+    /// Used in the Inspector to configure available audio clips.
+    /// </summary>
     [System.Serializable]
     public class AudioClipData
     {
@@ -41,6 +52,10 @@ public class StartAudioManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Initializes dictionaries for fast audio clip lookup by ID.
+    /// Called during Awake to prepare audio data from Inspector lists.
+    /// </summary>
     private void InitializeAudioDictionaries()
     {
         ambienceDict = new Dictionary<string, AudioClip>();
@@ -62,6 +77,12 @@ public class StartAudioManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Plays a looping ambience track by ID. Multiple ambiences can play simultaneously.
+    /// Each ambience creates its own AudioSource component. If the same ID is already playing,
+    /// a warning is logged and no duplicate is created.
+    /// </summary>
+    /// <param name="id">The string identifier of the ambience clip to play</param>
     public void PlayAmbience(string id)
     {
         if (ambienceDict.TryGetValue(id, out AudioClip clip))
@@ -87,6 +108,10 @@ public class StartAudioManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Stops a specific ambience track by ID and destroys its AudioSource component.
+    /// </summary>
+    /// <param name="id">The string identifier of the ambience clip to stop</param>
     public void StopAmbience(string id)
     {
         if (activeAmbienceSources.TryGetValue(id, out AudioSource source))
@@ -101,6 +126,9 @@ public class StartAudioManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Stops all currently playing ambience tracks and destroys their AudioSource components.
+    /// </summary>
     public void StopAllAmbience()
     {
         foreach (var source in activeAmbienceSources.Values)
@@ -111,6 +139,11 @@ public class StartAudioManager : MonoBehaviour
         activeAmbienceSources.Clear();
     }
 
+    /// <summary>
+    /// Plays a one-shot sound effect by ID. Multiple sound effects can overlap.
+    /// Does not interrupt other playing sounds.
+    /// </summary>
+    /// <param name="id">The string identifier of the sound effect to play</param>
     public void PlaySFX(string id)
     {
         if (sfxDict.TryGetValue(id, out AudioClip clip))
@@ -122,6 +155,7 @@ public class StartAudioManager : MonoBehaviour
             Debug.LogWarning($"SFX clip with id '{id}' not found!");
         }
     }
+
 
     public IEnumerator LowerPitch(string id)
     {
