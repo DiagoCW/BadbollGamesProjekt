@@ -4,6 +4,12 @@ EXTERNAL isSolutionCorrect()
 EXTERNAL unlockBoard()
 EXTERNAL isBoardLocked()
 
+EXTERNAL playAudio(string)
+EXTERNAL playAmbience(string)
+EXTERNAL stopAmbience(string)
+EXTERNAL stopAllAmbience()
+EXTERNAL lowerPitch(string)
+
 { carIsFixed: 
 <i>Man, this car fucking sucks. I should totally get a Chinese EV...</i>
     -> END 
@@ -25,6 +31,7 @@ EXTERNAL isBoardLocked()
     * [Pop the hood]
         <i>The hood of the car slides open.</i>
         ~isHoodOpen = true
+        ~ playAudio("car-hood-open")
         -> EngineState
     * [<b>Don't</b> pop the hood]
         <i>I don't open the hood. For whatever reason. I can always come back when I feel like taking this seriously.</i>
