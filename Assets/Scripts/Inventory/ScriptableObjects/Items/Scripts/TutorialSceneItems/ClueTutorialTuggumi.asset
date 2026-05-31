@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: 9
   uiDisplay: {fileID: 1683340597, guid: e3158eadc9b0fe04987e863c8ff779be, type: 3}
-  description: 
+  description: How long has the gum been sitting there on the passenger seat? 2,
+    3, 6, 7 years?

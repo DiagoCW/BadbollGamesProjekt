@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: 8
   uiDisplay: {fileID: -1001481405, guid: 5f06285ec945dd740bb7979586325e77, type: 3}
-  description: 
+  description: 2-Stroke Motor Oil, Semi Synthetic, Performance Level. Whatever that
+    means.

@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: 10
   uiDisplay: {fileID: -1159905273, guid: b02f9f41893f18a408054b7f5a6aaf17, type: 3}
-  description: 
+  description: I wonder why that evidence tape was even there... Maybe there is something
+    inside the forest?
