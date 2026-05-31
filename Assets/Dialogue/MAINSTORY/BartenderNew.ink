@@ -139,7 +139,7 @@ No, no. Sleepyhead over there and loiter man was here all night. Then they all l
 It was another dull and uneventful night. Well, except for Peter's singing.
 Anything else? Was he acting out of character, or did he tell you anything? #speaker: Player
 No, not really. Business as usual. #speaker: Bartender
-* { knowledge ? bartenderAlibi } [<color=\#FFFF00>That ain't right...</color>] -> Alibi 
+// * { knowledge ? bartenderAlibi } [<color=\#FFFF00>That ain't right...</color>] -> Alibi 
 ~ bartenderToldHisAlibi = true
 Alright, that'll be all. #speaker: Player
 -> StartQuestion("Anything else?")

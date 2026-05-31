@@ -25,7 +25,7 @@ Sir, I'm going on the 18th hour of my 30 hour shift. I don't have time to worry 
 { Victim: As I said, sir, } I don't have time to answer any questions you might have for me. I'm on the clock here, I got work to do. #speaker: Store Clerk
 C'mon. One question, please? #speaker: Player
 Alright, <i>one question.</i> #speaker: Store Clerk
-    * { (Suspects ? bossMan) or (knowledge ? receiptsBelongToVictim) } [Did Peter Grip come here last night?] -> LastNightVictim
+    * { Suspects ? bossMan or knowledge ? receiptsBelongToVictim } [Did Peter Grip come here last night?] -> LastNightVictim
     * [Where were you last night?]
         Here, as usual. I started my shift 18 hours ago, and still have some hours to go. #speaker: Store Clerk
         ~ cashierToldHisAlibi = true
@@ -57,7 +57,7 @@ No. #speaker: Store Clerk?
 
 = LastNightEnd
 That's your second question, I'm afraid. As I said, I'm happy to answer any questions you might have once I get off my shift. #speaker: Store Clerk
-{ (talkedToSuspiciousGuy or Suspects ? bossMan): 
+{ (Suspects ? bossMan): 
     * [<color=\#FFFF00><b>Keep pressing him</b></color>] -> AltercationVictim
 - else:
     ~ askedQuestion = true
@@ -74,9 +74,9 @@ Oh is right, buddy. So you knew who the victim was, then. What are you hiding? #
 Alright look; he just came in, mouthed off about some shit and started rubbing it in my face. And I wasn't having none of it, so I gave him a piece of my mind. I admit it, OK? It was a rough start to my shift. #speaker: Store Clerk
 What could he possibly have said to make you fly off the handle like that? #speaker: Player
 * { knowledge ? knowAboutTrisslott } [<color=\#FFFF00>Ask about trisslott</color>] -> AskTrisslott
-I don't see how that's any of your business, idiot. He pissed me off, like he always <b>did</b>. But that's all over now. That's all I have to say about that. #speaker: Store Clerk
+I don't see how that's any of your business. He pissed me off like he always <b>did</b>. No more. That's all I have to say about that. #speaker: Store Clerk
 <i>I need to find out what their argument was about. It could be the first puzzle piece in a very, very long series of intricate steps that eventually culminated in the victim's death.</i> #speaker: Player
-<i>Or not, but I have to find out more about this...</i>
+<i>Or not, but I should find out more about this...</i>
 <> -> Intro
 
 = AskTrisslott

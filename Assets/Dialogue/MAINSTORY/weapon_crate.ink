@@ -1,3 +1,3 @@
 #speaker: Player
-Hmm, I think this is completely irrelevant to the case.
+Uh... Yeah, I'm not doing this right now. Maybe I'll handle this after I'm done with this case...
 -> END

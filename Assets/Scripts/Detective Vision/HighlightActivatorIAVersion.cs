@@ -13,7 +13,7 @@ public class HighlightActivatorIAVersion : MonoBehaviour
     [Header("Settings")]
     public float highlightDuration = 5f;
     public float cooldownDuration = 25f;
-    public float totalTimeUsed = 0f;
+    public float TotalTimeUsed = 0f;
     [SerializeField] private float maxDistance = 15f;
 
     private List<OutlineHighlighter> currentHighlighters = new List<OutlineHighlighter>();
@@ -66,7 +66,7 @@ public class HighlightActivatorIAVersion : MonoBehaviour
         if (IsHighlighting)
         {
             RefreshHighlights();
-            totalTimeUsed += Time.deltaTime;
+            TotalTimeUsed += Time.deltaTime;
         }
         
         if (PlayerController.Instance.IsInventoryOpen || NewDialogueManager.Instance.dialogueIsPlaying)
@@ -164,7 +164,7 @@ public class HighlightActivatorIAVersion : MonoBehaviour
             OutlineHighlighter highlighter = go.GetComponent<OutlineHighlighter>();
             if (highlighter != null)
             {
-                highlighter.SetHighlighted(true, totalTimeUsed);
+                highlighter.SetHighlighted(true, TotalTimeUsed);
                 currentHighlighters.Add(highlighter);
                 
             }
