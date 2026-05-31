@@ -30,6 +30,8 @@ public class InkExternalFunctions
         });
         story.BindExternalFunction("FadeIn", () =>
         {
+            UnityEngine.Object.FindFirstObjectByType<CarDoorAnimator>()?.ExternalClose(); // Close the interactable car door before the fade
+
             if (FadeInOut.Instance != null) 
             {
                 FadeInOut.Instance.FadeToScene("MainScene", 5f); // Wait 5 seconds then load

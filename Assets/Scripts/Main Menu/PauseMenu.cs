@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-    //Author : Isabella
+    //Author : Isabella, Stefan
     /// <summary>
     /// Pause Menu in game play
 
@@ -14,15 +14,21 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private GameObject confirmationPanel;
     [Tooltip("The field manual container")]
     [SerializeField] private GameObject fieldManualPanel;
+    [Tooltip("Drag player here so it can't move or interact during scene transition")]
+    [SerializeField] private PlayerController playerController;
+    //[SerializeField] private PlayerInteract playerInteract;
 
     [Header("Settings")]
     [Tooltip("How long it takes to fade to black when quitting to the main menu")]
     [SerializeField] private float quitFadeDuration = 1.5f;
 
     private bool isPaused = false;
+    private bool isTransitioning = false;
 
     void Update()
     {
+        if (isTransitioning) return;
+        
         if((Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape))) // Toggle pause state when pressing p or ESC
         {
             
@@ -92,17 +98,50 @@ public class PauseMenu : MonoBehaviour
 
     public void RestartGame()
     {
-        //Make game time run after pressing restart
+        isTransitioning = true;
+        isPaused = false;
+        
+        pauseMenu.SetActive(false);
+        if (confirmationPanel != null) confirmationPanel.SetActive(false);
+
+        // turn off player movement
+        if (playerController != null) 
+        {
+            playerController.enabled = false;
+        }
+        //if (playerInteract != null) // turn off player actions
+        //{
+        //    playerInteract.enabled = false;
+        //}
+
+        // Hide mouse cursor so it doesn't float on the black screen
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+        // Make game time run after pressing restart so coroutine can run
         Time.timeScale = 1;
 
         //Go back to Main Menu
-        if (FadeInOut.Instance != null) 
+        if (FadeInOut.Instance != null)
         {
             FadeInOut.Instance.FadeToScene("MainMenu", quitFadeDuration);
         }
-        else 
+        else
         {
             SceneManager.LoadScene("MainMenu");
         }
+
+        ////Make game time run after pressing restart
+        //Time.timeScale = 1;
+
+        ////Go back to Main Menu
+        //if (FadeInOut.Instance != null) 
+        //{
+        //    FadeInOut.Instance.FadeToScene("MainMenu", quitFadeDuration);
+        //}
+        //else 
+        //{
+        //    SceneManager.LoadScene("MainMenu");
+        //}
     }
 }

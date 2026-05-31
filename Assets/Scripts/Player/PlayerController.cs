@@ -117,6 +117,8 @@ public class PlayerController : MonoBehaviour
 
     private void GameInput_OnJumpAction(object sender, EventArgs e)
     {
+        if (!this.enabled) return; // ignore input if script is disabled
+
         // Only jump if grounded and not in UI menus
         if (isGrounded && !IsInventoryOpen && !IsDialoguePlaying)
         {
@@ -126,6 +128,9 @@ public class PlayerController : MonoBehaviour
 
     private void GameInput_OnInventoryAction(object sender, EventArgs e)
     {
+        
+        if (!this.enabled) return; // ignore input if script is disabled
+
         if (IsDialoguePlaying || inventory == null || inventoryCanvas == null) // Prevent opening inventory during conversation
         {
             return;
@@ -140,6 +145,8 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void GameInput_OnInteractAction(object sender, EventArgs e)
     {
+        if (!this.enabled) return; // ignore input if script is disabled
+        
         if (IsInventoryOpen || IsDialoguePlaying) 
         {
             return;

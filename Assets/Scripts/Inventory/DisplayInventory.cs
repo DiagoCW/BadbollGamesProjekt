@@ -271,6 +271,13 @@ public class DisplayInventory : MonoBehaviour
         RectTransform slotRect = slotObject.GetComponent<RectTransform>();
         if (slotRect != null)
         {
+            // FIX FOR THE POST IT FLICKER
+            Canvas parentCanvas = GetComponentInParent<Canvas>();
+            float scaleFactor = parentCanvas != null ? parentCanvas.scaleFactor : 1f;
+
+            // Multiply the offset by the scale factor
+            Vector3 scaledOffset = new Vector3(tooltipOffset.x * scaleFactor, tooltipOffset.y * scaleFactor, 0); // END OF FIX
+
             tooltipPanel.transform.position = slotRect.position + (Vector3)tooltipOffset;
         }
         

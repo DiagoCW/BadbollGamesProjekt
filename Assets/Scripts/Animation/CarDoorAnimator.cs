@@ -26,12 +26,20 @@ public class CarDoorAnimator : MonoBehaviour, IInteractable // Author - Stefan C
         if (isOpen) 
         {
             doorAnimator.SetTrigger("OpenDoor");
-            Debug.Log("Door Interacted!");
         }
         else 
         {
             doorAnimator.SetTrigger("CloseDoor");
-            Debug.Log("Door Interacted!");
+        }
+    }
+
+    // Allows other scripts to close the door without player inptut
+    public void ExternalClose() 
+    {
+        if (isOpen) 
+        {
+            isOpen = false;
+            doorAnimator.SetTrigger("CloseDoor");
         }
     }
 }
