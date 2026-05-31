@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46db39dea7ad8e84bab99ebae6da6802, type: 3}
   m_Name: ClueTutorialWater
   m_EditorClassIdentifier: 
-  Id: 11
+  Id: 12
   uiDisplay: {fileID: 1821458864, guid: 87fc1f6e2b2c20c49b4f658fbd5bf1e6, type: 3}
   description: A half-empty bottle of stale, lukewarm water. It tastes terrible...
     Wait, why did I even decide to taste it?? Oh man... If I'm sick tomorrow atleast

@@ -43223,15 +43223,20 @@ MonoBehaviour:
   ambienceClips:
   - id: highway-travel-interior
     clip: {fileID: 8300000, guid: e97c81f86b89763489f8d36c27ad3281, type: 3}
+    volume: 0.75
   - id: PREMONITION-IN-THE-PARK
     clip: {fileID: 8300000, guid: 8cd9758445dd7d04f9b61f86b52435e9, type: 3}
+    volume: 0.5
   - id: ambiens-1
     clip: {fileID: 8300000, guid: 6dc711ab99b0b154e88fc6a0eb724af5, type: 3}
+    volume: 0.2
   sfxClips:
   - id: car-crash
     clip: {fileID: 8300000, guid: ee8003f6451d31a498c7f58af27a290c, type: 3}
+    volume: 2
   - id: cardoor-open-close
     clip: {fileID: 8300000, guid: 6c637babace6fef4f9606b00999f0796, type: 3}
+    volume: 2
 --- !u!43 &2107725001
 Mesh:
   m_ObjectHideFlags: 0

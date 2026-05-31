@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46db39dea7ad8e84bab99ebae6da6802, type: 3}
   m_Name: "Clue\xD6l"
   m_EditorClassIdentifier: 
-  Id: 5
+  Id: 8
   uiDisplay: {fileID: 21300000, guid: 17e48f4157a65d943a839b5d79198891, type: 3}
   description: 
