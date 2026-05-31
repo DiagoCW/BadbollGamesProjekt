@@ -96,6 +96,22 @@ public class InkExternalFunctions
         {
             FadeInOut.Instance.FadeScreenOnly(alpha, duration);
         });
+        story.BindExternalFunction("rollCredits", () =>
+        {
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            if (player != null)
+            {
+                PlayerController pc = player.GetComponent<PlayerController>();
+                if (pc != null) pc.enabled = false;
+            }
+
+            //SceneManager.LoadScene("Credits");
+
+            if (FadeInOut.Instance != null)
+            {
+                FadeInOut.Instance.FadeToScene("Credits", 5f);
+            }
+        });
 
     }
 
@@ -110,6 +126,7 @@ public class InkExternalFunctions
         story.UnbindExternalFunction("isBoardLocked");
         story.UnbindExternalFunction("changeTypingSpeed");
         story.UnbindExternalFunction("fadeToBlack");
+        story.UnbindExternalFunction("rollCredits");
 
         // Audio functions
         story.UnbindExternalFunction("playAudio");

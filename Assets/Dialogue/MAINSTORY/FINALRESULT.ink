@@ -11,7 +11,11 @@ EXTERNAL fadeToBlack(alpha, duration)
 { finalSuspect == "None": -> NoSuspect }
 
 = NoSuspect
-Implementera detta
+<i>Oh, right. You didn't arrest anyone. You couldn't crack the case.</i>
+~ startMovement("Walking")
+Just in time? More like <i>Not in time</i>. #speaker: Police
+Sorry, that was mean. But I told you, detective. This was a cut and dry case, not every little case is a murder to solve.
+Just hand over the case file and that will be that.
 -> Final
 
 = BossMan
@@ -19,8 +23,12 @@ First off, he had the victim's wallet. #speaker: Player
 Second, he claims to have found it <b>before</b> a purchase was made at his shop, which was made using the victim's card. #speaker: Police
 Third, and most important, he was the one who found the body and called it in. This could have been a ruse to make himself look less suspicious. #speaker: Player
 He claimed that he took the wallet as some form of 'payment' for the menial task of always having to return his wallet to him, before realising that the victim was actually dead, at which point he called the police. However, this was a bluff. 
-If Boss Man had knowledge of Peter's trisslott, then that changes things quite a lot. He would absolutely have a reason for killing him, and an even bigger reason for digging himself deeper into these lies.
+{ Clues ? trisslott: 
+If Boss Man had knowledge of Peter's trisslott, then that changes things quite a lot as well. He would absolutely have a reason for killing him, and an even bigger reason for digging himself deeper into these lies.
 He <i>poisoned</i> the victim's falafel, which would have taken effect almost immediately. He could then approach the body, get his hands on the lottery ticket, and dispose of any evidence; the half-eaten falafelrulle in the trash that matches the one that Peter orders.
+- else:
+He <i>poisoned</i> the victim's falafel, which would have taken effect almost immediately. He could then approach the body, get his hands on his wallet, and dispose of any evidence; the half-eaten falafelrulle in the trash that matches the one that Peter orders.
+}
 Given the victim's prior history with Boss Man, no one who knew them would even give it a second though. However, It looks like I was... <b>just in time.</b>
 -> PoliceArrives
 
@@ -128,7 +136,7 @@ I don't understand. If he didn't deliberately poison the falafel, then how did h
 The victim choked to death, which was all obviously part of Boss Man' plan. He put extra everything into the falafelrulle, which was too much for poor little Peter to digest properly. #speaker: Police
 That's extremely dumb and makes no sense. It almost feels like a half-baked ending to a story line that the writer didn't know how to finish properly. #speaker: Player
 No one cares what you think, it's what happened. #speaker: Police
--> MissingTrissLott
+{ Clues ? trisslott: -> MissingTrissLott | -> Final }
 
 = BartenderEnding
 We analyzed Peter's beer that you collected as evidence, and it sure as hell tested positive for rat poison. #speaker: Police
@@ -147,8 +155,6 @@ It just does, deal with it. #speaker: Police
 === Final ===
 That'll be all. Great work detective. Whenever you're ready to leave, just exit through there. #speaker: Police
 * { dvisionTotalTime <= 50 and trueEnding } [<color=\#FFFF00>Hold on a minute...] -> TrueEnding
-
-= Dontwantto
 -> END
 
 = TrueEnding
@@ -164,8 +170,7 @@ You're <b>done. This is it.</b> #speaker: ???
 ~ changeTypingSpeed(0.03)
 ~ playAmbience("PREMONITION-IN-THE-PARK")
 ~ fadeToBlack(1, 3)
-<i>You never did survive that car crash. None of this is real. Your last living synapse is hanging on by a thin thread, desperately firing off in all directions. But it too is fading now.</i> #speaker: 
-Please... This can't happen... #speaker: Not In Time
+<i>You never did survive that car crash. Your last living synapse is hanging on by the thinnest stretch of thread, desperately firing off in all directions. But it too is fading now.</i> #speaker: 
 { panicked: -> Panicked }
 { resignedToFate: -> Fate }
 { steppedOnGas: -> Gas }
@@ -184,5 +189,5 @@ How come you started flooring it? Did your foot really get stuck to the pedal li
 <i>As the car draws closer and closer to the town, time slows down exponentially, until time stands completely still.</i> #speaker: 
 ~ playAudio("car-crash")
 </i>And then it doesn't. You reach an abrupt stop.</i>
--> END
+~ rollCredits()
 -> END

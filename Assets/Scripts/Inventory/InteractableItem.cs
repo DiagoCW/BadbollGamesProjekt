@@ -15,6 +15,9 @@ public class InteractableItem : MonoBehaviour, IInteractable
     [SerializeField] ItemObject item, item2;
     [SerializeField] TextAsset inkJson, inkJson2;
 
+    [Tooltip("The name of the NPC that should pass their animator and AIScript when interacting with an item.")]
+    [SerializeField] string NPCName;
+
     [Header("Settings")]
     [Tooltip("Should this object be destroyed when picked up?")]
     [SerializeField] private bool destroyOnPickup = false;
@@ -31,27 +34,7 @@ public class InteractableItem : MonoBehaviour, IInteractable
         highlighter = GameObject.FindGameObjectWithTag("Player").GetComponent<HighlightActivatorIAVersion>();
         outline = GetComponentInChildren<OutlineHighlighter>();
 
-        //particles = GetComponentInChildren<ParticleSystem>();
-        //if (particles != null)
-        //{
-        //    particles.Play();
-        //    particles.Clear();
-        //    particles.Stop();
-        //}
     }
-
-    //void HandleParticles()
-    //{
-    //    if (particles == null) return;
-    //    if (highlighter.IsHighlighting)
-    //        particles.Play();
-    //    else
-    //        particles.Stop();
-    //}
-    //void Update()
-    //{
-    //    HandleParticles();
-    //}
     public void Interact()
     {
         if (outline != null && outline.hasBeenHighlighted) //highlighter.IsHighlighting)
@@ -59,7 +42,14 @@ public class InteractableItem : MonoBehaviour, IInteractable
             //Debug.Log("Detective vision enabled, and item is interacted with");
             if (inkJson2 != null)
             {
-                NewDialogueManager.Instance.EnterDialogue(inkJson2, null, null);
+                Animator anim = null;
+                TestAIScript aiScript = null;
+                if (!string.IsNullOrEmpty(NPCName))
+                {
+                    anim = GameObject.Find(NPCName).GetComponentInChildren<Animator>();
+                    aiScript = GameObject.Find(NPCName).GetComponent<TestAIScript>();
+                }
+                NewDialogueManager.Instance.EnterDialogue(inkJson2, anim, aiScript);
                 gameObject.tag = "Untagged";
             }
 

@@ -15,6 +15,7 @@ public class TriggerTutorial : MonoBehaviour
     [SerializeField] TextAsset inkJson, inkJsonTest;
     [SerializeField] string Inkvariable;
     object trigger = false;
+    [SerializeField] string NPCName;
     void Start()
     {
         // Some triggers that should start at the start of the scene won't execute, since an INK file must have already
@@ -29,10 +30,12 @@ public class TriggerTutorial : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
+        if (string.IsNullOrEmpty(NPCName)) return;
+
         if ((bool)trigger && string.IsNullOrEmpty(Inkvariable))
         {
-            Animator anim = GameObject.Find("StoreClerk").GetComponentInChildren<Animator>();
-            TestAIScript aiScript = GameObject.Find("StoreClerk").GetComponent<TestAIScript>();
+            Animator anim = GameObject.Find(NPCName).GetComponentInChildren<Animator>();
+            TestAIScript aiScript = GameObject.Find(NPCName).GetComponent<TestAIScript>();
 
             Debug.Log($"Activated function for {anim.name}, {aiScript.name}");
             NewDialogueManager.Instance.EnterDialogue(inkJson, anim, aiScript);

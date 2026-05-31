@@ -76,6 +76,7 @@ Did you see anything suspicious last night? #speaker: Player
 <b>WAKE THE FUCK UP!</b> #speaker: Player
 ~ isAsleep = false
 Why are you shouting? I'm awake. #snore: stop #speaker: Torsten
+<i>I have his attention. I need to ask him something before he falls asleep again.<i>
 I wanted to ask you about the store clerk by the gas station. Do you know where he was last night? #speaker: Player
 Uh, he's still on the same shift now as he was last night I think. Poor guy probably still has a few more hours to go. He looked beat when I went there last night at around 2AM. #speaker: Torsten
 You were there last night? Do you know if he ever left his post?

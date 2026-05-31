@@ -109,6 +109,7 @@ If you still feel the need to investigate more thoroughly, you can always come b
 -> END
 
 === Hub ===
+{ isTalkingToPolice: Detective, what did you tell Boss Man exactly? Please straighten this out. -> END } #speaker: Police
 What's up, doc? #speaker: Police
 * [Where should I go next?]
     { not talkedToBossMan: You can start with getting Boss Man's statement, as we've already discussed. -> END }
