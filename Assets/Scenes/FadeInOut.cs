@@ -6,7 +6,7 @@ using System.Collections;
 /// <summary>
 /// Handles screen fade ins when a scene starts and fade outs when transitioning to a new scene 
 /// </summary>
-public class FadeInOut : MonoBehaviour
+public class FadeInOut : MonoBehaviour // Author: Stefan Cwiek, Isak Sandgren
 {
     public static FadeInOut Instance {get; private set; }
 
