@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
+    //Author : Isabella
     /// <summary>
     /// Pause Menu in game play
 
@@ -22,17 +23,8 @@ public class PauseMenu : MonoBehaviour
 
     void Update()
     {
-        if((Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape)) /*&& !isPaused*/) // Toggle pause state when pressing p or ESC
+        if((Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape))) // Toggle pause state when pressing p or ESC
         {
-            //if(FadeInOut.Instance != null && FadeInOut.Instance.IsScreenObscured())
-            //{
-            //    return;
-            //}
-            // Updated Version //Bella - now the pausemenu wont cloe by pressing same button twice
-            // Do not allow the pause the pause menu to be opened when the screen is black and/or fading
-
-            //Pause();
-
             
             if (!isPaused && FadeInOut.Instance != null && FadeInOut.Instance.IsScreenObscured())
                 return; // Do not allow the pause the pause menu to be opened when the screen is black and/or fading

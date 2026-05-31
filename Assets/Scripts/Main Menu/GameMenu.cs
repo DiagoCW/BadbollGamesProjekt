@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 public class GameMenu : MonoBehaviour
 {
      
+    //Author : Isabella
 
     /// <summary>
     /// While pressing M key you will be returned to MainMenu - OLD CODE
