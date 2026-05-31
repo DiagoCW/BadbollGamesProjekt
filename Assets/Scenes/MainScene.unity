@@ -5139,7 +5139,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 265d8379ea94a64448cf58fb52633ac6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inkJson: {fileID: 4900000, guid: 75e6bee4fd344b046ae56a92cf5739a2, type: 3}
+  inkJson: {fileID: 4900000, guid: 93cc74fd534c6354db5b812a25c75ee1, type: 3}
 --- !u!4 &343879648
 Transform:
   m_ObjectHideFlags: 0
@@ -24479,6 +24479,7 @@ MonoBehaviour:
   destination: {fileID: 337600577}
   fadeDuration: 4
   inkVariableName: goToPoliceHouse
+  DICKVISIONVALUE: 0
   arrivalDialogue: {fileID: 4900000, guid: ce6982055bd3a01409926b6b9e198853, type: 3}
 --- !u!4 &1122867720
 Transform:
@@ -33525,7 +33526,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 4b09e41668915b149a8cde603f770edc, type: 2}
-  item2: {fileID: 0}
+  item2: {fileID: 11400000, guid: d37fe535f374f05409ab4bcd542210a0, type: 2}
   inkJson: {fileID: 4900000, guid: 0e4b7b09a1cc8e146a93e22dea041b3e, type: 3}
   inkJson2: {fileID: 4900000, guid: 0132a99c8b354494d8a573ee2ccb863d, type: 3}
   NPCName: 
@@ -35235,7 +35236,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 0.010000001, y: 0.02, z: 0.02}
-  m_Center: {x: 0.004996185, y: 0.00000011920929, z: -0.0000076292454}
+  m_Center: {x: -0.26, y: 0.21, z: -0.22}
 --- !u!114 &1634832695
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38383,8 +38384,8 @@ MonoBehaviour:
   outlineColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   outlineScale: {x: 1.03, y: 1.03, z: 1.03}
   isFlatDecal: 0
-  inkTrigger: talkedToBossMan
-  hideInteractionUntilTriggered: 0
+  inkTrigger: isTalkingToPolice
+  hideInteractionUntilTriggered: 1
   memoryDuration: 5
 --- !u!114 &1808297818
 MonoBehaviour:

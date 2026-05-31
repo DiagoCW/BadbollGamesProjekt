@@ -73,9 +73,6 @@ VAR finishedCrimeScene = false
 
 // BOSS MAN
 VAR talkedToBossMan = false
-VAR canDistract = false
-VAR isTalkingToPolice = false
-
 // BARTENDER
 VAR talkedToBartender = false
 VAR bartenderToldHisAlibi = false
@@ -88,6 +85,7 @@ VAR canEnterStorage = false
 VAR talkedToArmchairGuy = false
 // Suspicious Guy
 VAR talkedToSuspiciousGuy = false
+VAR SuspiciousGuyAlibi = false
 // AKT 1:
 // INTERROGATE
 //VAR canInterrogate = false
@@ -450,6 +448,16 @@ LIST WindowKnowledge = steam_on_glass, fingerprints_on_glass, fingerprints_on_gl
 
 
 -> END
+
+ND
+
+
+END
+
+ND
+
+
+
 
 ND
 

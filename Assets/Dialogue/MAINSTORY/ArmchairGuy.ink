@@ -29,20 +29,48 @@ The man is slumped deep in the armchair, snoring loudly. He hasn't even taken a 
         -> DONE
 
 === AwakeHub ===
+{ talkedToBartender and talkedToCashier and Clues ? victimWallet and Clues !? trisslott: -> TrissLott }
+    * { Clues ? trisslott } [About that trisslott...]
     * { items !? karaokeUSB } [Do you know Peter Grip?] -> KnowPeter
     * { KnowPeter } [I need that recording of Peter.] -> TheTape
     + [See anything suspicious last night?] -> LastNight
     + [I gots to go, baby.] -> AwakeExit
     * { knowledge ? bartenderAlibi } [Bartender's alibi] -> BartenderAlibi
-    
+
+= TrissLottAgain
+Torsten, I need to know more about that trisslott. What exactly did Peter tell you? #speaker: Player
+~ isAsleep = true
+<i>You guessed it, he fell back asleep again.</i> #snore: start speaker: 
+I figured... #speaker: Player
+-> Hub
+
 = BartenderAlibi
-Loiter guy told me that you and he left around the same time last night, is this true? #speaker: Player
+Leif told me that you and he left around the same time last night, is this true? #speaker: Player
 <i>He falls back asleep.</i> #snore: start #speaker:
 HEY! <i>You snap your fingers in his face.</i> #speaker: Player
 Yeah! Yeah, sorry, that's right. I decided to go home and catch up on some Z's, and left with loiter guy. #speaker: Torsten #snore: stop
-The only person left here was Peter. I wonder where he is now? He's usually here by this hour.
+The only person left here was Peter. I wonder where he is now? He's usually here by this hour. 
 <i>That confirms it. The bartender lied about his alibi.</i>
 -> END
+
+= TrissLott
+Hang on... Is that <i>Peter's wallet?</i> Did you rob him or something?! #speaker: Torsten #portrait: 2
+No, no, it's nothing like that. I just found it... somewhere. #speaker: Player #portrait: 
+Likely story, pal! He'd never drop his wallet. Do you mistake him for a common drunk? You probably heard about his immense wealth and decided to rob him blind! #speaker: Torsten
+Peter was rich? I certainly didn't get that impression. You're not pulling my leg here, right? #speaker: Player
+He will be, once he cashes in his trisslott! You probably assumed that he would keep it in his wallet, you filthy robber. #speaker: Torsten
+Slow down, I'm not following you. Are you saying Peter had a winning trisslott on him? #speaker: Player
+Oh yeah, buddy. It's pretty much all he talked about last night. He was declaring how he'll soon be the richest man in town. I told him that it's probably a bad idea to go around telling everyone that. #speaker: Torsten
+But I don't have to tell you that since you already knew all about it, you filthy robber... What did you do to him!? I have half a mind to call the cops on you.
+<i>No one I've talked to has mentioned this at all... Where's this coming from?</i>  #speaker: Player
+Please, start from the beginning. What's going on here? What trisslott?
+~ isAsleep = true
+<i>He falls back to sleep again.</i> #snore: start #speaker: 
+Hey, you have to tell me more about this! #speaker: Player
+<I>...No good, he's fast asleep. I think I've gotten all the information I can about this.</i>
+<i>I should keep this in mind though. If this is true, then it casts a bit of doubt on many of the people I've talked to...</i>
+~ getclue(trisslott)
+-> Hub
 
 === KnowPeter ===
 Do you know a guy named Peter Grip? #speaker: Player
@@ -55,7 +83,7 @@ Liked is an understatement. <>
 Oh yeah? What would he sing? #speaker: Player
 <i>ABBA's Greatest Hits.</i> No exceptions. <>
 }
-I actually recorded him on my phone last night to prove to my wife why I have to drink. #speaker: Torsten
+I actually recorded him on my phone last night to prove to my wife why I have to drink. It would be funny if it wasn't so tragic. #speaker: Torsten
 -> Hub
 
 === TheTape ===

@@ -44,6 +44,11 @@ public class LocalTeleporter : MonoBehaviour // Author: Stefan Cwiek
 
         if (shouldTeleport) 
         {
+            // Hämta värdet av TotalTimeUsed från HighlightActivator, och lagra det i ink variabeln som ska hålla mängden tid
+            Ink.Runtime.Object dvisionValue = 
+                new Ink.Runtime.IntValue((int)GameObject.FindGameObjectWithTag("Player").GetComponent<HighlightActivatorIAVersion>().TotalTimeUsed);
+            NewDialogueManager.Instance.dialogueVariables.variables["dvisionTotalTime"] = dvisionValue;
+
             if (NewDialogueManager.Instance.currentStory != null) // Set ink variable back to false so the player doesnt get stuck in teleport loop
             {
                 NewDialogueManager.Instance.currentStory.variablesState[inkVariableName] = false;

@@ -380,8 +380,8 @@ public class NewDialogueManager : MonoBehaviour
 
         if (currentChoices.Count > choices.Length)
         {
-            Debug.LogError($"More choices in the story than UI can support. " +
-                $"Number of choices: {currentChoices.Count}");
+            Debug.Log($"More choices in the story than UI can support. " +
+                $"Number of choices: {currentChoices.Count}", this);
         }
 
         // Beror på om vi vill se dialogtexten när spelaren har val inom dialogen,

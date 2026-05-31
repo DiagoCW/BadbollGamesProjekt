@@ -1,6 +1,6 @@
 INCLUDE globalsmainstory.INK
 VAR exhaustedOptions = false
-{ Suspects ? bossMan: Boss Man is currently under suspicion. <>-> END } #speaker: Player
+{ Suspects ? bossMan: <> Boss Man is currently under suspicion. -> END } #speaker: Player
 { talkedToBossMan: <>-> CanQuestion|-> Intro }
 === Intro ===
 Nice driving, asshole! #anim: Yelling #speaker: Boss Man
