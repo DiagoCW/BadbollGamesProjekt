@@ -537,8 +537,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -1207}
-  m_SizeDelta: {x: 757.56, y: 3000}
+  m_AnchoredPosition: {x: 0, y: -1770}
+  m_SizeDelta: {x: 735.7, y: 3000}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1093412685
 MonoBehaviour:
@@ -560,64 +560,18 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    CREDITS
-
-
-    Graphics:
-
-
-    Music and Sound:
-
-
-    Writing:
-
-
-    Design:
-
-
-    Animation:
-
-
-    3D
-    Modeling:
-
-
-    Additional Assets:
-
-
-    Game Testing and Feedback:
-
-
-    This
-    game was made with Unity that is developed by  David Helgason, Joachim Ante,
-    and Nicholas Francis. Unity is published by Unity Technologies.
-
-
-    Special
-    Thanks:
-
-
-    Thank you for playing space detective!'
+  m_text: "CREDITS\r\n\r\n\r\nDennis Olsson\r\n\r\nIsabella Brorsson\r\n\r\nIsak
+    Sandgren\r\n\r\nHugo PC\r\nProgrammer, sound engineer, and concept Artist, responsible
+    for programming the inventory system, fog shader and audio player; along with
+    implementation of some SFX and construction of the tutorial scene.\r\n\r\nStefan
+    Cwiek\r\n\r\n\r\nMUSIC AND SOUND:\r\n(Main Theme, Bar theme, Gas station theme
+    and city ambiance) by Krenar Sejdiu.\r\n\r\n(Many small sound samples) from freesound.org.\r\n\r\n\r\nGAME
+    TESTING AND FEEDBACK:\r\nTo the charitable people of spel 25; especially group
+    4.\r\n\r\n\r\nENGINE:\r\nThis game was made with Unity that was developed by
+    David Helgason, Joachim Ante, and Nicholas Francis. Unity is published by Unity
+    Technologies.\r\n\r\n\r\nSPECIAL THANKS:\r\nJose Font for overseeing and consulting
+    us throughout the process of making this game.\r\n\r\n\r\nThank you for playing
+    Murder On Bj\xF6rkgatan, space detective!\r\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
