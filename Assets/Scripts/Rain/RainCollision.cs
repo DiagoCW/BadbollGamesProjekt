@@ -4,7 +4,7 @@ using System.Collections;
 
 public class RainCollision : MonoBehaviour
 {
-     
+    //Author : Isabella
 
     /// <summary>
     /// Rain system = When rain hits something object/boxcollider function is called

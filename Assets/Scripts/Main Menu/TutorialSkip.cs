@@ -3,6 +3,9 @@ using UnityEngine.SceneManagement;
 
 public class TutorialSkip : MonoBehaviour
 {
+    //Author : Isabella
+    //Tutorial skip button in the tutorial scene
+
     [Header("Settings")]
     [Tooltip("How long the screen takes to fade to black before loading main scene")]
     [SerializeField] public float fadeDuration { get; private set; } = 1.5f;

@@ -4,6 +4,9 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    //Author : Isabella
+
+
     [Header("References")]
     [Tooltip("Drag MainMenuMusic object here")]
     public MainMenuMusic musicManager;
