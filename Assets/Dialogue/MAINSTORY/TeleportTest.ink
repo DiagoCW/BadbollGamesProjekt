@@ -1,11 +1,11 @@
-VAR goToPoliceHouse = false
+INCLUDE globalsmainstory.INK
 
 -> teleport
 
 === teleport ===
-Tjena bästaste kompis, vill du se något skit coolt?
+Tjena kompis, vill du se något skit coolt?
 
-+ [Klart som fan mannen]
++ [Klart som fan]
 Now watch this drive
 ~ goToPoliceHouse = true
 -> END

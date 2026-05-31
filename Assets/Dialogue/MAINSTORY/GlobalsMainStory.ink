@@ -87,6 +87,10 @@ VAR talkedToSuspiciousGuy = false
 // INTERROGATE
 //VAR canInterrogate = false
 
+// Transitions och End Game
+
+VAR goToPoliceHouse = false
+VAR rollCredits = false
 
 /*
 
