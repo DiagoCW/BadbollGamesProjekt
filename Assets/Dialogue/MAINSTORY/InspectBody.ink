@@ -2,8 +2,9 @@ INCLUDE globalsmainstory.INK
 VAR reminisce = false
 { cluesFoundonBody >= 2: -> Result }
 { not talkToPoliceAgain: I should talk to the officer before investigating the body. -> END } #speaker: Player
-<i>The victim. He's not even in the early stages of decay, and he still smells awful.</i>
+<><i>The victim. He's not even in the early stages of decay, and he still smells awful.</i>
 Now, where to start... -> Inspect
+
 === Inspect ===
     { cluesFoundonBody >= 2: -> Result } // Dirigerar till sista delen om man hittat alla ledtrådar på kroppen
     * [<b>Inspect his person</b>]

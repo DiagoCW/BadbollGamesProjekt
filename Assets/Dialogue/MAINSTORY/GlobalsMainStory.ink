@@ -5,7 +5,7 @@ VAR bossManID = 1
 VAR bartenderID = 2
 LIST Suspects = (none), bossMan, bartender, storeClerk
 // --- Fysiska ledtrådar i spelet
-LIST Clues = (none), snus, receipts, victimPockets, victimWallet, beer, trisslott, kylarVätska, ratPoison
+LIST Clues = (none), snus, receipts, victimPockets, victimWallet, beer, trisslott, kylarVätska, ratPoison, falafel
 // --- Kunskap om saker för att kunna pussla ihop ledtrådar
 LIST knowledge = none, victimPoisoned, pocketsEmptied, receiptsBelongToVictim, stoleWallet, knowAboutTrisslott, bartenderAlibi, cashierAlibi, foundCoolantBartender, foundCoolantKiosk
 LIST items = (none), karaokeUSB, beerz, backdoorkey
@@ -27,6 +27,8 @@ EXTERNAL stopAllAmbience()
 EXTERNAL lowerPitch(string)
 
 EXTERNAL changeTypingSpeed(int)
+
+EXTERNAL rollCredits()
 
 === function unlockAllSuspects()
     ~ addsuspect(storeClerk)
@@ -71,6 +73,9 @@ VAR finishedCrimeScene = false
 
 // BOSS MAN
 VAR talkedToBossMan = false
+VAR canDistract = false
+VAR isTalkingToPolice = false
+
 // BARTENDER
 VAR talkedToBartender = false
 VAR bartenderToldHisAlibi = false
@@ -445,6 +450,11 @@ LIST WindowKnowledge = steam_on_glass, fingerprints_on_glass, fingerprints_on_gl
 
 
 -> END
+
+ND
+
+
+END
 
 ND
 

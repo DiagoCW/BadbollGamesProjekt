@@ -109,7 +109,7 @@ public class FadeInOut : MonoBehaviour // Author: Stefan Cwiek, Isak Sandgren
     /// </summary>
     private IEnumerator FadeAndLoadRoutine(string sceneName, float duration) 
     {
-        yield return StartCoroutine(FadeRoutine(0f, 1f, duration)); // Wait for the screen to turn completely black. yield return StartCoroutine will make this coroutine pause intil the FadeRoutine finishes its entire loop.
+        yield return StartCoroutine(FadeRoutine(1f, 1f, duration)); // Wait for the screen to turn completely black. yield return StartCoroutine will make this coroutine pause intil the FadeRoutine finishes its entire loop.
 
         SceneManager.LoadScene(sceneName); // When previous step is done, then load the next scene
     }

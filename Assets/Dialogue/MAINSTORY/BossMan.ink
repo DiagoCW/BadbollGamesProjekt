@@ -1,6 +1,6 @@
 INCLUDE globalsmainstory.INK
 VAR exhaustedOptions = false
-{ Suspects ? bossMan: -> StartQuestion("Are you going to arrest me...?") }
+{ Suspects ? bossMan: Boss Man is currently under suspicion. <>-> END } #speaker: Player
 { talkedToBossMan: <>-> CanQuestion|-> Intro }
 === Intro ===
 Nice driving, asshole! #anim: Yelling #speaker: Boss Man
@@ -49,6 +49,7 @@ Nice driving, asshole! #anim: Yelling #speaker: Boss Man
     -> Apologize
 
 === CanQuestion
+{ isTalkingToPolice: -> StartQuestion.TalkingToPolice }
 What's going on, big guy? Crash any cars lately? #speaker: Boss Man #anim: Talking
 { finishedCrimeScene: -> Question | I don't have time for this bozo, I've got a crime scene to investigate. -> END }
 
@@ -64,17 +65,34 @@ What's going on, big guy? Crash any cars lately? #speaker: Boss Man #anim: Talki
 ~ talkedToBossMan = true
 {msg} #speaker: Boss Man #anim: Talking
 { Call and Relation: -> DeadEnd }
-* { debug } [Start walking, buddy.]
-    Ok :)
-    ~ startMovement("Walking")
-    -> END
+* { canDistract and Clues !? victimWallet } [<b>Distract him</b>] -> Police 
 * { knowledge ? receiptsBelongToVictim and Clues !? victimWallet } [<color=\#FFFF00>The victim came here last night.</color>] -> InquireAboutReceipt
-* { Clues ? victimWallet and knowledge !? stoleWallet } [About this wallet...] -> Wallet
+* { Clues ? victimWallet and knowledge !? stoleWallet } [<color=\#FFFF00>About this wallet...</color>] -> Wallet
 * { Suspects !? bossMan } [Did you make the call?] -> Call // Endast om Boss Man inte är en suspect 
-* { Suspects !? bossMan } [Did you know the victim?] -> Relation
-* { Suspects ? bossMan } [What happened last night?] -> LastNight
-* { Suspects ? bartender or Suspects ? storeClerk } [Ask about other suspects] -> AskAboutSuspects
+* { not canDistract & Suspects !? bossMan } [Did you know the victim?] -> Relation
+* { not canDistract & Suspects ? bossMan } [What happened last night?] -> LastNight
+// * { Suspects ? bartender or Suspects ? storeClerk } [Ask about other suspects] -> AskAboutSuspects
 * [Bye loser.] -> END
+
+= Police
+The officer needs to take your statement. Again... #speaker: Player
+Are you kidding me? What more can I say that I haven't already told you people? How incompetent are you!? #speaker: Boss Man
+You don't really have much of a choice. He's expecting you by the scene, so if I were you I would get going. #speaker: Player
+~ startMovement("Walking")
+Unbelievable... This is what my skattepengar goes to. #speaker: Boss Man
+<i>Beautiful, he's left the shop unattended. Now I can have a little look around...</i> #speaker: Player
+~ isTalkingToPolice = true
+-> END
+
+= TalkingToPolice
+What is this? You told me that the officer had to take my statement. #speaker: Boss Man #anim: Talking
+Yeah. What's the problem? #speaker: Player
+Detective, I said that <b>you</b> were supposed to take his statement. #speaker: Police
+Oh. Sorry! Let me do that now real quick. #speaker: Player
+~ startMovement("Walking")
+You already took my statement! Fuck this. Don't waste my time again. #speaker: Boss Man
+~ isTalkingToPolice = false
+-> END
 
 = InquireAboutReceipt
 Huh? #speaker: Boss Man
@@ -90,14 +108,10 @@ Look, he didn't come here, alright? But I guess I could keep an eye out in case 
 -> END
 
 = DeadEnd
-{ Suspects ? bossMan:
-    Suppose this leads nowhere, I'm bringing you in. I'll make sure the officer keep an eye on you. #speaker: Player
-    -> END
-- else:
-    <i>He knows more than he lets on. Call it a hunch, but I've seen this type of guy before...</i> #speaker:
-    <i>Som på Bollen i Rullen 25 på Nobeltorget.</i>
-    <i>Maybe he really doesn't know anything. Or I could take a little look around his shop... But I need to distract him somehow.</i>
-}
+<i>He knows more than he lets on. Call it a hunch, but I've seen this type of guy before...</i> #speaker:
+<i>Som på Bollen i Rullen 25 på Nobeltorget.</i>
+<i>Maybe he really doesn't know anything. Or I could take a little look around his shop... But I need to find a way to distract him somehow.</i>
+~ canDistract = true
 -> END
 
 = AskAboutSuspects
@@ -151,36 +165,60 @@ No, you're wrong! I didn't kill the poor guy! Let me explain...
 What's there to explain? You have his wallet, the only way you could have it is if you took it from his body.
 Like you took his wallet, I'm taking you... in, for murder.
 No, wait! I <i>DID</i> take his wallet after I found his body, yeah? But I didn't <i>KILL HIM!</i>
-~ addsuspect(bossMan)
-~ unlockSuspect(bossManID)
--> StartQuestion("Please, let me explain...")
+-> LastNight
 
 = LastNight
-You'd better start making damn good sense. #speaker: Player
-It's true, I found his body and decided to take his wallet. I figured that he owed me for all the times we had our dumb little back and forth. I was just gonna grab some cash and then give it back to him like normal the next day.
-Only then did I notice that he wasn't breathing. I tried to shake him awake, slap him around a bit you know?
-And, nothing. I immediately called the police, and told them that it's about Peter, but there was something <b>wrong</b> this time and that they really had to hurry.
+It's true, I found his body and decided to take his wallet. I was just gonna grab some cash and then give it back to him like normal the next day. #speaker: Boss Man
+Just like I told you before, I soon realized that he was actually dead and so I called the cops.
 Then I realized that I still had his wallet, which wasn't a good look for me. I couldn't admit something like that, that would make me look guilty! So I never mentioned it. 
-I wasn't lying when I said that I would often find his wallet. It just wasn't the truth this time. I figured if anyone would confront me about it, I could just use it as a fallback.
 He died <i>shortly</i> after leaving your shop. You know how it looks, right? #speaker: Player
-Yeah, but that's just why I <b>COULDN'T</b> have killed him! I heard you talking to the officer over there earlier, he said he died of alcohol poisoning or something, right? #speaker: Boss Man
-Probably. He had injuries indicative of a struggle, though. You could have knocked him the fuck out, and it happened to kill him. Let's just say it was manslaughter and call it a day, huh? Heat of the moment! #speaker: Player
-I didn't <b>do it!</b> As for his injuries, I can explain. He told me as much about them last night. #speaker: Boss Man
-He had a falling out with the clerk by the gas station, said they fought over something.
-Something? Like what? #speaker: Player
-He didn't say. I could tell that he didn't want to talk about it, either.
-Please, I'm telling you... If he really was murdered, I suppose I can't prove my innocence, but the store clerk sure as hell knows something about all this.
-// ~ addsuspect(storeClerk)
--> DeadEnd
+I didn't do it, please believe me! #speaker: Boss Man
+Why should I? You lied to me before, you might still be lying. He had injuries indicative of a struggle. You could have knocked him the fuck out, and it happened to kill him. Let's just say it was manslaughter and call it a day, huh? Heat of the moment! #speaker: Player
+I overheard you speaking with the Officer earlier, and he clearly stated that the victim couldn't have died from that! That means I couldn't have done it, yeah? #speaker: Boss Man
+{ knowledge ? victimPoisoned:
+    It's very likely that the victim could have been poisoned, and this falafelrulle right here could be the culprit. #portrait: 7 #speaker: Player
+    That's bullshit, that just means that you don't have any real proof that it's been poisoned! #speaker: Boss Man
+    Eat it. #speaker: Player
+    Beat it. #speaker: Boss Man
+    No, I mean <b>eat it</b>. This falafelrulle. If it's not poisoned, it should be fine to eat, right? #speaker: Player #portrait: 7
+    I'm... I'm not eating that. I don't know how old that thing is, and you could have put something in it yourself. I have no reason to trust you! #speaker: Boss Man
+    And I no longer have any reason to trust you. I have everything I need here. #speaker: Player
+    Wait! I have information! I can tell you about something Peter told me last night. #speaker: Boss Man
+    * [<b>Go on...<b>]
+        -> StoreClerkFight
+    * [<b>Not interested.</b>]
+        Not interested. Like I said, I have everything I need here.
+        -> UnlockSuspect
+- else:
+    <i>I guess that makes sense. I don't think I have anything to prove an alternative theory.</i> #speaker: Player
+    <i>Still, I know I'm onto something here... I'm just missing a small piece. I could ask around and see if I find out something interesting.</i>
+-> END
+}
+
+= StoreClerkFight
+Alright, let's hear it. #speaker: Player
+When he came here last night and bought his nightly falafelrulle, he told me that he and the cashier down by the gas station had an argument about something. #speaker: Boss Man
+So what? That doesn't mean anything. I can imagine that a lot of people had a bone to pick with Peter. #speaker: Player
+Yeah, yeah; but this was something else. He would always tell me whenever he got into trouble with the police, or if he was kicked out of the bar because of his shitty karaoke, and so on. #speaker: Boss Man
+But last night... He seemed off. When I asked him about what he and the cashier were arguing about, he got pissed and started yelling at me. So I didn't press him any further, and then he left. And you know the rest.
+<i>I could choose to follow up on this lead, and even if it leads nowhere; I still have my prime suspect right here.</i> #speaker: Player
+Alright. I'll see where this goes, but don't expect to be in the clear because of this.
+-> UnlockSuspect
+
+= UnlockSuspect
+~ addsuspect(bossMan)
+~ unlockSuspect(bossManID)
+<i>You have unlocked Boss Man as a suspect. You can speak with The Officer regarding this or consult your Field Manual for further information.</i>
+-> END
 
 = Call
 Didn't you already take my statement about this? #speaker: Boss Man
 The officer did, yes. I would like to hear it as well. Spare me no details, capische? #speaker: Player
 Fine, the quicker the better. #speaker: Boss Man
-Last night, at maybe around 2 A.M, I closed up shop and was ready to head home. I was walking along my usual path.
-And that's when I stumbled upon him. I though for sure that he had just passed out from another night of drinking, but..
-He wasn't breathing. I tried to wake him up, but his body was absolutely limp, it was scary.
-I had a hunch that it might not just be another blackout, and I quickly called the cops. They arrived almost immediately, I didn't even have time to...
-...you know, do anything else. I mean, I didn't know what to do really. They declared him dead instantly.
+Last night, at maybe around 2 A.M, I closed up shop and headed home.
+That's when I stumbled upon him. I though for sure that he had just passed out from another night of drinking.
+But... he wasn't breathing. I tried to wake him up, but I got no response.
+I realized he wasn't just black out drunk, and quickly called the cops. They arrived almost immediately, I didn't even have time to...
+...you know, do anything else. I mean, I didn't know what to do really.
 He didn't come by here last night then? I was told he was a regular here, to a fault almost. #speaker: Player
 -> StartQuestion("No, he didn't. That's all I have to say about that.")

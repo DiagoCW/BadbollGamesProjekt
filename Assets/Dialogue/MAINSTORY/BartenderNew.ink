@@ -60,7 +60,7 @@ I guess you're right. Sorry about that... #speaker: Player
 = AlibiContinued
 He was poisoned. Not by alcohol, but something else entirely. It's possible that you poisoned him somehow during that time. #speaker: Player
 Yeah? Got any proof of that? #speaker: Bartender
-{ knowledge ? foundCoolantBartender: 
+{ Clues ? ratPoison: 
 -> AlibiEnd
 - else:
 <i>If the victim was poisoned, I should be able to find something around here that he could've used to do it, as well as figure out how he did it. But for the time being...</i> #speaker: Player
@@ -72,7 +72,7 @@ No, not really. I was winging it and hoped you would come clean...
 = AlibiEnd
 For starters, what's up with the excessive amount of rat poison all over the place? #speaker: Player
 It's for rats. Obviously. #speaker: Bartender
-And Peter, it would seem. I found one of his beers, and it didn't smell like beer should, even if we're talking about the overpriced shitty beer you serve here. #speaker: Player
+And Peter, it would seem. When you came over to clean up his spot earlier, I managed to snag one of the cans. The beer smells really bad, even for that overpriced shitty beer you serve here. #speaker: Player
 You lied about your alibi. You were alone with Peter for at least an hour, at which point you had ample opportunity to poison him. When he inevitably dropped dead, you had ample opportunity to loot his body.
 I had no reason to kill him though, this is naught but the conjecture of a delusional detective! You have 0 proof! #speaker: Bartender
 <i>This is it. I need one final push and I got him dead to rights. Here goes...</i> #speaker: 
@@ -80,9 +80,10 @@ I had no reason to kill him though, this is naught but the conjecture of a delus
 The trisslott. It all makes sense. #speaker: Player
 You never mentioned that either, and that was to cover your tracks. But I know that the victim was flaunting it around last night, and you seemed <i>especially</i> interested in it.
 With your business failing, and his tab racking up more and more debt... You saw an opportunity. You saw big money. 
+You're... you're wrong. I didn't do it. I couldn't... #speaker: Bartender
 ~ addsuspect(bartender)
 ~ unlockSuspect(bartenderID)
-You're... you're wrong. I didn't do it. I couldn't... #speaker: Bartender
+<i>You have unlocked The Bartender as a suspect. You can speak with The Officer regarding this or consult your Field Manual for further information.</i>
 -> END
 - else:
 I've got nothing. Sorry. Just keeping you on your toes! Got to go now baby. #speaker: Player
@@ -145,12 +146,12 @@ Alright, that'll be all. #speaker: Player
 
 = ShowReceipt
 Wait, do you still have any of his receipts from last night? #speaker: Player
-Absolutely. I have them stacked here to keep track of his tab. Let's see... #speaker: Bartender
-Here's one from last night. #anim: Talking
+Sure, I think I have them here somewhere... #speaker: Bartender
+Here you go. #anim: Talking
 <i>You check the card code on the bottom of the receipt and compare it to the ones you found in the trash can earlier. <b>It's a match.</b></i> #speaker:
 <i>All these receipts belong to the victim. This also confirms that he was at Boss Man last night and bought a falafelrulle.</i>
 { Clues ? victimWallet: 
-    <i>...and Boss Man somehow has his wallet. Time to go yank his pizzle. 
+    <i>...and Boss Man somehow has his wallet. I need to confront him about this.
 - else:
     <i>...and then lost his wallet somehow. Could it have been stolen before his death? Or after his death...?</i>
     <i>I need to find that wallet.</i>
