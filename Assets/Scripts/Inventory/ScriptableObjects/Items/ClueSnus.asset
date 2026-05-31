@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46db39dea7ad8e84bab99ebae6da6802, type: 3}
   m_Name: ClueSnus
   m_EditorClassIdentifier: 
-  Id: 0
+  Id: 5
   uiDisplay: {fileID: 21300000, guid: 75135fe62f5aaa54eacd921572264873, type: 3}
   description: You found this snuff on the victim's body at the crime scene, a few
     nicotine pouches are  missing and it smells rancid.

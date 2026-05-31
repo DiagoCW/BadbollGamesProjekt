@@ -23,12 +23,12 @@ public class StartAudioManager : MonoBehaviour
     [Header("SFX Clips")]
     public List<AudioClipData> sfxClips = new List<AudioClipData>();
 
-    private Dictionary<string, AudioClip> ambienceDict;
-    private Dictionary<string, AudioClip> sfxDict;
+    private Dictionary<string, AudioClipData> ambienceDict;
+    private Dictionary<string, AudioClipData> sfxDict;
     private Dictionary<string, AudioSource> activeAmbienceSources = new Dictionary<string, AudioSource>();
 
     /// <summary>
-    /// Data structure for associating an audio clip with a string identifier.
+    /// Data structure for associating an audio clip with a string identifier and volume.
     /// Used in the Inspector to configure available audio clips.
     /// </summary>
     [System.Serializable]
@@ -36,6 +36,9 @@ public class StartAudioManager : MonoBehaviour
     {
         public string id;
         public AudioClip clip;
+        [Range(0f, 2f)]
+        [Tooltip("Volume for this specific audio clip (0 = silent, 1 = full volume, 2 = doubble volume)")]
+        public float volume = 1f;
     }
 
     private void Awake()
@@ -58,21 +61,21 @@ public class StartAudioManager : MonoBehaviour
     /// </summary>
     private void InitializeAudioDictionaries()
     {
-        ambienceDict = new Dictionary<string, AudioClip>();
+        ambienceDict = new Dictionary<string, AudioClipData>();
         foreach (var data in ambienceClips)
         {
             if (!string.IsNullOrEmpty(data.id) && data.clip != null)
             {
-                ambienceDict[data.id] = data.clip;
+                ambienceDict[data.id] = data;
             }
         }
 
-        sfxDict = new Dictionary<string, AudioClip>();
+        sfxDict = new Dictionary<string, AudioClipData>();
         foreach (var data in sfxClips)
         {
             if (!string.IsNullOrEmpty(data.id) && data.clip != null)
             {
-                sfxDict[data.id] = data.clip;
+                sfxDict[data.id] = data;
             }
         }
     }
@@ -85,7 +88,7 @@ public class StartAudioManager : MonoBehaviour
     /// <param name="id">The string identifier of the ambience clip to play</param>
     public void PlayAmbience(string id)
     {
-        if (ambienceDict.TryGetValue(id, out AudioClip clip))
+        if (ambienceDict.TryGetValue(id, out AudioClipData clipData))
         {
             // If already playing, don't create duplicate
             if (activeAmbienceSources.ContainsKey(id))
@@ -96,7 +99,8 @@ public class StartAudioManager : MonoBehaviour
 
             // Create a new AudioSource for this ambience
             AudioSource newSource = gameObject.AddComponent<AudioSource>();
-            newSource.clip = clip;
+            newSource.clip = clipData.clip;
+            newSource.volume = clipData.volume;
             newSource.loop = true;
             newSource.Play();
 
@@ -146,9 +150,9 @@ public class StartAudioManager : MonoBehaviour
     /// <param name="id">The string identifier of the sound effect to play</param>
     public void PlaySFX(string id)
     {
-        if (sfxDict.TryGetValue(id, out AudioClip clip))
+        if (sfxDict.TryGetValue(id, out AudioClipData clipData))
         {
-            sfxSource.PlayOneShot(clip);
+            sfxSource.PlayOneShot(clipData.clip, clipData.volume);
         }
         else
         {
