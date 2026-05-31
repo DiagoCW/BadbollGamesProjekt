@@ -6,6 +6,10 @@ public class CreditsRoller : MonoBehaviour
     [Tooltip("Drag the TextMeshPro object here")]
     [SerializeField] private RectTransform creditsText;
 
+    // secondary text for additional text in other fonts
+    [Tooltip("Aditional text")]
+    [SerializeField] private RectTransform creditsAd;
+
     [Tooltip("How fast the text moves up")]
     [SerializeField] private float scrollSpeed = 50f;
 
@@ -17,6 +21,12 @@ public class CreditsRoller : MonoBehaviour
         if (creditsText != null) 
         {
             creditsText.anchoredPosition += Vector2.up * scrollSpeed * Time.deltaTime;
+        }
+
+        // secondary text for additional text in other fonts
+        if (creditsAd != null)
+        {
+            creditsAd.anchoredPosition += Vector2.up * scrollSpeed * Time.deltaTime;
         }
 
         if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Space)) // skip credits with either escape or space
