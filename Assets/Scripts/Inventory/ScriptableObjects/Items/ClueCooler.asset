@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: 1
   uiDisplay: {fileID: 21300000, guid: d800089908d8f204fa43d6964d1d10ec, type: 3}
-  description: A liquid is trailed under your car, why is it blue?
+  description: Found in the storage at the gas station. Placed next to a bunch of
+    snus. Could it be...?
