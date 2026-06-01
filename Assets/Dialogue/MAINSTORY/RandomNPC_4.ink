@@ -1,2 +1,2 @@
-Can I choose to not be involved in whatever you’re doing?
+Can I choose to not be involved in whatever you’re doing? #speaker: Barbro
     -> END
