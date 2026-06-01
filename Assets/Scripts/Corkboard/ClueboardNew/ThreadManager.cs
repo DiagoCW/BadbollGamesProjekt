@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System;
 using UnityEngine.ProBuilder.MeshOperations;
-using UnityEditor.Search;
+//using UnityEditor.Search;
 
 /// <summary>
 /// Author: Stefan Cwiek
