@@ -16,22 +16,32 @@ public class CreditsRoller : MonoBehaviour
     [Tooltip("Scene to load when credits are done or skipped")]
     [SerializeField]private string mainMenu = "MainMenu";
 
+    private float elapsedTime = 0f;
+    private float delay = 3f;
+
     private void Update()
     {
-        if (creditsText != null) 
+        elapsedTime += Time.deltaTime;
+        if (elapsedTime >= delay)
         {
-            creditsText.anchoredPosition += Vector2.up * scrollSpeed * Time.deltaTime;
-        }
+            if (creditsText != null)
+            {
+                creditsText.anchoredPosition += Vector2.up * scrollSpeed * Time.deltaTime;
+            }
 
-        // secondary text for additional text in other fonts
-        if (creditsAd != null)
-        {
-            creditsAd.anchoredPosition += Vector2.up * scrollSpeed * Time.deltaTime;
+            // secondary text for additional text in other fonts
+            if (creditsAd != null)
+            {
+                creditsAd.anchoredPosition += Vector2.up * scrollSpeed * Time.deltaTime;
+            }
         }
-
+        
         if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Space)) // skip credits with either escape or space
         {
-            SceneManager.LoadScene(mainMenu);
+            if (!string.IsNullOrEmpty(mainMenu))
+            {
+                SceneManager.LoadScene(mainMenu);
+            }
         }
     }
 }
