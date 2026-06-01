@@ -321,7 +321,7 @@ public class PlayerController : MonoBehaviour
                 }
                 else if (interactable is OpenDoor)
                 {
-                    //interactPromptText.text = $"Interact Door";
+                    interactPromptText.text = $"Interact \nDoor";
 
                     if (!interactPromptText.gameObject.activeSelf)
                         interactPromptText.gameObject.SetActive(true);
