@@ -34,7 +34,7 @@ public class SuspectManager : MonoBehaviour
     }
 
     /// <summary>
-    ///  Looks up a suspect by their ID and puts their photo into the first empty frame on the board
+    ///  Looks up a suspect by their ID and puts their photo into their dedicated fixed slot on the board
     /// </summary>
     /// <param name="id">The ID of the suspect we want to show</param>
     public void UnlockSuspect(int id)
@@ -44,7 +44,7 @@ public class SuspectManager : MonoBehaviour
         // Find the photo for this ID in our database
         foreach (var data in suspectDatabase)
         {
-            if (data.suspectID == id /*&& NewDialogueManager.Instance.CheckSuspectsList(data.suspectName)*/)
+            if (data.suspectID == id)
             {
                 photoToAssign = data.suspectPhoto;
                 break;
@@ -58,19 +58,22 @@ public class SuspectManager : MonoBehaviour
             return;
         }
 
-        // find an empty node on the board to put the photo in
         foreach (SuspectNode node in suspectNodes)
         {
-            // ignore if we already unlocked this specific suspect
-            if (node.isUnlocked && node.suspectID == id) return;
-
-            if (!node.isUnlocked)
+            // Check if the slot belong to the suspect that is getting unlocked Does this slot belong to the suspect we are trying to unlock?
+            if (node.suspectID == id)
             {
-                node.suspectID = id;
+                // ignore if we already unlocked 
+                if (node.isUnlocked) return;
+
+                // Unlock in specific slot
                 node.UnlockSuspect(photoToAssign);
-                Debug.Log($"Unlocked Suspect {id} on the board");
+               // Debug.Log($"Unlocked Suspect {id}");
                 return;
             }
         }
+
+        // Failsafe
+        Debug.LogWarning($"No SuspectNode UI element found with ID {id} on the board");
     }
 }
