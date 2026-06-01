@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46db39dea7ad8e84bab99ebae6da6802, type: 3}
   m_Name: ClueWallet
   m_EditorClassIdentifier: 
-  Id: 7
+  Id: 6
   uiDisplay: {fileID: 21300000, guid: 4780ff92b0af85b4f95efc3afc299a7f, type: 3}
   description: Found tucked away in Boss Man's shop. Doesn't belong to him.

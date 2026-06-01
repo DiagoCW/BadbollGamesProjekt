@@ -30,12 +30,16 @@ public class CooldownUIVisualIAVersion : MonoBehaviour
 
         if (activator.IsHighlighting)
         {
-            secondsUsed.enabled = true;
-            totalTimeUsed = (int)GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<HighlightActivatorIAVersion>().TotalTimeUsed;
+            if (secondsUsed != null) 
+            {
+                secondsUsed.enabled = true;
+                totalTimeUsed = (int)activator.TotalTimeUsed;
+                secondsUsed.text = totalTimeUsed.ToString();
+            } 
+            
             // Active phase
             float remaining = activator.HighlightEndTime - time;
             float progress = Mathf.Clamp01(remaining / activator.highlightDuration);
-            secondsUsed.text = totalTimeUsed.ToString();
 
             if (activeFill) activeFill.fillAmount = progress;
             if (cooldownFill) cooldownFill.fillAmount = 0f;
@@ -43,7 +47,8 @@ public class CooldownUIVisualIAVersion : MonoBehaviour
         }
         else if (time < activator.CooldownEndTime)
         {
-            secondsUsed.enabled = false;
+            if (secondsUsed != null) secondsUsed.enabled = false;
+
             // Cooldown phase
             float remaining = activator.CooldownEndTime - time;
             float progress = Mathf.Clamp01(remaining / activator.cooldownDuration);
