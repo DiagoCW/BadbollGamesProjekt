@@ -7961,6 +7961,29 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &482013102 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2669023687429332413, guid: 84b6569a831a7354f98f712d0f21fc49, type: 3}
+  m_PrefabInstance: {fileID: 1611239081}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &482013104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 482013102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f71a69470d564a041a69426375efbee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  outlineScale: {x: 1.03, y: 1.03, z: 1.03}
+  isFlatDecal: 0
+  inkTrigger: finishedCrimeScene
+  hideInteractionUntilTriggered: 1
+  memoryDuration: 5
 --- !u!1001 &488058738
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18282,6 +18305,7 @@ MonoBehaviour:
   - {fileID: 1250976920}
   - {fileID: 211331204}
   isMoving: 0
+  isBlockingDialogue: 0
 --- !u!1001 &741766488
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23103,6 +23127,29 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 190, y: 190}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &995393888 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3347997686764627709, guid: 84b6569a831a7354f98f712d0f21fc49, type: 3}
+  m_PrefabInstance: {fileID: 1611239081}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &995393890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 995393888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f71a69470d564a041a69426375efbee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  outlineScale: {x: 1.03, y: 1.03, z: 1.03}
+  isFlatDecal: 0
+  inkTrigger: finishedCrimeScene
+  hideInteractionUntilTriggered: 1
+  memoryDuration: 5
 --- !u!1001 &1010039080
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25202,6 +25249,7 @@ MonoBehaviour:
   targetDestinations:
   - {fileID: 1382910879}
   isMoving: 0
+  isBlockingDialogue: 0
 --- !u!4 &1089154630 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6888508457427091554, guid: 596d7a6ae731aef498930a3e6793521d, type: 3}
@@ -29517,6 +29565,29 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &1260949766 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4170367909668586581, guid: 84b6569a831a7354f98f712d0f21fc49, type: 3}
+  m_PrefabInstance: {fileID: 1611239081}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1260949768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1260949766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f71a69470d564a041a69426375efbee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  outlineScale: {x: 1.03, y: 1.03, z: 1.03}
+  isFlatDecal: 0
+  inkTrigger: finishedCrimeScene
+  hideInteractionUntilTriggered: 1
+  memoryDuration: 5
 --- !u!1001 &1264136320
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29947,6 +30018,29 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &1278891293 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7538169631555916545, guid: 84b6569a831a7354f98f712d0f21fc49, type: 3}
+  m_PrefabInstance: {fileID: 1611239081}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1278891295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1278891293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f71a69470d564a041a69426375efbee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  outlineScale: {x: 1.03, y: 1.03, z: 1.03}
+  isFlatDecal: 0
+  inkTrigger: finishedCrimeScene
+  hideInteractionUntilTriggered: 1
+  memoryDuration: 5
 --- !u!1 &1285524699
 GameObject:
   m_ObjectHideFlags: 0
@@ -36192,7 +36286,7 @@ MonoBehaviour:
   outlineColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   outlineScale: {x: 1.03, y: 1.03, z: 1.03}
   isFlatDecal: 0
-  inkTrigger: talkedToBartender
+  inkTrigger: finishedCrimeScene
   hideInteractionUntilTriggered: 1
   memoryDuration: 5
 --- !u!65 &1592556531
@@ -36428,6 +36522,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1469026037}
     m_Modifications:
+    - target: {fileID: 2669023687429332413, guid: 84b6569a831a7354f98f712d0f21fc49, type: 3}
+      propertyPath: m_TagString
+      value: Clue
+      objectReference: {fileID: 0}
     - target: {fileID: 2971138067116066963, guid: 84b6569a831a7354f98f712d0f21fc49, type: 3}
       propertyPath: m_LocalPosition.x
       value: 36.868206
@@ -36468,11 +36566,27 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3019181409305775893, guid: 84b6569a831a7354f98f712d0f21fc49, type: 3}
+      propertyPath: m_TagString
+      value: Clue
+      objectReference: {fileID: 0}
+    - target: {fileID: 3347997686764627709, guid: 84b6569a831a7354f98f712d0f21fc49, type: 3}
+      propertyPath: m_TagString
+      value: Clue
+      objectReference: {fileID: 0}
+    - target: {fileID: 4170367909668586581, guid: 84b6569a831a7354f98f712d0f21fc49, type: 3}
+      propertyPath: m_TagString
+      value: Clue
+      objectReference: {fileID: 0}
     - target: {fileID: 7149498178498738793, guid: 84b6569a831a7354f98f712d0f21fc49, type: 3}
       propertyPath: m_Name
       value: "R\xE5ttgift"
       objectReference: {fileID: 0}
     - target: {fileID: 7149498178498738793, guid: 84b6569a831a7354f98f712d0f21fc49, type: 3}
+      propertyPath: m_TagString
+      value: Clue
+      objectReference: {fileID: 0}
+    - target: {fileID: 7538169631555916545, guid: 84b6569a831a7354f98f712d0f21fc49, type: 3}
       propertyPath: m_TagString
       value: Clue
       objectReference: {fileID: 0}
@@ -36495,6 +36609,21 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7149498178498738793, guid: 84b6569a831a7354f98f712d0f21fc49, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1634832694}
+    - targetCorrespondingSourceObject: {fileID: 3347997686764627709, guid: 84b6569a831a7354f98f712d0f21fc49, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 995393890}
+    - targetCorrespondingSourceObject: {fileID: 3019181409305775893, guid: 84b6569a831a7354f98f712d0f21fc49, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1893254988}
+    - targetCorrespondingSourceObject: {fileID: 4170367909668586581, guid: 84b6569a831a7354f98f712d0f21fc49, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1260949768}
+    - targetCorrespondingSourceObject: {fileID: 7538169631555916545, guid: 84b6569a831a7354f98f712d0f21fc49, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1278891295}
+    - targetCorrespondingSourceObject: {fileID: 2669023687429332413, guid: 84b6569a831a7354f98f712d0f21fc49, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 482013104}
   m_SourcePrefab: {fileID: 100100000, guid: 84b6569a831a7354f98f712d0f21fc49, type: 3}
 --- !u!4 &1611239082 stripped
 Transform:
@@ -37126,7 +37255,7 @@ MonoBehaviour:
   outlineColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   outlineScale: {x: 1.03, y: 1.03, z: 1.03}
   isFlatDecal: 0
-  inkTrigger: 
+  inkTrigger: finishedCrimeScene
   hideInteractionUntilTriggered: 1
   memoryDuration: 5
 --- !u!23 &1634832696
@@ -42413,6 +42542,29 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4170723076871718782, guid: cc1a29695ab6b464fbbb46b96f6e7364, type: 3}
   m_PrefabInstance: {fileID: 1891992285}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1893254986 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3019181409305775893, guid: 84b6569a831a7354f98f712d0f21fc49, type: 3}
+  m_PrefabInstance: {fileID: 1611239081}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1893254988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1893254986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f71a69470d564a041a69426375efbee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  outlineScale: {x: 1.03, y: 1.03, z: 1.03}
+  isFlatDecal: 0
+  inkTrigger: finishedCrimeScene
+  hideInteractionUntilTriggered: 1
+  memoryDuration: 5
 --- !u!1001 &1898443536
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -42916,6 +43068,7 @@ MonoBehaviour:
   - {fileID: 1384461574}
   - {fileID: 1453794564}
   isMoving: 0
+  isBlockingDialogue: 0
 --- !u!1 &1932367754
 GameObject:
   m_ObjectHideFlags: 0
@@ -48087,6 +48240,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1592371411}
+    - target: {fileID: 704153897162764629, guid: 36aad984599f71f4d8f6d9dd7d1259ce, type: 3}
+      propertyPath: m_Name
+      value: Bottles of Alcohol
+      objectReference: {fileID: 0}
     - target: {fileID: 704153897162764629, guid: 36aad984599f71f4d8f6d9dd7d1259ce, type: 3}
       propertyPath: m_TagString
       value: Clue

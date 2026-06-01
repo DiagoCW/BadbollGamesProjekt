@@ -14,13 +14,26 @@ public class PlayerCamera : MonoBehaviour
     [SerializeField] private float minPitch = -80f; // max looking down angle
     [SerializeField] private float maxPitch = 80f; // max looking up angle
 
+    [Header("Cinematic Settings")]
+    [Tooltip("How much higher than the target's origin the camera should look)")]
+    [SerializeField] private float cinematicHeightOffset = 1.5f;
+
     private float xRotation = 0f; // Tracks up/down rotation state to allow for clamping.
    // private float yRotation = 0f; // Tracks left/right rotation state
+
+    private Transform cinematicTarget;
+    private bool isCinematicLook = false;
 
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+    }
+
+    public void SetCinematicTarget(Transform target)
+    {
+        cinematicTarget = target;
+        isCinematicLook = (target != null);
     }
 
     private void LateUpdate()
@@ -29,6 +42,24 @@ public class PlayerCamera : MonoBehaviour
         if (PlayerController.Instance != null && PlayerController.Instance.IsInventoryOpen)
         {
             return;
+        }
+
+        if (isCinematicLook && cinematicTarget != null)
+        {
+            Vector3 targetPosition = cinematicTarget.position + (Vector3.up * cinematicHeightOffset);
+
+            // Calculate the direction to the adjusted target position
+            Vector3 direction = targetPosition - transform.position;
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+
+            // Smoothly rotate the camera
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 5f * Time.deltaTime);
+
+            // Sync the xRotation variable so the camera doesn't violently snap when the player gets control back
+            xRotation = transform.localEulerAngles.x;
+            if (xRotation > 180f) xRotation -= 360f;
+
+            return; 
         }
 
         HandleCameraLook();

@@ -122,10 +122,24 @@ public class InkExternalFunctions
         {
             return ThreadManager.Instance.GetAccusedSuspectID();
         });
-
-        
-
-
+        story.BindExternalFunction("startMovementBlocking", (string name) =>
+        {
+            aiAgent?.StartPathBlocking(name);
+        });
+        story.BindExternalFunction("focusCamera", (string targetName) =>
+        {
+            GameObject target = GameObject.Find(targetName);
+            if (target != null)
+            {
+                // Find the player camera and tell it to look at the target
+                Camera.main.GetComponentInParent<PlayerCamera>()?.SetCinematicTarget(target.transform);
+            }
+        });
+        story.BindExternalFunction("resetCamera", () =>
+        {
+            // Tell the player camera to release the target and return to mouse control
+            Camera.main.GetComponentInParent<PlayerCamera>()?.SetCinematicTarget(null);
+        });
     }
 
     public void Unbind(Story story)
@@ -142,6 +156,9 @@ public class InkExternalFunctions
         story.UnbindExternalFunction("rollCredits");
         story.UnbindExternalFunction("addClueThroughDialogue");
         story.UnbindExternalFunction("getAccusedSuspectID");
+        story.UnbindExternalFunction("startMovementBlocking");
+        story.UnbindExternalFunction("resetCamera");
+        story.UnbindExternalFunction("focusCamera");
 
         // Audio functions
         story.UnbindExternalFunction("playAudio");
