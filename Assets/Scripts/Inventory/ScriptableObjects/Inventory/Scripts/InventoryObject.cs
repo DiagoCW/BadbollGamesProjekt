@@ -12,6 +12,12 @@ public class InventoryObject : ScriptableObject
     public ItemDatabaseObject database;
     public Inventory Container;
 
+    /// <summary>
+    /// Author: Hugo
+    /// Adds an item to the inventory. If the item already exists, returns early.
+    /// Otherwise, adds the item to the first available empty slot.
+    /// </summary>
+    /// <param name="_item">The item to add to the inventory.</param>
     public void AddItem(Item _item/*, int _amount*/)
     {
         for (int i = 0; i < Container.Items.Length; i++)
@@ -26,6 +32,12 @@ public class InventoryObject : ScriptableObject
         }
         SetEmptySlot(_item);
     }
+
+    /// <summary>
+    /// Finds the first empty slot in the inventory and places the item there.
+    /// </summary>
+    /// <param name="_item">The item to place in an empty slot.</param>
+    /// <returns>The inventory slot where the item was placed, or null if the inventory is full.</returns>
     public InventorySlot SetEmptySlot(Item _item)
     {
         for (int i = 0; i < Container.Items.Length; i++)
@@ -40,6 +52,11 @@ public class InventoryObject : ScriptableObject
         return null;
     }
 
+    /// <summary>
+    /// Swaps the contents of two inventory slots.
+    /// </summary>
+    /// <param name="item1">The first inventory slot.</param>
+    /// <param name="item2">The second inventory slot.</param>
     public void MoveItem(InventorySlot item1, InventorySlot item2)
     {
         InventorySlot temp = new InventorySlot(item2.ID, item2.item);
@@ -82,6 +99,10 @@ public class InventoryObject : ScriptableObject
     //    }
     //}
 
+    /// <summary>
+    /// Clears the inventory by creating a new container and resetting all slots to empty.
+    /// Can be called from the context menu in the Unity Editor.
+    /// </summary>
     [ContextMenu("Clear")]
     public void Clear()
     {
@@ -119,11 +140,21 @@ public class InventorySlot
     //-Excluded-
     //public int amount;
     //-Excluded-
+
+    /// <summary>
+    /// Creates an empty inventory slot with ID -1 and no item.
+    /// </summary>
     public InventorySlot()
     {
         ID = -1;
         item = null;
     }
+
+    /// <summary>
+    /// Creates an inventory slot with the specified item data.
+    /// </summary>
+    /// <param name="_id">The item ID.</param>
+    /// <param name="_item">The item object.</param>
     public InventorySlot(int _id, Item _item/*, int _amount*/)
     {
         ID = _id;
@@ -133,6 +164,11 @@ public class InventorySlot
         //-Excluded-
     }
 
+    /// <summary>
+    /// Updates the slot with new item data.
+    /// </summary>
+    /// <param name="_id">The new item ID.</param>
+    /// <param name="_item">The new item object.</param>
     public void UpdateSlot(int _id, Item _item)
     {
         ID = _id;

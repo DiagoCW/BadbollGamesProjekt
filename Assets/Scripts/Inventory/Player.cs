@@ -1,5 +1,11 @@
 using UnityEngine;
 
+/// <summary>
+/// Author: Hugo
+/// Legacy player script that previously managed player functionality.
+/// Most functionality has been moved to PlayerController and PlayerInteract scripts.
+/// Currently only used to clear the inventory when the application quits.
+/// </summary>
 public class Player : MonoBehaviour
 {
     // this script used to be asigned to the player before it's functionality
