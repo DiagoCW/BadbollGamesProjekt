@@ -6656,6 +6656,102 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4765414502428353124, guid: f63db0fb3eeb6e44d809851f0b4ff4a9, type: 3}
+      propertyPath: clueDatabase.Array.size
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4765414502428353124, guid: f63db0fb3eeb6e44d809851f0b4ff4a9, type: 3}
+      propertyPath: clueDatabase.Array.data[0].clueSprite
+      value: 
+      objectReference: {fileID: -1811802506, guid: 8fda39d87e5a2ab4fa6fe4072dba6bfe, type: 3}
+    - target: {fileID: 4765414502428353124, guid: f63db0fb3eeb6e44d809851f0b4ff4a9, type: 3}
+      propertyPath: clueDatabase.Array.data[1].clueSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d800089908d8f204fa43d6964d1d10ec, type: 3}
+    - target: {fileID: 4765414502428353124, guid: f63db0fb3eeb6e44d809851f0b4ff4a9, type: 3}
+      propertyPath: clueDatabase.Array.data[2].clueSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: adfa3247b85d82f44868e8637e01033f, type: 3}
+    - target: {fileID: 4765414502428353124, guid: f63db0fb3eeb6e44d809851f0b4ff4a9, type: 3}
+      propertyPath: clueDatabase.Array.data[3].clueSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 8fc928859508d144481862d5bd868333, type: 3}
+    - target: {fileID: 4765414502428353124, guid: f63db0fb3eeb6e44d809851f0b4ff4a9, type: 3}
+      propertyPath: clueDatabase.Array.data[4].clueSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 75135fe62f5aaa54eacd921572264873, type: 3}
+    - target: {fileID: 4765414502428353124, guid: f63db0fb3eeb6e44d809851f0b4ff4a9, type: 3}
+      propertyPath: clueDatabase.Array.data[5].clueSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b0ad20fbe6914bd4fbb789afd031d115, type: 3}
+    - target: {fileID: 4765414502428353124, guid: f63db0fb3eeb6e44d809851f0b4ff4a9, type: 3}
+      propertyPath: clueDatabase.Array.data[6].clueSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 4780ff92b0af85b4f95efc3afc299a7f, type: 3}
+    - target: {fileID: 4765414502428353124, guid: f63db0fb3eeb6e44d809851f0b4ff4a9, type: 3}
+      propertyPath: clueDatabase.Array.data[7].clueSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 17e48f4157a65d943a839b5d79198891, type: 3}
+    - target: {fileID: 4765414502428353124, guid: f63db0fb3eeb6e44d809851f0b4ff4a9, type: 3}
+      propertyPath: clueDatabase.Array.data[8].clueSprite
+      value: 
+      objectReference: {fileID: -1001481405, guid: 5f06285ec945dd740bb7979586325e77, type: 3}
+    - target: {fileID: 4765414502428353124, guid: f63db0fb3eeb6e44d809851f0b4ff4a9, type: 3}
+      propertyPath: clueDatabase.Array.data[9].clueSprite
+      value: 
+      objectReference: {fileID: 1683340597, guid: e3158eadc9b0fe04987e863c8ff779be, type: 3}
+    - target: {fileID: 4765414502428353124, guid: f63db0fb3eeb6e44d809851f0b4ff4a9, type: 3}
+      propertyPath: clueDatabase.Array.data[10].clueSprite
+      value: 
+      objectReference: {fileID: -1159905273, guid: b02f9f41893f18a408054b7f5a6aaf17, type: 3}
+    - target: {fileID: 4765414502428353124, guid: f63db0fb3eeb6e44d809851f0b4ff4a9, type: 3}
+      propertyPath: clueDatabase.Array.data[11].clueSprite
+      value: 
+      objectReference: {fileID: 1821458864, guid: 87fc1f6e2b2c20c49b4f658fbd5bf1e6, type: 3}
+    - target: {fileID: 4765414502428353124, guid: f63db0fb3eeb6e44d809851f0b4ff4a9, type: 3}
+      propertyPath: clueDatabase.Array.data[1].inventoryItemID
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4765414502428353124, guid: f63db0fb3eeb6e44d809851f0b4ff4a9, type: 3}
+      propertyPath: clueDatabase.Array.data[2].inventoryItemID
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4765414502428353124, guid: f63db0fb3eeb6e44d809851f0b4ff4a9, type: 3}
+      propertyPath: clueDatabase.Array.data[3].inventoryItemID
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4765414502428353124, guid: f63db0fb3eeb6e44d809851f0b4ff4a9, type: 3}
+      propertyPath: clueDatabase.Array.data[4].inventoryItemID
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4765414502428353124, guid: f63db0fb3eeb6e44d809851f0b4ff4a9, type: 3}
+      propertyPath: clueDatabase.Array.data[5].inventoryItemID
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4765414502428353124, guid: f63db0fb3eeb6e44d809851f0b4ff4a9, type: 3}
+      propertyPath: clueDatabase.Array.data[6].inventoryItemID
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4765414502428353124, guid: f63db0fb3eeb6e44d809851f0b4ff4a9, type: 3}
+      propertyPath: clueDatabase.Array.data[7].inventoryItemID
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4765414502428353124, guid: f63db0fb3eeb6e44d809851f0b4ff4a9, type: 3}
+      propertyPath: clueDatabase.Array.data[8].inventoryItemID
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4765414502428353124, guid: f63db0fb3eeb6e44d809851f0b4ff4a9, type: 3}
+      propertyPath: clueDatabase.Array.data[9].inventoryItemID
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4765414502428353124, guid: f63db0fb3eeb6e44d809851f0b4ff4a9, type: 3}
+      propertyPath: clueDatabase.Array.data[10].inventoryItemID
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4765414502428353124, guid: f63db0fb3eeb6e44d809851f0b4ff4a9, type: 3}
+      propertyPath: clueDatabase.Array.data[11].inventoryItemID
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 4789774487583169714, guid: f63db0fb3eeb6e44d809851f0b4ff4a9, type: 3}
       propertyPath: suspectDatabase.Array.data[0].suspectName
       value: storeClerk
