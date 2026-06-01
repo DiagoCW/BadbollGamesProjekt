@@ -289,6 +289,59 @@ public class ThreadManager : MonoBehaviour // Author - Stefan Cwiek
     }
 
     /// <summary>
+    /// Evaluates the board and returns the int ID of the correct accused  Returns 3 if wrong.
+    /// </summary>
+    public int GetAccusedSuspectID() 
+    {
+        if (!IsBoardReadyToSubmit()) return 5; // 5 is not enough clues attached, just something I made up
+
+        foreach (var kvp in suspectWebs) 
+        {
+            SuspectNode suspect = kvp.Key;
+            Queue<ClueSlot> connectedSlots = kvp.Value;
+
+            SuspectSolution solution = caseSolutions.Find(s => s.suspect == suspect);
+            if (solution.suspect == null || solution.requiredClues.Count == 0) continue;
+            if (connectedSlots.Count != solution.requiredClues.Count) continue;
+
+            // Gather the id of the clues the player attached
+            List<int> playerSubmittedIDs = new List<int>();
+            foreach (ClueSlot slot in connectedSlots) 
+            {
+                if (slot.currentClue != null) playerSubmittedIDs.Add(slot.currentClue.itemID);
+            }
+
+            // gather ids of the clues required to prove suspect guiklty
+            List<int> requiredIDs = new List<int>();
+            foreach (ItemObject item in solution.requiredClues)
+            {
+                if (item != null) requiredIDs.Add(item.Id);
+            }
+
+            // check if they match
+            if (playerSubmittedIDs.Count == requiredIDs.Count) 
+            {
+                List<int> tempReq = new List<int>(requiredIDs);
+                bool isCorrect = true;
+
+                foreach (int id in playerSubmittedIDs) 
+                {
+                    if (tempReq.Contains(id)) tempReq.Remove(id);
+                    else 
+                    {
+                        isCorrect = false;
+                        break;
+                    }
+                }
+
+                if (isCorrect) return suspect.suspectID; // return this suspect id so ink knows who accused
+            }
+        }
+
+        return 3; // fails
+    }
+
+    /// <summary>
     /// Locks or unlocks the board and forces the UI to uppdate
     /// </summary>
     /// <param name="state"></param>

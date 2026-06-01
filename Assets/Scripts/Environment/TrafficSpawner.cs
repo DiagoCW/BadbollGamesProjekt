@@ -2,6 +2,8 @@ using UnityEngine;
 using System.Collections;
 
 /// <summary>
+/// Author: Stefan Cwiek
+/// 
 /// Handles the periodic spawning of traffic vehicles at a specific point.
 /// Makes sure that vehicles are only spawned if the area is clear to prevent overlapping
 /// </summary>

@@ -118,6 +118,11 @@ public class InkExternalFunctions
             var item = NewDialogueManager.Instance.itemDatabase.GetItem[itemToRetrieve]; 
             PlayerController.Instance.inventory.AddItem(new Item(item));
         });
+        story.BindExternalFunction("getAccusedSuspectID", () => 
+        {
+            return ThreadManager.Instance.GetAccusedSuspectID();
+        });
+
         
 
 
@@ -136,6 +141,7 @@ public class InkExternalFunctions
         story.UnbindExternalFunction("fadeToBlack");
         story.UnbindExternalFunction("rollCredits");
         story.UnbindExternalFunction("addClueThroughDialogue");
+        story.UnbindExternalFunction("getAccusedSuspectID");
 
         // Audio functions
         story.UnbindExternalFunction("playAudio");
