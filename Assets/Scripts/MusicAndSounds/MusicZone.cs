@@ -6,13 +6,12 @@ using System.Threading;
 /// Handles audio crossfading when the player enters or exits a specific area.
 /// Requieres a trigger collider on the GameObject this script is attached to.
 /// </summary>
-public class MusicZone : MonoBehaviour
+public class MusicZone : MonoBehaviour // Author: Stefan Cwiek
 {
     public AudioSource mainMusic;
     public AudioSource barMusic;
     public float fadeTime = 2.0f; 
     public float maxVolume = 0.5f; 
-    
 
     // Tracks the active fade coroutine to interrupt if the player quickly runs in and out
     private Coroutine fadeRoutine;
@@ -96,17 +95,24 @@ public class MusicZone : MonoBehaviour
 
         float timer = 0f;
 
-
         float startVolOut = trackToFadeOut.volume;
         float startVolIn = trackToFadeIn.volume;
+
+        // if fadus uis barMusic, set ambience to 0
+        float targetAmbience = (trackToFadeIn == barMusic) ? 0f : 1f;
+        float startAmbience = StartAudioManager.Instance != null ? StartAudioManager.Instance.GetGlobalAmbienceVolume() : 1f; // Get volume the ambience is currently at
 
         while (timer < fadeTime)
         {
             timer += Time.deltaTime;
 
-           
             trackToFadeOut.volume = Mathf.Lerp(startVolOut, 0f, timer / fadeTime);
             trackToFadeIn.volume = Mathf.Lerp(startVolIn, maxVolume, timer / fadeTime);
+
+            if (StartAudioManager.Instance != null) 
+            {
+                StartAudioManager.Instance.SetGlobalAmbienceVolume(Mathf.Lerp(startAmbience, targetAmbience, timer / fadeTime));
+            }
 
             yield return null;
         }
