@@ -6,6 +6,12 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
 
+/// <summary>
+/// Author: Hugo
+/// Manages the inventory UI display, including slot creation, item dragging/dropping,
+/// and tooltip functionality. Updates the visual representation of the inventory based
+/// on the InventoryObject's current state and handles user interactions with inventory slots.
+/// </summary>
 public class DisplayInventory : MonoBehaviour
 {
     // This script is responsible for displaying the inventory UI, handling dragging and dropping of items,
@@ -82,10 +88,10 @@ public class DisplayInventory : MonoBehaviour
     //    }
     //}
 
-    // Updates the inventory based on inventories current state.
-    // Checks each slot in itemsDisplayed dictionary and updates the UI element accordingly.
-    // If the slot has an item (ID >= 0), sets the sprite to the item's UI display and makes it visible.
-    // If the slot is empty (ID < 0), it clears the sprite and makes it invisible. -Hugo
+    /// <summary>
+    /// Updates the inventory UI based on the current state of the inventory.
+    /// Refreshes each slot's sprite and visibility based on whether it contains an item.
+    /// </summary>
     public void UpdateSlots()
     {
         foreach(KeyValuePair<GameObject, InventorySlot> _slot in itemsDisplayed)
@@ -105,7 +111,11 @@ public class DisplayInventory : MonoBehaviour
 
     }
 
-    // Creates the inventory slots based on the inventory's container items at launch.
+    /// <summary>
+    /// Creates inventory slot UI elements based on the inventory container's size.
+    /// Instantiates slot prefabs, positions them in a grid, and sets up event triggers
+    /// for hover, drag, and drop interactions.
+    /// </summary>
     public void CreateSlots()
     {
         itemsDisplayed = new Dictionary<GameObject, InventorySlot>();
@@ -126,7 +136,9 @@ public class DisplayInventory : MonoBehaviour
         }
     }
 
-    // Helper method to add event triggers to inventory slot game objects.
+    /// <summary>
+    /// Adds an event trigger of the specified type to a GameObject with the given callback action.
+    /// </summary>
     private void AddEvent(GameObject obj, EventTriggerType type, UnityAction<BaseEventData> action)
     {
         EventTrigger trigger = obj.GetComponent<EventTrigger>();
@@ -136,7 +148,10 @@ public class DisplayInventory : MonoBehaviour
         trigger.triggers.Add(eventTrigger);
     }
     
-    // Hovers over a game object
+    /// <summary>
+    /// Called when the mouse pointer enters an inventory slot.
+    /// Sets the hovered item and displays the tooltip if the slot contains an item.
+    /// </summary>
     public void OnEnter(GameObject obj)
     {
         mouseItem.hoverObj = obj;
@@ -154,7 +169,10 @@ public class DisplayInventory : MonoBehaviour
 
     }
     
-    // Doesn't hover over a game object lol
+    /// <summary>
+    /// Called when the mouse pointer exits an inventory slot.
+    /// Clears the hovered item and hides the tooltip.
+    /// </summary>
     public void OnExit(GameObject obj)
     {
         mouseItem.hoverObj = null;
@@ -165,7 +183,10 @@ public class DisplayInventory : MonoBehaviour
         HideTooltip();
     }
     
-    // Apparent name but when you drag an object
+    /// <summary>
+    /// Called when the user starts dragging an inventory slot.
+    /// Creates a visual representation of the item being dragged and hides the tooltip.
+    /// </summary>
     public void OnDragStart(GameObject obj)
     {
         // Hide tooltip when starting to drag
@@ -186,7 +207,10 @@ public class DisplayInventory : MonoBehaviour
         mouseItem.item = itemsDisplayed[obj];
     }
     
-    // Also obvious name but when you stop dragging an item
+    /// <summary>
+    /// Called when the user stops dragging an inventory slot.
+    /// Handles item swapping between slots or dropping items onto the clueboard.
+    /// </summary>
     public void OnDragEnd(GameObject obj)
     {
         if (mouseItem.hoverObj)
@@ -223,7 +247,10 @@ public class DisplayInventory : MonoBehaviour
         mouseItem.item = null;
     }
     
-    // When you are CURRENTLY dragging an item
+    /// <summary>
+    /// Called continuously while dragging an inventory slot.
+    /// Updates the position of the dragged item visual to follow the mouse cursor.
+    /// </summary>
     public void OnDrag(GameObject obj)
     {
         if(mouseItem.obj != null)
@@ -232,12 +259,20 @@ public class DisplayInventory : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Calculates the position for an inventory slot based on its index in the grid layout.
+    /// </summary>
+    /// <param name="i">The index of the inventory slot.</param>
+    /// <returns>The local position for the slot.</returns>
     public Vector3 GetPosition(int i)
     {
         return new Vector3(X_START + (X_SPACE_BETWEEN_ITEM * (i % NUMBER_OF_COLUMN)), Y_START + (-Y_SPACE_BETWEEN_ITEM * (i / NUMBER_OF_COLUMN)), 0f);
     }
 
-    // Check if the mouse is over an object tagged as "Clueboard".
+    /// <summary>
+    /// Checks if the mouse pointer is currently over a UI element tagged as "Clueboard".
+    /// </summary>
+    /// <returns>True if the pointer is over a clueboard element, false otherwise.</returns>
     private bool IsPointerOverClueboard() 
     {
         PointerEventData eventData = new PointerEventData(EventSystem.current);
@@ -252,7 +287,10 @@ public class DisplayInventory : MonoBehaviour
         return false;
     }
 
-    // Shows the tooltip for the given inventory slot and its corresponding UI object.
+    /// <summary>
+    /// Displays the tooltip panel for the given inventory slot, showing the item's name and description.
+    /// Positions the tooltip relative to the slot with the configured offset.
+    /// </summary>
     private void ShowTooltip(InventorySlot slot, GameObject slotObject)
     {
         if (tooltipPanel == null) return;
@@ -290,7 +328,9 @@ public class DisplayInventory : MonoBehaviour
         tooltipPanel.SetActive(true);
     }
 
-    // Hides the tooltip panel.
+    /// <summary>
+    /// Hides the tooltip panel.
+    /// </summary>
     private void HideTooltip()
     {
         if (tooltipPanel != null)
@@ -298,6 +338,9 @@ public class DisplayInventory : MonoBehaviour
     }
 }
 
+/// <summary>
+/// Helper class that tracks the currently dragged or hovered inventory item and its associated UI elements.
+/// </summary>
 public class MouseItem
 {
     public GameObject obj;
