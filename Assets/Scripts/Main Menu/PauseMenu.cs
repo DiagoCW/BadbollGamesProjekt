@@ -8,6 +8,8 @@ public class PauseMenu : MonoBehaviour
     /// <summary>
     /// Pause Menu in game play
 
+    public static PauseMenu Instance { get; private set; }
+
     [Header("References")]
     [SerializeField] GameObject pauseMenu;
     [Tooltip("The Are you sure you want to exit? panel")]
@@ -22,7 +24,7 @@ public class PauseMenu : MonoBehaviour
     [Tooltip("How long it takes to fade to black when quitting to the main menu")]
     [SerializeField] private float quitFadeDuration = 1.5f;
 
-    private bool isPaused = false;
+    public static bool isPaused = false;
     private bool isTransitioning = false;
 
     void Update()
@@ -45,10 +47,21 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
+    private void Awake()
+    {
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
+    }
+
     public void Pause()
     {
         isPaused = true;
         pauseMenu.SetActive(true);
+
+        if (playerController != null)
+        {
+            playerController.enabled = false;
+        }
 
         // Force close sub menus when pausing
         if (confirmationPanel != null) confirmationPanel.SetActive(false);
@@ -69,6 +82,11 @@ public class PauseMenu : MonoBehaviour
     {
         isPaused = false;
         pauseMenu.SetActive(false);
+
+        if (playerController != null)
+        {
+            playerController.enabled = true;
+        }
 
         if (confirmationPanel != null) confirmationPanel.SetActive(false);
         if (fieldManualPanel != null) fieldManualPanel.SetActive(false);

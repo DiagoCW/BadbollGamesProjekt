@@ -16462,6 +16462,48 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3761541483239895710, guid: dc7360efdc9ea504d9ae1776f72d8632, type: 3}
+      propertyPath: m_text
+      value: 'CLUEBOARD: HOW TO USE
+
+
+
+        TRANSFER CLUES: Click and drag items
+        from your inventory onto the board.
+
+
+
+        PLACE CLUES: Drag photos from
+        the spawn tray into any empty slot on the board.
+
+
+
+        FIND SUSPECTS:
+        Explore the game to uncover suspects. They will automatically appear at the
+        top of the board once discovered.
+
+
+
+        CONNECT THREADS: Click and drag
+        a red thread from a Suspect to a Clue to connect them. (Right-click while
+        drawing to cancel).
+
+
+
+        CUT STRINGS: Left-click any connected Clue
+        to remove the connection.
+
+
+
+        RETURN ITEMS: Right-click a Clue on
+        the board to send it back to your inventory.
+
+
+        SOLVE THE CASE: To
+        decide which suspect is guilty, connect 3 Clues to their photo. Once you
+        do, the "Submit Solution" button will turn green. Click it to submit your
+        evidence.'
+      objectReference: {fileID: 0}
     - target: {fileID: 4595600416492452890, guid: dc7360efdc9ea504d9ae1776f72d8632, type: 3}
       propertyPath: m_Name
       value: ClueboardTutorialCanvas
