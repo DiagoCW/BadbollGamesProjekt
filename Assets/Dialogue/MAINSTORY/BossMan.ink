@@ -3,7 +3,7 @@ VAR exhaustedOptions = false
 { Suspects ? bossMan: <> Boss Man is currently under suspicion. -> END } #speaker: Player
 { talkedToBossMan: <>-> CanQuestion|-> Intro }
 === Intro ===
-Nice driving, asshole! #anim: Yelling #speaker: Boss Man
+<>Nice driving, asshole! #anim: Yelling #speaker: Boss Man
     //{ talkToPolice: -> CanQuestion.Question } 
     * {debug} [LÅS UPP SOM SUSPECT]
         ~ addsuspect(bossMan)

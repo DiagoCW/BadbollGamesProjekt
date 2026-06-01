@@ -4,7 +4,7 @@ INCLUDE globalsmainstory.INK
 VAR isAsleep = true
 
 // check if we met him before
-{ talkedToArmchairGuy: -> Hub | -> Intro }
+{ talkedToArmchairGuy: What's going on? -> Hub | -> Intro }
 === Intro ===
 The man is slumped deep in the armchair, snoring loudly. He hasn't even taken a single bite from his princesstårta before he fell asleep. #speaker: 
     * { finishedCrimeScene } [Wake him up.]
@@ -29,6 +29,7 @@ The man is slumped deep in the armchair, snoring loudly. He hasn't even taken a 
         -> DONE
 
 === AwakeHub ===
+<>
 { talkedToBartender and Clues ? victimWallet and Clues !? trisslott: -> TrissLott }
     * { Clues ? trisslott } [About that trisslott...] -> TrissLottAgain
     * { items !? karaokeUSB } [Do you know Peter Grip?] -> KnowPeter
@@ -54,7 +55,7 @@ The only person left here was Peter. I wonder where he is now? He's usually here
 -> END
 
 = TrissLott
-Hang on... Is that <i>Peter's wallet?</i> Did you rob him or something?! #speaker: Torsten #portrait: 2
+Hang on... Is that <i>Peter's wallet?</i> Did you rob him or something?! #speaker: Torsten #portrait: 6
 No, no, it's nothing like that. I just found it... somewhere. #speaker: Player #portrait: 
 Likely story, pal! He'd never drop his wallet. Do you mistake him for a common drunk? You probably heard about his immense wealth and decided to rob him blind! #speaker: Torsten
 Peter was rich? I certainly didn't get that impression. You're not pulling my leg here, right? #speaker: Player
@@ -110,7 +111,7 @@ I wanted to ask you about the store clerk by the gas station. Do you know where 
 Uh, he's still on the same shift now as he was last night I think. Poor guy probably still has a few more hours to go. He looked beat when I went there last night at around 2AM. #speaker: Torsten
 You were there last night? Do you know if he ever left his post?
 <i>He falls back asleep.</i> #speaker: #snore: start
-<i><b>NOT!</b> Got you. Alright, back to the story.</i> #snore: stop
+<i>...But immediately wakes up again.</i> #snore: stop
 Well, I don't know if he left... but he came out of the storage after I'd been waiting at the counter for a few minutes. #speaker: Torsten
 ~ gainknowledge(cashierAlibi)
 ~ askedQuestion = false
