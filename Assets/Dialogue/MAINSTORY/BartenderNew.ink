@@ -87,7 +87,7 @@ Peter doesn't look like no rat to me. When you came over to clean up his spot ea
 You lied about your alibi. You were alone with Peter for at least an hour, at which point you had ample opportunity to poison him. When he inevitably dropped dead, you had ample opportunity to loot his body. #portrait: 
 I had no reason to kill him though, this is naught but the conjecture of a delusional detective! You have 0 proof! #speaker: Bartender
 <i>This is it. I need one final push and I got him dead to rights. Here goes...</i> #speaker: 
-{ knowledge ? knowAboutTrisslott: 
+{ Clues ? trisslott: 
 The trisslott. It all makes sense. #speaker: Player #portrait: 5
 I know that the victim was flaunting it around last night, telling everybody about it. You seemed to have neglected mentioning it, though... #portrait: 
 With your business failing, and his tab racking up more and more debt, you saw an opportunity. You saw big money. 

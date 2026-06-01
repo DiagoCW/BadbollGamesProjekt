@@ -35,9 +35,6 @@ Alright, <i>one question.</i> #speaker: Store Clerk
         Fine, thank you. #speaker: Store Clerk
         Busy day? #speaker: Player
         -> LastNightEnd
-    * [Come back later]
-        Nevermind, I'll come back later. #speaker: Player
-        -> END
 
 = LastNightVictim
 Ah, Peter... He did, yes. #speaker: Store Clerk
@@ -45,15 +42,13 @@ You don't sound too thrilled to hear his name. Did something happen? #speaker: S
 -> LastNightEnd
 
 = OneMoreQuestion
-{ OneMoreQuestion >= 3: 
-    Alright, alright... #speaker: Store Clerk
-    ~ askedQuestion = false
-    -> Intro
-- else:
-No. #speaker: Store Clerk?
-+ [Please?] -> OneMoreQuestion
-* [Alright...] -> END
-}
+Could I just ask one more question? #speaker: Player
+No. #speaker: Store Clerk
+Please? #speaker: Player
+Alright, alright. Make it quick, I have work to do you know. #speaker: Store Clerk
+~ askedQuestion = false
+-> Intro
+
 
 = LastNightEnd
 That's your second question, I'm afraid. As I said, I'm happy to answer any questions you might have once I get off my shift. #speaker: Store Clerk
@@ -73,7 +68,7 @@ Oh... oh. #speaker: Store Clerk
 Oh is right, buddy. So you knew who the victim was, then. What are you hiding? #speaker: Player
 Alright look; he just came in, mouthed off about some shit and started rubbing it in my face. And I wasn't having none of it, so I gave him a piece of my mind. I admit it, OK? It was a rough start to my shift. #speaker: Store Clerk
 What could he possibly have said to make you fly off the handle like that? #speaker: Player
-* { knowledge ? knowAboutTrisslott } [<color=\#FFFF00>Ask about trisslott</color>] -> AskTrisslott
+* { Clues ? trisslott } [<color=\#FFFF00>Ask about trisslott</color>] -> AskTrisslott
 I don't see how that's any of your business. He pissed me off like he always <b>did</b>. No more. That's all I have to say about that. #speaker: Store Clerk
 <i>I need to find out what their argument was about. It could be the first puzzle piece in a very, very long series of intricate steps that eventually culminated in the victim's death.</i> #speaker: Player
 <i>Or not, but I should find out more about this...</i>

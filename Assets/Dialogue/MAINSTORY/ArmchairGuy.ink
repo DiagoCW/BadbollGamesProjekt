@@ -29,7 +29,7 @@ The man is slumped deep in the armchair, snoring loudly. He hasn't even taken a 
         -> DONE
 
 === AwakeHub ===
-{ talkedToBartender and talkedToCashier and Clues ? victimWallet and Clues !? trisslott: -> TrissLott }
+{ talkedToBartender and Clues ? victimWallet and Clues !? trisslott: -> TrissLott }
     * { Clues ? trisslott } [About that trisslott...] -> TrissLottAgain
     * { items !? karaokeUSB } [Do you know Peter Grip?] -> KnowPeter
     * { KnowPeter } [I need that recording of Peter.] -> TheTape

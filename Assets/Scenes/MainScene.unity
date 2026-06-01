@@ -3903,18 +3903,123 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6025360147944165, guid: d2904bbd25fde8a44a944d5659872cda, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 274862292}
   m_SourcePrefab: {fileID: 100100000, guid: d2904bbd25fde8a44a944d5659872cda, type: 3}
 --- !u!4 &274862290 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6076344148793555217, guid: d2904bbd25fde8a44a944d5659872cda, type: 3}
   m_PrefabInstance: {fileID: 274862289}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &274862291 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6025360147944165, guid: d2904bbd25fde8a44a944d5659872cda, type: 3}
+  m_PrefabInstance: {fileID: 274862289}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &274862292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 274862291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bb7deca832e7b444af57b3ce96794b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destination: {fileID: 337600577}
+  fadeDuration: 3
+  inkVariableName: goToPoliceHouse
+  arrivalDialogue: {fileID: 4900000, guid: a13cd68cb24c0824faaf72d1e2fc09df, type: 3}
 --- !u!4 &279123489 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8522062254197562951, guid: 69ef4c2763709414e80b78bd507b3b33, type: 3}
   m_PrefabInstance: {fileID: 917337985}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &279774441
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6025360147944165, guid: d2904bbd25fde8a44a944d5659872cda, type: 3}
+      propertyPath: m_Name
+      value: Police Officer
+      objectReference: {fileID: 0}
+    - target: {fileID: 4958004412980684518, guid: d2904bbd25fde8a44a944d5659872cda, type: 3}
+      propertyPath: m_Speed
+      value: 1.48
+      objectReference: {fileID: 0}
+    - target: {fileID: 6076344148793555217, guid: d2904bbd25fde8a44a944d5659872cda, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6076344148793555217, guid: d2904bbd25fde8a44a944d5659872cda, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6076344148793555217, guid: d2904bbd25fde8a44a944d5659872cda, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6076344148793555217, guid: d2904bbd25fde8a44a944d5659872cda, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.314
+      objectReference: {fileID: 0}
+    - target: {fileID: 6076344148793555217, guid: d2904bbd25fde8a44a944d5659872cda, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -202.285
+      objectReference: {fileID: 0}
+    - target: {fileID: 6076344148793555217, guid: d2904bbd25fde8a44a944d5659872cda, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.432
+      objectReference: {fileID: 0}
+    - target: {fileID: 6076344148793555217, guid: d2904bbd25fde8a44a944d5659872cda, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6076344148793555217, guid: d2904bbd25fde8a44a944d5659872cda, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6076344148793555217, guid: d2904bbd25fde8a44a944d5659872cda, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6076344148793555217, guid: d2904bbd25fde8a44a944d5659872cda, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6076344148793555217, guid: d2904bbd25fde8a44a944d5659872cda, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6076344148793555217, guid: d2904bbd25fde8a44a944d5659872cda, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6076344148793555217, guid: d2904bbd25fde8a44a944d5659872cda, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7020770928520715069, guid: d2904bbd25fde8a44a944d5659872cda, type: 3}
+      propertyPath: targetDestination
+      value: 
+      objectReference: {fileID: 859785532}
+    - target: {fileID: 7020770928520715069, guid: d2904bbd25fde8a44a944d5659872cda, type: 3}
+      propertyPath: 'targetDestinations.Array.data[0]'
+      value: 
+      objectReference: {fileID: 859785532}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d2904bbd25fde8a44a944d5659872cda, type: 3}
 --- !u!1001 &285850185
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19946,6 +20051,37 @@ Camera:
   m_CorrespondingSourceObject: {fileID: 6380339019467068605, guid: 0993b5793f98947409e773b6431cd003, type: 3}
   m_PrefabInstance: {fileID: 1942624432}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &859785531
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 859785532}
+  m_Layer: 0
+  m_Name: PoliceFinalTarget
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &859785532
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 859785531}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.01, y: -202.26, z: 1.725}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &862302747 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 11468279179b4f743b484ea170680759, type: 3}
@@ -25660,7 +25796,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1122867716
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -29932,6 +30068,76 @@ Light:
   m_LightUnit: 1
   m_LuxAtDistance: 1
   m_EnableSpotReflector: 1
+--- !u!1 &1287139225
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1287139228}
+  - component: {fileID: 1287139227}
+  - component: {fileID: 1287139226}
+  m_Layer: 0
+  m_Name: TriggerFinalBriefing
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1287139226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1287139225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8e2274fcdafbff4da254964735e5e2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inkJson: {fileID: 4900000, guid: 93cc74fd534c6354db5b812a25c75ee1, type: 3}
+  inkJsonTest: {fileID: 0}
+  Inkvariable: 
+  NPCName: Police Officer
+--- !u!65 &1287139227
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1287139225}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &1287139228
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1287139225}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.488, y: -201.722, z: 2.515}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1293319112
 GameObject:
   m_ObjectHideFlags: 0
@@ -45859,13 +46065,13 @@ MonoBehaviour:
   ambienceClips:
   - id: highway-travel-interior
     clip: {fileID: 8300000, guid: e97c81f86b89763489f8d36c27ad3281, type: 3}
-    volume: 0.75
+    volume: 0.3
   - id: PREMONITION-IN-THE-PARK
     clip: {fileID: 8300000, guid: 8cd9758445dd7d04f9b61f86b52435e9, type: 3}
     volume: 0.5
   - id: ambiens-1
     clip: {fileID: 8300000, guid: 6dc711ab99b0b154e88fc6a0eb724af5, type: 3}
-    volume: 0.2
+    volume: 0.1
   sfxClips:
   - id: car-crash
     clip: {fileID: 8300000, guid: ee8003f6451d31a498c7f58af27a290c, type: 3}
@@ -51197,3 +51403,6 @@ SceneRoots:
   - {fileID: 1932367755}
   - {fileID: 1432033218}
   - {fileID: 1604290240}
+  - {fileID: 1287139228}
+  - {fileID: 279774441}
+  - {fileID: 859785532}
