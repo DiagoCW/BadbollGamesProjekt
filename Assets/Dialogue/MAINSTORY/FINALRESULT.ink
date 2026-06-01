@@ -17,7 +17,7 @@ EXTERNAL fadeToBlack(alpha, duration)
 Just in time? More like <i>Not in time</i>. #speaker: Police
 Sorry, that was mean. But I told you, detective. This was a cut and dry case, not every little case is a murder to solve.
 Just hand over the case file and that will be that.
-So that's it? Just like that? It's like the writer just threw an ending together.
+So that's it? Just like that? It's like the writer just threw something together when he realised that he didn't have an ending for if you didn't manage to catch the suspect. #speaker: Player
 -> Final
 
 = BossMan
@@ -27,12 +27,8 @@ First off, he had the victim's wallet.
 Second, he claims to have found it <b>before</b> a purchase was made at his shop, which was made using the victim's card. #speaker: Police
 Third, and most important, he was the one who found the body and called it in. This could have been a ruse to make himself look less suspicious. #speaker: Player
 He claimed that he took the wallet as some form of 'payment' for the menial task of always having to return his wallet to him, before realising that the victim was actually dead, at which point he called the police. However, this was a bluff. 
-{ Clues ? trisslott: 
-If Boss Man had knowledge of Peter's trisslott, then that changes things quite a lot as well. He would absolutely have a reason for killing him, and an even bigger reason for digging himself deeper into these lies.
-He <i>poisoned</i> the victim's falafel, which would have taken effect almost immediately. He could then approach the body, get his hands on the lottery ticket, and dispose of any evidence; the half-eaten falafelrulle in the trash that matches the one that Peter orders.
-- else:
 He <i>poisoned</i> the victim's falafel, which would have taken effect almost immediately. He could then approach the body, get his hands on his wallet, and dispose of any evidence; the half-eaten falafelrulle in the trash that matches the one that Peter orders.
-}
+
 Given the victim's prior history with Boss Man, no one who knew him would even give it a second though. However, It looks like I was... <b>just in time.</b>
 -> PoliceArrives
 
@@ -145,14 +141,14 @@ That's extremely dumb and makes no sense. It almost feels like a half-baked endi
 No one cares what you think, it's what happened. #speaker: Police
 -> Final 
 
-= BartenderEnding
+=== BartenderEnding ===
 We analyzed Peter's beer that you collected as evidence, and it sure as hell tested positive for rat poison. #speaker: Police
 It also tested positive for Hanta-virus, which... has certain implications. None of which concerns the case, however.
 It didn't take long for the bartender to confess. Just like you said, he saw an opportunity to save his business; no matter the cost. He needed that trisslott.
 It's a shame... Peter had at least a good 15 years of heavy drinking left in him. I should have known that he couldn't have died just from that.
 -> MissingTrissLott
 
-= MissingTrissLott
+=== MissingTrissLott ===
 One thing still bothers me, though... We never did find the trisslott. #speaker: Police
 Maybe you just didn't look hard enough. {finalSuspect} must have it stashed away somewhere. It has to show up eventually. #speaker: Player
 I hope so. Without the trisslott as actual evidence, it will be harder to prosecute {finalSuspect}. #speaker: Police
@@ -166,8 +162,9 @@ That'll be all. Until next time, detective. #speaker: Police
 ~ rollCredits()
 
 = TrueEnding
+You can leave, now.
 I... I don't want to. #speaker: Player
-You have to. It's over now. #speaker: Police
+You have to. It's over. #speaker: Police
 It can't be. This feels wrong for some reason... Something is off. #speaker: Player
 You did it, detective. You solved the big case. You're Justin Time, and you're just in time. #speaker: Police
 And now you have to leave. 
