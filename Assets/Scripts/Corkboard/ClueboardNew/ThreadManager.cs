@@ -5,6 +5,8 @@ using UnityEngine.ProBuilder.MeshOperations;
 using UnityEditor.Search;
 
 /// <summary>
+/// Author: Stefan Cwiek
+/// 
 /// Manages the creation, routing, and validation of visual threads between SuspectNodes and ClueSlots.
 /// </summary>
 public class ThreadManager : MonoBehaviour // Author - Stefan Cwiek

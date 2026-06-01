@@ -4,6 +4,8 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 /// <summary>
+/// Author: Stefan Cwiek
+/// 
 /// Handles the dragging, dropping, and interaction logic for clue items on the clueboard
 /// </summary>
 [RequireComponent(typeof(Image))]

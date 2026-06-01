@@ -4,6 +4,8 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 /// <summary>
+/// Author: Stefan Cwiek
+/// 
 /// controls the photo of a suspect on the clueboard.
 /// starts hidden and becomes visible/clickable when the player unlocks it
 /// </summary>

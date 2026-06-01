@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
+/// Author: Stefan Cwiek
+/// 
 /// Controls the "Submit Case" button. Listens to the ThreadManager to change color when the board has at least one suspect with 3 clues attached
 /// </summary>
 [RequireComponent(typeof(Button), typeof(Image))]

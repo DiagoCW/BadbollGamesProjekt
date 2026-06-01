@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
+/// Author: Stefan Cwiek
+/// 
 /// draws the red thread on the UI. 
 /// stretches and rotates an Image to connect a suspect to a clue slot
 /// </summary>

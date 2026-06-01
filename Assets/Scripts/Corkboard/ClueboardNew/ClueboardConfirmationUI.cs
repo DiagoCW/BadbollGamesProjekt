@@ -2,9 +2,11 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
+/// Author: Stefan Cwiek
+/// 
 /// The UI panel for the clueboard whether you accept the solution or not
 /// </summary>
-public class ClueboardConfirmationUI : MonoBehaviour
+public class ClueboardConfirmationUI : MonoBehaviour 
 {
     [Header("UI references")]
     [SerializeField] private GameObject confirmationPanel;

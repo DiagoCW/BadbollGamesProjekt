@@ -1,60 +1,55 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Author: Stefan, Isak, Dennis
+/// Displays a counter showing how many seconds detective vision has been actively used
+/// </summary>
 public class CooldownUIVisual : MonoBehaviour
 {
     [Header("References")]
+    [Tooltip("Reference to the detective vision highlighter")]
     [SerializeField] private HighlightActivatorIAVersion activator;
-    [SerializeField] private Image cooldownFill;     // grey radial – fills 0 to 1 during cooldown
-    [SerializeField] private Image activeFill;       // green radial – empties 1 to 0 during active
-    [SerializeField] private Image icon;             // magnifying glass icon
 
-    [Header("Colors")]
-    [SerializeField] private Color readyColor = Color.white;
-    [SerializeField] private Color activeColor = Color.green;
-    [SerializeField] private Color cooldownColor = new Color(0.5f, 0.5f, 0.5f, 1f); // dim grey
+    [Tooltip("The circle image")]
+    [SerializeField] private Image circleImage;
+
+    [Tooltip("The text that displayes secodns")]
+    [SerializeField] private TextMeshProUGUI secondsUsedText;
 
     private void Start()
     {
-        ResetVisuals();
+        SetVisualsActive(false); // make it hidden at game start
     }
 
     private void Update()
     {
         if (activator == null) return;
 
-        float time = Time.time;
-
-        if (activator.IsHighlighting)
+        if (activator.IsHighlighting) // if the player is highlighting
         {
-            // Active phase
-            float remaining = activator.HighlightEndTime - time;
-            float progress = Mathf.Clamp01(remaining / activator.highlightDuration);
+            SetVisualsActive(true); // turn on the UI
 
-            if (activeFill) activeFill.fillAmount = progress;
-            if (cooldownFill) cooldownFill.fillAmount = 0f;
-            if (icon) icon.color = activeColor;
-        }
-        else if (time < activator.CooldownEndTime)
-        {
-            // Cooldown phase
-            float remaining = activator.CooldownEndTime - time;
-            float progress = Mathf.Clamp01(remaining / activator.cooldownDuration);
-
-            if (cooldownFill) cooldownFill.fillAmount = 1f - progress;
-            if (activeFill) activeFill.fillAmount = 0f;
-            if (icon) icon.color = cooldownColor;
+            if (secondsUsedText != null) // Update the text counter
+            {
+                int seconds = Mathf.FloorToInt(activator.TotalTimeUsed); // convert the float into whole numbers
+                secondsUsedText.text = seconds.ToString() + "s";
+            }
         }
         else
         {
-            ResetVisuals();
+            SetVisualsActive(false); // if DV closed, hide the UI
         }
     }
 
-    private void ResetVisuals()
+    /// <summary>
+    /// Helper method to turn the image and the timer on/off.
+    /// </summary>
+    /// <param name="isActive">true to show, false to hide</param>
+    private void SetVisualsActive(bool isActive) 
     {
-        if (cooldownFill) cooldownFill.fillAmount = 0f;
-        if (activeFill) activeFill.fillAmount = 0f;
-        if (icon) icon.color = readyColor;
+        if (circleImage != null) circleImage.enabled = isActive;
+        if (secondsUsedText != null) secondsUsedText.enabled = isActive;
     }
 }

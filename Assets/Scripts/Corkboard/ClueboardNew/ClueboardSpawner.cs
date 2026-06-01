@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 
 /// <summary>
+/// Author: Stefan Cwiek
+/// 
 /// Spawns the physical photo of the clues onto the board. 
 /// </summary>
 public class ClueboardSpawner : MonoBehaviour
