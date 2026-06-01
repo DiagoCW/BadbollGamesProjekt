@@ -37,7 +37,6 @@ Need another drink? I'd really prefer if you'd buy another beer. #speaker: Barte
 {msg} #speaker: Bartender
 -(opts)
 * [About the victim...] -> KnowPeter
-* { Suspects ? bossMan } [Ask about Boss Man] -> BossMan
 * /*{ knowledge !? receiptsBelongToVictim}*/ [Last night?] -> LastNight
 * { knowledge ? bartenderAlibi and Suspects !? bartender } [<color=\#FFFF00>About your alibi...</color>] -> Alibi
 * [See you later.] -> END
@@ -48,6 +47,7 @@ Uh... yeah. That's right. #speaker: Bartender
 That's not what I heard. I have a credible source that you were alone with Peter up until you closed. #speaker: Player
 Who told you that, him?! <i> He gestures towards the man still sleeping in the armchair.</i> He wasn't even awake during half the time! #speaker: Bartender
 He's not the only one. These two patreons are confirmed to have left the bar a few hours before closing, leaving only you and the victim here. #speaker: Player
+- (poisoned)
 That's... alright, so what? Why does it matter? He was found dead way off from here, right? #speaker: Bartender
 { knowledge ? victimPoisoned:
 -> AlibiContinued
@@ -70,25 +70,36 @@ No, not really. I was winging it and hoped you would come clean...
 }
 
 = AlibiEnd
-For starters, what's up with the excessive amount of rat poison all over the place? #speaker: Player
-It's for rats. Obviously. #speaker: Bartender
-And Peter, it would seem. When you came over to clean up his spot earlier, I managed to snag one of the cans. The beer smells really bad, even for that overpriced shitty beer you serve here. #speaker: Player
-You lied about your alibi. You were alone with Peter for at least an hour, at which point you had ample opportunity to poison him. When he inevitably dropped dead, you had ample opportunity to loot his body.
+For starters, what's up with the excessive amount of rat poison all over the place? #speaker: Player #portrait: 12
+It's for rats. Obviously. I have a <i>minor</i> rat infestation... #speaker: Bartender #portrait: 
+{ Clues ? beer:
+    -> AlibiPoisoned
+- else:
+    Uh... That's true. Unless you used it to poison him? #speaker: Player
+    Which I didn't. #speaker: Bartender #anim: Shake
+    <i>Another dead end. I know he could have used it to poison him, but I have no proof of that.</i> #speaker: 
+    <i>What if I had a little look around here? I have to find something.</i>
+    -> END
+}
+
+= AlibiPoisoned
+Peter doesn't look like no rat to me. When you came over to clean up his spot earlier, I managed to snag one of the cans. The beer smells really bad, even for that overpriced shitty beer you serve here. #speaker: Player #portrait: 7
+You lied about your alibi. You were alone with Peter for at least an hour, at which point you had ample opportunity to poison him. When he inevitably dropped dead, you had ample opportunity to loot his body. #portrait: 
 I had no reason to kill him though, this is naught but the conjecture of a delusional detective! You have 0 proof! #speaker: Bartender
 <i>This is it. I need one final push and I got him dead to rights. Here goes...</i> #speaker: 
 { knowledge ? knowAboutTrisslott: 
-The trisslott. It all makes sense. #speaker: Player
-You never mentioned that either, and that was to cover your tracks. But I know that the victim was flaunting it around last night, and you seemed <i>especially</i> interested in it.
-With your business failing, and his tab racking up more and more debt... You saw an opportunity. You saw big money. 
-You're... you're wrong. I didn't do it. I couldn't... #speaker: Bartender
+The trisslott. It all makes sense. #speaker: Player #portrait: 5
+I know that the victim was flaunting it around last night, telling everybody about it. You seemed to have neglected mentioning it, though... #portrait: 
+With your business failing, and his tab racking up more and more debt, you saw an opportunity. You saw big money. 
+You're... you're wrong. I couldn't... I didn't do it! #speaker: Bartender
 ~ addsuspect(bartender)
 ~ unlockSuspect(bartenderID)
-<i>You have unlocked The Bartender as a suspect. You can speak with The Officer regarding this or consult your Field Manual for further information.</i>
+<i>You have unlocked The Bartender as a suspect. You can now speak with The Officer regarding this or consult your Field Manual for further information.</i> #speaker: 
 -> END
 - else:
-I've got nothing. Sorry. Just keeping you on your toes! Got to go now baby. #speaker: Player
-<i>Damn. You know you're on to something here, but there's one last crucial piece missing... but what?</i> #speaker:
-<i>You should come back to this eventually. Right now you should keep investigating and ask around.</i>
+    I've got nothing. Sorry. Just keeping you on your toes! Got to go now baby. #speaker: Player
+    <i>Damn. I know I'm on to something here, but there's one last crucial piece missing... but what?</i> #speaker:
+    <i>I should come back to this eventually. Right now the best choice is to keep investigating and ask around.</i>
 -> END
 }
 

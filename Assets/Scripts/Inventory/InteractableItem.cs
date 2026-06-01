@@ -56,7 +56,8 @@ public class InteractableItem : MonoBehaviour, IInteractable
             if (!pickedUpClue && item != null)
             {
                 playerInventory.AddItem(new Item(item));
-                
+                if (item2 != null)
+                    playerInventory.AddItem(new Item(item2));
                 pickedUpClue = true;
                 gameObject.tag = "Untagged"; // removes "clue" tag so that object no longer can be highlighted
 

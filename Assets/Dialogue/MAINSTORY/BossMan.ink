@@ -68,6 +68,7 @@ What's going on, big guy? Crash any cars lately? #speaker: Boss Man #anim: Talki
 * { canDistract and Clues !? victimWallet } [<b>Distract him</b>] -> Police 
 * { knowledge ? receiptsBelongToVictim and Clues !? victimWallet } [<color=\#FFFF00>The victim came here last night.</color>] -> InquireAboutReceipt
 * { Clues ? victimWallet and knowledge !? stoleWallet } [<color=\#FFFF00>About this wallet...</color>] -> Wallet
+* { knowledge ? stoleWallet } [<color=\#FFFF00> Continue Interrogation</color>] -> LastNight
 * { not canDistract and Suspects !? bossMan } [Did you make the call?] -> Call // Endast om Boss Man inte är en suspect 
 * { not canDistract and Suspects !? bossMan } [Did you know the victim?] -> Relation 
 //* { Suspects ? bossMan } [What happened last night?] -> LastNight
@@ -172,24 +173,25 @@ Just like I told you before, I soon realized that he was actually dead and so I 
 Then I realized that I still had his wallet, which wasn't a good look for me. I couldn't admit something like that, that would make me look guilty! So I never mentioned it. 
 He died <i>shortly</i> after leaving your shop. You know how it looks, right? #speaker: Player
 I didn't do it, please believe me! #speaker: Boss Man
-Why should I? You lied to me before, you might still be lying. He had injuries indicative of a struggle. You could have knocked him the fuck out, and it happened to kill him. Let's just say it was manslaughter and call it a day, huh? Heat of the moment! #speaker: Player
+Why should I? You lied to me before, you might still be lying.
+You could have knocked him the fuck out, and it happened to kill him. Let's just say it was manslaughter and call it a day, huh? Heat of the moment! #speaker: Player
 I overheard you speaking with the Officer earlier, and he clearly stated that the victim couldn't have died from that! That means I couldn't have done it, yeah? #speaker: Boss Man
 { knowledge ? victimPoisoned:
-    It's very likely that the victim could have been poisoned, and this falafelrulle right here could be the culprit. #portrait: 7 #speaker: Player
-    That's bullshit, that just means that you don't have any real proof that it's been poisoned! #speaker: Boss Man
+    It's very likely that the victim was poisoned, and this falafelrulle right here <i>could</i> be the culprit. #portrait: 2 #speaker: Player
+    That's bullshit, <i>could</i> means that you don't have any real proof! #speaker: Boss Man
     Eat it. #speaker: Player
     Beat it. #speaker: Boss Man
-    No, I mean <b>eat it</b>. This falafelrulle. If it's not poisoned, it should be fine to eat, right? #speaker: Player #portrait: 7
+    No, I mean <b>eat it</b>. This falafelrulle. If it's not poisoned, it should be fine to eat, right? #speaker: Player
     I'm... I'm not eating that. I don't know how old that thing is, and you could have put something in it yourself! #speaker: Boss Man
-    And I no longer have any reason to trust you. I have everything I need here. #speaker: Player
+    And I no longer have any reason to trust you. I have everything I need here. #speaker: Player #portrait: 
     Wait! I have information! I can tell you about something Peter told me last night. #speaker: Boss Man
     * [<b>Go on...<b>]
         -> StoreClerkFight
     * [<b>Not interested.</b>]
-        Not interested. Like I said, I have everything I need here.
+        Not interested. Like I said, I have everything I need here. #speaker: Player
         -> UnlockSuspect
 - else:
-    <i>I guess that makes sense. I don't think I have anything to prove an alternative theory.</i> #speaker: Player
+    <i>I guess that makes sense. I don't think I have anything to prove an alternative theory.</i> #speaker: 
     <i>Still, I know I'm onto something here... I'm just missing a small piece. I could ask around and see if I find out something interesting.</i>
 -> END
 }
@@ -200,14 +202,14 @@ When he came here last night and bought his nightly falafelrulle, he told me tha
 So what? That doesn't mean anything. I can imagine that a lot of people had a bone to pick with Peter. #speaker: Player
 Yeah, yeah; but this was something else. He would always tell me whenever he got into trouble with the police, or if he was kicked out of the bar because of his shitty karaoke, and so on. #speaker: Boss Man
 But last night... He seemed off. When I asked him about what he and the cashier were arguing about, he got pissed and started yelling at me. So I didn't press him any further, and then he left. And you know the rest.
-<i>I could choose to follow up on this lead, and even if it leads nowhere; I still have my prime suspect right here.</i> #speaker: Player
-Alright. I'll see where this goes, but don't expect to be in the clear because of this.
+<i>I could choose to follow up on this lead, and even if it leads nowhere; I still have my prime suspect right here.</i> #speaker: 
+Alright. I'll see where this goes, but don't expect to be in the clear because of this. #speaker: Player
 -> UnlockSuspect
 
 = UnlockSuspect
 ~ addsuspect(bossMan)
 ~ unlockSuspect(bossManID)
-<i>You have unlocked Boss Man as a suspect. You can speak with The Officer regarding this or consult your Field Manual for further information.</i>
+<i>You have unlocked Boss Man as a suspect. You can now speak with The Officer regarding this or consult your Field Manual for further information.</i> #speaker: 
 -> END
 
 = Call

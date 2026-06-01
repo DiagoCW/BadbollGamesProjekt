@@ -70,6 +70,7 @@ Hey, you have to tell me more about this! #speaker: Player
 <I>...No good, he's fast asleep. I think I've gotten all the information I can about this.</i>
 <i>I should keep this in mind though. If this is true, then it casts a bit of doubt on many of the people I've talked to...</i>
 ~ getclue(trisslott)
+~ addClueThroughDialogue()
 -> Hub
 
 === KnowPeter ===
