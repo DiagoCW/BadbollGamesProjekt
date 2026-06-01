@@ -1,2 +1,2 @@
-Just here for the view. Definitely on purpose. #speaker: Isak
+Just here for the view. Definitely not on purpose. #speaker: Isak
     -> END
