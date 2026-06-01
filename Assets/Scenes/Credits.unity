@@ -560,7 +560,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "CREDITS\r\n\r\n\r\nDennis Olsson\r\n\r\nIsabella Brorsson\r\n\r\nIsak
+  m_text: "\n\nCREDITS\r\n\r\n\r\nDennis Olsson\r\n\r\nIsabella Brorsson\r\n\r\nIsak
     Sandgren\r\n\r\nHugo PC\r\nProgrammer, sound engineer, and concept Artist, responsible
     for programming the inventory system, fog shader and audio player; along with
     implementation of some SFX and construction of the tutorial scene.\r\n\r\nStefan

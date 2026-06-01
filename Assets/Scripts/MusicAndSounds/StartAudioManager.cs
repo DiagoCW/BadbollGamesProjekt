@@ -27,6 +27,8 @@ public class StartAudioManager : MonoBehaviour
     private Dictionary<string, AudioClipData> sfxDict;
     private Dictionary<string, AudioSource> activeAmbienceSources = new Dictionary<string, AudioSource>();
 
+    private float globalAmbienceMultiplier = 1f; // For tracking of global volume so other scripts can quiet it down
+
     /// <summary>
     /// Data structure for associating an audio clip with a string identifier and volume.
     /// Used in the Inspector to configure available audio clips.
@@ -164,11 +166,36 @@ public class StartAudioManager : MonoBehaviour
     public IEnumerator LowerPitch(string id)
     {
         const float decrease = 0.02f;
-        var source = activeAmbienceSources[id];
-        while (source.pitch > 0)
+
+        // check if track is playing before trying to get it
+        if (!activeAmbienceSources.TryGetValue(id, out var source)) 
+        {
+            yield break; // exit coroutine
+        }
+
+        while (source != null && source.pitch > 0)
         {
             source.pitch -= decrease;
             yield return new WaitForSeconds(0.1f);
+        }
+    }
+
+    // Get volume multiplier
+    public float GetGlobalAmbienceVolume() 
+    {
+        return globalAmbienceMultiplier;
+    }
+
+    // update all playing ambience tracks
+    public void SetGlobalAmbienceVolume(float multiplier) 
+    {
+        globalAmbienceMultiplier = multiplier;
+        foreach (var kvp in activeAmbienceSources) 
+        {
+            if (ambienceDict.TryGetValue(kvp.Key, out AudioClipData data)) 
+            {
+                kvp.Value.volume = data.volume * globalAmbienceMultiplier;
+            }
         }
     }
 
