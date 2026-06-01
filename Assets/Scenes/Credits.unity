@@ -543,7 +543,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -576, y: -2263}
+  m_AnchoredPosition: {x: -576, y: -2522}
   m_SizeDelta: {x: 735.7, y: 3000}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1093412685
@@ -566,15 +566,15 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\n\n\r\n\r\n\r\n\r\n\r\nMUSIC AND SOUND:\r\n(Main Theme, Bar theme, Gas
-    station theme and city ambiance) by Krenar Sejdiu.\n\n(Premonition In The Park)
-    by Justin Allan Arnold\r\n\r\n(Many small sound samples) from freesound.org.\r\n\r\n\r\nGAME
-    TESTING AND FEEDBACK:\r\nTo the charitable people of spel 25; especially group
-    4.\r\n\r\n\r\nENGINE:\r\nThis game was made with Unity that was developed by
-    David Helgason, Joachim Ante, and Nicholas Francis. Unity is published by Unity
-    Technologies.\r\n\r\n\r\nSPECIAL THANKS:\r\nJose Font for overseeing and consulting
-    us throughout the process of making this game.\r\n\r\n\r\nThank you for playing
-    Murder On Bj\xF6rkgatan, \nspace detective!\r\n"
+  m_text: "MUSIC AND SOUND:\r\n(Main Theme, Bar theme, Gas station theme and city
+    ambiance) by Krenar Sejdiu.\n\n(Premonition In The Park) by Justin Allan Arnold\r\n\r\n(Many
+    small sound samples) from freesound.org.\r\n\r\n\r\nGAME TESTING AND FEEDBACK:\r\nTo
+    the charitable people of spel 25; especially group 4.\r\n\r\n\r\nENGINE:\r\nThis
+    game was made with Unity that was developed by David Helgason, Joachim Ante,
+    and Nicholas Francis. Unity is published by Unity Technologies.\r\n\r\n\r\nSPECIAL
+    THANKS:\r\nJose Font for overseeing and consulting us throughout the process
+    of making this game.\r\n\r\n\r\nThank you for playing Murder On Bj\xF6rkgatan.\nSee
+    you later space detective!\r\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1129,10 +1129,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\t\t\t\t  CREDITS\n\n\t  Programmer\t\t\t   Dennis Olsson \t\t\n\t\n\t 
-    Level Designer \t\t   Isabella Brorsson\n\t \n      \t  Level Designer \t\t  
-    Stefan Cwiek\n\t\n      \t  Narrative Lead \t\t   Isak Sandgren\n\t\n      \t 
-    Concept Artist /\t\t   Hugo PC\n      \t  Sounds Effects\t\t\t"
+  m_text: "\t\t\t\tCREDITS\n\n\tProgrammer\t\t\tDennis Olsson\n\n\tLevel Designer\t\t\tIsabella
+    Brorsson\n\n\tLevel Designer\t\t\tStefan Cwiek\n\n\tNarrative Lead /\t\t\tIsak
+    Sandgren\n\tHand model\n\n\tConcept Artist /\t\t\tHugo PC\n\tSounds Effects\t\t\t"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
