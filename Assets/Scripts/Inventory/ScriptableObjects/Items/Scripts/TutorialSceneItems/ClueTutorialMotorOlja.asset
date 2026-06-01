@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46db39dea7ad8e84bab99ebae6da6802, type: 3}
   m_Name: ClueTutorialMotorOlja
   m_EditorClassIdentifier: 
-  Id: 9
+  Id: 8
   uiDisplay: {fileID: -1001481405, guid: 5f06285ec945dd740bb7979586325e77, type: 3}
   description: 2-Stroke Motor Oil, Semi Synthetic, Performance Level. Whatever that
     means.

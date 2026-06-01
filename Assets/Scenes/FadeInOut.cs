@@ -89,7 +89,7 @@ public class FadeInOut : MonoBehaviour // Author: Stefan Cwiek, Isak Sandgren
         // Loop every frame until the timer reaches the destination
         while (timer < duration) 
         {
-            timer += Time.deltaTime; // track how much time has passed since last frame
+            timer += Time.unscaledDeltaTime; // track how much time has passed since last frame
             fadeColor.a = Mathf.Lerp(startAlpha, endAlpha, timer / duration); // Lerp to blend start value and end value based on the percentage of time passed (timer/duration)
             fadeImage.color = fadeColor;
             yield return null; // Pause the loop here, render the frame, and continue to the next frame
@@ -109,7 +109,7 @@ public class FadeInOut : MonoBehaviour // Author: Stefan Cwiek, Isak Sandgren
     /// </summary>
     private IEnumerator FadeAndLoadRoutine(string sceneName, float duration) 
     {
-        yield return StartCoroutine(FadeRoutine(1f, 1f, duration)); // Wait for the screen to turn completely black. yield return StartCoroutine will make this coroutine pause intil the FadeRoutine finishes its entire loop.
+        yield return StartCoroutine(FadeRoutine(fadeImage.color.a, 1f, duration)); // Wait for the screen to turn completely black. yield return StartCoroutine will make this coroutine pause intil the FadeRoutine finishes its entire loop.
 
         SceneManager.LoadScene(sceneName); // When previous step is done, then load the next scene
     }

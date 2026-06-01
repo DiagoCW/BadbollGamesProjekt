@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46db39dea7ad8e84bab99ebae6da6802, type: 3}
   m_Name: ClueFickor
   m_EditorClassIdentifier: 
-  Id: 4
+  Id: 3
   uiDisplay: {fileID: 21300000, guid: 8fc928859508d144481862d5bd868333, type: 3}
   description: 
