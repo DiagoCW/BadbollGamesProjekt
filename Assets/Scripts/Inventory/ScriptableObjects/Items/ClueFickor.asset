@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: 3
   uiDisplay: {fileID: 21300000, guid: 8fc928859508d144481862d5bd868333, type: 3}
-  description: 
+  description: The pockets of the victim have been emptied, maybe by another individual;
+    nothing in here but lint.
