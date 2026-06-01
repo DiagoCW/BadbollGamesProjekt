@@ -248,6 +248,7 @@ MonoBehaviour:
   creditsAd2: {fileID: 1946933880}
   scrollSpeed: 25
   mainMenu: MainMenu
+  autoReturnTime: 88
 --- !u!114 &763764897
 MonoBehaviour:
   m_ObjectHideFlags: 0
