@@ -19,6 +19,9 @@ public class TestAIScript : MonoBehaviour
 
     private string animtrigger;
     public bool isMoving = false;
+    public bool isBlockingDialogue = false;
+
+    private float moveStartTime;
 
     void Start()
     {
@@ -30,18 +33,23 @@ public class TestAIScript : MonoBehaviour
     void Update()
     {
         if (!isMoving) return;
-        if (Vector3.Distance(agent.transform.position, targetDestinations[destIndex - 1].position) <= 0.5f)
+        if (Time.time < moveStartTime + 0.2f) return;
+
+        if (!agent.pathPending && agent.remainingDistance <= 0.5f)
         {
             animator.SetTrigger($"Stop{animtrigger}");
             agent.tag = "NPC";
             isMoving = false;
-            if (destIndex >= targetDestinations.Count)
-            {
-                destIndex = 0;
-            }
+            isBlockingDialogue = false;
         }
             
     }
+    public void StartPathBlocking(string trigger)
+    {
+        isBlockingDialogue = true; // Lock the dialogue
+        StartPath(trigger); // Start the normal movement
+    }
+
     /// <summary>
     /// This method is bound to an external function defined within INK, that can start their path when called in dialogue
     /// </summary>
@@ -49,12 +57,22 @@ public class TestAIScript : MonoBehaviour
     public void StartPath(string trigger)
     {
         animtrigger = trigger;
-        if (targetDestination != null)
+
+        if (targetDestination != null && targetDestinations.Count > 0)
         {
             animator.SetTrigger(animtrigger);
-            agent.SetDestination(targetDestinations[destIndex++ % targetDestinations.Count].position);
+
+            agent.SetDestination(targetDestinations[destIndex].position); // set destination to current index
+
+            destIndex++;
+            if (destIndex >= targetDestinations.Count)
+            {
+                destIndex = 0; // Wrap around to the start
+            }
+
             //agent.tag = "Untagged";
             isMoving = true;
+            moveStartTime = Time.time;
         }
         else
         {

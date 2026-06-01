@@ -165,14 +165,22 @@ public class NewDialogueManager : MonoBehaviour
             if (FadeInOut.Instance != null) FadeInOut.Instance.FadeScreenOnly(0f, 1f); // failsafe if the screen is still black when dialogue is skipped
             ExitDialogue();
         }
+        
+        if (!isTyping && !dialogueCheck.enabled && (aiAgent == null || !aiAgent.isBlockingDialogue)) // shiw the E checkmark when the npc finishes walking
+        {
+            dialogueCheck.enabled = true;
+        }
 
         // If the player presses E to advance dialogue, check whether the story is currently typing; autofinish current line.
         // If story is ready to continue; continue to next line.
         // If there are choices at the current line; display them.
         if (Input.GetKeyDown(KeyCode.E) && Time.time >= inputCooldownUntil)
         {
+            if (aiAgent != null && aiAgent.isBlockingDialogue) return;
+
             if (!isTyping)
             {
+                if (aiAgent != null && aiAgent.isBlockingDialogue) return; // block player from going to next line if the npc is walking
                 ContinueStory();
             }
             else
@@ -183,7 +191,10 @@ public class NewDialogueManager : MonoBehaviour
                 }
                 dialogueText.text = currentStory.currentText;
                 isTyping = false;
-                dialogueCheck.enabled = true;
+
+                if (aiAgent != null && aiAgent.isBlockingDialogue) dialogueCheck.enabled = false;
+                else dialogueCheck.enabled = true;
+
                 if (currentStory.currentChoices.Count > 0)
                     DisplayChoices();
             }
