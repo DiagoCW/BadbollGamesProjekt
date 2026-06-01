@@ -88,9 +88,7 @@ VAR talkedToArmchairGuy = false
 // Suspicious Guy
 VAR talkedToSuspiciousGuy = false
 VAR SuspiciousGuyAlibi = false
-// AKT 1:
-// INTERROGATE
-//VAR canInterrogate = false
+
 
 // Transitions och End Game
 
@@ -455,6 +453,40 @@ ND
 
 
 END
+
+ND
+
+
+
+
+ND
+
+
+END
+
+ND
+
+
+D
+
+ND
+
+
+END
+
+ND
+
+
+
+
+ND
+
+
+END
+
+ND
+
+
 
 ND
 

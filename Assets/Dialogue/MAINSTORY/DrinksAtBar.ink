@@ -7,6 +7,5 @@ Excuse me, let me just... #anim: Talking
 ~ startMovement("Walking")
 <i>The bartender cleans up everything as quickly as he can, and quickly returns back to behind the counter.</i> #speaker: 
 Wait, you forgot... #speaker: Player #portrait: 7
-<i>Actually, I should keep this. This beer smells very peculiar. I'll hang on to it just in case, it could be important.</i>
-{ knowledge ? victimPoisoned: Could it be...? }
+<i>Actually, I should keep this. This beer smells very peculiar. I'll hang on to it just in case, it could be important.</i> #portrait: 
 -> END

@@ -112,6 +112,14 @@ public class InkExternalFunctions
                 FadeInOut.Instance.FadeToScene("Credits", 5f);
             }
         });
+        story.BindExternalFunction("addClueThroughDialogue", () =>
+        {
+            int itemToRetrieve = 5; // ändra detta om ID för clue ändras; just nu är det trisslotten
+            var item = NewDialogueManager.Instance.itemDatabase.GetItem[itemToRetrieve]; 
+            PlayerController.Instance.inventory.AddItem(new Item(item));
+        });
+        
+
 
     }
 
@@ -127,6 +135,7 @@ public class InkExternalFunctions
         story.UnbindExternalFunction("changeTypingSpeed");
         story.UnbindExternalFunction("fadeToBlack");
         story.UnbindExternalFunction("rollCredits");
+        story.UnbindExternalFunction("addClueThroughDialogue");
 
         // Audio functions
         story.UnbindExternalFunction("playAudio");
