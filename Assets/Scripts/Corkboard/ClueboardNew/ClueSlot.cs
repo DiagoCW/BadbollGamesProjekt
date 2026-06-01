@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 /// <summary>
+/// Author: Stefan Cwiek
+/// 
 /// Represents an empty clue slot on the board where a clue photo can be placed. 
 /// </summary>
 public class ClueSlot : MonoBehaviour, IPointerClickHandler

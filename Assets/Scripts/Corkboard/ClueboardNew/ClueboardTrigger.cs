@@ -1,6 +1,8 @@
 using UnityEngine;
 
 /// <summary>
+/// Author: Stefan Cwiek
+/// 
 /// Manages player interaction with the physical clueboard object in the game world.
 /// Handles camera transitions, cursor state management, and input listening for entering and exiting the board view.
 /// </summary>

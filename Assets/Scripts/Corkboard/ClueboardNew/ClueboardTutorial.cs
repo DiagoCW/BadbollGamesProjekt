@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
+/// Author: Stefan Cwiek
+/// 
 /// Handles showing and hiding the clueboard instructions panel
 /// </summary>
 public class ClueboardTutorial : MonoBehaviour

@@ -26,7 +26,8 @@ public class NewDialogueManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI dialogueText;
     [SerializeField] UnityEngine.UI.Image dialogueCheck;
     [SerializeField] UnityEngine.UI.Image itemPortrait;
-    [SerializeField] ItemDatabaseObject itemDatabase;
+   // [SerializeField]
+    public ItemDatabaseObject itemDatabase;
 
     // This is a globals file that contains variables that all dialogue files need access to, in order to 
     // persist variables between characters and objects. 
@@ -274,7 +275,7 @@ public class NewDialogueManager : MonoBehaviour
     /// gets the descriptor string 'Walking', and sets the string as the animation trigger for the current character or object.
     /// </summary>
     /// <param name="currentTags">All tags collected from the latest Continue() call of the story.</param>
-    void HandleTags(List<string> currentTags)
+    public void HandleTags(List<string> currentTags)
     {
         foreach (string tag in currentTags)
         {

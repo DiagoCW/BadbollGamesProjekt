@@ -2,6 +2,8 @@ using UnityEngine;
 using System.Collections.Generic;
 
 /// <summary>
+/// Author: Stefan Cwiek
+/// 
 /// Hold the database of all suspects and handles putting their photos on the board.
 /// </summary>
 public class SuspectManager : MonoBehaviour
