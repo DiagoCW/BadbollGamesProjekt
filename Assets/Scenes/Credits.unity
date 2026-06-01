@@ -569,12 +569,12 @@ MonoBehaviour:
   m_text: "MUSIC AND SOUND:\r\n(Main Theme, Bar theme, Gas station theme and city
     ambiance) by Krenar Sejdiu.\n\n(Premonition In The Park) by Justin Allan Arnold.\r\n\r\n(Many
     small sound samples) from freesound.org.\r\n\r\n\r\nGAME TESTING AND FEEDBACK:\r\nTo
-    the charitable people of spel 25; especially group 4.\r\n\r\n\r\nENGINE:\r\nThis
+    the charitable people of spel 25; especially group 1.\r\n\r\n\r\nENGINE:\r\nThis
     game was made with Unity that was developed by David Helgason, Joachim Ante,
     and Nicholas Francis. Unity is published by Unity Technologies.\r\n\r\n\r\nSPECIAL
     THANKS:\r\nJose Font for overseeing and consulting us throughout the process
-    of making this game.\r\n\r\n\r\nThank you for playing Murder On Bj\xF6rkgatan.\nSee
-    you later space detective!\r\n"
+    of making this game.\n\nThe members of group 4 who were wonderful to work with.\r\n\n\nThank
+    you for playing Murder On Bj\xF6rkgatan.\nSee you later space detective!\r"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
