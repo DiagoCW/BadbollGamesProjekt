@@ -2,16 +2,16 @@ INCLUDE globalsmainstory.INK
 EXTERNAL FadeOut()
 VAR intro = true
 ~ playAudio("cardoor-open-close")
-<i>You slam the door shut, shift into gear, and off you go. You are en route to the scene of the crime.<i> #speaker:
+<i>You slam the door shut, and off you go. You are en route to the scene of the crime.<i> #speaker:
 ~ playAmbience("highway-travel-interior")
 ~ playAmbience("PREMONITION-IN-THE-PARK")
 <i>Your name is Justin Time. You're an old school detective. You've been cracking heads and cases as long as there's been heads and cases to crack. Which is a very long time to be cracking heads and cases. Except...</i>
 This sucks. I haven't had a proper case to solve in, what... 20 years now? And they call me in to take a look at some low-life drunk they found dead in an alley? #speaker: Player
 I used to solve the biggest cases. Everywhere I rolled up I would say my iconic catchphrase, <i>"Looks like I'm... <b>Justin Time</b>."</i>, and then I solved the case. And everyone loved me for it.
-The officer who called me in didn't seem even the least bit thrilled to have me over. He didn't even consider the prospect that we could have a murder on our hands.
+The officer that called me in didn't even consider the prospect that we could have a murder on our hands.
 Are law enforcement so quick to rule out cold-blooded murder these days? As if there's not a crime to be solved?
 <b>Bullshit artist.</b> There's always a crime to be solved. My instincts are screaming as much.
-This will be my epic comeback. I'm sure of it. I'll prove it was a murder, and everyone will love and appreciate me for solving the case. Like they used to do...
+This will be my epic comeback. I'll prove it was a murder. They'll see.
 <i>After driving for a while, you see the outskirts of the town you're headed towards. It's dark now, and it's started raining.</i> #speaker: 
 <i>...a *lot*, actually. You suddenly start hydroplaning. This is <b>really bad.<b> You swerve uncontrollably.</i>
 That's not good. But what if I... #speaker: Player
@@ -39,8 +39,6 @@ That's not good. But what if I... #speaker: Player
 ~ playAmbience("ambiens-1")
 <i>You've hit a tree in the middle of a park. Your Honda Civic '89 has been absolutely demolished. You exit the driver's seat, miracolously without a single scratch.</i>
 My car... My lovely little car... A shame that there was no way to avoid this situation. #speaker: Player
-<i>In reality, you never went above 20km/h and this whole situation was easily avoidable.</i> #speaker: 
-<i>Your car doesn't care though, as it's absolutely fucked.</i>
 <i>You see the officer from across your shoulder, rushing towards you after he heard the crash.</i>
 Ah, Officer! I'll be with you in but a moment. #speaker: Player
 -> END

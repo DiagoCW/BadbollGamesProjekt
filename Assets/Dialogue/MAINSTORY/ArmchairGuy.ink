@@ -6,7 +6,7 @@ VAR isAsleep = true
 // check if we met him before
 { talkedToArmchairGuy: -> Hub | -> Intro }
 === Intro ===
-The man is slumped deep in the armchair, snoring loudly. He hasn't even taken a single bite from his princesstårta before he fell asleep.
+The man is slumped deep in the armchair, snoring loudly. He hasn't even taken a single bite from his princesstårta before he fell asleep. #speaker: 
     * { finishedCrimeScene } [Wake him up.]
         Hey. Wake up. #speaker: Player
         Huh?! I'm awake! I wasn't sleeping, I was just... Okay, you got me I was sleeping. #speaker: Torsten #anim: Shake #snore: stop

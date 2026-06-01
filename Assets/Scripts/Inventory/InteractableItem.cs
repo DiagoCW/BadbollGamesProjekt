@@ -11,11 +11,13 @@ using UnityEngine;
 public class InteractableItem : MonoBehaviour, IInteractable
 {
     [Header("References")]
-    private InventoryObject playerInventory;
+    [Tooltip("Drag any clues that are obtainable through interaction with this object here")]
     [SerializeField] ItemObject item, item2;
+    [Tooltip("Drag any INK-files here that should trigger depending on if you're interacting with it with or without Detective Vision enabled")]
     [SerializeField] TextAsset inkJson, inkJson2;
 
-    [Tooltip("The name of the NPC that should pass their animator and AIScript when interacting with an item.")]
+    [Tooltip("The name of the NPC that should pass their animator and AIScript when interacting with an item. " +
+        "Used when characters should move or animate outside of interacting with the item.")]
     [SerializeField] string NPCName;
 
     [Header("Settings")]
@@ -23,25 +25,31 @@ public class InteractableItem : MonoBehaviour, IInteractable
     [SerializeField] private bool destroyOnPickup = false;
 
     bool pickedUpClue = false;
-    
+
+    InventoryObject playerInventory; // Reference to the player inventory for adding clues 
     HighlightActivatorIAVersion highlighter;
-    ParticleSystem particles;
     OutlineHighlighter outline;
 
-    void Start()
+    void Start() 
     {
         playerInventory = PlayerController.Instance.inventory;
         highlighter = GameObject.FindGameObjectWithTag("Player").GetComponent<HighlightActivatorIAVersion>();
         outline = GetComponentInChildren<OutlineHighlighter>();
-
     }
     public void Interact()
     {
-        if (outline != null && outline.hasBeenHighlighted) //highlighter.IsHighlighting)
+        // If currently available for interaction, check whether Detective Vision is currently highlighting objects.
+        // If not, trigger standard dialogue.
+        if (inkJson != null && !highlighter.IsHighlighting)
+            NewDialogueManager.Instance.EnterDialogue(inkJson, null, null);
+
+        // If the objects condition for being highlighted is true, and is also currently being highlighted with Detective Vision:
+        else if (outline != null && outline.hasBeenHighlighted)
         {
             //Debug.Log("Detective vision enabled, and item is interacted with");
-            if (inkJson2 != null)
+            if (inkJson2 != null) // Null check in case the second INK-file is missing 
             {
+                // Passing components of the NPC that we want to control when interacting with another gameObject.
                 Animator anim = null;
                 TestAIScript aiScript = null;
                 if (!string.IsNullOrEmpty(NPCName))
@@ -50,7 +58,7 @@ public class InteractableItem : MonoBehaviour, IInteractable
                     aiScript = GameObject.Find(NPCName).GetComponent<TestAIScript>();
                 }
                 NewDialogueManager.Instance.EnterDialogue(inkJson2, anim, aiScript);
-                gameObject.tag = "Untagged";
+                gameObject.tag = "Untagged"; // Untags the gameObject, no longer allowing us to highlight it or enter this path again
             }
 
             if (!pickedUpClue && item != null)
@@ -64,8 +72,7 @@ public class InteractableItem : MonoBehaviour, IInteractable
                 if (destroyOnPickup) Destroy(gameObject); // If box checked, destroy the object when its been picked up
             }
         }
-        else if (inkJson != null && !highlighter.IsHighlighting)
-            NewDialogueManager.Instance.EnterDialogue(inkJson, null, null);
+        
         //else Debug.Log("Detective vision NOT enabled, and item is interacted with");
     }
 }

@@ -44,16 +44,8 @@ public class DialogueTrigger : MonoBehaviour, IInteractable
     {
         if (gameObject.CompareTag("NPC") && gameObject.name != "ArmchairGuy")
         {
-            if (/*NewDialogueManager.Instance.dialogueIsPlaying ||*/
-            Vector3.Distance(npcDir.position, player.position) <= PlayerController.Instance.InteractRange() + 0.5f)
+            if (Vector3.Distance(npcDir.position, player.position) <= PlayerController.Instance.InteractRange() + 0.5f)
                 FacePlayer();
-            //else
-            //{
-            //    Vector3 rotation = new Vector3(-transform.position.x, transform.position.y, -transform.position.y);
-            //    transform.LookAt(rotation);
-            //    return;
-            //}
-            
         }
         
     }
@@ -61,7 +53,8 @@ public class DialogueTrigger : MonoBehaviour, IInteractable
     // Rotates the NPC within range to face the player
     public void FacePlayer()
     {
-        if (aiScript != null && aiScript.isMoving) return; // returns if they are currently moving, as to not face the player
+        // returns if they are currently moving, as to not face the player mid walk
+        if (aiScript != null && aiScript.isMoving) return; 
         Vector3 rotation = new Vector3(player.position.x, transform.position.y, player.position.z);
         transform.LookAt(rotation);
     }

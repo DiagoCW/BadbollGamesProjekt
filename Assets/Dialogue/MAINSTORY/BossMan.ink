@@ -71,7 +71,6 @@ What's going on, big guy? Crash any cars lately? #speaker: Boss Man #anim: Talki
 * { knowledge ? stoleWallet } [<color=\#FFFF00> Continue Interrogation</color>] -> LastNight
 * { not canDistract and Suspects !? bossMan } [Did you make the call?] -> Call // Endast om Boss Man inte är en suspect 
 * { not canDistract and Suspects !? bossMan } [Did you know the victim?] -> Relation 
-//* { Suspects ? bossMan } [What happened last night?] -> LastNight
 * [Bye loser.] -> END
 
 = Police
@@ -135,7 +134,7 @@ Sorry, I can't tell you anything that I haven't already said. <>
 Did you steal that from my shop? #speaker: Boss Man #anim: Angry
 It's not stealing if it's not yours, is it? #speaker: Player
 I don't like what you're implying. Look, I know it belonged to Peter. He would lose his wallet <i>constantly</i>. I find it, hold on to it, he comes back the next day and asks if I found it. Rinse and repeat. #speaker: Boss Man #anim: Angry
-It was like my other full time job, except I never got anything in the form of gratitude. He would just expect me to have it, and we would keep having this little back and forth.
+He would just expect me to have it, and we would keep having this little back and forth.
 Only this time he never came back... #anim: Shake
 When did you find this wallet, exactly? #speaker: Player
 Let's see... I must have found it sometime before 2 A.M. He probably dropped it after he left the bar. #speaker: Boss Man
@@ -144,7 +143,7 @@ Like I said. Are we done here? #speaker: Boss Man
 { knowledge ? receiptsBelongToVictim: 
     -> WalletCont
 - else:
-    <i>He's only telling half the truth. You can't press this issue further though, you have to find something more tangible and come back to this.</i> #speaker:
+    <i>He's only telling half the truth. I can't press this issue further though, I have to find something more tangible and come back to this.</i> #speaker:
     -> StartQuestion("Anything else?")
     }
 -> END
