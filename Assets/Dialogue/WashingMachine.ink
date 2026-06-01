@@ -1,5 +1,7 @@
-INCLUDE globals.ink
+
 /* 
+INCLUDE globals.ink
+
 VAR foundWallet = false
 {talkedToBossMan: -> FindWallet | -> Inspect }
 
@@ -22,6 +24,7 @@ This is the part of the game where I find an incriminating piece of evidence and
 ~ visitedCrimeScene = true
 ~ foundWallet = true
 -> END 
-*/
+
 
 ~ visitedCrimeScene = true
+*/

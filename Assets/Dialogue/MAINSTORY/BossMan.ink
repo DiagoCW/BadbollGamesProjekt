@@ -68,10 +68,9 @@ What's going on, big guy? Crash any cars lately? #speaker: Boss Man #anim: Talki
 * { canDistract and Clues !? victimWallet } [<b>Distract him</b>] -> Police 
 * { knowledge ? receiptsBelongToVictim and Clues !? victimWallet } [<color=\#FFFF00>The victim came here last night.</color>] -> InquireAboutReceipt
 * { Clues ? victimWallet and knowledge !? stoleWallet } [<color=\#FFFF00>About this wallet...</color>] -> Wallet
-* { Suspects !? bossMan } [Did you make the call?] -> Call // Endast om Boss Man inte är en suspect 
-* { not canDistract & Suspects !? bossMan } [Did you know the victim?] -> Relation
-* { not canDistract & Suspects ? bossMan } [What happened last night?] -> LastNight
-// * { Suspects ? bartender or Suspects ? storeClerk } [Ask about other suspects] -> AskAboutSuspects
+* { not canDistract and Suspects !? bossMan } [Did you make the call?] -> Call // Endast om Boss Man inte är en suspect 
+* { not canDistract and Suspects !? bossMan } [Did you know the victim?] -> Relation 
+//* { Suspects ? bossMan } [What happened last night?] -> LastNight
 * [Bye loser.] -> END
 
 = Police
@@ -181,7 +180,7 @@ I overheard you speaking with the Officer earlier, and he clearly stated that th
     Eat it. #speaker: Player
     Beat it. #speaker: Boss Man
     No, I mean <b>eat it</b>. This falafelrulle. If it's not poisoned, it should be fine to eat, right? #speaker: Player #portrait: 7
-    I'm... I'm not eating that. I don't know how old that thing is, and you could have put something in it yourself. I have no reason to trust you! #speaker: Boss Man
+    I'm... I'm not eating that. I don't know how old that thing is, and you could have put something in it yourself! #speaker: Boss Man
     And I no longer have any reason to trust you. I have everything I need here. #speaker: Player
     Wait! I have information! I can tell you about something Peter told me last night. #speaker: Boss Man
     * [<b>Go on...<b>]

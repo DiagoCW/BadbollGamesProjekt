@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class CooldownUIVisualIAVersion : MonoBehaviour
@@ -8,6 +9,8 @@ public class CooldownUIVisualIAVersion : MonoBehaviour
     [SerializeField] private Image cooldownFill;     // grey radial – fills 0 to 1 during cooldown
     [SerializeField] private Image activeFill;       // green radial – empties 1 to 0 during active
     [SerializeField] private Image icon;             // magnifying glass icon
+    [SerializeField] private TextMeshProUGUI secondsUsed;
+    private int totalTimeUsed = 0;
 
     [Header("Colors")]
     [SerializeField] private Color readyColor = Color.white;
@@ -27,9 +30,12 @@ public class CooldownUIVisualIAVersion : MonoBehaviour
 
         if (activator.IsHighlighting)
         {
+            secondsUsed.enabled = true;
+            totalTimeUsed = (int)GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<HighlightActivatorIAVersion>().TotalTimeUsed;
             // Active phase
             float remaining = activator.HighlightEndTime - time;
             float progress = Mathf.Clamp01(remaining / activator.highlightDuration);
+            secondsUsed.text = totalTimeUsed.ToString();
 
             if (activeFill) activeFill.fillAmount = progress;
             if (cooldownFill) cooldownFill.fillAmount = 0f;
@@ -37,6 +43,7 @@ public class CooldownUIVisualIAVersion : MonoBehaviour
         }
         else if (time < activator.CooldownEndTime)
         {
+            secondsUsed.enabled = false;
             // Cooldown phase
             float remaining = activator.CooldownEndTime - time;
             float progress = Mathf.Clamp01(remaining / activator.cooldownDuration);

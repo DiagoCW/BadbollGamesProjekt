@@ -73,6 +73,8 @@ VAR finishedCrimeScene = false
 
 // BOSS MAN
 VAR talkedToBossMan = false
+VAR isTalkingToPolice = false
+VAR canDistract = false
 // BARTENDER
 VAR talkedToBartender = false
 VAR bartenderToldHisAlibi = false
