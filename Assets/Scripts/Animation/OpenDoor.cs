@@ -1,5 +1,9 @@
 using UnityEngine;
 
+/// <summary>
+/// Simple script for determining if you're allowed to open the door at the back of the gas station. Checks a LIST within INK
+/// to see if it contains the item needed to interact with the door.
+/// </summary>
 public class OpenDoor : MonoBehaviour, IInteractable
 {
     Animator animator;
@@ -18,8 +22,7 @@ public class OpenDoor : MonoBehaviour, IInteractable
             NewDialogueManager.Instance.EnterDialogue(inkJson, null, null);
             return;
         }
-        //bool trigger = animator.GetBool("isOpen");
-        //animator.SetBool("isOpen", !trigger);
+        // Since dialogue does not trigger when opening the door, I can't pass along the door's animator. I have to set the trigger manually
         animator.SetTrigger("IsOpen");
     }
 }

@@ -7,7 +7,7 @@ using Unity.VisualScripting;
 /// <summary>
 /// Gets variables from within INK and saves any changes to their states. Is used by DialogueManager to listen in on
 /// any changes made to variables to persist between dialogue. 
-/// Made by @ShapedByRainStudios on Youtube, no other changes made. 
+/// Made by @ShapedByRainStudios on Youtube, no other changes made. Is only used with the functionality of variable persistence
 /// </summary>
 public class DialogueVariables
 {

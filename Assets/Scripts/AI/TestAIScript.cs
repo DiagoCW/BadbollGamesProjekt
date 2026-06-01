@@ -5,7 +5,8 @@ using UnityEngine.AI;
 
 /// <summary>
 /// Author: Stefan & Isak
-///
+/// Contains references to the objects navmeshagent and targets that it can move to.
+/// 
 /// </summary>
 public class TestAIScript : MonoBehaviour
 {
@@ -41,6 +42,10 @@ public class TestAIScript : MonoBehaviour
         }
             
     }
+    /// <summary>
+    /// This method is bound to an external function defined within INK, that can start their path when called in dialogue
+    /// </summary>
+    /// <param name="trigger"></param>
     public void StartPath(string trigger)
     {
         animtrigger = trigger;

@@ -16,31 +16,40 @@ using UnityEngine.UI;
 /// It also handles animations and navmeshagents, and binds methods that can be called from within INK
 /// to set a certain animation for the currently talking NPC, or have them move between points.
 /// Huge thanks to @ShapedByRainStudios on Youtube for much of the framework that this script was built on.
-/// 
+/// Implemented by Isak
 /// </summary>
 public class NewDialogueManager : MonoBehaviour
 {
     // Alla komponenter för dialogpanelen
     [Header("Dialogue UI")]
+    [Tooltip("The entire UI component for the Dialogue Box")]
     [SerializeField] GameObject dialoguePanel;
+    [Tooltip("Displays the current line of dialogue")]
     [SerializeField] TextMeshProUGUI dialogueText;
+    [Tooltip("Image component for the 'E' button, that is enabled when the current story can be continued")]
     [SerializeField] UnityEngine.UI.Image dialogueCheck;
+    [Tooltip("Displays clue items while in dialogue")]
     [SerializeField] UnityEngine.UI.Image itemPortrait;
-   // [SerializeField]
+    [Tooltip("The Clue Database. Is needed for displaying clues and retrieve their ID")]
+    // [SerializeField]
     public ItemDatabaseObject itemDatabase;
 
     // This is a globals file that contains variables that all dialogue files need access to, in order to 
     // persist variables between characters and objects. 
     [Header("Load Globals JSON")]
+    [Tooltip("This is a globals file that contains variables that all dialogue files need access to, " +
+        "in order to persist variables between characters and objects. ")]
     [SerializeField] TextAsset loadGlobalsJSON;
 
-    // The container that holds all assets for the dialogue box. 
+
     [Header("Choices UI")]
+    [Tooltip("The container that holds all assets for the dialogue box")]
     [SerializeField] GameObject choicesContainer;
     [SerializeField] GameObject[] choices;
     TextMeshProUGUI[] choicesText;
 
     [Header("Speaker Panels")]
+    [Tooltip("Headers above the dialogue box that should display the name of the current speaker")]
     [SerializeField] GameObject npcPanel;
     [SerializeField] GameObject playerPanel;
     [SerializeField] TextMeshProUGUI npcText;
@@ -51,15 +60,16 @@ public class NewDialogueManager : MonoBehaviour
     Animator npcAnimator;
 
     public float typingSpeed = 0.03f;
-    // Add with other private fields
+
+    // Provides a small delay after registering button presses, i.e continuing the story by pressing E, selecting a dialogue option, etc.
     private float inputCooldownUntil;
     private const float INPUT_COOLDOWN = 0.1f;
 
-    public Story currentStory { get; private set; } // Den dialog som spelas för tillfället: Nästan allting utgår från denna  
-    public bool dialogueIsPlaying { get; private set; } // Referens som andra klasser kan hämta för att kontrollera att en dialog är aktiv eller inte 
+    public Story currentStory { get; private set; } // Holds the dialogue to display. Almost all logic is built around the Story object 
+    public bool dialogueIsPlaying { get; private set; } // Some functions should be disabled while dialogue is playing, they reference this variable
     bool isTyping;
 
-    private Coroutine displayLineCoroutine; // Should contain the Coroutine for typing out text one char at a time
+    private Coroutine displayLineCoroutine; // Contains the Coroutine for typing out text one character at a time
 
     public DialogueVariables dialogueVariables { get; private set; } // Lagrar alla globala variabler som finns delade mellan olika Ink-filer 
     public InkExternalFunctions functions { get; private set; } // Denna kallas för att binda / unbinda externa funktioner inuti en Ink-fil 
@@ -85,9 +95,9 @@ public class NewDialogueManager : MonoBehaviour
     }
 
 
-    private void Start()
+    private void Start() // Disable UI at startup, and initialize dialogue buttons
     {
-        if (dialoguePanel != null) 
+        if (dialoguePanel != null)
         {
             dialoguePanel.SetActive(false);
             dialogueIsPlaying = false;
@@ -102,6 +112,11 @@ public class NewDialogueManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Method for returning a variable value from within INK. Is used to see if the player meets a certain condition.
+    /// </summary>
+    /// <param name="variableName"></param>
+    /// <returns></returns>
     public Ink.Runtime.Object GetVariableState(string variableName)
     {
         Ink.Runtime.Object value = null;
@@ -109,11 +124,11 @@ public class NewDialogueManager : MonoBehaviour
         //if (value == null)
         //    Debug.LogWarning($"Variable {variableName} not found in DialogueVariables.");
         return value;
-        
+
     }
 
     /// <summary>
-    /// Check if a list in INK contains the item
+    /// Check if a list in INK contains a certain item.
     /// </summary>
     /// <param name="itemName">The item to look for</param>
     /// <param name="listName">The INK list to check in</param>
@@ -121,10 +136,10 @@ public class NewDialogueManager : MonoBehaviour
     public bool InkListContainsItem(string itemName, string listName)
     {
         var list = currentStory.variablesState[listName] as InkList;
-        if (list!= null)
+        if (list != null)
         {
             return list.ContainsItemNamed(itemName);
-            
+
         }
         return false;
     }
@@ -143,15 +158,17 @@ public class NewDialogueManager : MonoBehaviour
 
     private void Update()
     {
-        if (!dialogueIsPlaying /*||
-            currentStory.currentChoices.Count > 0 || choicesContainer.activeSelf*/) return;
+        if (!dialogueIsPlaying) return;
 
-        if (Input.GetKeyDown(KeyCode.Escape)) 
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (FadeInOut.Instance != null) FadeInOut.Instance.FadeScreenOnly(0f, 1f); // failsafe if the screen is still black when dialogue is skipped
             ExitDialogue();
         }
 
+        // If the player presses E to advance dialogue, check whether the story is currently typing; autofinish current line.
+        // If story is ready to continue; continue to next line.
+        // If there are choices at the current line; display them.
         if (Input.GetKeyDown(KeyCode.E) && Time.time >= inputCooldownUntil)
         {
             if (!isTyping)
@@ -174,7 +191,8 @@ public class NewDialogueManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Types out the dialogue text one character at a time.
+    /// Coroutine that types out the dialogue text one character at a time. 
+    /// Also handles italics or color coding letters, will pause when it notices '<' character, and continue once it encounters '>'
     /// </summary>
     /// <param name="line">The next line of dialogue to type out.</param>
     /// <returns></returns>
@@ -190,13 +208,13 @@ public class NewDialogueManager : MonoBehaviour
         foreach (char letter in line.ToCharArray())
         {
             if (letter == '<') addingItalicsToText = true;
-            
+
             dialogueText.text += letter;
 
             if (letter == '>') addingItalicsToText = false;
 
             if (!addingItalicsToText)
-            yield return new WaitForSeconds(typingSpeed);
+                yield return new WaitForSeconds(typingSpeed);
         }
 
         isTyping = false;
@@ -208,6 +226,13 @@ public class NewDialogueManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// This method is often called inside the 'Interact()' method of any game object that inherits the IInteractable interface.
+    /// Is used as the starting point of displaying dialogue
+    /// </summary>
+    /// <param name="inkJson">The story / dialogue to display</param>
+    /// <param name="npc">Reference to the objects animator. Can be null if no animator</param>
+    /// <param name="agent">Reference to the objects script that will eventually activate its navmeshagent. Can be null</param>
     public void EnterDialogue(TextAsset inkJson, Animator npc, TestAIScript agent)
     {
         npcAnimator = npc;
@@ -216,7 +241,7 @@ public class NewDialogueManager : MonoBehaviour
         currentStory = new(inkJson.text);
         dialogueVariables.StartListening(currentStory);
         //if (agent != null)
-            functions.Bind(currentStory, agent);
+        functions.Bind(currentStory, agent);
 
         dialogueIsPlaying = true;
         dialoguePanel.SetActive(true);
@@ -273,6 +298,7 @@ public class NewDialogueManager : MonoBehaviour
     /// them, and sets their values to the corresponding thing. Example:
     /// "#anim: Walking" parses the 'anim' tag and enters the corresponding switch statement, 
     /// gets the descriptor string 'Walking', and sets the string as the animation trigger for the current character or object.
+    /// #'speaker:' sets the value to the speaker box 
     /// </summary>
     /// <param name="currentTags">All tags collected from the latest Continue() call of the story.</param>
     public void HandleTags(List<string> currentTags)
@@ -287,7 +313,7 @@ public class NewDialogueManager : MonoBehaviour
             }
             string tagKey = splitTag[0].Trim();
             string tagValue = splitTag[1].Trim();
-            
+
 
             switch (tagKey)
             {
@@ -350,9 +376,9 @@ public class NewDialogueManager : MonoBehaviour
                     }
                     break;
                 case "video":
-                    if (tagValue == "play_karaoke") 
+                    if (tagValue == "play_karaoke")
                     {
-                        if (InteractableTV.Instance != null) 
+                        if (InteractableTV.Instance != null)
                         {
                             InteractableTV.Instance.PlayVideo();
                         }
@@ -393,7 +419,7 @@ public class NewDialogueManager : MonoBehaviour
         {
             if (i < currentChoices.Count)
             {
-                
+
                 choices[i].SetActive(true);
                 choicesText[i].text = currentChoices[i].text;
             }
@@ -403,7 +429,7 @@ public class NewDialogueManager : MonoBehaviour
             }
         }
         StartCoroutine(SelectFirstChoice());
-        
+
     }
 
     // A workaround method for registering button presses for the Event System. I have no idea how or why it works
@@ -424,7 +450,7 @@ public class NewDialogueManager : MonoBehaviour
         currentStory.ChooseChoiceIndex(choiceIndex);
         inputCooldownUntil = Time.time + INPUT_COOLDOWN;
         ContinueStory();
-        
+
     }
-    
+
 }

@@ -2,13 +2,13 @@ INCLUDE globalsmainstory.INK
 EXTERNAL fadeToBlack(alpha, duration)
 -> Start
 === Start ===
+~ temp accusedID = getAccusedSuspectID()
 <i>You find yourself at the local precinct awaiting a final brief from the officer, after managing to apprehend a suspect.</i> #speaker: 
 <i>Who was it you arrested, again?</i>
-{ finalSuspect }. It has to be them. #speaker: Player
-{ finalSuspect == "Boss Man": -> BossMan }
-{ finalSuspect == "Bartender": -> Bartender }
-{ finalSuspect == "Store Clerk": -> StoreClerk }
-{ finalSuspect == "None": -> NoSuspect }
+{ accusedID == "1": -> BossMan }
+{ accusedID == "2": -> Bartender }
+{ accusedID == "0": -> StoreClerk }
+{ accusedID == "3": -> NoSuspect }
 
 = NoSuspect
 <i>Oh, right. You didn't arrest anyone. You couldn't crack the case.</i>
