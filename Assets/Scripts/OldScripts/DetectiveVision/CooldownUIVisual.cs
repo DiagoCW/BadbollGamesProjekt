@@ -27,6 +27,13 @@ public class CooldownUIVisual : MonoBehaviour
     {
         if (activator == null) return;
 
+        if (PauseMenu.Instance != null && PauseMenu.isPaused) 
+        {
+            SetVisualsActive(false);
+            return;
+        }
+        
+
         if (activator.IsHighlighting) // if the player is highlighting
         {
             SetVisualsActive(true); // turn on the UI
