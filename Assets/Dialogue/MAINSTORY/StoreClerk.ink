@@ -26,7 +26,7 @@ Sir, I'm going on the 18th hour of my 30 hour shift. I don't have time to worry 
 C'mon. One question, please? #speaker: Player
 Alright, <i>one question.</i> #speaker: Store Clerk
     * { Suspects ? bossMan or knowledge ? receiptsBelongToVictim } [Did Peter Grip come here last night?] -> LastNightVictim
-    * [Where were you last night?]
+    * { not cashierToldHisAlibi } [Where were you last night?]
         Here, as usual. I started my shift 18 hours ago, and still have some hours to go. #speaker: Store Clerk
         ~ cashierToldHisAlibi = true
         And you've never left even once? #speaker: Player
@@ -52,7 +52,7 @@ Alright, alright. Make it quick, I have work to do you know. #speaker: Store Cle
 
 = LastNightEnd
 That's your second question, I'm afraid. As I said, I'm happy to answer any questions you might have once I get off my shift. #speaker: Store Clerk
-{ (Suspects ? bossMan): 
+{ (Suspects ? bossMan or Suspects ? bartender): 
     * [<color=\#FFFF00><b>Keep pressing him</b></color>] -> AltercationVictim
 - else:
     ~ askedQuestion = true
@@ -119,7 +119,7 @@ An empty cant of coolister.
 What? #speaker: Store Clerk
 I meant an empty cannister of coolant, sorry. I might have suffered a concussion earlier... #speaker: Player
 Still, what? That's your big reveal? Do you know where we are? We are at <b>the gas station</b> buddy, where you might go to get coolant for your car. #speaker: Store Clerk
-I saw that you keep it next to a bunch of snus. It just so happens that's the very same snus that Peter has, and which I have proof that he also bought here last night. #speaker: Player #portrait: 0
+I saw that you keep it next to a bunch of snus. It just so happens that's the very same snus that Peter has, and which I have proof that he also bought here last night. #speaker: Player #portrait: 1
 Look, that snus is in the storage because I took them out of sale. You know why I did that? <b>Because a bunch of coolant has seeped into them!</b> I obviously know that it's a health hazard, and I wouldn't ever sell it to my customers. #speaker: Store Clerk #portrait: 
 Except that you did sell it to him. I found this on Peter's body. And it sure as hell smells like it has been soaking in coolant. #portrait: 4 #speaker: Player
 The fact that you two had an argument and that you were not here during the time of the victim's death, coupled with the fact that Peter likely succumbed to that coolant-soaked snus; what say you?
