@@ -3457,6 +3457,10 @@ MonoBehaviour:
   sfxClips:
   - id: FAH
     clip: {fileID: 8300000, guid: 3a8db6a4ddf79084ea853f0e5532d691, type: 3}
+    volume: 1
+  - id: car-hood-open
+    clip: {fileID: 8300000, guid: 9c43d9e2d7bcbf54da9a6947b327f7e3, type: 3}
+    volume: 1
 --- !u!1001 &96624430
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11764,6 +11768,7 @@ MonoBehaviour:
   inkJson: {fileID: 4900000, guid: 9e88715b287220f42b28208f1cbb415e, type: 3}
   inkJsonTest: {fileID: 4900000, guid: 62358e60673012841b43426c7ce59c87, type: 3}
   Inkvariable: startIntro
+  NPCName: 
 --- !u!65 &357192431
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -18546,6 +18551,7 @@ MonoBehaviour:
   item2: {fileID: 0}
   inkJson: {fileID: 4900000, guid: da511653ea55d0c43908cbabb07bdcef, type: 3}
   inkJson2: {fileID: 4900000, guid: 962fcabc32c3ba34987c8d88a96dbeb5, type: 3}
+  NPCName: 
   destroyOnPickup: 1
 --- !u!65 &644358313
 BoxCollider:
@@ -35212,6 +35218,7 @@ MonoBehaviour:
   item2: {fileID: 0}
   inkJson: {fileID: 4900000, guid: 130a1dac22569ce4b8c0a7820afdfcc2, type: 3}
   inkJson2: {fileID: 4900000, guid: 365d4834952e1194e9ce8bc6c2b72492, type: 3}
+  NPCName: 
   destroyOnPickup: 1
 --- !u!1001 &1256045648
 PrefabInstance:
@@ -37424,17 +37431,23 @@ MonoBehaviour:
   ambienceClips:
   - id: highway-travel-interior
     clip: {fileID: 8300000, guid: e97c81f86b89763489f8d36c27ad3281, type: 3}
+    volume: 1
   - id: PREMONITION-IN-THE-PARK
     clip: {fileID: 8300000, guid: 8cd9758445dd7d04f9b61f86b52435e9, type: 3}
+    volume: 1
   - id: ambiens-1
     clip: {fileID: 8300000, guid: 6dc711ab99b0b154e88fc6a0eb724af5, type: 3}
+    volume: 1
   sfxClips:
   - id: car-crash
     clip: {fileID: 8300000, guid: ee8003f6451d31a498c7f58af27a290c, type: 3}
+    volume: 1
   - id: cardoor-open-close
     clip: {fileID: 8300000, guid: 6c637babace6fef4f9606b00999f0796, type: 3}
+    volume: 1
   - id: car-hood-open
     clip: {fileID: 8300000, guid: 9c43d9e2d7bcbf54da9a6947b327f7e3, type: 3}
+    volume: 1
 --- !u!82 &1293983021
 AudioSource:
   m_ObjectHideFlags: 0
@@ -40137,6 +40150,7 @@ MonoBehaviour:
   item2: {fileID: 0}
   inkJson: {fileID: 4900000, guid: 0e5b2f62da6f5a34289dde72d3614956, type: 3}
   inkJson2: {fileID: 4900000, guid: 37ff04889651184458d055babff4b570, type: 3}
+  NPCName: 
   destroyOnPickup: 0
 --- !u!1 &1333401694
 GameObject:
@@ -43555,6 +43569,7 @@ MonoBehaviour:
   item2: {fileID: 0}
   inkJson: {fileID: 4900000, guid: d374d9464fad0234c821cdb5e618c046, type: 3}
   inkJson2: {fileID: 4900000, guid: d9464430d52627a438f253332797005b, type: 3}
+  NPCName: 
   destroyOnPickup: 1
 --- !u!65 &1408362087
 BoxCollider:
@@ -52183,6 +52198,7 @@ MonoBehaviour:
   item2: {fileID: 0}
   inkJson: {fileID: 4900000, guid: 416fe40fbf916cb43a2a0b478101e689, type: 3}
   inkJson2: {fileID: 4900000, guid: f5b04a235a12ea64184aecb2c098e100, type: 3}
+  NPCName: 
   destroyOnPickup: 1
 --- !u!65 &1751749150
 BoxCollider:

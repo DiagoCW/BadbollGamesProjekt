@@ -36,6 +36,11 @@ public class DisplayInventory : MonoBehaviour
 
     private void Awake()
     {
+        if (inventory != null) 
+        {
+            inventory.Clear();
+        }
+        
         // Initialize inventory slots
         CreateSlots();
 
@@ -278,7 +283,8 @@ public class DisplayInventory : MonoBehaviour
             // Multiply the offset by the scale factor
             Vector3 scaledOffset = new Vector3(tooltipOffset.x * scaleFactor, tooltipOffset.y * scaleFactor, 0); // END OF FIX
 
-            tooltipPanel.transform.position = slotRect.position + (Vector3)tooltipOffset;
+            tooltipPanel.transform.position = slotRect.position + scaledOffset;
+            //tooltipPanel.transform.position = slotRect.position + (Vector3)tooltipOffset;
         }
         
         tooltipPanel.SetActive(true);

@@ -86,9 +86,14 @@ public class InventoryObject : ScriptableObject
     public void Clear()
     {
         Container = new Inventory();
+
+        for (int i = 0; i < Container.Items.Length; i++)
+        {
+            Container.Items[i] = new InventorySlot();
+        }
     }
 
-    #if UNITY_EDITOR
+#if UNITY_EDITOR
     private void OnDisable()
     {
         // Clear inventory when exiting play mode in the Editor
@@ -103,6 +108,8 @@ public class Inventory
     //public List<InventorySlot> Items = new List<InventorySlot>();
     public InventorySlot[] Items = new InventorySlot[12];
 }
+
+
 
 [System.Serializable]
 public class InventorySlot
