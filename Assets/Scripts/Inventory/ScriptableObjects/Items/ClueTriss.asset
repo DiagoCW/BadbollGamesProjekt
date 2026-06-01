@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: 5
   uiDisplay: {fileID: 21300000, guid: b0ad20fbe6914bd4fbb789afd031d115, type: 3}
-  description: 
+  description: Would you look at that, a winning lottery ticket, and one million
+    kronor at that.
