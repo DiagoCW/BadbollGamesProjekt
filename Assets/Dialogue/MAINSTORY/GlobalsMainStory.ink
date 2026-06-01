@@ -15,7 +15,7 @@ VAR finalSuspect = "Store Clerk"
 // Ett script I unity måste sätta in ett värde på denna från Detective Vision när man har löst clueboard
 VAR dvisionTotalTime = 0
 VAR trueEnding = false
-
+VAR confirmedSolution = false
 
 // Binder en metod som kan kallas av ett script i unity för att starta en navmeshagent. Parametern är till för att sätta animation trigger
 EXTERNAL startMovement(x)
@@ -506,6 +506,17 @@ ND
 
 
 ND
+
+
+
+
+ND
+
+
+END
+
+ND
+
 
 
 

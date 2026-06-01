@@ -106,6 +106,7 @@ If you still feel the need to investigate more thoroughly, you can always come b
 -> END
 
 === Hub ===
+{ confirmedSolution: -> FinalScene }
 { isTalkingToPolice: Detective, what did you tell Boss Man exactly? Please straighten this out. -> END } #speaker: Police
 What's up, doc? #speaker: Police
 * [Where should I go next?]
@@ -176,7 +177,11 @@ To sum up: When the bartender found out about the winning trisslott and the othe
 Well, if that's what you think... You should have all the clues you need to connect them to him as a suspect. If you decide to go for him, come back to me after you've connected his clues on your dainty little clueboard. #speaker: Detective
 -> Hub
     
-    
+=== FinalScene ===
+So, you found yourself a suspect huh? I still think you're onto nothing here, but I'll go ahead and talk to them and see whether it leads anywhere. #speaker: Police
+Go ahead and wait for me at the station. I'll come back and brief you about what I found out.
+~ goToPoliceHouse = true
+-> END
     
 
 

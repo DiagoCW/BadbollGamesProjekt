@@ -126,7 +126,6 @@ You solved the case, detective. What more do you need? A pat on the shoulder? Ge
 -> Final
 
 === BadEnding ===
-...
 { finalSuspect == "Boss Man": 
     -> BossManEnding
 - else:
@@ -144,12 +143,13 @@ I don't understand. If he didn't deliberately poison the falafel, then how did h
 The victim choked to death, which was all obviously part of Boss Man' plan. He put extra everything into the falafelrulle, which was too much for poor little Peter to digest properly. #speaker: Police
 That's extremely dumb and makes no sense. It almost feels like a half-baked ending to a story line that the writer didn't know how to finish properly. #speaker: Player
 No one cares what you think, it's what happened. #speaker: Police
-{ Clues ? trisslott: -> MissingTrissLott | -> Final }
+-> Final 
 
 = BartenderEnding
 We analyzed Peter's beer that you collected as evidence, and it sure as hell tested positive for rat poison. #speaker: Police
 It also tested positive for Hanta-virus, which... has certain implications. None of which concerns the case, however.
-It didn't take long for the bartender to confess. Just like you said, he saw an opportunity to save his business; no matter the cost.
+It didn't take long for the bartender to confess. Just like you said, he saw an opportunity to save his business; no matter the cost. He needed that trisslott.
+It's a shame... Peter had at least a good 15 years of heavy drinking left in him. I should have known that he couldn't have died just from that.
 -> MissingTrissLott
 
 = MissingTrissLott
@@ -161,41 +161,44 @@ It just does, deal with it. #speaker: Police
 -> Final
 
 === Final ===
-That'll be all. Great work detective. Whenever you're ready to leave, just exit through there. #speaker: Police
+That'll be all. Until next time, detective. #speaker: Police
 * { dvisionTotalTime <= 50 and trueEnding } [<color=\#FFFF00>Hold on a minute...] -> TrueEnding
--> END
+~ rollCredits()
 
 = TrueEnding
 I... I don't want to. #speaker: Player
 You have to. It's over now. #speaker: Police
 It can't be. This feels wrong for some reason... Something is off. #speaker: Player
-But you did it, detective. You solved the big case. You're Justin Time, and you're just in time. #speaker: Police
+You did it, detective. You solved the big case. You're Justin Time, and you're just in time. #speaker: Police
 And now you have to leave. 
+~ fadeToBlack(1, 3)
 Officer...? #speaker: Player
 ~ stopAllAmbience()
-~ changeTypingSpeed(0.12)
-You're <b>done. This is it.</b> #speaker: ???
-~ changeTypingSpeed(0.03)
+//~ changeTypingSpeed(0.12)
+//You're <b>done. This is it.</b> #speaker: ???
+//~ changeTypingSpeed(0.03)
 ~ playAmbience("PREMONITION-IN-THE-PARK")
-~ fadeToBlack(1, 3)
-<i>You never did survive that car crash. Your last living synapse is hanging on by the thinnest stretch of thread, desperately firing off in all directions. But it too is fading now.</i> #speaker: 
+<i>You are still in your car on your way to the crime scene, and your car is swerving. In just a few seconds, you are going to crash into that tree in the park. Only difference is you won't make it this time.</i> #speaker: 
+The human mind really is fascinating... I managed to solve an entire case in my head mere moments before dying. I might be the greatest detective alive. #speaker: Player
+Well, I won't be alive for much longer I reckon.
 { panicked: -> Panicked }
 { resignedToFate: -> Fate }
 { steppedOnGas: -> Gas }
 - (Panicked)
-Maybe if you hadn't panicked when your car started swerving, you would have been fine. #speaker: 
+Maybe this is because I started panicking when my car started swerving. If only I had kept my cool... #speaker: 
 -> introcont
 - (Fate)
-Isn't this what you wanted, a quick end to it all? You wanted to be with Him. #speaker: 
+Like I said, this is fine. I will be with Him soon. #speaker: 
 -> introcont 
 - (Gas)
-How come you started flooring it? Did your foot really get stuck to the pedal like you said, or was it because you wanted to do it? #speaker: 
+Why the fuck did I even start flooring it? #speaker: 
 -> introcont
 - (introcont) 
-<> But now...
+<> Well, I solved the case and that's all that matters. Even if it was all in my head.
 ~ lowerPitch("PREMONITION-IN-THE-PARK")
 <i>As the car draws closer and closer to the town, time slows down exponentially, until time stands completely still.</i> #speaker: 
+Looks like I'm... <i>just in...</i> #speaker: Player
 ~ playAudio("car-crash")
-</i>And then it doesn't. You reach an abrupt stop.</i>
+</i>Until it doesn't. You reach an abrupt stop.</i> #speaker: 
 ~ rollCredits()
 -> END
