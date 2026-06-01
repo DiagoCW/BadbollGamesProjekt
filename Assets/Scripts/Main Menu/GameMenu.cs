@@ -5,6 +5,8 @@ public class GameMenu : MonoBehaviour
 {
      
     //Author : Isabella
+    //Old script that was used when main menu was a part of the main scene and not
+    //as a seperate scene itself
 
     /// <summary>
     /// While pressing M key you will be returned to MainMenu - OLD CODE
