@@ -543,7 +543,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -576, y: -2522}
+  m_AnchoredPosition: {x: -576, y: -2553}
   m_SizeDelta: {x: 735.7, y: 3000}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1093412685
@@ -567,7 +567,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "MUSIC AND SOUND:\r\n(Main Theme, Bar theme, Gas station theme and city
-    ambiance) by Krenar Sejdiu.\n\n(Premonition In The Park) by Justin Allan Arnold\r\n\r\n(Many
+    ambiance) by Krenar Sejdiu.\n\n(Premonition In The Park) by Justin Allan Arnold.\r\n\r\n(Many
     small sound samples) from freesound.org.\r\n\r\n\r\nGAME TESTING AND FEEDBACK:\r\nTo
     the charitable people of spel 25; especially group 4.\r\n\r\n\r\nENGINE:\r\nThis
     game was made with Unity that was developed by David Helgason, Joachim Ante,
@@ -1129,7 +1129,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\t\t\t\tCREDITS\n\n\tProgrammer\t\t\tDennis Olsson\n\n\tLevel Designer\t\t\tIsabella
+  m_text: "\t\t\t\tCREDITS\n\n\n\tProgrammer\t\t\tDennis Olsson\n\n\tLevel Designer\t\t\tIsabella
     Brorsson\n\n\tLevel Designer\t\t\tStefan Cwiek\n\n\tNarrative Lead /\t\t\tIsak
     Sandgren\n\tHand model\n\n\tConcept Artist /\t\t\tHugo PC\n\tSounds Effects\t\t\t"
   m_isRightToLeft: 0
