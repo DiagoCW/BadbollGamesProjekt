@@ -224,6 +224,7 @@ public class NewDialogueManager : MonoBehaviour
         ContinueStory();
     }
 
+    // Disables UI, unbinds external functions called from INK, and dialoguevariables stop subscribing to any variable events
     private void ExitDialogue()
     {
         dialogueVariables.StopListening(currentStory);
@@ -363,6 +364,7 @@ public class NewDialogueManager : MonoBehaviour
         }
     }
 
+    // Hides the Dialogue Choices UI-component after making a choice.
     void HideChoices()
     {
         choicesContainer.SetActive(false);
@@ -383,11 +385,6 @@ public class NewDialogueManager : MonoBehaviour
             Debug.Log($"More choices in the story than UI can support. " +
                 $"Number of choices: {currentChoices.Count}", this);
         }
-
-        // Beror på om vi vill se dialogtexten när spelaren har val inom dialogen,
-        // Eller om dialogtexten ska försvinna när valen visas.
-        //if (currentChoices.Count > 0)
-        //    dialogueText.text = string.Empty;
 
         choicesContainer.SetActive(currentChoices.Count > 0);
 
@@ -417,7 +414,7 @@ public class NewDialogueManager : MonoBehaviour
     }
 
     /// <summary>
-    /// This method is wired to their respective button game components in the Dialogue UI. When a button with
+    /// This method is bound to their respective button game components in the Dialogue UI. When a button with
     /// index n is pressed, it calls this method and sends that as the parameter, and then continues the story.
     /// </summary>
     /// <param name="choiceIndex"></param>

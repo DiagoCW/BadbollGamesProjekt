@@ -12,8 +12,8 @@ public class ThreadManager : MonoBehaviour // Author - Stefan Cwiek
     public static ThreadManager Instance { get; private set; }
 
     // Other scripts can listen to this to trigger whatever is to be triggered
-    public static event Action OnCaseSolved;
-    public static event Action OnCaseFailed;
+    //public static event Action OnCaseSolved;
+    //public static event Action OnCaseFailed;
 
     // This tells the submit button to check if it should change color
     public static event Action OnThreadsChanged;

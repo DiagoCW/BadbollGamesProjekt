@@ -7,15 +7,14 @@ VAR ranaway = false
 The man before you is clearly intoxicated. Inebriated, even. Absolutely piss drunk. #speaker: Player
     * { finishedCrimeScene } [I need to ask you a few questions.]
         -> GainEntry
-    * [What are you doing?]
+    * { not finishedCrimeScene } [What are you doing?]
         I am LOITERING. And I will NEVER stop loitering. So don't bother asking me anything. # speaker: Leif
-        { finishedCrimeScene: I need to ask you a few questions, actually. -> GainEntry } #speaker: Player
     * [Nothing...]
-- You don't even want to bother with this guy. Until you find something you could reasonably question him with you should just go. #speaker: Player
+- <i>I don't even want to bother with this guy, I should just avoid him. For now...</i> #speaker: Player
         -> END
 
 = GainEntry
-- What? Why? #speaker: Leif
+What? Why? #speaker: Leif
 ~ startMovement("Running")
 ~ ranaway = true
 You'll never catch me pig!!! //# anim: Running

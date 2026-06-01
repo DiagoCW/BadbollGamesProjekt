@@ -1,4 +1,4 @@
-INCLUDE globals.ink
+/*INCLUDE globals.ink
 
 {talkedToBossMan: -> VisitedCrimeScene | -> Intro}
 
@@ -55,3 +55,4 @@ Please leave. #speaker: Boss Man #anim: Yelling
 Hello, Boss Man. I found something interesting by the crime scene. #speaker: Player
 THIS IS THE END OF THE DEMO SUPPORT THIS PROJECT BY DONATING TO OUR PATREON THANK YOU TO ALL OUR SUPPORTERS
 -> END
+*/
