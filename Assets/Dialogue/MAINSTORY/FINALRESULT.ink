@@ -2,17 +2,17 @@ INCLUDE globalsmainstory.INK
 EXTERNAL fadeToBlack(alpha, duration)
 -> Start
 === Start ===
+The officer still isn't here. #speaker: Player
+That should give me a bit of time go over the facts once more. Who did I tell the officer to arrest, again? 
 ~ temp accusedID = getAccusedSuspectID()
-<i>You find yourself at the local precinct awaiting a final brief from the officer, after managing to apprehend a suspect.</i> #speaker: 
-<i>Who was it you arrested, again?</i>
 { accusedID == 1: -> BossMan }
 { accusedID == 2: -> Bartender }
 { accusedID == 0: -> StoreClerk }
 { accusedID == 3: -> NoSuspect }
 
 = NoSuspect
-<i>Oh, right. You didn't arrest anyone. You couldn't crack the case.</i>
-<i>The evidence that you linked to your suspect were wrong, and didn't quite crack the case.</i>
+Oh, right. I didn't arrest anyone. I couldn't crack the case.
+The evidence that I linked to the suspect were either wrong, or they were actually innocent all along.
 ~ startMovement("Walking")
 Just in time? More like <i>Not in time</i>. #speaker: Police
 Sorry, that was mean. But I told you, detective. This was a cut and dry case, not every little case is a murder to solve.
@@ -24,11 +24,10 @@ So that's it? Just like that? It's like the writer just threw something together
 Boss Man. It has to be him. #speaker: Player
 ~ finalSuspect = "Boss Man"
 First off, he had the victim's wallet.
-Second, he claims to have found it <b>before</b> a purchase was made at his shop, which was made using the victim's card. #speaker: Police
-Third, and most important, he was the one who found the body and called it in. This could have been a ruse to make himself look less suspicious. #speaker: Player
+Second, he claims to have found it <b>before</b> a purchase was made at his shop, which was made using the victim's card.
+Third, and most important, he was the one who found the body and called it in. This could have been a ruse to make himself look less suspicious.
 He claimed that he took the wallet as some form of 'payment' for the menial task of always having to return his wallet to him, before realising that the victim was actually dead, at which point he called the police. However, this was a bluff. 
 He <i>poisoned</i> the victim's falafel, which would have taken effect almost immediately. He could then approach the body, get his hands on his wallet, and dispose of any evidence; the half-eaten falafelrulle in the trash that matches the one that Peter orders.
-
 Given the victim's prior history with Boss Man, no one who knew him would even give it a second though. However, It looks like I was... <b>just in time.</b>
 -> PoliceArrives
 
