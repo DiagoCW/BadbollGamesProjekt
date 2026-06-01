@@ -12,10 +12,10 @@ LIST items = (none), karaokeUSB, beerz, backdoorkey
 
 // Efter att man har löst clueboard ska denna tilldelas "Boss Man", "The Bartender", eller "The Store Clerk"
 VAR finalSuspect = "Store Clerk"
-VAR chosenSuspect = 3
 // Ett script I unity måste sätta in ett värde på denna från Detective Vision när man har löst clueboard
 VAR dvisionTotalTime = 0
 VAR trueEnding = false
+
 
 // Binder en metod som kan kallas av ett script i unity för att starta en navmeshagent. Parametern är till för att sätta animation trigger
 EXTERNAL startMovement(x)
@@ -29,6 +29,7 @@ EXTERNAL lowerPitch(string)
 
 EXTERNAL changeTypingSpeed(int)
 EXTERNAL addClueThroughDialogue()
+EXTERNAL getAccusedSuspectID()
 
 EXTERNAL rollCredits()
 
@@ -475,6 +476,20 @@ ND
 
 
 END
+
+ND
+
+
+
+
+ND
+
+
+END
+
+ND
+
+
 
 ND
 

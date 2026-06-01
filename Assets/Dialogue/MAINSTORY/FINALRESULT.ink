@@ -5,21 +5,25 @@ EXTERNAL fadeToBlack(alpha, duration)
 ~ temp accusedID = getAccusedSuspectID()
 <i>You find yourself at the local precinct awaiting a final brief from the officer, after managing to apprehend a suspect.</i> #speaker: 
 <i>Who was it you arrested, again?</i>
-{ accusedID == "1": -> BossMan }
-{ accusedID == "2": -> Bartender }
-{ accusedID == "0": -> StoreClerk }
-{ accusedID == "3": -> NoSuspect }
+{ accusedID == 1: -> BossMan }
+{ accusedID == 2: -> Bartender }
+{ accusedID == 0: -> StoreClerk }
+{ accusedID == 3: -> NoSuspect }
 
 = NoSuspect
 <i>Oh, right. You didn't arrest anyone. You couldn't crack the case.</i>
+<i>The evidence that you linked to your suspect were wrong, and didn't quite crack the case.</i>
 ~ startMovement("Walking")
 Just in time? More like <i>Not in time</i>. #speaker: Police
 Sorry, that was mean. But I told you, detective. This was a cut and dry case, not every little case is a murder to solve.
 Just hand over the case file and that will be that.
+So that's it? Just like that? It's like the writer just threw an ending together.
 -> Final
 
 = BossMan
-First off, he had the victim's wallet. #speaker: Player
+Boss Man. It has to be him. #speaker: Player
+~ finalSuspect = "Boss Man"
+First off, he had the victim's wallet.
 Second, he claims to have found it <b>before</b> a purchase was made at his shop, which was made using the victim's card. #speaker: Police
 Third, and most important, he was the one who found the body and called it in. This could have been a ruse to make himself look less suspicious. #speaker: Player
 He claimed that he took the wallet as some form of 'payment' for the menial task of always having to return his wallet to him, before realising that the victim was actually dead, at which point he called the police. However, this was a bluff. 
@@ -29,11 +33,13 @@ He <i>poisoned</i> the victim's falafel, which would have taken effect almost im
 - else:
 He <i>poisoned</i> the victim's falafel, which would have taken effect almost immediately. He could then approach the body, get his hands on his wallet, and dispose of any evidence; the half-eaten falafelrulle in the trash that matches the one that Peter orders.
 }
-Given the victim's prior history with Boss Man, no one who knew them would even give it a second though. However, It looks like I was... <b>just in time.</b>
+Given the victim's prior history with Boss Man, no one who knew him would even give it a second though. However, It looks like I was... <b>just in time.</b>
 -> PoliceArrives
 
 = Bartender
-First, he lied about his alibi. He claims that Peter and two other patreons were all together at his bar last night until closing. #speaker: Player
+~ finalSuspect = "The bartender"
+The bartender. It has to be him. #speaker: Player
+First, he lied about his alibi. He claims that Peter and two other patreons were all together at his bar last night until closing. 
 However, these other two patreons contradict this alibi. In reality, they both left together some hours before closing, leaving only the bartender alone with Peter.
 Second, during this time, he had ample opportunity to kill him. That is, he <i>poisoned him</i>. #speaker: Player
 The bar suffers from a rat infestation, and the bartender has rat poison strewn about all over the place; and it seems to have found its way into his beer <i>somehow</i>.
@@ -45,7 +51,9 @@ The bartender almost got away with it too, but it looks like I was... <b>just in
 -> PoliceArrives
 
 = StoreClerk
+The store clerk. It has to be him. #speaker: Player
 ~ trueEnding = true
+~ finalSuspect = "The Store Clerk"
 First, him and the victim had been overheard arguing over something. This something was a trisslott. A winning one, at that. Peter had come in and started flaunting it right in his face. #speaker: Player
 The store clerk felt slighted at this, insinuating that Peter didn't deserve to win such a huge sum. This quickly escalated into a brawl between the two and Peter would leave the store shortly after; but not without buying his snus.
 Second, there is a witness that can attest to the store clerk not being at the store around the time of the victim's death, around 5 minutes or so. Though not definitive proof, there is reasonable doubt.
@@ -74,8 +82,8 @@ I looked into this <color=\#FFFF00>Detective Vision</color> of yours that you me
 I understand that it puts quite the strain on the user, and excessive use might lead to unintended side effects. Let's see...
 { dvisionTotalTime <= 50: 
 You used your Detective Vision quite sparingly; only {dvisionTotalTime} seconds recorded. Very impressive. If you've used it this efficiently during all your years of service, you may still have many good years still ahead of you.
-Is there some sort of negative side effect to using it too much? This is news to me. #speaker: Player
-You don't want to know. Just be glad that you use it conservatively. #speaker: Police
+This is news to me. What happens if you use it too much? #speaker: Player
+Trust me, you don't want to know. #speaker: Police
 - else: 
 You certainly didn't skimp on using your Detective Vision... I have {dvisionTotalTime} seconds recorded here. That's not good.
 Why? What do you mean? #speaker: Player
@@ -91,7 +99,7 @@ If I knew you'd be such a baby about it, I wouldn't have told you. Get over it. 
 = FinalSuspect
 You decided to arrest {finalSuspect} based on the evidence that you went through earlier, when you were talking to yourself like some kind of freak. #speaker: Police
 So...
-{ finalSuspect == "Store Clerk": 
+{ finalSuspect == "The Store Clerk": 
     -> GoodEnding 
 - else:
     -> BadEnding
