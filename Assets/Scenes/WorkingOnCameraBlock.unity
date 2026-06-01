@@ -5415,11 +5415,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7632616700528747106, guid: 4d16c313b754012408d4305184336cd0, type: 3}
   m_PrefabInstance: {fileID: 335450033}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &337600577 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3864484147747589122, guid: 71483774530209a468232487cc6e51bc, type: 3}
-  m_PrefabInstance: {fileID: 867937639}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &339727461
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25872,7 +25867,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1122867720}
-  - component: {fileID: 1122867719}
   - component: {fileID: 1122867718}
   - component: {fileID: 1122867717}
   - component: {fileID: 1122867716}
@@ -25939,23 +25933,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 265d8379ea94a64448cf58fb52633ac6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inkJson: {fileID: 4900000, guid: b0f30bda2d55c384ebe86e2463e0f955, type: 3}
---- !u!114 &1122867719
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1122867715}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9bb7deca832e7b444af57b3ce96794b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  destination: {fileID: 337600577}
-  fadeDuration: 4
-  inkVariableName: goToPoliceHouse
-  arrivalDialogue: {fileID: 4900000, guid: ce6982055bd3a01409926b6b9e198853, type: 3}
+  inkJson: {fileID: 4900000, guid: f91bd5c9b9c2d6b47a9479d999b2c637, type: 3}
 --- !u!4 &1122867720
 Transform:
   m_ObjectHideFlags: 0
