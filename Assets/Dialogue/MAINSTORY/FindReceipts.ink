@@ -10,5 +10,5 @@ INCLUDE globalsmainstory.ink
 <i>You also find a half eaten falafel by the receipts.</i>
 Probably also not important, but I'll hang on to it just in case I get hungry or it turns out to be important. #speaker: Player
 ~ getclue(receipts)
+}
 -> END
-
