@@ -158,8 +158,14 @@ It just does, deal with it. #speaker: Police
 
 === Final ===
 That'll be all. Until next time, detective. #speaker: Police
-* { dvisionTotalTime <= 50 and trueEnding } [<color=\#FFFF00>Hold on a minute...] -> TrueEnding
-~ rollCredits()
+{ dvisionTotalTime <= 50 and trueEnding:
+    [<color=\#FFFF00>Hold on a minute...]
+        -> TrueEnding
+- else:
+    ~ rollCredits()
+    -> END
+    }  
+
 
 = TrueEnding
 You can leave, now.

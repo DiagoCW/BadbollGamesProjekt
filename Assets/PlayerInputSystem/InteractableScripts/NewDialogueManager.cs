@@ -160,12 +160,6 @@ public class NewDialogueManager : MonoBehaviour
     {
         if (!dialogueIsPlaying) return;
 
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (FadeInOut.Instance != null) FadeInOut.Instance.FadeScreenOnly(0f, 1f); // failsafe if the screen is still black when dialogue is skipped
-            ExitDialogue();
-        }
-        
         if (!isTyping && !dialogueCheck.enabled && (aiAgent == null || !aiAgent.isBlockingDialogue)) // shiw the E checkmark when the npc finishes walking
         {
             dialogueCheck.enabled = true;
