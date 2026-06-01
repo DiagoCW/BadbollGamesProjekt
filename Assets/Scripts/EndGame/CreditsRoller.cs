@@ -5,10 +5,12 @@ public class CreditsRoller : MonoBehaviour
 {
     [Tooltip("Drag the TextMeshPro object here")]
     [SerializeField] private RectTransform creditsText;
+    [SerializeField] private RectTransform creditsImage;
 
     // secondary text for additional text in other fonts
     [Tooltip("Aditional text")]
     [SerializeField] private RectTransform creditsAd;
+    [SerializeField] private RectTransform creditsAd2;
 
     [Tooltip("How fast the text moves up")]
     [SerializeField] private float scrollSpeed = 50f;
@@ -27,6 +29,15 @@ public class CreditsRoller : MonoBehaviour
             if (creditsText != null)
             {
                 creditsText.anchoredPosition += Vector2.up * scrollSpeed * Time.deltaTime;
+            }
+            if (creditsText != null)
+            {
+                creditsImage.anchoredPosition += Vector2.up * scrollSpeed * Time.deltaTime;
+            }
+
+            if (creditsText != null)
+            {
+                creditsAd2.anchoredPosition += Vector2.up * scrollSpeed * Time.deltaTime;
             }
 
             // secondary text for additional text in other fonts
