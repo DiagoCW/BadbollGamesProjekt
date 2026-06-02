@@ -19,7 +19,7 @@ public class CreditsRoller : MonoBehaviour
     [SerializeField]private string mainMenu = "MainMenu";
 
     [Tooltip("Time in seconds before automatically returning to main menu")]
-    [SerializeField] private float autoReturnTime = 90f; // 1 minute 30 seconds
+    [SerializeField] private float autoReturnTime = 88f; // less than 1 minute 30 seconds
 
     private float elapsedTime = 0f;
     private float delay = 3f;
