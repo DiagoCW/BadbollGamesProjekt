@@ -160,7 +160,12 @@ public class NewDialogueManager : MonoBehaviour
     {
         if (!dialogueIsPlaying) return;
 
-        if (!isTyping && !dialogueCheck.enabled && (aiAgent == null || !aiAgent.isBlockingDialogue)) // shiw the E checkmark when the npc finishes walking
+        if (aiAgent != null && aiAgent.isBlockingDialogue) // hide E check mark if NPC walking
+        {
+            if (dialogueCheck.enabled) dialogueCheck.enabled = false;
+        }
+        //show it if typing is done
+        else if (!isTyping && !dialogueCheck.enabled)
         {
             dialogueCheck.enabled = true;
         }
@@ -174,7 +179,7 @@ public class NewDialogueManager : MonoBehaviour
 
             if (!isTyping)
             {
-                if (aiAgent != null && aiAgent.isBlockingDialogue) return; // block player from going to next line if the npc is walking
+               // if (aiAgent != null && aiAgent.isBlockingDialogue) return; // block player from going to next line if the npc is walking
                 ContinueStory();
             }
             else
@@ -223,7 +228,16 @@ public class NewDialogueManager : MonoBehaviour
         }
 
         isTyping = false;
-        dialogueCheck.enabled = true;
+        //dialogueCheck.enabled = true;
+        if (aiAgent != null && aiAgent.isBlockingDialogue) // turn on E if the NPC is not blocking
+        {
+            dialogueCheck.enabled = false;
+        }
+        else
+        {
+            dialogueCheck.enabled = true;
+        }
+
         if (currentStory.currentChoices.Count > 0)
         {
             yield return new WaitForSeconds(0.1f);
