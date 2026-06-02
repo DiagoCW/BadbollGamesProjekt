@@ -24,6 +24,11 @@ public class CreditsRoller : MonoBehaviour
     private float elapsedTime = 0f;
     private float delay = 3f;
 
+    private void Start()
+    {
+        Time.timeScale = 1f;
+    }
+
     private void Update()
     {
         elapsedTime += Time.deltaTime;
