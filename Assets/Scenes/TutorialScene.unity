@@ -1508,6 +1508,7 @@ MonoBehaviour:
   dialogueText: {fileID: 1834112657}
   dialogueCheck: {fileID: 1498346361}
   itemPortrait: {fileID: 1077921084}
+  crosshair: {fileID: 0}
   itemDatabase: {fileID: 11400000, guid: ebf6e610692fd9a41b8525a59d798fac, type: 2}
   loadGlobalsJSON: {fileID: 4900000, guid: bc99ec50a9b06534cb1d64861951f3ce, type: 3}
   choicesContainer: {fileID: 823731176}
@@ -55312,6 +55313,7 @@ MonoBehaviour:
   gameInput: {fileID: 1849737989}
   playerCamera: {fileID: 599140792}
   clueboardCamera: {fileID: 1035888979}
+  crosshairUI: {fileID: 1320455638}
   isDraggingThread: 0
   isDraggingClue: 0
 --- !u!65 &1905876300

@@ -7044,6 +7044,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 410230760}
     - target: {fileID: 1229088308314206582, guid: f63db0fb3eeb6e44d809851f0b4ff4a9, type: 3}
+      propertyPath: crosshairUI
+      value: 
+      objectReference: {fileID: 1118400102}
+    - target: {fileID: 1229088308314206582, guid: f63db0fb3eeb6e44d809851f0b4ff4a9, type: 3}
       propertyPath: playerCamera
       value: 
       objectReference: {fileID: 449840688}
@@ -29494,7 +29498,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeImage: {fileID: 1716885947}
-  fadeDuration: 1.5
+  fadeDuration: 10
   startBlack: 1
   FadeInOnStart: 0
 --- !u!4 &1266457901
