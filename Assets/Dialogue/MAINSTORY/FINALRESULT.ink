@@ -2,13 +2,15 @@ INCLUDE globalsmainstory.INK
 EXTERNAL fadeToBlack(alpha, duration)
 -> Start
 === Start ===
+~ finalDialogueTriggered = true
 The officer still isn't here. #speaker: Player
 That should give me a bit of time go over the facts once more. Who did I tell the officer to arrest, again? 
 ~ temp accusedID = getAccusedSuspectID()
+//VAR accusedID = 1
 { accusedID == 1: -> BossMan }
 { accusedID == 2: -> Bartender }
 { accusedID == 0: -> StoreClerk }
-{ accusedID == 3: -> NoSuspect }
+{ accusedID == 5: -> NoSuspect }
 
 = NoSuspect
 Oh, right. I didn't arrest anyone. I couldn't crack the case.
@@ -18,7 +20,7 @@ The evidence that I linked to the suspect were either wrong, or they were actual
 Just in time? More like <i>Not in time</i>. #speaker: Police
 Sorry, that was mean. But I told you, detective. This was a cut and dry case, not every little case is a murder to solve.
 Just hand over the case file and that will be that.
-So that's it? Just like that? It's like the writer just threw something together when he realised that he didn't have an ending for if you didn't manage to catch the suspect. #speaker: Player
+So that's it? Just like that? It's like the writer just threw something together when he realised that he didn't have a proper ending if you fail to catch a suspect. #speaker: Player
 -> Final
 
 = BossMan
@@ -27,9 +29,9 @@ Boss Man. It has to be him. #speaker: Player
 First off, he had the victim's wallet.
 Second, he claims to have found it <b>before</b> a purchase was made at his shop, which was made using the victim's card.
 Third, and most important, he was the one who found the body and called it in. This could have been a ruse to make himself look less suspicious.
-He claimed that he took the wallet as some form of 'payment' for the menial task of always having to return his wallet to him, before realising that the victim was actually dead, at which point he called the police. However, this was a bluff. 
+He claimed that he took the wallet as some form of 'payment' before realising that the victim was actually dead, at which point he called the police. However, this was a bluff. 
 He <i>poisoned</i> the victim's falafel, which would have taken effect almost immediately. He could then approach the body, get his hands on his wallet, and dispose of any evidence; the half-eaten falafelrulle in the trash that matches the one that Peter orders.
-Given the victim's prior history with Boss Man, no one who knew him would even give it a second though. However, It looks like I was... <b>just in time.</b>
+Given the victim's prior history with Boss Man, no one who knew him would even give it a second thought. However, It looks like I was... <b>just in time.</b>
 -> PoliceArrives
 
 = Bartender
@@ -114,12 +116,12 @@ To commerorate this massive achievement, we see it fit that you should be the on
 Don't you need this as evidence for the prosecution? #speaker: Player
 Who cares? I hate this job. I do what I want. #speaker: Police
 This... I don't know what to say. #speaker: Player
-<i>You hold the trisslott with both hands. The final piece of the puzzle, and the entire reason for this whole horrible ordeal. You glance over it, and inspect the winning sum of...</i> #portrait: 0 #speaker: 
+<i>You hold the trisslott with both hands. The final piece of the puzzle, and the entire reason for this whole horrible ordeal. You glance over it, and inspect the winning sum of...</i> #portrait: 5 #speaker: 
 <i>...1000kr?</i> Really? That's it? #speaker: Player #portrait: 
-Oh. That sucks. We didn't actually bother looking at it, we just assumed it had to have been a big enough sum to justify killing a man. #speaker: Police
+Yeah, you would think that it would be a large enough sum to justify murdering someone. #speaker: Police
 I guess it was a big deal for Peter though, this could cover his drinking tab for a few days at least.
 This is very anti-climactic. I don't know how to feel about this. #speaker: Player
-You solved the case, detective. What more do you need? A pat on the shoulder? Get real. Buy yourself something nice with it. Maybe a drink to honor Peter's memory. #speaker: Police
+You solved the case, detective. What more do you need? A pat on the shoulder? Get real. Buy yourself something nice with it. Maybe a drink to honor Peter's memory... #speaker: Police
 -> Final
 
 === BadEnding ===

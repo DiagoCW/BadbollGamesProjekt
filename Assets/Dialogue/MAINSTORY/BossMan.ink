@@ -169,16 +169,16 @@ That doesn't add up. Take a look at this receipt here. #portrait:
 You see Boss Man's eyes glance across the receipt, while he's trying to understand where you're going with this. #speaker:
 I'd recognize a receipt from my shop, obviously. What's the angle here? #speaker: Boss Man
 Well, guess who this receipt belonged to? #speaker: Player
-His eyes stop and dart up from the receipt to look back at you. #speaker: 
-That's right bitch boy... It's clear as day that Peter was here last night, after 2 A.M and shortly before his estimated time of death, buying his nightly falafel. #speaker: Player
+His eyes stop and dart back up from the receipt to look back at you. #speaker: 
+That's right, bitch boy... It's clear as day that Peter was here last night, <b>after</b> 2 A.M and shortly before his estimated time of death, buying his nightly falafel. #speaker: Player
 Ok, wait a minute here, hold on... I just <i>forgot</i> he came here. It was a busy night, and I was tired, yeah? #speaker: Boss Man
 Bullshit artist. Even if that were true, that would mean he still had his wallet on him. And now it's here, with you instead... See where I'm going with this? #speaker: Player
 ~ gainknowledge(stoleWallet)
 He came here last night, bought a falafel, and as he walked away, you went after. Killed him, took his wallet. Bam.
-No, you're wrong! I didn't kill the poor guy! Let me explain...
+No, you're wrong! I didn't kill the poor guy! Let me explain... #speaker: Boss Man
 What's there to explain? You have his wallet, the only way you could have it is if you took it from his body.
 Like you took his wallet, I'm taking you... in, for murder.
-No, wait! I <i>DID</i> take his wallet after I found his body, yeah? But I didn't <i>KILL HIM!</i>
+No, wait! I <i>DID</i> take his wallet after I found his body, yeah? But I didn't <i>KILL HIM!</i> #speaker: Boss Man
 -> LastNight
 
 = LastNight
@@ -187,7 +187,7 @@ Just like I told you before, I soon realized that he was actually dead and so I 
 Then I realized that I still had his wallet, which wasn't a good look for me. I couldn't admit something like that, that would make me look guilty! So I never mentioned it. 
 He died <i>shortly</i> after leaving your shop. You know how it looks, right? #speaker: Player
 I didn't do it, please believe me! #speaker: Boss Man
-Why should I? You lied to me before, you might still be lying.
+Why should I? You lied to me before, you might still be lying. #speaker: Player
 You could have knocked him the fuck out, and it happened to kill him. Let's just say it was manslaughter and call it a day, huh? Heat of the moment! #speaker: Player
 I overheard you speaking with the Officer earlier, and he clearly stated that the victim couldn't have died from that! That means I couldn't have done it, yeah? #speaker: Boss Man
 { knowledge ? victimPoisoned:
