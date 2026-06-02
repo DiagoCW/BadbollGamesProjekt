@@ -140,6 +140,10 @@ public class InkExternalFunctions
             // Tell the player camera to release the target and return to mouse control
             Camera.main.GetComponentInParent<PlayerCamera>()?.SetCinematicTarget(null);
         });
+        story.BindExternalFunction("allowContinueAfter", (float seconds) => 
+        {
+            NewDialogueManager.Instance.AllowContinueAfterDelay(seconds);
+        });
     }
 
     public void Unbind(Story story)
@@ -159,6 +163,7 @@ public class InkExternalFunctions
         story.UnbindExternalFunction("startMovementBlocking");
         story.UnbindExternalFunction("resetCamera");
         story.UnbindExternalFunction("focusCamera");
+        story.UnbindExternalFunction("allowContinueAfter");
 
         // Audio functions
         story.UnbindExternalFunction("playAudio");

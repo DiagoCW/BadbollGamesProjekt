@@ -497,4 +497,29 @@ public class NewDialogueManager : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Forces the dialogue block to lift after a set amount of seconds, allows player to press E early while the NPC is still walking
+    /// </summary>
+    /// <param name="delay"></param>
+    public void AllowContinueAfterDelay(float delay) 
+    {
+        StartCoroutine(AllowContinueRoutine(delay));
+    }
+
+    private IEnumerator AllowContinueRoutine(float delay) 
+    {
+        yield return new WaitForSeconds(delay);
+
+        if (aiAgent != null) 
+        {
+            aiAgent.isBlockingDialogue = false; // disable the lock
+        }
+
+        // show E button if text has already finished typing by the time the lock lifts
+        if (!isTyping) 
+        {
+            dialogueCheck.enabled = true;
+        }
+    }
+
 }

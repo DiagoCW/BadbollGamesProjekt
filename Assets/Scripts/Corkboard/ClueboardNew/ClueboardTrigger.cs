@@ -17,6 +17,10 @@ public class ClueboardTrigger : MonoBehaviour, IInteractable
     [Tooltip("Clueboard camera")]
     [SerializeField] private GameObject clueboardCamera;
 
+    [Header("UI References")]
+    [Tooltip("Drag the player crosshair here so it hiden when the board is open")]
+    [SerializeField] private GameObject crosshairUI;
+
     //[Header("UI Fix")]
     //[Tooltip("Drag your Submit Case button here")]
     //[SerializeField] private GameObject submitButton;
@@ -119,6 +123,7 @@ public class ClueboardTrigger : MonoBehaviour, IInteractable
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = true;
 
+            if (crosshairUI != null) crosshairUI.SetActive(false);
         }
         else
         {
@@ -134,6 +139,8 @@ public class ClueboardTrigger : MonoBehaviour, IInteractable
             // Lock and hide the cursor
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+
+            if (crosshairUI != null) crosshairUI.SetActive(true);
         }
     }
 

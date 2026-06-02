@@ -50,7 +50,7 @@ public class HighlightActivatorIAVersion : MonoBehaviour
 
         if (ThreadManager.Instance != null && ThreadManager.Instance.boardTrigger != null && ThreadManager.Instance.boardTrigger.isViewingBoard) return; // Prevent use if player is looking at clueboard
 
-      //  if (PlayerController.Instance.IsInventoryOpen || NewDialogueManager.Instance.dialogueIsPlaying) return; // Prevent use if inventory or dialogue is open
+        if (PlayerController.Instance.IsInventoryOpen) return; // Prevent use if inventory is open
 
         HighlightVisibleObjects();
         
@@ -63,7 +63,7 @@ public class HighlightActivatorIAVersion : MonoBehaviour
 
     void Update()
     {
-        if (NewDialogueManager.Instance.dialogueIsPlaying) return;
+        //if (NewDialogueManager.Instance.dialogueIsPlaying) return; // commented out to prevent cinematic camera while DV is active bug
         if (IsHighlighting)
         {
             RefreshHighlights();
@@ -75,7 +75,7 @@ public class HighlightActivatorIAVersion : MonoBehaviour
             playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, currentFOV, 10f * Time.deltaTime);
             ClearCurrentHighlights();
         }
-        //else
+        else
         {
             float desiredFOV = IsHighlighting ? zoomFOV : currentFOV;
             playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, desiredFOV, 8f * Time.deltaTime);
