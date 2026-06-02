@@ -10,7 +10,7 @@ That should give me a bit of time go over the facts once more. Who did I tell th
 { accusedID == 1: -> BossMan }
 { accusedID == 2: -> Bartender }
 { accusedID == 0: -> StoreClerk }
-{ accusedID == 5: -> NoSuspect }
+{ accusedID == 5 or 4 or 3: -> NoSuspect }
 
 = NoSuspect
 Oh, right. I didn't arrest anyone. I couldn't crack the case.

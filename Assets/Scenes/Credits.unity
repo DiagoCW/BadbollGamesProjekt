@@ -246,7 +246,7 @@ MonoBehaviour:
   creditsImage: {fileID: 1494350917}
   creditsAd: {fileID: 1093412684}
   creditsAd2: {fileID: 1946933880}
-  scrollSpeed: 25
+  scrollSpeed: 28
   mainMenu: MainMenu
   autoReturnTime: 88
 --- !u!114 &763764897
@@ -575,7 +575,7 @@ MonoBehaviour:
     and Nicholas Francis. Unity is published by Unity Technologies.\r\n\r\n\r\nSPECIAL
     THANKS:\r\nJose Font for overseeing and consulting us throughout the process
     of making this game.\n\nThe members of group 4 who were wonderful to work with.\r\n\n\nThank
-    you for playing Murder On Bj\xF6rkgatan.\nSee you later space detective!\r"
+    you for playing Murder On Bj\xF6rkgatan.\n\n\rSee you, space detective..."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
