@@ -80,6 +80,7 @@ VAR finishedCrimeScene = false
 // AKT 2: SUSPECTS
 
 // BOSS MAN
+VAR bossManBeforeCrimeScene = false
 VAR talkedToBossMan = false
 VAR isTalkingToPolice = false
 VAR canDistract = false

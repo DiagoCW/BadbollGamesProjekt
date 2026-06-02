@@ -1,7 +1,7 @@
 INCLUDE globalsmainstory.INK
 VAR exhaustedOptions = false
 { Suspects ? bossMan: <> Boss Man is currently under suspicion. -> END } #speaker: Player
-{ talkedToBossMan: <>-> CanQuestion|-> Intro }
+{ bossManBeforeCrimeScene: <>-> CanQuestion|-> Intro }
 === Intro ===
 <>Nice driving, asshole! #anim: Yelling #speaker: Boss Man
     //{ talkToPolice: -> CanQuestion.Question } 
@@ -33,7 +33,7 @@ VAR exhaustedOptions = false
             -> Apologize
     * [{I'm sorry. | For crashing my car behind your shop epic style.}]
         That wasn't so hard, now was it? Now get lost, I don't wanna see your face again.
-        ~ talkedToBossMan = true
+        ~ bossManBeforeCrimeScene = true
         { finishedCrimeScene: 
             Actually... I kinda need to take your statement. I'm here on behalf of Peter. #speaker: Player
             -> StartQuestion("For fuck's sake.")
@@ -51,7 +51,12 @@ VAR exhaustedOptions = false
 === CanQuestion
 { isTalkingToPolice: -> StartQuestion.TalkingToPolice }
 What's going on, big guy? Crash any cars lately? #speaker: Boss Man #anim: Talking
-{ finishedCrimeScene: -> Question | I don't have time for this bozo, I've got a crime scene to investigate. -> END }
+{ finishedCrimeScene: 
+    <>-> Question  
+- else:
+    I don't have time for this bozo, I've got a crime scene to investigate. #speaker: Player
+    -> END 
+}
 
 = Question
 * [I've got some questions for you.]

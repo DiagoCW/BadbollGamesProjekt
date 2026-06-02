@@ -21341,7 +21341,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 7e571bdf60db71d4b84e381ffd61d140, type: 3}
   m_Resource: {fileID: 8300000, guid: 7e571bdf60db71d4b84e381ffd61d140, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.05
+  m_Volume: 0.02
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -38971,7 +38971,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7221789743334233440, guid: 074320e8dafa0cb44a6f48bddbeaeb96, type: 3}
       propertyPath: m_Volume
-      value: 0.343
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 7221789743334233440, guid: 074320e8dafa0cb44a6f48bddbeaeb96, type: 3}
       propertyPath: MaxDistance
@@ -46146,10 +46146,10 @@ MonoBehaviour:
   ambienceClips:
   - id: highway-travel-interior
     clip: {fileID: 8300000, guid: e97c81f86b89763489f8d36c27ad3281, type: 3}
-    volume: 0.3
+    volume: 0.15
   - id: PREMONITION-IN-THE-PARK
     clip: {fileID: 8300000, guid: 8cd9758445dd7d04f9b61f86b52435e9, type: 3}
-    volume: 0.3
+    volume: 0.5
   - id: ambiens-1
     clip: {fileID: 8300000, guid: 6dc711ab99b0b154e88fc6a0eb724af5, type: 3}
     volume: 0.05
@@ -46159,7 +46159,7 @@ MonoBehaviour:
     volume: 2
   - id: cardoor-open-close
     clip: {fileID: 8300000, guid: 6c637babace6fef4f9606b00999f0796, type: 3}
-    volume: 2
+    volume: 1.7
 --- !u!43 &2107725001
 Mesh:
   m_ObjectHideFlags: 0
@@ -50086,7 +50086,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7729582276731395754, guid: 36aad984599f71f4d8f6d9dd7d1259ce, type: 3}
       propertyPath: m_Volume
-      value: 0.08
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 7788972421531600572, guid: 36aad984599f71f4d8f6d9dd7d1259ce, type: 3}
       propertyPath: m_Mesh
