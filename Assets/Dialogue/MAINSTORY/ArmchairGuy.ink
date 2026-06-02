@@ -16,12 +16,12 @@ The man is slumped deep in the armchair, snoring loudly. He hasn't even taken a 
 === Hub ===
 { isAsleep: -> SleepingHub | What's going on? -> AwakeHub }
 === SleepingHub ===
-<i>He's still sound asleep.</i> #speaker: Player
+<i>He's still sound asleep.</i> #speaker: 
     + [Wake him up.]
         Hey! #speaker: Player
         Sorry. #speaker: Torsten #anim: Shake #snore: stop
         ~ isAsleep = false
-        { LastNight > 1: <i>I'm never getting anything out of the guy like this... Maybe down the line he will provide me with some information to blow this whole case wide open. But that time is not now.</i> } #speaker:
+        { LastNight > 1: <i>I'm never getting anything out of the guy like this... Maybe down the line he will provide me with some information to blow this whole case wide open. But that time is not now.</i> } #speaker: Player
         <>-> Hub
     + [Leave him be.]
         -> DONE
@@ -47,9 +47,9 @@ I figured... #speaker: Player
 Leif told me that you and he left around the same time last night, is this true? #speaker: Player
 <i>He falls back asleep.</i> #snore: start #speaker:
 HEY! <i>You snap your fingers in his face.</i> #speaker: Player
-Yeah! Yeah, sorry, that's right. I decided to go home and catch up on some Z's, and left with loiter guy. #speaker: Torsten #snore: stop
+Yeah! Yeah, sorry, that's right. I decided to go home and catch up on some Z's, so I left with him. #speaker: Torsten #snore: stop
 The only person left here was Peter. I wonder where he is now? He's usually here by this hour. 
-<i>That confirms it. The bartender lied about his alibi.</i>
+<i>That confirms it. The bartender lied about his alibi.</i> #speaker: 
 -> END
 
 = TrissLott
@@ -64,10 +64,11 @@ But I don't have to tell you that since you already knew all about it, you filth
 <i>No one I've talked to has mentioned this at all... Where's this coming from?</i>  #speaker: Player
 Please, start from the beginning. What's going on here? What trisslott?
 ~ isAsleep = true
-<i>He falls back to sleep again.</i> #snore: start #speaker: 
+<i>He falls back asleep again.</i> #snore: start #speaker: 
 Hey, you have to tell me more about this! #speaker: Player
-<I>...No good, he's fast asleep. I think I've gotten all the information I can about this.</i>
-<i>I should keep this in mind though. If this is true, then it could change things quite a lot...</i> #portrait: 5
+<i>...No good, he's fast asleep. I think I've gotten all the information I can about this.</i>
+<i>So Peter might have won big at triss, huh? I should keep this in mind.</i> #portrait: 5
+<i>If this is true, then it could change things quite a lot...</i> #portrait: 
 ~ getclue(trisslott)
 ~ addClueThroughDialogue()
 -> Hub

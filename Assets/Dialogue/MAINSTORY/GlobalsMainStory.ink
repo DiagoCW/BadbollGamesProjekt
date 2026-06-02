@@ -103,6 +103,7 @@ VAR SuspiciousGuyAlibi = false
 
 VAR goToPoliceHouse = false
 VAR rollCredits = false
+VAR finalDialogueTriggered = false
 
 /*
 
