@@ -55,7 +55,7 @@ public class PlayerCamera : MonoBehaviour
             // Smoothly rotate the camera
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 5f * Time.deltaTime);
 
-            // Sync the xRotation variable so the camera doesn't violently snap when the player gets control back
+            // Sync the xRotation variable so the camera does not just snap when the player gets control back // DOES NOT SEEM TO WORK
             xRotation = transform.localEulerAngles.x;
             if (xRotation > 180f) xRotation -= 360f;
 
