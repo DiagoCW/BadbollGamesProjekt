@@ -34,6 +34,7 @@ EXTERNAL getAccusedSuspectID()
 EXTERNAL startMovementBlocking(triggerName)
 EXTERNAL focusCamera(targetName)
 EXTERNAL resetCamera()
+EXTERNAL allowContinueAfter(float)
 
 EXTERNAL rollCredits()
 

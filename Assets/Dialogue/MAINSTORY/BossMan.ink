@@ -77,11 +77,12 @@ What's going on, big guy? Crash any cars lately? #speaker: Boss Man #anim: Talki
 The officer needs to take your statement. Again... #speaker: Player
 Are you kidding me? What more can I say that I haven't already told you people? How incompetent are you!? #speaker: Boss Man
 You don't really have much of a choice. He's expecting you by the scene, so if I were you I would get going. #speaker: Player
-~ startMovement("Walking")
+~ startMovementBlocking("Walking")
 ~ focusCamera("Boss Man")
+~ allowContinueAfter(5)
 Unbelievable... This is what my skattepengar goes to. #speaker: Boss Man
-<i>Beautiful, he's left the shop unattended. Now I can have a little look around...</i> #speaker: Player
 ~ resetCamera()
+<i>Beautiful, he's left the shop unattended. Now I can have a little look around...</i> #speaker: Player
 ~ isTalkingToPolice = true
 -> END
 
@@ -91,8 +92,9 @@ Yeah. What's the problem? #speaker: Player
 ~ focusCamera("Police Officer")
 Detective, I said that <b>you</b> were supposed to take his statement. #speaker: Police
 Oh. Sorry! Let me do that now real quick. #speaker: Player
-~ startMovement("Walking")
+~ startMovementBlocking("Walking")
 ~ focusCamera("Boss Man")
+~ allowContinueAfter(6)
 You already took my statement! Fuck this. Don't waste my time again. #speaker: Boss Man
 ~ focusCamera("Police Officer")
 C'mon, detective. This is just embarassing. #speaker: Police
