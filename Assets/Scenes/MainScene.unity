@@ -49832,6 +49832,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -79.137
       objectReference: {fileID: 0}
+    - target: {fileID: 6930165582408289737, guid: 36aad984599f71f4d8f6d9dd7d1259ce, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: dcefa9df86eca1b4c87e95c7e9c0159f, type: 2}
     - target: {fileID: 6960736567359849470, guid: 36aad984599f71f4d8f6d9dd7d1259ce, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -50317,9 +50321,17 @@ PrefabInstance:
       value: 2856
       objectReference: {fileID: 0}
     - target: {fileID: 8577623602665189936, guid: 36aad984599f71f4d8f6d9dd7d1259ce, type: 3}
+      propertyPath: m_Looping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8577623602665189936, guid: 36aad984599f71f4d8f6d9dd7d1259ce, type: 3}
       propertyPath: m_PlaybackSpeed
       value: 0.98
       objectReference: {fileID: 0}
+    - target: {fileID: 8577623602665189936, guid: 36aad984599f71f4d8f6d9dd7d1259ce, type: 3}
+      propertyPath: m_TargetTexture
+      value: 
+      objectReference: {fileID: 8400000, guid: f28e43111551f2c42abea9f4711689ae, type: 2}
     - target: {fileID: 8588494610638851833, guid: 36aad984599f71f4d8f6d9dd7d1259ce, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.00922
