@@ -34,10 +34,9 @@ Need another drink? I'd really prefer if you'd buy another beer. #speaker: Barte
 
 // --- MAIN HUB ---
 === StartQuestion(msg) ===
-~ talkedToBartender = true
 {msg} #speaker: Bartender
 -(opts)
-* [About the victim...] -> KnowPeter
+* {not talkedToBartender } [About the victim...] -> KnowPeter
 * /*{ knowledge !? receiptsBelongToVictim}*/ [Last night?] -> LastNight
 * { knowledge ? bartenderAlibi and Suspects !? bartender } [<color=\#FFFF00>About your alibi...</color>] -> Alibi
 * [See you later.] -> END
@@ -104,11 +103,8 @@ You're... you're wrong. I couldn't... I didn't do it! #speaker: Bartender
 -> END
 }
 
-= BossMan
-~ temp m = "Under Construction. Här kan man få mer information efter att Boss Man lagts till som misstänkt."
--> StartQuestion(m)
-
 = KnowPeter
+~ talkedToBartender = true
 I know that he died, yes. Awful way to go. #speaker: Bartender
 What way would that be? #speaker: Player
 Alcohol, as anyone else would tell you. I guess I feel somewhat responsible for it, being the proprietor and main supplier of his lifestyle... But he was a big boy, he could make his own decisions. #speaker: Bartender
@@ -122,48 +118,46 @@ He always got way too drunk and took over the karaoke machine. Do you know what 
 He came here like any other night, business as usual. Well, not in the profitable sense, but something else. He never pays upfront, always tells me to "put it on his tab". #speaker: Bartender
 I suppose there's nothing to be done about that now... At least he can't rack up anymore debt than he already had.
 Come to think of it, he did pay last night. I had to do a double take when I heard him say "put it on my <b>card</b>" instead of "<b>tab</b>".
-{ knowledge ? pocketsEmptied: 
-    -> Wallet
+{ Clues ? receipts and knowledge !? receiptsBelongToVictim:
+    * [<color=\#FFFF00><b>Show receipt from trash</b></color>] 
+    -> ShowReceipt
 - else:
-    Not very frugal with his money, then. #speaker: Player
-    <>-> LastNightCont
+    -> Wallet
 }
 
 = Wallet
 When the body was found, his pockets were emptied. He didn't have his wallet on him. #speaker: Player
-    Then he lost it, simple as. He was prone to losing his wallet during his benders. 
-    He would use it as an excuse to put off paying his tab, but he never had any money to begin with. #speaker: Bartender
-* { Clues ? receipts and knowledge !? receiptsBelongToVictim} [<color=\#FFFF00><b>Show receipt from trash</b></color>] -> ShowReceipt
+Then he lost it, simple as. He was prone to losing his wallet during his benders. 
+He would use it as an excuse to put off paying his tab, but he never had any money to begin with. #speaker: Bartender
+* { Clues ? victimWallet } [<color=\#FFFF00>Boss Man has his wallet.</color>]
+    Huh, no kidding. He's probably one of many people that have found it during the years whenever Peter lost it. I just hope he got something in return. #speaker: Bartender
+    You don't think he could have stolen it somehow? #speaker: Player
+    I don't think he would do that. Unless you have some reason to think otherwise? #speaker: Bartender #anim: Shake
+    -> LastNightCont
 * { knowledge !? stoleWallet and Clues !? victimWallet } [Did he drop it here?]
     Nope, hasn't turned up here. He usually found it by himself somehow. Not that it matters. #speaker: Bartender
     <i>Nothing of note here. It's not hard to believe a drunk like him would lose his wallet constantly.</i> #speaker:
     <i>But he always got it back, one way or another. I need to find out more about this somehow.</i>
     -> LastNightCont
-* { Clues ? victimWallet } [<color=\#FFFF00>Boss Man has his wallet.</color>]
-    Huh, go figure. That's probably how he kept getting it back. He was as much of a regular there as he was here. #speaker: Bartender
-    You don't think that Boss Man could have stolen it? #speaker: Player
-    I don't think so. Unless you know something that I don't, of course. #speaker: Bartender
-    -> LastNightCont
-    
+
 = LastNightCont
 So, was Peter the only one here last night? #speaker: Player
-No, no. Sleepyhead over there and loiter man was here all night. Then they all left shortly after another. #speaker: Bartender
+No, no. Sleepyhead over there and Leif was here all night. Then they all left shortly after another. #speaker: Bartender
 It was another dull and uneventful night. Well, except for Peter's singing.
 Anything else? Was he acting out of character, or did he tell you anything? #speaker: Player
 No, not really. Business as usual. #speaker: Bartender
-// * { knowledge ? bartenderAlibi } [<color=\#FFFF00>That ain't right...</color>] -> Alibi 
 ~ bartenderToldHisAlibi = true
 Alright, that'll be all. #speaker: Player
 -> StartQuestion("Anything else?")
 
 = ShowReceipt
-Wait, do you still have any of his receipts from last night? #speaker: Player
+<>Wait, do you still have any of his receipts from last night? #speaker: Player
 Sure, I think I have them here somewhere... #speaker: Bartender
 Here you go. #anim: Talking
-<i>You check the card code on the bottom of the receipt and compare it to the ones you found in the trash can earlier. <b>It's a match.</b></i> #speaker:
-<i>All these receipts belong to the victim. This also confirms that he was at Boss Man last night and bought a falafelrulle.</i>
+<i>You check the card code on the bottom of the receipt and compare it to the ones you found in the trash can earlier. <b><color=\#FFFF00>It's a match.</color></b></i> #speaker:
+<i>These receipts belong to the victim; this confirms that he was at Boss Man last night and bought a falafelrulle. He was also at the gas station and bought some snus, it seems.</i>
 { Clues ? victimWallet: 
-    <i>...and Boss Man somehow has his wallet. I need to confront him about this.
+    <i>...and Boss Man now somehow has his wallet. I need to confront him about this.
 - else:
     <i>...and then lost his wallet somehow. Could it have been stolen before his death? Or after his death...?</i>
     <i>I need to find that wallet.</i>

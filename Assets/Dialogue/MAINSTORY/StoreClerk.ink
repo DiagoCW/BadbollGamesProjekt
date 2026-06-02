@@ -9,7 +9,7 @@ INCLUDE globalsmainstory.INK
     ~ addsuspect(storeClerk)
     ~ unlockSuspect(storeClerkID)
     -> Intro
-* {finishedCrimeScene and not askedQuestion } [Did you know the victim?] -> Victim
+* {finishedCrimeScene and not askedQuestion and not talkedToCashier} [Did you know the victim?] -> Victim
 * {finishedCrimeScene and not askedQuestion} [About last night...] -> LastNight
 * {askedQuestion} [One more question] -> OneMoreQuestion
 // * {askedQuestion and Clues ? kylarVätska } [About last night...] -> LastNight
@@ -18,7 +18,7 @@ INCLUDE globalsmainstory.INK
 = Victim
 I heard from some customers that they found someone, <i>dead</i>. Scary times we're living in. #anim: Shake
 You don't know who it was, then? #speaker: Player
-Sir, I'm going on the 18th hour of my 30 hour shift. I don't have time to worry about stuff like that. Wait until after my shift if you want to ask me about anything non-work related. #speaker: Store Clerk
+Sir, I'm going on the 18th hour of my 30 hour shift. I don't really have time to worry about stuff like that. Wait until after my shift if you want to ask me about anything non-work related. #speaker: Store Clerk
 ~ talkedToCashier = true
 -> Intro
 

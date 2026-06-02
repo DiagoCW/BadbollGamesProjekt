@@ -39,7 +39,7 @@ The man is slumped deep in the armchair, snoring loudly. He hasn't even taken a 
 = TrissLottAgain
 Torsten, I need to know more about that trisslott. What exactly did Peter tell you? #speaker: Player
 ~ isAsleep = true
-<i>You guessed it, he fell back asleep again.</i> #snore: start speaker: 
+<i>He falls back asleep again.</i> #snore: start speaker: 
 I figured... #speaker: Player
 -> Hub
 
@@ -67,7 +67,7 @@ Please, start from the beginning. What's going on here? What trisslott?
 <i>He falls back to sleep again.</i> #snore: start #speaker: 
 Hey, you have to tell me more about this! #speaker: Player
 <I>...No good, he's fast asleep. I think I've gotten all the information I can about this.</i>
-<i>I should keep this in mind though. If this is true, then it casts a bit of doubt on many of the people I've talked to...</i>
+<i>I should keep this in mind though. If this is true, then it could change things quite a lot...</i> #portrait: 5
 ~ getclue(trisslott)
 ~ addClueThroughDialogue()
 -> Hub
