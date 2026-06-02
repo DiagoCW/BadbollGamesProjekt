@@ -30,6 +30,8 @@ public class PauseMenu : MonoBehaviour
     void Update()
     {
         if (isTransitioning) return;
+
+        if (NewDialogueManager.Instance != null && NewDialogueManager.Instance.dialogueIsPlaying) return;
         
         if((Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape))) // Toggle pause state when pressing p or ESC
         {
