@@ -46248,10 +46248,10 @@ MonoBehaviour:
     volume: 0.3
   - id: PREMONITION-IN-THE-PARK
     clip: {fileID: 8300000, guid: 8cd9758445dd7d04f9b61f86b52435e9, type: 3}
-    volume: 0.5
+    volume: 0.3
   - id: ambiens-1
     clip: {fileID: 8300000, guid: 6dc711ab99b0b154e88fc6a0eb724af5, type: 3}
-    volume: 0.1
+    volume: 0.05
   sfxClips:
   - id: car-crash
     clip: {fileID: 8300000, guid: ee8003f6451d31a498c7f58af27a290c, type: 3}
