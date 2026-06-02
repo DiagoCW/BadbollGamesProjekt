@@ -39,6 +39,36 @@ That's not good. But what if I... #speaker: Player
 ~ playAmbience("ambiens-1")
 <i>You've hit a tree in the middle of a park. Your Honda Civic '89 has been absolutely demolished. You exit the driver's seat, miracolously without a single scratch.</i>
 My car... My lovely little car... A shame that there was no way to avoid this situation. #speaker: Player
+~ startMovementBlocking("Walking")
+~ focusCamera("Police Officer")
 <i>You see the officer from across your shoulder, rushing towards you after he heard the crash.</i>
-Ah, Officer! I'll be with you in but a moment. #speaker: Player
+-> Intro
+
+=== Intro ===
+Jesus, are you alright?! What happened? #speaker: Police #anim: Talking
+Looks like I'm... <i>Jus imhime...</i> time to... Justin... #speaker: Player
+What? What are you talking about, did you have a concussion or something? #speaker: Police
+{ panicked: -> Panicked }
+{ resignedToFate: -> Fate }
+{ steppedOnGas: -> Gas }
+- (Panicked)
+The car started swerving, so I panicked. So what? Big deal, happens to the best of us. I didn't cry like a baby or nothing. #speaker: Player
+But you were barely going 20km an hour... #speaker: Police
+<> -> introcont
+- (Fate)
+I left my fate in the hands of God, and he led me right where I needed to be. Praise his name. #speaker: Player
+Yes, praise his name indeed... #speaker: Police
+<> -> introcont 
+- (Gas)
+I started flooring it. Sadly, my foot got stuck on the pedal. Not much to be done about that. #speaker: Player
+You shouldn't have floored it to begin with, but I guess you're right. #speaker: Police
+<> -> introcont
+- (introcont) Anyway, what took you so long? I've been waiting for quite a while. #speaker: Police
+My car broke down on my way here, but it's alright. I fixed it using my <color=\#FFFF00>Detective Vision.</color> #speaker: Player
+Uh... Ok. I don't know what that means. It sounds cool though, I'm happy for you. #speaker: Police #anim: Shake
+Stop wasting my time, officer. Let's get on with the briefing. #speaker: Player 
+~ startMovement("Walking")
+Alright... Follow me, it's just over here. #speaker: Police
+~ resetCamera()
+~ talkToPolice = true
 -> END

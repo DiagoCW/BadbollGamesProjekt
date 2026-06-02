@@ -60,14 +60,32 @@ public class TriggerTutorial : MonoBehaviour
         if (other.CompareTag("Player") && (bool)trigger
             && !NewDialogueManager.Instance.dialogueIsPlaying)
         {
-            NewDialogueManager.Instance.EnterDialogue(inkJson, null, null);
-            Debug.Log($"Trigger {Inkvariable} activated");
+            if (string.IsNullOrEmpty(Inkvariable))
+            {
+                Animator anim = GameObject.Find(NPCName).GetComponentInChildren<Animator>();
+                TestAIScript aiScript = GameObject.Find(NPCName).GetComponent<TestAIScript>();
+
+                Debug.Log($"Activated function for {anim.name}, {aiScript.name}");
+                NewDialogueManager.Instance.EnterDialogue(inkJson, anim, aiScript);
+            }
+            else
+            {
+                NewDialogueManager.Instance.EnterDialogue(inkJson, null, null);
+                Debug.Log($"Trigger {Inkvariable} activated");
+            }
         }
+
 
         if ((bool)trigger && !string.IsNullOrEmpty(Inkvariable))
         {
             Debug.Log($"Destroying trigger " + Inkvariable);
             Destroy(gameObject);
         }
+
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player")) Destroy(gameObject);
     }
 }

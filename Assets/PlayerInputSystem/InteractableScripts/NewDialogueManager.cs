@@ -30,6 +30,8 @@ public class NewDialogueManager : MonoBehaviour
     [SerializeField] UnityEngine.UI.Image dialogueCheck;
     [Tooltip("Displays clue items while in dialogue")]
     [SerializeField] UnityEngine.UI.Image itemPortrait;
+    [Tooltip("The crosshair. Disables when entering dialogue, and enables when exiting")]
+    [SerializeField] UnityEngine.UI.Image crosshair;
     [Tooltip("The Clue Database. Is needed for displaying clues and retrieve their ID")]
     // [SerializeField]
     public ItemDatabaseObject itemDatabase;
@@ -264,6 +266,26 @@ public class NewDialogueManager : MonoBehaviour
 
         dialogueIsPlaying = true;
         dialoguePanel.SetActive(true);
+        crosshair.gameObject.SetActive(false);
+        itemPortrait.gameObject.SetActive(false);
+        inputCooldownUntil = Time.time + INPUT_COOLDOWN;
+        ContinueStory();
+    }
+
+    public void EnterDialogue(TextAsset inkJson, GameObject go)
+    {
+        npcAnimator = go.GetComponentInChildren<Animator>();
+        aiAgent = go.GetComponent<TestAIScript>();
+        Camera.main.GetComponentInParent<PlayerCamera>()?.SetCinematicTarget(go.transform);
+        if (aiAgent != null && aiAgent.isMoving) return; // Do not initiate dialogue if a character is moving
+        currentStory = new(inkJson.text);
+        dialogueVariables.StartListening(currentStory);
+        //if (agent != null)
+        functions.Bind(currentStory, aiAgent);
+
+        dialogueIsPlaying = true;
+        crosshair.gameObject.SetActive(false);
+        dialoguePanel.SetActive(true);
         itemPortrait.gameObject.SetActive(false);
         inputCooldownUntil = Time.time + INPUT_COOLDOWN;
         ContinueStory();
@@ -272,9 +294,12 @@ public class NewDialogueManager : MonoBehaviour
     // Disables UI, unbinds external functions called from INK, and dialoguevariables stop subscribing to any variable events
     private void ExitDialogue()
     {
+        Camera.main.GetComponentInParent<PlayerCamera>()?.SetCinematicTarget(null);
         dialogueVariables.StopListening(currentStory);
         functions.Unbind(currentStory);
         dialogueIsPlaying = false;
+        crosshair.gameObject.SetActive(true);
+        
         dialoguePanel.SetActive(false);
         dialogueText.text = string.Empty;
         itemPortrait.gameObject.SetActive(false);
