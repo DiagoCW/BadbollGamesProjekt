@@ -219,7 +219,7 @@ public class DisplayInventory : MonoBehaviour
         }
         else
         {
-            // NEW DEBUG LOGGING: Let's see exactly what the mouse is hitting!
+            // DEBUG WHERE IS MOUSE HITTING
             PointerEventData eventData = new PointerEventData(EventSystem.current);
             eventData.position = Input.mousePosition;
             List<RaycastResult> results = new List<RaycastResult>();
@@ -238,8 +238,20 @@ public class DisplayInventory : MonoBehaviour
                 ClueboardSpawner spawner = FindFirstObjectByType<ClueboardSpawner>();
                 if (spawner != null)
                 {
-                    spawner.SpawnClue(itemToDropID);
-                    itemsDisplayed[obj].UpdateSlot(-1, null);
+                    // pre check conditions before dropping stuff from inventory
+                    bool boardIsOpen = ThreadManager.Instance != null && ThreadManager.Instance != null && ThreadManager.Instance.boardTrigger.isViewingBoard;
+                    bool boardNotFull = spawner.spawnedItemIDs.Count < 3;
+                    bool notAlreadyOnBoard = !spawner.spawnedItemIDs.Contains(itemToDropID);
+
+                    if (boardIsOpen && boardNotFull && notAlreadyOnBoard) // only spawn and delete items from inventory if all the conditions are true
+                    {
+                        spawner.SpawnClue(itemToDropID);
+                        itemsDisplayed[obj].UpdateSlot(-1, null);
+                    }
+                    else 
+                    {
+                        // Debug.LogWarning("Could not place clue, board either closed, full, or clue is already placed.")
+                    }
                 }
             }
         }

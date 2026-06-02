@@ -25,6 +25,8 @@ public class FadeInOut : MonoBehaviour // Author: Stefan Cwiek, Isak Sandgren
     [Tooltip("Should the screen fade in from black when this scene starts?")]
     public bool FadeInOnStart = true;
 
+    private Coroutine currentFadeRoutine;
+
     private void Awake()
     {
         if (Instance == null) Instance = this; // Singleton setup
@@ -74,6 +76,7 @@ public class FadeInOut : MonoBehaviour // Author: Stefan Cwiek, Isak Sandgren
     /// <param name="duration">for how long</param>
     public void FadeScreenOnly(float targetAlpha, float duration) 
     {
+        if (currentFadeRoutine != null) StopCoroutine(currentFadeRoutine);
         StartCoroutine(FadeRoutine(fadeImage.color.a, targetAlpha, duration));
     }
     
@@ -89,10 +92,20 @@ public class FadeInOut : MonoBehaviour // Author: Stefan Cwiek, Isak Sandgren
         // Loop every frame until the timer reaches the destination
         while (timer < duration) 
         {
-            timer += Time.unscaledDeltaTime; // track how much time has passed since last frame
-            fadeColor.a = Mathf.Lerp(startAlpha, endAlpha, timer / duration); // Lerp to blend start value and end value based on the percentage of time passed (timer/duration)
+            // temp fix???
+            float timeStep = Time.unscaledDeltaTime;
+            if (timeStep > 0.1f) timeStep = 0.1f;
+
+            timer += timeStep;
+            fadeColor.a = Mathf.Lerp(startAlpha, endAlpha, timer / duration);
             fadeImage.color = fadeColor;
-            yield return null; // Pause the loop here, render the frame, and continue to the next frame
+            yield return null;
+
+
+            //timer += Time.unscaledDeltaTime; // track how much time has passed since last frame
+            //fadeColor.a = Mathf.Lerp(startAlpha, endAlpha, timer / duration); // Lerp to blend start value and end value based on the percentage of time passed (timer/duration)
+            //fadeImage.color = fadeColor;
+            //yield return null; // Pause the loop here, render the frame, and continue to the next frame
         }
 
         fadeColor.a = endAlpha; // failsafe since lerp isnt always fully precise. Snap to alpha

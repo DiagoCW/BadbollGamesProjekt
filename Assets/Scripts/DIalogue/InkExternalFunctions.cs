@@ -41,7 +41,7 @@ public class InkExternalFunctions
         {
             if (FadeInOut.Instance != null) 
             {
-                FadeInOut.Instance.FadeScreenOnly(0f, 2f); // Fades from black to clear in over 2 seconds
+                FadeInOut.Instance.FadeScreenOnly(0f, FadeInOut.Instance.fadeDuration); // Fades from black to clear in over x seconds
             }
         });
         story.BindExternalFunction("unlockSuspect", (int id) =>

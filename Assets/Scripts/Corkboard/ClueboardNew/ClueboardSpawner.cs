@@ -45,6 +45,16 @@ public class ClueboardSpawner : MonoBehaviour
     /// <param name="itemID">The inventory ID of the item being placed on the board</param>
     public void SpawnClue(int itemID)
     {
+        if (ThreadManager.Instance != null && ThreadManager.Instance.boardTrigger != null) 
+        {
+            if (!ThreadManager.Instance.boardTrigger.isViewingBoard) return;// dont spawn clues onto the clueboard if clueboard is closed
+        }
+
+        if (spawnedItemIDs.Count >= 3) // limit number of items spawned to 3
+        {
+            return;
+        }
+        
         // Stop if this clue is already somewhere on the board
         if (spawnedItemIDs.Contains(itemID))
         {
