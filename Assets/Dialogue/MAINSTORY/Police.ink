@@ -129,9 +129,23 @@ What's up, doc? #speaker: Police
 = GetLead
 I need to solve this case immediately. And I need suspects to solve the case. I can't solve a case if I don't have a suspect. Please, officer! I need help! Anything! #speaker: Player
 Jesus, alright, relax man... I'll humour you, ok? #speaker: Police #anim: Shake
-{ Clues !? victimWallet: You could try to track down his wallet somehow. <i>Assuming</i> he was robbed, then whoever robbed him should have his wallet. You just gotta find out who. Easy. } #speaker: Police #anim: Talking
-{ knowledge !? victimPoisoned: I'm sure he died because he was an alcoholic. But, if I were to put myself into your shoes, that's not a satisfying deduction. Maybe there's an alternative explanation to his death? } #speaker: Police
-{ Clues !? trisslott: I see you found his wallet, but it's not exactly worth robbing him for. He could have had something else entirely that was the reason for robbing him... }
+{ not findWallet and not trisslottLead and knowledge !? victimPoisoned: -> poisonLead }
+{ not poisonLead and not trisslottLead and Clues !? victimWallet: -> findWallet } 
+{ not poisonLead and not findWallet and Clues !? trisslott: -> trisslottLead }
+* -> noMoreLeads 
+-(poisonLead)
+I'm sure he died because he was an alcoholic. But, if I were to put myself into your shoes, that's not a satisfying deduction. Maybe there's an alternative explanation to his death? #speaker: Police #anim: Talking
+    -> end 
+-(findWallet)
+You could try to track down his wallet somehow. <i>Assuming</i> he was robbed, then whoever robbed him should have his wallet. You just gotta find out who. Easy. #speaker: Police #anim: Talking
+    -> end 
+-(trisslottLead)
+I see you found his wallet, but it's not exactly worth robbing him for. He could have had something else entirely that was the reason for robbing him... Someone has to know something about it. #speaker: Police #anim: Talking 
+    -> end 
+-(noMoreLeads)
+I'd say that you have everything to find your imagined suspect at this point. If you still don't, then that just means you have some more leg work to do. #speaker: Police #anim: Talking
+    -> end
+-(end)
 Retrace your steps, detective. Maybe something has showed up that you missed. Talk to people, look around. -> END
 
 = SearchTrash

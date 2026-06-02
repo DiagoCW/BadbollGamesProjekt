@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: 5
   uiDisplay: {fileID: 21300000, guid: b0ad20fbe6914bd4fbb789afd031d115, type: 3}
-  description: 'A winning Trisslott. Prize: 1000 kr. That''s a lot less impressive
-    than it sounded...
+  description: 'Peter supposedly had a winning trisslott, and it sounds like at was
+    a rather huge sum... What does it mean, and where could it be now?
 
 '

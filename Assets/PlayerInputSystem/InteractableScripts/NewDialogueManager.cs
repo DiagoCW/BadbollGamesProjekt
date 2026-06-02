@@ -276,8 +276,8 @@ public class NewDialogueManager : MonoBehaviour
     {
         npcAnimator = go.GetComponentInChildren<Animator>();
         aiAgent = go.GetComponent<TestAIScript>();
-        Camera.main.GetComponentInParent<PlayerCamera>()?.SetCinematicTarget(go.transform);
         if (aiAgent != null && aiAgent.isMoving) return; // Do not initiate dialogue if a character is moving
+        Camera.main.GetComponentInParent<PlayerCamera>()?.SetCinematicTarget(go.transform);
         currentStory = new(inkJson.text);
         dialogueVariables.StartListening(currentStory);
         //if (agent != null)

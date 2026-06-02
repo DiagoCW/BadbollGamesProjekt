@@ -77,6 +77,8 @@ After that, me and Torsten left an hour or so before closing, and Peter was alon
 Are you sure? The bartender told me that you all left at around the same time. #speaker: Player
 That ain't right. After Peter came back from the shop, he was lowkey ruining the vibe so me and Torsten went home. #speaker: Leif
 ~ gainknowledge(bartenderAlibi)
+Can anyone verify this? #speaker: Player
+Yeah, that would be Torsten. Even if he falls asleep, just push through and keep asking him! He'll tell you the same thing that I did. #speaker: Leif
 <i>I have to remember to confront the bartender about this. It could be important.</i> #speaker: 
 -> QuestionHub
 - else:

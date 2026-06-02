@@ -221,7 +221,7 @@ Alright. I'll see where this goes, but don't expect to be in the clear because o
 
 = Call
 Didn't you already take my statement about this? #speaker: Boss Man
-The officer did, yes. I would like to hear it as well. Spare me no details, capische? #speaker: Player
+The officer that arrived at the scen did some brief questioning, but I'd like to hear the whole story. Spare me no details, capische? #speaker: Player
 Fine, the quicker the better. #speaker: Boss Man
 Last night, at maybe around 2 A.M, I closed up shop and headed home.
 That's when I stumbled upon him. I though for sure that he had just passed out from another night of drinking.
