@@ -1520,7 +1520,7 @@ MonoBehaviour:
   playerPanel: {fileID: 2054589848}
   npcText: {fileID: 421564623}
   playerText: {fileID: 396429091}
-  typingSpeed: 0.03
+  typingSpeed: 0.02
 --- !u!4 &40409938
 Transform:
   m_ObjectHideFlags: 0
