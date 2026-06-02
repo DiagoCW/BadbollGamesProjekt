@@ -17,12 +17,22 @@ public class PlayerCamera : MonoBehaviour
     [Header("Cinematic Settings")]
     [Tooltip("How much higher than the target's origin the camera should look)")]
     [SerializeField] private float cinematicHeightOffset = 1.5f;
+    [Tooltip("How fast camera pans to target and back")]
+    [SerializeField] private float cinematicPanSpeed = 5f;
 
     private float xRotation = 0f; // Tracks up/down rotation state to allow for clamping.
    // private float yRotation = 0f; // Tracks left/right rotation state
 
     private Transform cinematicTarget;
-    private bool isCinematicLook = false;
+
+    // State tracking of camera state
+    private enum CameraState { Free, Cinematic, Returning}
+    private CameraState currentState = CameraState.Free;
+
+    // Store camera location before looking at the "cinematic" camera
+    private Quaternion storedLocalRotation;
+    private float storedXrotation;
+
 
     private void Start()
     {
@@ -33,7 +43,24 @@ public class PlayerCamera : MonoBehaviour
     public void SetCinematicTarget(Transform target)
     {
         cinematicTarget = target;
-        isCinematicLook = (target != null);
+
+        if (target != null) 
+        {
+            if (currentState == CameraState.Free) // store rotation when going from free look
+            {
+                storedLocalRotation = transform.localRotation;
+                storedXrotation = xRotation;
+            }
+            currentState = CameraState.Cinematic;
+        }
+        else 
+        {
+            if (currentState == CameraState.Cinematic) 
+            {
+                currentState = CameraState.Returning;
+            }
+        }
+
     }
 
     private void LateUpdate()
@@ -44,25 +71,41 @@ public class PlayerCamera : MonoBehaviour
             return;
         }
 
-        if (isCinematicLook && cinematicTarget != null)
+        if (currentState == CameraState.Cinematic) // Looking at NPC
         {
+            if (cinematicTarget == null) 
+            {
+                currentState = CameraState.Returning;
+                return;
+            }
+            
             Vector3 targetPosition = cinematicTarget.position + (Vector3.up * cinematicHeightOffset);
-
             // Calculate the direction to the adjusted target position
             Vector3 direction = targetPosition - transform.position;
             Quaternion targetRotation = Quaternion.LookRotation(direction);
 
             // Smoothly rotate the camera
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 5f * Time.deltaTime);
-
-            // Sync the xRotation variable so the camera does not just snap when the player gets control back // DOES NOT SEEM TO WORK
-            xRotation = transform.localEulerAngles.x;
-            if (xRotation > 180f) xRotation -= 360f;
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, cinematicPanSpeed * Time.deltaTime);
 
             return; 
         }
 
-        HandleCameraLook();
+        // When returning to OG view
+        if (currentState == CameraState.Returning)
+        {
+            transform.localRotation = Quaternion.Slerp(transform.localRotation, storedLocalRotation, cinematicPanSpeed * Time.deltaTime);
+
+            if (Quaternion.Angle(transform.localRotation, storedLocalRotation) < 0.5f) 
+            {
+                transform.localRotation = storedLocalRotation;
+                xRotation = storedXrotation;
+
+                currentState = CameraState.Free;
+            }
+            return;
+        }
+
+        HandleCameraLook(); // Free, OG, Look
     }
 
     /// <summary>
