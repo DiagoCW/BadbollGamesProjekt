@@ -40,11 +40,9 @@ public class InteractableItem : MonoBehaviour, IInteractable
     {
         // If currently available for interaction, check whether Detective Vision is currently highlighting objects.
         // If not, trigger standard dialogue.
-        if (inkJson != null && !highlighter.IsHighlighting)
-            NewDialogueManager.Instance.EnterDialogue(inkJson, null, null);
-
+        
         // If the objects condition for being highlighted is true, and is also currently being highlighted with Detective Vision:
-        else if (outline != null && outline.hasBeenHighlighted)
+        if (outline != null && outline.hasBeenHighlighted)
         {
             //Debug.Log("Detective vision enabled, and item is interacted with");
             if (inkJson2 != null) // Null check in case the second INK-file is missing 
@@ -72,7 +70,9 @@ public class InteractableItem : MonoBehaviour, IInteractable
                 if (destroyOnPickup) Destroy(gameObject); // If box checked, destroy the object when its been picked up
             }
         }
-        
+        else if (inkJson != null && !highlighter.IsHighlighting)
+            NewDialogueManager.Instance.EnterDialogue(inkJson, null, null);
+
         //else Debug.Log("Detective vision NOT enabled, and item is interacted with");
     }
 }

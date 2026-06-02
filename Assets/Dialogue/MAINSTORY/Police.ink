@@ -1,5 +1,7 @@
 INCLUDE globalsmainstory.INK
-{ talkToPolice: <>-> Brief | -> Intro }
+-> Brief
+//{ talkToPolice: <>-> Brief | -> Intro }
+/*
 === Intro ===
 Jesus, are you alright?! What happened? #speaker: Police #anim: Talking
 Looks like I'm... <i>Jus imhime...</i> time to... Justin... #speaker: Player
@@ -27,7 +29,7 @@ Alright... Walk with me, it's just over here. #speaker: Police
 ~ startMovement("Walking")
 ~ talkToPolice = true
 -> END
-
+*/
 === Brief ===
 { talkToPoliceAgain: -> Continued }
 What's the MO, chief? What's the beef, who's the perp? 10-17, over. #speaker: Player
@@ -61,6 +63,7 @@ So, that's pretty much it! Any questions?
 -> END
 
 === Continued ===
+<>
 { finishedCrimeScene: -> Hub }
 { foundAllClues():
     -> Questions

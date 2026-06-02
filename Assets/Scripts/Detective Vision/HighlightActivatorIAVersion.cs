@@ -46,7 +46,7 @@ public class HighlightActivatorIAVersion : MonoBehaviour
 
     private void GameInput_OnHighlightAction(object sender, System.EventArgs e)
     {
-        if (playerCamera == null || !playerCamera.isActiveAndEnabled) return; // Prevent use if the camera is disabled
+        if (NewDialogueManager.Instance.dialogueIsPlaying || playerCamera == null || !playerCamera.isActiveAndEnabled) return; // Prevent use if the camera is disabled
 
         if (ThreadManager.Instance != null && ThreadManager.Instance.boardTrigger != null && ThreadManager.Instance.boardTrigger.isViewingBoard) return; // Prevent use if player is looking at clueboard
 
@@ -63,6 +63,7 @@ public class HighlightActivatorIAVersion : MonoBehaviour
 
     void Update()
     {
+        if (NewDialogueManager.Instance.dialogueIsPlaying) return;
         if (IsHighlighting)
         {
             RefreshHighlights();
@@ -89,6 +90,7 @@ public class HighlightActivatorIAVersion : MonoBehaviour
     /// </summary>
     private void RefreshHighlights()
     {
+        if (NewDialogueManager.Instance.dialogueIsPlaying) return;
         GameObject[] candidates = GameObject.FindGameObjectsWithTag("Clue");
         if (candidates == null || candidates.Length == 0)
         {

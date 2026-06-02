@@ -1,5 +1,6 @@
 INCLUDE globalsmainstory.INK
-{ talkedToBartender: <>-> CanQuestion | -> Intro }
+<>
+{ talkedToBartender: -> CanQuestion | -> Intro }
 === Intro() ===
 { What can I get you? | { ~Anything else? | What'll it be? } } #anim: Talking #speaker: Bartender
     * {debug} [LÅS UPP SOM SUSPECT]

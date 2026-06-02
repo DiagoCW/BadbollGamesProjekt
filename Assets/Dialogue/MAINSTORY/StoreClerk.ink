@@ -1,5 +1,6 @@
 INCLUDE globalsmainstory.INK
 #speaker: Store Clerk #anim: Talking
+<>
 { Suspects ? storeClerk: We're done here. I will answer no further questions. }
 { askedQuestion: Welcome back! Hope you didn't have any more questions, because I won't answer them. | Welcome, welcome! What can I do for you today? }
 -> Intro

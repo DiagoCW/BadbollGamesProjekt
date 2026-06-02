@@ -13,7 +13,8 @@ That should give me a bit of time go over the facts once more. Who did I tell th
 = NoSuspect
 Oh, right. I didn't arrest anyone. I couldn't crack the case.
 The evidence that I linked to the suspect were either wrong, or they were actually innocent all along.
-~ startMovement("Walking")
+~ startMovementBlocking("Walking")
+~ focusCamera("Officer")
 Just in time? More like <i>Not in time</i>. #speaker: Police
 Sorry, that was mean. But I told you, detective. This was a cut and dry case, not every little case is a murder to solve.
 Just hand over the case file and that will be that.
@@ -61,7 +62,8 @@ However, it looks like I was... <b>just in time...</b>
 -> PoliceArrives
 
 = PoliceArrives
-~ startMovement("Walking")
+~ startMovementBlocking("Walking")
+~ focusCamera("Officer")
 Very impressive, detective. Very impressive indeed. #speaker: Police
 No thanks to you. If I hadn't solved this case, you would just chalk his death up to alcohol poisoning. #speaker: Player
 C'mon, don't be like that. We were a team you and I! We're just in time! #speaker: Police
@@ -82,12 +84,12 @@ Trust me, you don't want to know. #speaker: Police
 - else: 
 You certainly didn't skimp on using your Detective Vision... I have {dvisionTotalTime} seconds recorded here. That's not good.
 Why? What do you mean? #speaker: Player
-I mean, if you've used it this liberally during all your years in service, and considering the strain that it puts on you... #speaker: Police
-You only have 5 months left to live.
+I mean, if you've used it this liberally during all your years in service considering the strain that it puts on you... #speaker: Police
+I'd say you only have 5 months left to live.
 Oh... #speaker: Player
 Yeah, but don't worry about it. We still have to assess your deduction on the case, and subsequent arrest of the culprit! #speaker: Police
 I kind of don't care about anything anymore... #speaker: Player
-If I knew you'd be such a baby about it, I wouldn't have told you. Get over it. Now, moving on... #speaker: Police
+If I knew you'd be such a baby about it, I wouldn't have told you. Now, moving on... #speaker: Police
 }
 - -> FinalSuspect
 
@@ -158,7 +160,7 @@ It just does, deal with it. #speaker: Police
 === Final ===
 That'll be all. Until next time, detective. #speaker: Police
 { dvisionTotalTime <= 50 and trueEnding:
-    [<color=\#FFFF00>Hold on a minute...]
+    * [<color=\#FFFF00>Hold on a minute...]
         -> TrueEnding
 - else:
     ~ rollCredits()

@@ -58,6 +58,7 @@ public class GameInput : MonoBehaviour // Author: Stefan Cwiek
     
     private void Highlight_performed(InputAction.CallbackContext obj)
     {
+        if (NewDialogueManager.Instance.dialogueIsPlaying) return;
         OnHighlightAction?.Invoke(this, EventArgs.Empty);
     }
 

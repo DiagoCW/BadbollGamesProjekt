@@ -31,6 +31,10 @@ EXTERNAL changeTypingSpeed(int)
 EXTERNAL addClueThroughDialogue()
 EXTERNAL getAccusedSuspectID()
 
+EXTERNAL startMovementBlocking(triggerName)
+EXTERNAL focusCamera(targetName)
+EXTERNAL resetCamera()
+
 EXTERNAL rollCredits()
 
 === function unlockAllSuspects()

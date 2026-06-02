@@ -16,9 +16,11 @@ The man before you is clearly intoxicated. Inebriated, even. Absolutely piss dru
 = GainEntry
 What? Why? #speaker: Leif
 ~ startMovement("Running")
+~ focusCamera("Leif")
 ~ ranaway = true
 You'll never catch me pig!!! //# anim: Running
 <i>This guy seems suspicious... I have to track him down.</i> #speaker: Player
+~ resetCamera()
 ->END
 
 === Question ===

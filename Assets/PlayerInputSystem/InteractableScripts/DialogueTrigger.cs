@@ -37,7 +37,8 @@ public class DialogueTrigger : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        NewDialogueManager.Instance.EnterDialogue(inkJson, npcAnimator, aiScript);
+        //NewDialogueManager.Instance.EnterDialogue(inkJson, npcAnimator, aiScript);
+        NewDialogueManager.Instance.EnterDialogue(inkJson, gameObject);
     }
 
     void Update()

@@ -1,10 +1,7 @@
 INCLUDE globalsmainstory.INK
-
-// local variable to track if he is snoring
 VAR isAsleep = true
-
-// check if we met him before
-{ talkedToArmchairGuy: What's going on? -> Hub | -> Intro }
+<>
+{ talkedToArmchairGuy: -> Hub | -> Intro }
 === Intro ===
 The man is slumped deep in the armchair, snoring loudly. He hasn't even taken a single bite from his princesstårta before he fell asleep. #speaker: 
     * { finishedCrimeScene } [Wake him up.]
@@ -17,8 +14,9 @@ The man is slumped deep in the armchair, snoring loudly. He hasn't even taken a 
         -> DONE
 
 === Hub ===
-{ isAsleep: -> SleepingHub | -> AwakeHub }
+{ isAsleep: -> SleepingHub | What's going on? -> AwakeHub }
 === SleepingHub ===
+<i>He's still sound asleep.</i> #speaker: Player
     + [Wake him up.]
         Hey! #speaker: Player
         Sorry. #speaker: Torsten #anim: Shake #snore: stop
