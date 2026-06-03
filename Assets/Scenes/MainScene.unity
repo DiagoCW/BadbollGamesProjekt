@@ -25648,10 +25648,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1122867720}
-  - component: {fileID: 1122867719}
   - component: {fileID: 1122867718}
   - component: {fileID: 1122867717}
   - component: {fileID: 1122867716}
+  - component: {fileID: 1122867721}
   m_Layer: 0
   m_Name: Trollkarl
   m_TagString: NPC
@@ -25716,22 +25716,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inkJson: {fileID: 4900000, guid: b0f30bda2d55c384ebe86e2463e0f955, type: 3}
---- !u!114 &1122867719
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1122867715}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9bb7deca832e7b444af57b3ce96794b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  destination: {fileID: 337600577}
-  fadeDuration: 4
-  inkVariableName: goToPoliceHouse
-  arrivalDialogue: {fileID: 4900000, guid: ce6982055bd3a01409926b6b9e198853, type: 3}
 --- !u!4 &1122867720
 Transform:
   m_ObjectHideFlags: 0
@@ -25748,6 +25732,22 @@ Transform:
   - {fileID: 1206659787}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 12.15, z: 0}
+--- !u!114 &1122867721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1122867715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bb7deca832e7b444af57b3ce96794b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destination: {fileID: 337600577}
+  fadeDuration: 1.5
+  inkVariableName: goToPoliceHouse
+  arrivalDialogue: {fileID: 0}
 --- !u!1001 &1134404415
 PrefabInstance:
   m_ObjectHideFlags: 0
