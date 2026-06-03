@@ -73,6 +73,7 @@ EXTERNAL lowerPitch(string)
 === InvestigateHole ===
 { inspectedHole:
     <i>I need to find something to plug the hole, something to bind it tight, and some fluid to replace what I lost. Time to lock in.</i>
+    <i>Once I have enough items to connect to the car engine, I should go to the clueboard in my trunk and drag the items over from my inventory.</i>
     -> END
 }
 

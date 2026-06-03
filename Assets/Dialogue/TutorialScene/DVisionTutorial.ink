@@ -1,4 +1,5 @@
 <i><color=\#FFA500>It's boring to wander aimlessly. If I concentrate [Hold Right-Click], I can see past an object's normal use and spot its detective-worthy value.</color></i>
-<i><color=\#FFA500>Careful though! Forcing my brain to work like that causes massive strain. If I rely on it too much, my final score for the case will take a huge hit.</color></i>
 <i><color=\#FFA500>I don't need to hold the focus down forever. Once an item is highlighted, I have a short window to examine it normally. But if I wait too long, I'll forget why I cared and have to do it all over again.</color></i>
+<i><color=\#FFA500>Careful though! Forcing my brain to work like that causes massive strain. If I rely on it too much, my final score for the case will take a huge hit.</color></i>
+<i><color=\#FFA500>However, feel free to use it as much as you want during this time! The final time will only count once you begin the actual investigation.</color></i>
 -> END
