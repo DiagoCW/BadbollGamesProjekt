@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 /// <summary>
 /// Controls the tutorial menu. Allows the palyer to click through multiple pages of instructions.
@@ -18,8 +19,8 @@ public class FieldManual : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0)) NextPage(); // Left click makes the page go forward
-        else if (Input.GetMouseButtonDown(1)) PreviousPage(); // Right click makes page go backward
+        if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.D)) NextPage(); // Left click makes the page go forward
+        else if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.A)) PreviousPage(); // Right click makes page go backward
     }
 
     /// <summary>

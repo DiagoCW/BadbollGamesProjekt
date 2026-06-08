@@ -903,6 +903,82 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1449518826}
   m_SourcePrefab: {fileID: 100100000, guid: 005a89c68984c9d46befae3348f84b8b, type: 3}
+--- !u!1 &40718384
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 40718385}
+  - component: {fileID: 40718387}
+  - component: {fileID: 40718386}
+  m_Layer: 5
+  m_Name: GuidePage4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &40718385
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 40718384}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.5001958, y: 0.5001958, z: 0.5001958}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1773019041}
+  m_Father: {fileID: 8038719735858826702}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1600, y: 900}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &40718386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 40718384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.78039217}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &40718387
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 40718384}
+  m_CullTransparentMesh: 1
 --- !u!1 &41521406
 GameObject:
   m_ObjectHideFlags: 0
@@ -14048,41 +14124,40 @@ PrefabInstance:
 
 
 
-        TRANSFER CLUES: Click and drag items
-        from your inventory onto the board.
+        TRANSFER CLUES: Open your Inventory
+        with [TAB], then click and drag any item from your inventory on to the clueboard.
 
 
 
-        PLACE CLUES: Drag photos from
-        the spawn tray into any empty slot on the board.
+        PLACE
+        CLUES: Drag the clues from the spawn tray into any empty slot on the board.
 
 
 
-        FIND SUSPECTS:
-        Explore the game to uncover suspects. They will automatically appear at the
-        top of the board once discovered.
+        FIND
+        SUSPECTS: Explore the game to uncover suspects. They will automatically appear
+        at the top of the board once discovered.
 
 
 
-        CONNECT THREADS: Click and drag
-        a red thread from a Suspect to a Clue to connect them. (Right-click while
-        drawing to cancel).
+        CONNECT THREADS: Click
+        and drag on a suspect towards a clue to form a connection with red thread.
 
 
 
-        CUT STRINGS: Left-click any connected Clue
-        to remove the connection.
+        CUT
+        STRINGS: Left-click any connected Clue to remove the connection.
 
 
 
-        RETURN ITEMS: Right-click a Clue on
-        the board to send it back to your inventory.
+        RETURN
+        ITEMS: Right-click a Clue on the board to send it back to your inventory.
 
 
-        SOLVE THE CASE: To
-        decide which suspect is guilty, connect 3 Clues to their photo. Once you
-        do, the "Submit Solution" button will turn green. Click it to submit your
-        evidence.'
+        SOLVE
+        THE CASE: To decide which suspect is guilty, connect 3 Clues to their photo.
+        Once you do, the "Submit Solution" button will turn green. Click it to submit
+        your evidence.'
       objectReference: {fileID: 0}
     - target: {fileID: 4595600416492452890, guid: dc7360efdc9ea504d9ae1776f72d8632, type: 3}
       propertyPath: m_Name
@@ -16445,6 +16520,7 @@ MonoBehaviour:
   playerPanel: {fileID: 1883761120}
   npcText: {fileID: 1031264302}
   playerText: {fileID: 2084618338}
+  typingAudioSource: {fileID: 8300000, guid: 04d00f392a21f9849a1448ae9dac3e1a, type: 3}
   typingSpeed: 0.02
 --- !u!4 &652223531
 Transform:
@@ -39059,7 +39135,7 @@ MonoBehaviour:
   activator: {fileID: 832864061}
   volume: {fileID: 1736379147}
   visionSaturation: -65
-  visionVignetteIntensity: 0.8
+  visionVignetteIntensity: 0.601
   lerpSpeed: 8
   boostBloomDuringHighlight: 1
   activeBloomIntensity: 3.5
@@ -39846,6 +39922,149 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4170723076871718782, guid: cc1a29695ab6b464fbbb46b96f6e7364, type: 3}
   m_PrefabInstance: {fileID: 1769723720}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1773019040
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1773019041}
+  - component: {fileID: 1773019043}
+  - component: {fileID: 1773019042}
+  m_Layer: 5
+  m_Name: DialogueText (TMP)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1773019041
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1773019040}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 40718385}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -127, y: -110}
+  m_SizeDelta: {x: 1150, y: 1100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1773019042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1773019040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: "TALKING TO PEOPLE\n\nTalking to people can be hard. As a detective, it
+    can still be hard.\n\nMost of your information will come from talking to the
+    people that you encounter. You may learn of new information or leads that will
+    nudge you in the right direction in order to uncover new evidence. \n\nSometimes
+    you will hit a brick wall when interrogating someone. At that point, your best
+    course of action is to either find someone else to talk to, as they may now have
+    new information to divulge, or you can take a look around using your Detective
+    Vision (Next Page)."
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 9c77d99a005c452478bbecfefb2d60d7, type: 2}
+  m_sharedMaterial: {fileID: 5744245805278149646, guid: 9c77d99a005c452478bbecfefb2d60d7, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 37
+  m_fontSizeBase: 37
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 1
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 256
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 2
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 1
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: -41.708374, y: 29.314392, z: -302.41528, w: 225.37946}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &1773019043
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1773019040}
+  m_CullTransparentMesh: 1
 --- !u!1 &1774808635
 GameObject:
   m_ObjectHideFlags: 0
@@ -46046,7 +46265,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.119
+  m_Volume: 1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -46149,7 +46368,7 @@ MonoBehaviour:
     volume: 0.15
   - id: PREMONITION-IN-THE-PARK
     clip: {fileID: 8300000, guid: 8cd9758445dd7d04f9b61f86b52435e9, type: 3}
-    volume: 0.5
+    volume: 0.8
   - id: ambiens-1
     clip: {fileID: 8300000, guid: 6dc711ab99b0b154e88fc6a0eb724af5, type: 3}
     volume: 0.05
@@ -51365,6 +51584,23 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1168499699}
+    - target: {fileID: 1561929899444233703, guid: c58d34a73b8fb5547a7c842330d2c720, type: 3}
+      propertyPath: m_text
+      value: "DETECTIVE VISION\n\n\nYou can see things that other people might not
+        even shoot a second glance at. Hold [Right-Click] to activate your Detective
+        Vision. This will highlight crucial evidence hidden in the environment.\n\nExhausting
+        your Detective Vision helps no one; most evidence need to fulfil a certain
+        condition before they can be highlighted. Unless you talk to people and find
+        new leads, you might not uncover anything with your Detective Vision. \n\nAs
+        good practice, you do not need to use your Detective Vision up to the point
+        of interacting with the highlighted item; once highlighted, you will receive
+        a grace period of 5 seconds to interact with it. Once those seconds are up
+        however, you'll need to highlight it again.\n\nCaution: Your Detective Vision
+        inflicts unnecessary strain on you. If you use it above a certain amount
+        of time, it will reflect poorly on your evaluation by the end of the case.
+        This should not discourage you from using it altogether, however; use it
+        responisibly, detective."
+      objectReference: {fileID: 0}
     - target: {fileID: 1747028152663186025, guid: c58d34a73b8fb5547a7c842330d2c720, type: 3}
       propertyPath: m_Name
       value: pauseMenu
@@ -51379,22 +51615,39 @@ PrefabInstance:
       objectReference: {fileID: 1168499699}
     - target: {fileID: 2700855029537268881, guid: c58d34a73b8fb5547a7c842330d2c720, type: 3}
       propertyPath: m_text
-      value: 'NVENTORY & EVIDENCE
-
-
-
-        A disorganized detective is a dead detective.
-
-
-
-        Press
-        TAB to open your clipboard. Here you can review the evidence you''ve collected
-        from the crime scene. These clues can then be dragged over to your Clueboard.'
+      value: "INVENTORY & EVIDENCE\n\n\nA disorganized detective is a dead detective.
+        A dead detective is not good. Therefore, a detective should be organized.
+        That's what we call deduction.\n\n\nPress [TAB] to open your clipboard. Here
+        you can review the evidence you've collected thus far during your investigation.
+        These clues are then used to create connections to suspects on your clueboard.
+        \n\nInteract with your clueboard for further instructions on how to use it."
       objectReference: {fileID: 0}
     - target: {fileID: 2752276537040216215, guid: c58d34a73b8fb5547a7c842330d2c720, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1168499699}
+    - target: {fileID: 2913917896218490774, guid: c58d34a73b8fb5547a7c842330d2c720, type: 3}
+      propertyPath: m_text
+      value: 'STANDARD PROCEDURE
+
+
+
+        Your job is simple. Explore the town,
+        talk to the locals, and gather evidence.
+
+
+
+        Once you have enough
+        pieces of the puzzle, head back to the trunk of your car to use the clueboard.
+        Connect the evidence to a suspect, and pin down the culprit.
+
+
+        [Left-Click]
+        with your mouse or press [D] to flip to the next page.
+
+        [Right-Click]
+        with your mouse or press [A] to flip to the previous page.'
+      objectReference: {fileID: 0}
     - target: {fileID: 5848593434675329200, guid: c58d34a73b8fb5547a7c842330d2c720, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -51475,11 +51728,45 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8853279250141322955, guid: c58d34a73b8fb5547a7c842330d2c720, type: 3}
+      propertyPath: pages.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8853279250141322955, guid: c58d34a73b8fb5547a7c842330d2c720, type: 3}
+      propertyPath: 'pages.Array.data[1]'
+      value: 
+      objectReference: {fileID: 40718384}
+    - target: {fileID: 8853279250141322955, guid: c58d34a73b8fb5547a7c842330d2c720, type: 3}
+      propertyPath: 'pages.Array.data[2]'
+      value: 
+      objectReference: {fileID: 8038719735858826704}
+    - target: {fileID: 8853279250141322955, guid: c58d34a73b8fb5547a7c842330d2c720, type: 3}
+      propertyPath: 'pages.Array.data[3]'
+      value: 
+      objectReference: {fileID: 8038719735858826703}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 8527560218566106769, guid: c58d34a73b8fb5547a7c842330d2c720, type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 40718385}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c58d34a73b8fb5547a7c842330d2c720, type: 3}
+--- !u!224 &8038719735858826702 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 8527560218566106769, guid: c58d34a73b8fb5547a7c842330d2c720, type: 3}
+  m_PrefabInstance: {fileID: 8038719735858826701}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8038719735858826703 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2614293064635973122, guid: c58d34a73b8fb5547a7c842330d2c720, type: 3}
+  m_PrefabInstance: {fileID: 8038719735858826701}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8038719735858826704 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5842156028094147814, guid: c58d34a73b8fb5547a7c842330d2c720, type: 3}
+  m_PrefabInstance: {fileID: 8038719735858826701}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
