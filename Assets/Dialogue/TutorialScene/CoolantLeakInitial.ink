@@ -1,10 +1,9 @@
 INCLUDE globalsmain2.INK
 
-{ seenPuddle:
-<i>I know it isn't real piss, I was just joking...</i>
+{ foundCoolantLeak:
+<i>I know it wasn't real piss, I was just joking...</i>
  -> END
  - else:
- <i>Looks like someone took a piss here. Right underneath my car. For shame.</i>
- ~ seenPuddle = true
+ <i>Looks like someone took a piss here, <b>right</b> underneath my car. For shame.</i>
  -> END
 }

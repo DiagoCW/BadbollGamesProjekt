@@ -14,8 +14,8 @@ EXTERNAL unlockSuspect(id)
 }
 <i><b>Pop the hood?</b></i>
     *[Pop the hood]
-    The hood of the car slides open.
     ~isHoodOpen = true
+    The hood of the car slides open.
     -> Examine
     *[<b>Don't</b> pop the hood]
     <i>You <b>don't</b> open the hood. For whatever reason. You can always come back whenever you feel like taking this seriously.</i>

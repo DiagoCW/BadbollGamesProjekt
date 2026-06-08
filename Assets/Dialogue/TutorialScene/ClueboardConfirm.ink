@@ -1,11 +1,11 @@
 INCLUDE GlobalsMain2.ink
 
-~ temp randomResponse = RANDOM(1, 4)
+~ temp randomResponse = RANDOM(1, 3)
 
 { randomResponse:
     - 1: 
         <i>Did I cook with this one, chat?</i>
-        <i>I need to go look at the engine and see if this actually holds up.</i>
+        <i>I don't know why I said that. I should take a look at the engine and see if this actually holds up.</i>
         
     - 2: 
         <i>Shout out Jeremy Clarkson.</i>
@@ -15,6 +15,4 @@ INCLUDE GlobalsMain2.ink
         <i>All in a day's work.</i>
         <i>Let's go look at the engine if this solution works.</i>
         
-    - 4:
-        <i>Let's check the engine to see if this solution was L or Nah.</i>
 }

@@ -57,6 +57,11 @@ public class NewDialogueManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI npcText;
     [SerializeField] TextMeshProUGUI playerText;
 
+    [Header("Audio")]
+    [Tooltip("Audio source to play when typing text")]
+    [SerializeField] AudioClip typingAudioSource;
+    private AudioSource audioSource;
+
     // References for animating characters and controlling them as navmeshagents.
     TestAIScript aiAgent;
     Animator npcAnimator;
@@ -94,6 +99,9 @@ public class NewDialogueManager : MonoBehaviour
 
         dialogueVariables = new(loadGlobalsJSON);
         functions = new();
+
+        audioSource = this.gameObject.AddComponent<AudioSource>();
+        audioSource.volume = 0.05f;
     }
 
 
@@ -190,7 +198,8 @@ public class NewDialogueManager : MonoBehaviour
                 {
                     StopCoroutine(displayLineCoroutine);
                 }
-                dialogueText.text = currentStory.currentText;
+                //dialogueText.text = currentStory.currentText;
+                dialogueText.maxVisibleCharacters = dialogueText.text.Length;
                 isTyping = false;
 
                 if (aiAgent != null && aiAgent.isBlockingDialogue) dialogueCheck.enabled = false;
@@ -211,7 +220,8 @@ public class NewDialogueManager : MonoBehaviour
     IEnumerator TypeText(string line)
     {
         HideChoices();
-        dialogueText.text = string.Empty;
+        dialogueText.text = line;
+        dialogueText.maxVisibleCharacters = 0;
         isTyping = true;
         dialogueCheck.enabled = false;
 
@@ -219,15 +229,23 @@ public class NewDialogueManager : MonoBehaviour
 
         foreach (char letter in line.ToCharArray())
         {
-            if (letter == '<') addingItalicsToText = true;
-
-            dialogueText.text += letter;
-
-            if (letter == '>') addingItalicsToText = false;
-
-            if (!addingItalicsToText)
+            if (letter == '<' || addingItalicsToText)
+            {
+                addingItalicsToText = true;
+                if (letter == '>')
+                {
+                    addingItalicsToText = false;
+                }
+            }
+            else
+            {
+                //TypingSoundFrequency(dialogueText.maxVisibleCharacters);
+                dialogueText.maxVisibleCharacters++;
                 yield return new WaitForSeconds(typingSpeed);
+            }
+                
         }
+
 
         isTyping = false;
         //dialogueCheck.enabled = true;
@@ -244,6 +262,16 @@ public class NewDialogueManager : MonoBehaviour
         {
             yield return new WaitForSeconds(0.1f);
             DisplayChoices();
+        }
+    }
+    private void TypingSoundFrequency(int nbrCharacters)
+    {
+        if (typingAudioSource == null) return;
+        if (nbrCharacters % 5 == 0)
+        {
+            audioSource.Stop();
+            audioSource.pitch = UnityEngine.Random.Range(0.8f, 0.85f);
+            audioSource.PlayOneShot(typingAudioSource);
         }
     }
 
@@ -522,4 +550,8 @@ public class NewDialogueManager : MonoBehaviour
         }
     }
 
+    //private void OnApplicationQuit()
+    //{
+    //    dialogueVariables.SaveVariables();
+    //}
 }
