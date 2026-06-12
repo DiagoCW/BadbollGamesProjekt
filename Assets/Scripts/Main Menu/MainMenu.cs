@@ -32,6 +32,15 @@ public class MainMenu : MonoBehaviour
         }
     }
 
+
+    // Resume saved game 
+    //Load the saved game scene
+    public void ResumeSavedGame()
+    {
+        Debug.Log("Resume Saved button pressed");
+    }
+
+
     //Exit the game
     public void ExitGame()
     {
