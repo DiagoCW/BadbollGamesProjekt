@@ -53,6 +53,7 @@ public class PauseMenu : MonoBehaviour
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
+
     }
 
     public void Pause()
@@ -151,6 +152,7 @@ public class PauseMenu : MonoBehaviour
             SceneManager.LoadScene("MainMenu");
         }
 
+
         ////Make game time run after pressing restart
         //Time.timeScale = 1;
 
@@ -164,4 +166,15 @@ public class PauseMenu : MonoBehaviour
         //    SceneManager.LoadScene("MainMenu");
         //}
     }
+
+    //Save Game 
+    //Save players position
+    public void SaveGame()
+    {
+        //Can only be pressed once?? Why?? - maybe something with gamemanager script
+        Debug.Log("Save button was clicked!");
+        
+    }
+
+
 }
